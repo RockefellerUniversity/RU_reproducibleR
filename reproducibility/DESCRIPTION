@@ -1,16 +1,18 @@
 Package: reproducibility
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Reporoducibility in R
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Author: Ji-Dung Luo, Matt Paul, Wei Wang, Doug Barrows and Thomas Carroll.
+Maintainer: Thomas Carroll <tc.infomatics@gmail>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE
 biocViews: Training
-Depends: R (>= 2.10), testthat, methods, ggplot2, rmarkdown, knitr, lattice, yaml
+Depends: methods, ggplot2, rmarkdown
 Suggests: knitr,
     rmarkdown,
-    testthat
+    testthat,
+    yaml
+SystemRequirements: R, RStudio
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

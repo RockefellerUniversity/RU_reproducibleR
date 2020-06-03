@@ -1,0 +1,11 @@
+## Course Overview
+
+<br>
+[<img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/R-CMD-check-bioc/badge.svg">](https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3AR-CMD-check-bioc)
+
+This course introduces how to code in R in a reproducible way.
+
+Course material is available as HTML presentations or single page document. An exercise is available at the end.
+
+Course material and exercises are available to view as rendered HTML at https://rockefelleruniversity.github.io/RU_reproducibleR/.
+All material is available to download under GPL v2 license.
