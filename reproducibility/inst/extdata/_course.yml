@@ -2,6 +2,6 @@ Description:
   OverviewRmd: CourseOverview.Rmd
 Presentations:
   titles: Session1
-PresRmd: reproducibleR.Rmd
-PresOverviewRmd: ReproducibleR_Session1Overview.Rmd
-Exercises: ReproducibleR.Rmd
+  PresRmd: reproducibleR.Rmd
+  PresOverviewRmd: ReproducibleR_Session1Overview.Rmd
+  Exercises: ReproducibleR.Rmd
