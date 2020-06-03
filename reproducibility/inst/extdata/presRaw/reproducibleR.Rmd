@@ -829,14 +829,8 @@ http://rstudio.github.io/packrat/
 ---
 ## Exercises
 
-- Open up markdownExampleDefaultStyles.Rmd and markdownExample.Rmd in the scripts directory. Have a look at the rMarkdown examples here and the resulting output html files.
+Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
 
-[Example HTML Default style.](../../scripts/markdownExampleDefaultStyles.html)  
-[Example HTML with extra style.](../../scripts/markdownExample.html)
-
-- Open scriptToConvertToRMarkdown.r in scripts directory and save as new name.
-
-- Convert this script to an Rmarkdown document using the render() function or inside RStudio.
 
 ---
 # Contact
