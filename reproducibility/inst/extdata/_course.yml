@@ -1,4 +1,5 @@
 Description:
+  CourseName: Reproducible R
   OverviewRmd: CourseOverview.Rmd
 Presentations:
   titles: Session1
