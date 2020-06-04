@@ -80,7 +80,7 @@ setwd("/PathToMyDownload/Reproducible_R/r_course")
 # e.g. setwd("~/Downloads/Intro_To_R_1Day/r_course")
 ```
 
-
+---
 ## Reproducible Research
 
 >"Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to humans what we want the computer to do."
@@ -126,7 +126,6 @@ if(params$isSlides == "yes"){
 
 ```
 
----
 ## From Scripts to Notes
 
 So we have just seen the speed at which you can produce a report document from an R script using Rstudio. 
@@ -200,7 +199,6 @@ if(params$isSlides == "yes"){
 
 ```
 
----
 ## Comments 
 
 Rendering a report with metadata like author and date of render is the essential first step in reproducibility. 
@@ -293,7 +291,6 @@ if(params$isSlides == "yes"){
 
 ```
 
----
 ## Markdown
 
 Under the hood, R is creating an intermediate document in **Markdown** format.
@@ -337,7 +334,6 @@ if(params$isSlides == "yes"){
 
 ```
 
----
 ## Markdown syntax
 
 Markdown uses simple syntax to control text output.
@@ -523,7 +519,6 @@ if(params$isSlides == "yes"){
 
 ```
 
----
 ## rMarkdown
 
 rMarkdown is a script type used in R to allow for the generation of Markdown from R code. rMarkdown files will typically have the extension **.Rmd**.
