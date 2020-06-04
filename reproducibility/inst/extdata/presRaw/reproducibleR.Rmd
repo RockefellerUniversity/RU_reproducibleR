@@ -76,8 +76,8 @@ You may navigate to the unarchived Reproducible_R folder in the Rstudio menu.
 or in the console.
 
 ```{r setwd_introtoR,eval=F} 
-setwd("/PathToMyDownload/Reproducible_R/r_course")
-# e.g. setwd("~/Downloads/Intro_To_R_1Day/r_course")
+setwd("/PathToMyDownload/Reproducible_R-master/r_course")
+# e.g. setwd("~/Downloads/Reproducible_R-master/r_course")
 ```
 
 ---
