@@ -1,7 +1,7 @@
 ---
 title: "Reproducible Reports <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
 author: "Rockefeller University, Bioinformatics Resource Centre"
-date: "http://rockefelleruniversity.github.io/Intro_To_R_1Day/"
+date: "https://rockefelleruniversity.github.io/RU_reproducibleR/"
 output: 
   xaringan::moon_reader:
     css: ["default", "metropolisCustom.css", "metropolis-fontsCustom.css"]
@@ -673,12 +673,12 @@ kable(dfExample)
 
 ```
 
-'''{r,results='asis'} 
+```{r, results='asis'} 
 temp <- rnorm(10)
 temp2 <- rnorm(10)
 dfExample <- cbind(temp,temp2)
 kable(dfExample)
-'''
+```
 
 ---
 ## Evaluating code in the md
