@@ -587,8 +587,8 @@ temp
 ```r
 temp &lt;- rnorm(10)
 temp
-##  [1] -0.1142361 -0.3769799 -0.2986376 -1.6160626  1.0307194  1.8137791
-##  [7]  1.1993791 -0.1686857 -2.1193848  0.5704474
+##  [1]  0.6425147 -1.3033501  1.0161650  1.0638804 -0.1472778 -0.4700649
+##  [7]  2.8710597  0.3295211 -1.7431163 -0.4878765
 ```
 
 ---
@@ -611,26 +611,32 @@ kable(dfExample)
 
 
 ```r
-temp &lt;- rnorm(10)
-temp2 &lt;- rnorm(10)
+temp &lt;- rnorm(3)
+temp2 &lt;- rnorm(3)
+dfExample &lt;- cbind(temp,temp2)
+kable(dfExample)
+```
+
+---
+## Inserting tables
+
+
+```r
+temp &lt;- rnorm(3)
+temp2 &lt;- rnorm(3)
 dfExample &lt;- cbind(temp,temp2)
 kable(dfExample)
 ```
 
        temp        temp2
 -----------  -----------
- -1.0373646    0.6449080
- -0.5940058    1.7147822
- -0.2417953   -2.4190238
-  1.0497142   -0.1201266
-  0.3533154    1.4781996
-  0.5480510    0.2901025
-  0.3119684    0.8184992
- -0.2585975   -1.5582796
- -0.0131980    1.0879141
-  1.4084104    1.0871476
+  1.0419519   -0.5601566
+ -0.1243636   -0.6490760
+  0.1408426    0.7199920
 
 ---
+
+
 ## Evaluating code in the md
 
 
@@ -643,7 +649,7 @@ more free form text.
 
 ```
 Here is some freeform _markdown_ and the first result
-from an rnorm call is -2.5358734, followed by some more free form text.
+from an rnorm call is -0.4420863, followed by some more free form text.
 
 ---
 ## cache

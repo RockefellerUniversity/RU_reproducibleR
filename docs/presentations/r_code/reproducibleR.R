@@ -206,9 +206,16 @@ temp <- rnorm(10)
 temp
 
 
+## ---- eval=F------------------------------------------------------------------
+## temp <- rnorm(3)
+## temp2 <- rnorm(3)
+## dfExample <- cbind(temp,temp2)
+## kable(dfExample)
+
+
 ## ---- results='asis'----------------------------------------------------------
-temp <- rnorm(10)
-temp2 <- rnorm(10)
+temp <- rnorm(3)
+temp2 <- rnorm(3)
 dfExample <- cbind(temp,temp2)
 kable(dfExample)
 
