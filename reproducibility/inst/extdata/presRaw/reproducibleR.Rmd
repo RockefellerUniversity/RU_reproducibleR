@@ -673,14 +673,26 @@ kable(dfExample)
 
 ```
 
-```{r, results='asis'} 
-temp <- rnorm(10)
-temp2 <- rnorm(10)
+```{r, eval=F} 
+temp <- rnorm(3)
+temp2 <- rnorm(3)
 dfExample <- cbind(temp,temp2)
 kable(dfExample)
 ```
 
 ---
+## Inserting tables
+
+```{r, results='asis'} 
+temp <- rnorm(3)
+temp2 <- rnorm(3)
+dfExample <- cbind(temp,temp2)
+kable(dfExample)
+```
+
+---
+
+
 ## Evaluating code in the md
 
 
