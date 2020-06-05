@@ -20,7 +20,7 @@ class: center, middle, inverse, title-slide
 <hr color='#EB811B' size=1px width=796px>
 </html>
 ### Rockefeller University, Bioinformatics Resource Centre
-### <a href="http://rockefelleruniversity.github.io/Intro_To_R_1Day/" class="uri">http://rockefelleruniversity.github.io/Intro_To_R_1Day/</a>
+### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/" class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
 
 ---
 
@@ -68,8 +68,8 @@ or in the console.
 
 
 ```r
-setwd("/PathToMyDownload/Reproducible_R/r_course")
-# e.g. setwd("~/Downloads/Intro_To_R_1Day/r_course")
+setwd("/PathToMyDownload/Reproducible_R-master/r_course")
+# e.g. setwd("~/Downloads/Reproducible_R-master/r_course")
 ```
 
 ---
@@ -587,8 +587,8 @@ temp
 ```r
 temp &lt;- rnorm(10)
 temp
-##  [1]  1.3127411  0.3799799 -1.0057958 -0.9138451  0.3539514 -0.4222179
-##  [7]  0.3699349  1.3617327 -0.7575385 -0.5480055
+##  [1] -0.1142361 -0.3769799 -0.2986376 -1.6160626  1.0307194  1.8137791
+##  [7]  1.1993791 -0.1686857 -2.1193848  0.5704474
 ```
 
 ---
@@ -609,12 +609,26 @@ kable(dfExample)
 
 ```
 
-'''{r,results='asis'} 
+
+```r
 temp &lt;- rnorm(10)
 temp2 &lt;- rnorm(10)
 dfExample &lt;- cbind(temp,temp2)
 kable(dfExample)
-'''
+```
+
+       temp        temp2
+-----------  -----------
+ -1.0373646    0.6449080
+ -0.5940058    1.7147822
+ -0.2417953   -2.4190238
+  1.0497142   -0.1201266
+  0.3533154    1.4781996
+  0.5480510    0.2901025
+  0.3119684    0.8184992
+ -0.2585975   -1.5582796
+ -0.0131980    1.0879141
+  1.4084104    1.0871476
 
 ---
 ## Evaluating code in the md
@@ -629,7 +643,7 @@ more free form text.
 
 ```
 Here is some freeform _markdown_ and the first result
-from an rnorm call is -1.6216889, followed by some more free form text.
+from an rnorm call is -2.5358734, followed by some more free form text.
 
 ---
 ## cache

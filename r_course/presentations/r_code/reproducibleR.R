@@ -19,8 +19,8 @@ if(params$isSlides != "yes"){
 
 
 ## ----setwd_introtoR,eval=F----------------------------------------------------
-## setwd("/PathToMyDownload/Reproducible_R/r_course")
-## # e.g. setwd("~/Downloads/Intro_To_R_1Day/r_course")
+## setwd("/PathToMyDownload/Reproducible_R-master/r_course")
+## # e.g. setwd("~/Downloads/Reproducible_R-master/r_course")
 
 
 ## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
@@ -204,4 +204,11 @@ rnorm(100  )
 ## ---- collapse=T--------------------------------------------------------------
 temp <- rnorm(10)
 temp
+
+
+## ---- results='asis'----------------------------------------------------------
+temp <- rnorm(10)
+temp2 <- rnorm(10)
+dfExample <- cbind(temp,temp2)
+kable(dfExample)
 
