@@ -8,9 +8,8 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE
 biocViews: Training
-Depends: methods, ggplot2, rmarkdown, tidyverse, kable
-Suggests: knitr,
-    rmarkdown,
+Depends: methods, ggplot2, rmarkdown, tidyverse, knitr
+Suggests: rmarkdown,
     testthat,
     yaml
 SystemRequirements: R, RStudio
