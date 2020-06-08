@@ -209,13 +209,13 @@ temp
 ## ---- eval=F------------------------------------------------------------------
 ## temp <- rnorm(3)
 ## temp2 <- rnorm(3)
-## dfExample <- cbind(temp,temp2)
-## kable(dfExample)
+## dfExample <- data.frame(temp,temp2)
+## kable(dfExample,format="markdown")
 
 
-## ---- results='asis'----------------------------------------------------------
+## -----------------------------------------------------------------------------
 temp <- rnorm(3)
 temp2 <- rnorm(3)
-dfExample <- cbind(temp,temp2)
-kable(dfExample)
+dfExample <- data.frame(temp,temp2)
+kable(dfExample,format="markdown")
 

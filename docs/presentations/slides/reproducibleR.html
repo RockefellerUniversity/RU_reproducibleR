@@ -587,8 +587,8 @@ temp
 ```r
 temp &lt;- rnorm(10)
 temp
-##  [1]  0.6425147 -1.3033501  1.0161650  1.0638804 -0.1472778 -0.4700649
-##  [7]  2.8710597  0.3295211 -1.7431163 -0.4878765
+##  [1] -0.65999575  0.24119196 -0.39982574 -0.09567358  0.22004762  2.58788313
+##  [7]  0.23661156 -0.24348557 -1.45075661  0.82709842
 ```
 
 ---
@@ -596,11 +596,11 @@ temp
 
 The results of printing data frames or matrices in the console aren't neat.
 
-We can insert HTML tables into Markdown by setting the **results** option to **asis** and using the knitr function **kable()**.
+We can insert HTML tables into Markdown by using the knitr function **kable()** and setting the **format** argument to *"markdown"*.
 
 ```
 
-'''{r,results='asis'} 
+'''{r} 
 temp &lt;- rnorm(10)
 temp2 &lt;- rnorm(10)
 dfExample &lt;- cbind(temp,temp2)
@@ -613,8 +613,8 @@ kable(dfExample)
 ```r
 temp &lt;- rnorm(3)
 temp2 &lt;- rnorm(3)
-dfExample &lt;- cbind(temp,temp2)
-kable(dfExample)
+dfExample &lt;- data.frame(temp,temp2)
+kable(dfExample,format="markdown")
 ```
 
 ---
@@ -624,15 +624,17 @@ kable(dfExample)
 ```r
 temp &lt;- rnorm(3)
 temp2 &lt;- rnorm(3)
-dfExample &lt;- cbind(temp,temp2)
-kable(dfExample)
+dfExample &lt;- data.frame(temp,temp2)
+kable(dfExample,format="markdown")
 ```
 
-       temp        temp2
------------  -----------
-  1.0419519   -0.5601566
- -0.1243636   -0.6490760
-  0.1408426    0.7199920
+
+
+|       temp|      temp2|
+|----------:|----------:|
+| -1.7720047|  1.2959096|
+| -0.1490129| -1.2869796|
+|  0.5162408|  0.4447888|
 
 ---
 
@@ -649,7 +651,7 @@ more free form text.
 
 ```
 Here is some freeform _markdown_ and the first result
-from an rnorm call is -0.4420863, followed by some more free form text.
+from an rnorm call is 0.2915345, followed by some more free form text.
 
 ---
 ## cache
