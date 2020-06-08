@@ -660,11 +660,11 @@ temp
 
 The results of printing data frames or matrices in the console aren't neat.
 
-We can insert HTML tables into Markdown by setting the **results** option to **asis** and using the knitr function **kable()**.
+We can insert HTML tables into Markdown by using the knitr function **kable()** and setting the **format** argument to *"markdown"*.
 
 ```
 
-'''{r,results='asis'} 
+'''{r} 
 temp <- rnorm(10)
 temp2 <- rnorm(10)
 dfExample <- cbind(temp,temp2)
@@ -676,18 +676,18 @@ kable(dfExample)
 ```{r, eval=F} 
 temp <- rnorm(3)
 temp2 <- rnorm(3)
-dfExample <- cbind(temp,temp2)
-kable(dfExample)
+dfExample <- data.frame(temp,temp2)
+kable(dfExample,format="markdown")
 ```
 
 ---
 ## Inserting tables
 
-```{r, results='asis'} 
+```{r} 
 temp <- rnorm(3)
 temp2 <- rnorm(3)
-dfExample <- cbind(temp,temp2)
-kable(dfExample)
+dfExample <- data.frame(temp,temp2)
+kable(dfExample,format="markdown")
 ```
 
 ---
