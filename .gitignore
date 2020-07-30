@@ -4,3 +4,5 @@
 .Ruserdata
 compiling_R3.R
 .DS_Store
+*_cache
+*_files

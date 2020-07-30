@@ -27,7 +27,7 @@ Bold  =  __Bold__ or **Bold**
 
 ![alt text](../imgs/baseR.png)
 
-![alt text](https://raw.githubusercontent.com/RockefellerUniversity/Intro_To_R_1Day/master/r_course/imgs/baseR.png)
+![alt text](https://github.com/RockefellerUniversity/RU_reproducibleR/tree/master/r_course/presentations/slides/imgs/baseR.png)
 
 # Top level section
 ## Middle level section
