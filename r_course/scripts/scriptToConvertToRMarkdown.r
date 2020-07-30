@@ -1,6 +1,4 @@
-filesToRead <- dir("data/ExpressionResults/",pattern = "*\\.txt",full.names=T)
-filesToRead <- filesToRead[-grep('Anno',filesToRead)]
-
+filesToRead <- dir("../ExpressionResults/",pattern = "*\\.txt",full.names=T)
 fileRead <- vector("list",length=length(filesToRead))
 for(i in 1:length(filesToRead)){
   fileRead[[i]] <- read.delim(filesToRead[i],header=F,sep="\t")
@@ -19,7 +17,7 @@ for(i in fileRead){
 
 mergedTable[1:3,] 
 
-Annotation <- read.table("data/ExpressionResults/Annotation.txt",sep="\t",h=T)
+Annotation <- read.table("../ExpressionResults/Annotation.ann",sep="\t",h=T)
 annotatedExpression <- merge(Annotation,mergedTable,by=1,all.x=F,all.y=T)
 annotatedExpression[1:2,]
 
@@ -43,4 +41,3 @@ colnames(testResult) <- c("logFC","tStatistic","pValue")
 annotatedResult <- cbind(annotatedExpression[,1:3],testResult)
 annotatedResult <- annotatedResult[order(annotatedResult$tStatistic),]
 annotatedResult[1:2,]
-
