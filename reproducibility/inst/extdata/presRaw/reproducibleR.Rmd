@@ -840,7 +840,7 @@ Exercise on Reproducibility in R can be found [here](../../exercises/exercises/R
 
 
 ---
-# Contact
+## Contact
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
 

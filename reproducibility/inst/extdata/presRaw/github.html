@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>github.utf8</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
+    <script src="github_files/header-attrs-2.6/header-attrs.js"></script>
+    <link href="github_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="github_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Getting started with Git and GitHub
+<html>
+<div style="float:left">
+
+</div>
+<hr color='#EB811B' size=1px width=796px>
+</html>
+### Rockefeller University, Bioinformatics Resource Centre
+### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/" class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
+
+---
+
+
+
+
+# Getting started with Git and GitHub
+
+---
+
+
+## TO DO
+
+##
+## CHECK ALL COMMANDS WORK ON WINDOWS i.e. touch
+##
+
+## Set Up
+
+All prerequisites, links to material and slides for this course can be found on github.
+
+* [Reproducible_R](https://rockefelleruniversity.github.io/Reproducible_R/)
+
+Or can be downloaded as a zip archive from here.
+
+* [Download zip](https://github.com/rockefelleruniversity/Reproducible_R/zipball/master)
+
+---
+## Course materials
+
+Once the zip file in unarchived. All presentations as HTML slides and pages, their R code and HTML practical sheets will be available in the directories underneath.
+
+* **presentations/slides/**
+Presentations as an HTML slide show.
+* **presentations/singlepage/** 
+Presentations as an HTML single page.
+* **presentations/r_code/**
+code in presentations.
+* **exercises/**
+Practicals as HTML pages. 
+* **answers/**
+Practicals with answers as HTML pages and R code solutions. 
+
+
+---
+## Set the Working directory
+
+Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived. 
+
+You may navigate to the unarchived Reproducible_R folder in the Rstudio menu.
+
+**Session -&gt; Set Working Directory -&gt; Choose Directory**
+
+or in the console.
+
+
+```r
+setwd("/PathToMyDownload/Reproducible_R-master/r_course")
+# e.g. setwd('~/Downloads/Reproducible_R-master/r_course')
+```
+
+---
+# What is Git?
+
+---
+
+---
+## The problem
+As you collect code for a project, you are always making updates. What version did you use when? How do organize all of these? How do I stay in lockstep with my collaborators? How do efficiently share code with collaborators?
+
+---
+## What is Git?
+
+* Decentralized (Whole team has a copy)
+* Collaborative (Whole team can make modifications)
+* Version control (Snapshots over time filed into organized historical manager)
+
+---
+## The principles
+In 2005 Linus Torvalds [the main developer of the Linux] was having issues with the version control system they used. So they designed a new one from the ground up with specific set of principles:   
+
+- Speed
+- Simplicity
+- Support for branched development
+- Decentralized
+- Capable of handling large projects i.e. Linux development
+
+---
+## What will we cover
+
+1. How to set up your own repositories.
+2. How to keep them updated locally and remotely.
+3. Workflows for code development.
+4. Workflows for collaborating with others.
+
+
+* Git version control system and Github as our repository hosting service
+* Using Git on the command line and with GUIs
+
+---
+## What will we not cover
+
+* Making packages.
+
+* Alternative systems.
+
+  * Other version control systems
+  i.e. CVS and SVS.
+
+  * Other repository hosting services
+  i.e. Bitbucket or GitLab.
+
+---
+
+# Getting started with Git
+
+---
+
+---
+## Git install
+
+You may already have Git installed, as it installed by certain tools i.e. Xcode Command Line Tools. To interact with Git at the most basic level we will use a command prompt. We can run the this command to check.
+
+
+```sh
+git --version
+```
+
+```
+## git version 2.24.3 (Apple Git-128)
+```
+
+If you do not have it, instructions for installation on each system is here:
+https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+
+---
+## Set up a local repository: *init*
+
+We initialize repositories to store files related to a project. You can make many repositories and they are just a regular folder with some extra properties created by git. 
+
+
+```
+## raw(0)
+## attr(,"class")
+## [1] "gh_response" "raw"
+```
+
+```
+## {
+##   "id": 337248135,
+##   "node_id": "MDEwOlJlcG9zaXRvcnkzMzcyNDgxMzU=",
+##   "name": "My_GitHub_Project",
+##   "full_name": "matthew-paul-2006/My_GitHub_Project",
+##   "private": false,
+##   "owner": {
+##     "login": "matthew-paul-2006",
+##     "id": 23037538,
+##     "node_id": "MDQ6VXNlcjIzMDM3NTM4",
+##     "avatar_url": "https://avatars.githubusercontent.com/u/23037538?v=4",
+##     "gravatar_id": "",
+##     "url": "https://api.github.com/users/matthew-paul-2006",
+##     "html_url": "https://github.com/matthew-paul-2006",
+##     "followers_url": "https://api.github.com/users/matthew-paul-2006/followers",
+##     "following_url": "https://api.github.com/users/matthew-paul-2006/following{/other_user}",
+##     "gists_url": "https://api.github.com/users/matthew-paul-2006/gists{/gist_id}",
+##     "starred_url": "https://api.github.com/users/matthew-paul-2006/starred{/owner}{/repo}",
+##     "subscriptions_url": "https://api.github.com/users/matthew-paul-2006/subscriptions",
+##     "organizations_url": "https://api.github.com/users/matthew-paul-2006/orgs",
+##     "repos_url": "https://api.github.com/users/matthew-paul-2006/repos",
+##     "events_url": "https://api.github.com/users/matthew-paul-2006/events{/privacy}",
+##     "received_events_url": "https://api.github.com/users/matthew-paul-2006/received_events",
+##     "type": "User",
+##     "site_admin": false
+##   },
+##   "html_url": "https://github.com/matthew-paul-2006/My_GitHub_Project",
+##   "description": {},
+##   "fork": false,
+##   "url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project",
+##   "forks_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/forks",
+##   "keys_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/keys{/key_id}",
+##   "collaborators_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/collaborators{/collaborator}",
+##   "teams_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/teams",
+##   "hooks_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/hooks",
+##   "issue_events_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/issues/events{/number}",
+##   "events_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/events",
+##   "assignees_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/assignees{/user}",
+##   "branches_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/branches{/branch}",
+##   "tags_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/tags",
+##   "blobs_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/git/blobs{/sha}",
+##   "git_tags_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/git/tags{/sha}",
+##   "git_refs_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/git/refs{/sha}",
+##   "trees_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/git/trees{/sha}",
+##   "statuses_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/statuses/{sha}",
+##   "languages_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/languages",
+##   "stargazers_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/stargazers",
+##   "contributors_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/contributors",
+##   "subscribers_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/subscribers",
+##   "subscription_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/subscription",
+##   "commits_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/commits{/sha}",
+##   "git_commits_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/git/commits{/sha}",
+##   "comments_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/comments{/number}",
+##   "issue_comment_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/issues/comments{/number}",
+##   "contents_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/contents/{+path}",
+##   "compare_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/compare/{base}...{head}",
+##   "merges_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/merges",
+##   "archive_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/{archive_format}{/ref}",
+##   "downloads_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/downloads",
+##   "issues_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/issues{/number}",
+##   "pulls_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/pulls{/number}",
+##   "milestones_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/milestones{/number}",
+##   "notifications_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/notifications{?since,all,participating}",
+##   "labels_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/labels{/name}",
+##   "releases_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/releases{/id}",
+##   "deployments_url": "https://api.github.com/repos/matthew-paul-2006/My_GitHub_Project/deployments",
+##   "created_at": "2021-02-09T00:26:42Z",
+##   "updated_at": "2021-02-09T00:26:42Z",
+##   "pushed_at": "2021-02-09T00:26:44Z",
+##   "git_url": "git://github.com/matthew-paul-2006/My_GitHub_Project.git",
+##   "ssh_url": "git@github.com:matthew-paul-2006/My_GitHub_Project.git",
+##   "clone_url": "https://github.com/matthew-paul-2006/My_GitHub_Project.git",
+##   "svn_url": "https://github.com/matthew-paul-2006/My_GitHub_Project",
+##   "homepage": {},
+##   "size": 0,
+##   "stargazers_count": 0,
+##   "watchers_count": 0,
+##   "language": {},
+##   "has_issues": true,
+##   "has_projects": true,
+##   "has_downloads": true,
+##   "has_wiki": true,
+##   "has_pages": false,
+##   "forks_count": 0,
+##   "mirror_url": {},
+##   "archived": false,
+##   "disabled": false,
+##   "open_issues_count": 0,
+##   "license": {},
+##   "forks": 0,
+##   "open_issues": 0,
+##   "watchers": 0,
+##   "default_branch": "main",
+##   "permissions": {
+##     "admin": true,
+##     "push": true,
+##     "pull": true
+##   },
+##   "allow_squash_merge": true,
+##   "allow_merge_commit": true,
+##   "allow_rebase_merge": true,
+##   "delete_branch_on_merge": false,
+##   "network_count": 0,
+##   "subscribers_count": 1
+## }
+```
+
+
+```
+## Initialized empty Git repository in /Users/mattpaul/Documents/Box Sync/RU/Teaching/Compilation/RU_reproducibleR/reproducibility/inst/extdata/My_Project_Folder/.git/
+```
+
+
+
+```sh
+mkdir My_Project_Folder
+cd My_Project_Folder
+git init
+```
+
+  
+---
+## What is different about a repository?
+
+.pull-left[
+*Mac/Linux*
+
+```sh
+ls .
+```
+
+```sh
+ls -a .
+```
+
+```
+## .
+## ..
+## .git
+```
+  ]
+  
+.pull-right[
+*Windows*
+
+```sh
+dir .
+```
+
+```sh
+dir /ah .
+```
+  ] 
+
+The .git folder is a hidden folder. This is where all the business of Git happens.
+
+
+---
+## What's inside .git?
+
+You can explore it. It is full of simple plain text files.
+
+.pull-left[
+*Mac/Linux*
+
+```sh
+ls -a .git
+```
+
+```
+## .
+## ..
+## HEAD
+## config
+## description
+## hooks
+## info
+## objects
+## refs
+```
+  ]
+  
+.pull-right[
+*Windows*
+
+```sh
+dir /ah .git
+```
+  ]
+
+---
+## Setting up Git to be yours: *config*
+
+When first working with git, you need to attach your information. This means you are attached to changes you make. And this will be important for connecting to GitHub later. 
+
+
+
+```sh
+git config --global user.name 'matthew-paul-2006'
+```
+
+```sh
+git config --global user.name
+```
+
+```
+## matthew-paul-2006
+```
+
+```sh
+git config --global user.email 'matthew.paul.2006@gmail.com'
+```
+
+```sh
+git config --global user.email
+```
+
+```
+## matthew.paul.2006@gmail.com
+```
+
+
+---
+## Lets use the repository
+I have added a new file called README. We can check the *status* of our git once we have added this. 
+
+```sh
+touch README.md
+git status .
+```
+
+```
+## On branch master
+## 
+## No commits yet
+## 
+## Untracked files:
+##   (use "git add &lt;file&gt;..." to include in what will be committed)
+## 	README.md
+## 
+## nothing added to commit but untracked files present (use "git add" to track)
+```
+
+---
+## The 3 states of Git.
+
+1. **Working directory**: Make and save changes to files and git will be aware, but not necessarily involved. New files would be considered *untracked*. 
+
+2. **Staging**: Untracked changes or files can be *added to the staged area*. Staged files are not added to your Git repository.
+
+3. **Local Repository**: Once all the edits are finished and the files are staged,  they can then be *committed*. Commits will put the changes in the staged file into ther repository.
+
+
+---
+## This seems overcomplicated. Right?? Wrong!
+
+There is a culture to making edits:
+* Do **not** commit every time anything is new. 
+* Each commit should be a nice neat little story
+  * *Example*: If you include new function in a pipeline. Save locally while developing. Update README. Stage both. Commit it together. 
+* The aim is you/others will look back and understand what you were thinking and doing. 
+* **A good rule:** There shouldn't be multiple clauses in your commit message. This will mean you are likely doing multiple things. 
+
+It is all about balance between having a good log of your changes, without having every single thing you do logged. Ideally each step is deliberate and thoughtful. When you are looking back through changes you want the commit of interest to be easy to find, coherent and succinct. Your future self will thank you. 
+
+---
+## Staging - git add  
+Add the README file to your staged area
+
+```sh
+git add README.md
+git status .
+```
+
+```
+## On branch master
+## 
+## No commits yet
+## 
+## Changes to be committed:
+##   (use "git rm --cached &lt;file&gt;..." to unstage)
+## 	new file:   README.md
+```
+
+---
+## Commiting - git commit
+Commit the README file into your repository with a message.
+If you do not add a message, you will get prompted.
+
+```sh
+git commit -m'Made a README'
+git status .
+```
+
+```
+## [master (root-commit) 149ec68] Made a README
+##  1 file changed, 0 insertions(+), 0 deletions(-)
+##  create mode 100644 README.md
+## On branch master
+## nothing to commit, working tree clean
+```
+
+---
+## What's changed? - git diff (pt1)
+You might have 3 different versions i.e. committed, staged, and working directory version. Diff can tell you the changes between these files. 
+
+
+```sh
+echo 'Hello Friends' &gt;&gt; README.md
+git status .
+git diff
+```
+
+```
+## On branch master
+## Changes not staged for commit:
+##   (use "git add &lt;file&gt;..." to update what will be committed)
+##   (use "git restore &lt;file&gt;..." to discard changes in working directory)
+## 	modified:   README.md
+## 
+## no changes added to commit (use "git add" and/or "git commit -a")
+## diff --git a/README.md b/README.md
+## index e69de29..ba06163 100644
+## --- a/README.md
+## +++ b/README.md
+## @@ -0,0 +1 @@
+## +Hello Friends
+```
+
+---
+## What's changed? - git diff (pt2)
+Always good to check what is changed in your staged files before you commit.
+
+
+```sh
+git add README.md
+git status .
+```
+
+```
+## On branch master
+## Changes to be committed:
+##   (use "git restore --staged &lt;file&gt;..." to unstage)
+## 	modified:   README.md
+```
+
+```sh
+git diff
+```
+
+---
+## What's changed? - git diff (pt2)
+Always good to check what is changed in your staged files before you commit.
+
+
+```sh
+git diff --staged
+git commit -m 'Added welcome message'
+```
+
+```
+## diff --git a/README.md b/README.md
+## index e69de29..ba06163 100644
+## --- a/README.md
+## +++ b/README.md
+## @@ -0,0 +1 @@
+## +Hello Friends
+## [master 801ac31] Added welcome message
+##  1 file changed, 1 insertion(+)
+```
+
+---
+## What've we done? - git log (pt1)
+* Log gives a list of commits in chronological order.
+* There is a hexadecimal code that is unique ID for each commit. 
+* Other information i.e. Time and Author
+
+```sh
+
+git log
+
+```
+
+```
+## commit 801ac31683a793f817c5f68638ec8510787c1e47
+## Author: matthew-paul-2006 &lt;matthew.paul.2006@gmail.com&gt;
+## Date:   Mon Feb 8 19:26:44 2021 -0500
+## 
+##     Added welcome message
+## 
+## commit 149ec689e6cf14e35d09158f4e3e29ff3d4f9575
+## Author: matthew-paul-2006 &lt;matthew.paul.2006@gmail.com&gt;
+## Date:   Mon Feb 8 19:26:44 2021 -0500
+## 
+##     Made a README
+```
+
+---
+## What've we done? - git log (pt2)
+Can modify the log response to specific information that you need. This is important if you want to comb through 100s of commits. 
+
+* --oneline = Just commit message
+* --stat = What files change
+* --patch = What content changes
+
+
+```sh
+git log --oneline
+```
+
+```
+## 801ac31 Added welcome message
+## 149ec68 Made a README
+```
+
+```sh
+git log --oneline --stat
+```
+
+```
+## 801ac31 Added welcome message
+##  README.md | 1 +
+##  1 file changed, 1 insertion(+)
+## 149ec68 Made a README
+##  README.md | 0
+##  1 file changed, 0 insertions(+), 0 deletions(-)
+```
+
+---
+# Connecting Git to GitHub
+
+---
+
+## GitHub 
+
+* While Git is local, GitHub is online. It is a repository hosting service.
+
+* Easy to back up and share code.
+
+* Easy collaboration.
+
+* Can make repositories public, so the code supporting a project will be available to others. 
+
+---
+## GitHub vs. other services
+
+* Direct web access, many require desktop tools to be able to access. 
+* Issue and pull request methodology.
+* GitHub probably has the most extensive features and support (i.e. transfer to svn, automated systems).
+* Support rendering of several file formats i.e. Markdown or GeoJSON.
+* GitHub community (almost like a social network).
+
+**Drawbacks**
+It is almost like a monopoly. Which can lead to [problems](https://github.com/1995parham/github-do-not-ban-us).
+
+---
+## Connecting to GitHub
+Everything about Git is local and offline, until you tell it to go to a remote. 
+Push it up to wherever you're hosting you code i.e. GitHub. 
+
+* Next step sign into [GitHub](https://github.com/)
+
+
+---
+## Create a remote repository
+
+```r
+knitr::include_graphics("../imgs/1_createnew.png")
+```
+
+&lt;img src="../imgs/1_createnew.png" width="3149" /&gt;
+
+---
+## Get remote address
+The address is shown when you first set up the repo
+
+```r
+knitr::include_graphics("../imgs/2_reposetup.png")
+```
+
+&lt;img src="../imgs/2_reposetup.png" width="2725" /&gt;
+
+---
+## Get remote address
+If you want to get the address later you can check press the clone button when you open up the repository. 
+
+```r
+knitr::include_graphics("../imgs/16.png")
+```
+
+&lt;img src="../imgs/16.png" width="2408" /&gt;
+
+
+---
+## Adding a remote to your local Git
+
+Add the address to the Git. If you do not want it online on GitHub you can pick somewhere else. A server or someone else laptop. 
+
+```sh
+git remote add origin https://github.com/matthew-paul-2006/My_GitHub_Project.git
+```
+
+---
+## Updating GitHub - Push
+
+
+```sh
+git push -u origin master
+```
+
+```
+## To https://github.com/matthew-paul-2006/My_GitHub_Project.git
+##  * [new branch]      master -&gt; master
+## Branch 'master' set up to track remote branch 'master' from 'origin'.
+```
+After pushing, your commits will appear on GitHub
+
+```r
+knitr::include_graphics("../imgs/3_postpush.png")
+```
+
+&lt;img src="../imgs/3_postpush.png" width="2797" /&gt;
+
+
+---
+## Editing on GitHub
+Broadly you will want to do edits through Git as its has more capabilities. 
+You can make commits on GitHub to single files i.e. if you have a typo, this can be a quick fix.
+
+
+```r
+knitr::include_graphics("../imgs/4_makingedits.png")
+```
+
+&lt;img src="../imgs/4_makingedits.png" width="3365" /&gt;
+
+
+---
+## Editing on GitHub
+
+
+```r
+knitr::include_graphics("../imgs/5_madeedits.png")
+```
+
+&lt;img src="../imgs/5_madeedits.png" width="2739" /&gt;
+
+---
+## Editing on GitHub
+
+
+```r
+knitr::include_graphics("../imgs/6_commitedits.png")
+```
+
+&lt;img src="../imgs/6_commitedits.png" width="2840" /&gt;
+
+---
+## Updating your local Git - Pull
+
+Whenever your local Git is behind the remote GitHub, you can grab the updates with Pull.
+
+```sh
+git pull origin master
+```
+
+```
+## From https://github.com/matthew-paul-2006/My_GitHub_Project
+##  * branch            master     -&gt; FETCH_HEAD
+## Already up to date.
+```
+
+
+
+---
+# Git and GUIs
+
+---
+
+
+---
+## GUIs and RStudio
+
+* [GitHub](https://desktop.github.com/) has a desktop Graphical User Interface 
+* [RStudio](https://rstudio.com/products/rstudio/download/) also has Git integration
+
+These two tools, of many, that make it easier to manage Git repositories on your computer without having to use the command line. 
+
+They work by accessing the same git repository as used by the command line Git tools. This means it has the same principles. It just adds a point-and-click interface, which is easier to work with for your day-to-day Git wants and needs.
+
+---
+## GitHub Desktop
+
+It is easy to add remote repositories from GitHub or local repositories from your computer. 
+
+
+```r
+knitr::include_graphics("../imgs/7_addrepo.png")
+```
+
+&lt;img src="../imgs/7_addrepo.png" width="2528" /&gt;
+
+
+---
+## GitHub Desktop
+We can check the log of the repository with the *history* tab.
+
+```r
+knitr::include_graphics("../imgs/8_history.png")
+```
+
+&lt;img src="../imgs/8_history.png" width="2400" /&gt;
+
+---
+## GitHub Desktop
+Staging and committing is simplified:
+
+1. Simply click the checkbox of all files you want to stage
+2. Then add your commit message and press commit.
+
+```r
+knitr::include_graphics("../imgs/10commits.png")
+```
+
+&lt;img src="../imgs/10commits.png" width="1872" /&gt;
+
+---
+## GitHub Desktop
+If there is an associated remote on GitHub you can then just push it up.
+
+```r
+knitr::include_graphics("../imgs/11 push.png")
+```
+
+&lt;img src="../imgs/11 push.png" width="2808" /&gt;
+
+---
+## GitHub Desktop
+
+* For help setting up:
+https://docs.github.com/en/desktop
+
+* For help using the software:
+https://www.softwaretestinghelp.com/github-desktop-tutorial/
+
+---
+## RStudio
+
+RStudio has Git integration through its project management system. 
+Simply start a project and click the version control option. 
+
+
+.pull-left[
+
+```r
+knitr::include_graphics("../imgs/12.png")
+```
+
+&lt;img src="../imgs/12.png" width="1355" /&gt;
+  ]
+  
+.pull-right[
+
+```r
+knitr::include_graphics("../imgs/13.png")
+```
+
+&lt;img src="../imgs/13.png" width="1323" /&gt;
+  ]
+
+
+---
+## RStudio
+
+We can then just pick the Git option and enter the repository information. This is the same information we used when we added a remote on the command line. 
+
+.pull-left[
+
+```r
+knitr::include_graphics("../imgs/14.png")
+```
+
+&lt;img src="../imgs/14.png" width="1309" /&gt;
+  ]
+  
+.pull-right[
+
+```r
+knitr::include_graphics("../imgs/15.png")
+```
+
+&lt;img src="../imgs/15.png" width="1312" /&gt;
+  ]
+
+---
+## RStudio
+
+We can then just pick the Git option and enter the repository information. This is the same information we used when we added a remote on the command line. 
+
+.pull-left[
+
+```r
+knitr::include_graphics("../imgs/16.png")
+```
+
+&lt;img src="../imgs/16.png" width="2408" /&gt;
+  ]
+  
+.pull-right[
+
+```r
+knitr::include_graphics("../imgs/17.png")
+```
+
+&lt;img src="../imgs/17.png" width="1307" /&gt;
+  ]
+
+---
+## RStudio
+
+Once you have a new project set up this way there will be a new Git tab in the Environment pane (top right in the standard layout).  
+
+.pull-left[
+
+```r
+knitr::include_graphics("../imgs/18.png")
+```
+
+&lt;img src="../imgs/18.png" width="1264" /&gt;
+  ]
+  
+.pull-right[
+
+```r
+knitr::include_graphics("../imgs/19.png")
+```
+
+&lt;img src="../imgs/19.png" width="1264" /&gt;
+  ]
+
+---
+## RStudio
+
+Commits are similar to GitHub Desktop. You can use the checkbox to stage them. Add a commit message. Then press commit.  
+
+
+```r
+knitr::include_graphics("../imgs/20.png")
+```
+
+&lt;img src="../imgs/20.png" width="2741" /&gt;
+
+---
+# Project workflow and collaboration using GitHub
+
+---
+
+
+## Collaborating with GitHub
+Best practice workflow for collaborating with GitHub (or working solo)
+
+1. Issue raised
+
+2. Create a branch to address issue
+
+3. Add commits
+
+4. Pull request
+
+5. Review changes and get feedback 
+
+6. Merge changes
+
+
+---
+## Raising an issue
+
+This can be done by you, a collaborator, or if the repository is public, anyone!
+The workflow can used to reveal a bug. An idea for a feature. Or just simple typos in your documentation. 
+
+.pull-left[
+
+```r
+knitr::include_graphics("../imgs/22.png")
+```
+
+&lt;img src="../imgs/22.png" width="2043" /&gt;
+  ]
+  
+.pull-right[
+
+```r
+knitr::include_graphics("../imgs/23.png")
+```
+
+&lt;img src="../imgs/23.png" width="2061" /&gt;
+  ]
+
+---
+## Branching
+
+If you are making modifications to a repository that is actively being used, you might still want to be able to maintain a working version, until the updates you make are finished tested
+
+* Building a new feature
+* Fixing a bug
+
+Creating a branch creates an additional copy of your repository, whose history can then diverge. Later on when you finish working on the branch, you can then integrate it back into the master branch. 
+
+Master should reflect what is 'published'. This is your core repository. Branching helps protect the master. 
+
+---
+## Branching
+
+.pull-left[
+
+*Git*
+
+```sh
+git branch 'newbranch' # to build new one.
+```
+
+
+```sh
+git branch  # tells you what branches exist
+```
+
+```
+## * master
+##   newbranch
+```
+
+  ]
+  
+.pull-right[
+*Rstudio*
+
+```r
+knitr::include_graphics("../imgs/24.png")
+```
+
+&lt;img src="../imgs/24.png" width="1123" /&gt;
+  ]
+
+---
+## Checkout - Branches
+Once you have made a branch and want to work on it, you will need to make this branch the one that is active in your Git. The checkout command allows you to switch what is active in your Git.
+
+.pull-left[
+
+*Git*
+
+```sh
+git checkout newbranch 
+```
+
+```
+## Switched to branch 'newbranch'
+```
+
+
+```sh
+git branch
+```
+
+```
+##   master
+## * newbranch
+```
+
+  ]
+  
+.pull-right[
+*Rstudio*
+
+```r
+knitr::include_graphics("../imgs/25.png")
+```
+
+&lt;img src="../imgs/25.png" width="1096" /&gt;
+  ]
+
+
+---
+## Other Checkouts 
+
+Though you will mostly use checkout to move between branches, you can also use it to move backwards and forwards along branches to specific commits or files.
+
+* Commits - Each commit has an ID. You can see this in the log. You can use checkout to go back to this point in the project. 
+
+
+```sh
+git checkout commitID
+```
+
+* Files - When you have made local changes to a file, they have not been staged, and you want to actually roll them back to the most recent commit you can checkout that file. 
+
+
+```sh
+git checkout -- filename
+```
+
+---
+## Pull requests
+Git has the merge function to allow branches to be merged together. Pull requests are the GitHub equivalent, but have built in steps for review. This can be for you, or for others you are collaborating with. Pull requests are the cornerstone of a collaborative GitHub Environment.
+
+
+```r
+knitr::include_graphics("../imgs/26.png")
+```
+
+&lt;img src="../imgs/26.png" width="2496" /&gt;
+
+
+---
+## Pull requests
+When you start a new pull request, you first specify which branches you are bringing together, and what the directionality is. 
+
+
+```r
+knitr::include_graphics("../imgs/27.png")
+```
+
+&lt;img src="../imgs/27.png" width="2536" /&gt;
+
+---
+## Pull requests
+Next you add a comment to describe what this merge is doing. At this point you can also add reviewers. If you are working collaboratively this is asking a specific person to review the code and approve the pull request.
+
+
+```r
+knitr::include_graphics("../imgs/28.png")
+```
+
+&lt;img src="../imgs/28.png" width="2507" /&gt;
+
+---
+## Pull requests
+Once the pull request is added other people can look at the request, including the reviewer, and add comments and feedback. If this addresses an issue you can use the # to tag it in the pull request. At this point GitHub will check that there are no conflicts ie. the branches can be merged succesfully. 
+
+
+```r
+knitr::include_graphics("../imgs/29.png")
+```
+
+&lt;img src="../imgs/29.png" width="2291" /&gt;
+
+---
+## Pull requests
+Once everyone is happy, you can merge the pull request. You will then get the option to delete the old branch.  
+
+
+```r
+knitr::include_graphics("../imgs/30.png")
+```
+
+&lt;img src="../imgs/30.png" width="2221" /&gt;
+
+---
+## Pull requests vs. git merge
+
+Generally it is good practice to do a pull request as opposed to a merge.  Pull requests are preserved conversations, that include code. Even if something is not accepted, the rationale for why is saved. This means you have a record of the 'culture' surrounding the repository. 
+
+Even working with your own private repository, where you are a core/only contributor pull requests are good to use. You can still follow the workflow: make an issue take a branch, address the issue, then pull. If nothing else it is good record keeping and good practice for when you do work on a collaborative project. 
+
+
+---
+## Conflicts
+Occasionally you may get a conflict error, typically from a pull or a merge. This is because Git is unsure how to merge two files together. Maybe two collaborators have edited the same line of code and tried to merge them back into master branch.      
+
+There will be an error message, and you can also see it displayed in status. To resolve the conflict you will have to open the problem file/s.
+
+
+---
+## Conflicts
+
+The conflicting code with information from both sides of the merge will be present in the problem file/s. Once you have opened the file and you will find the structure somewhere:  
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+
+master code i.e.  
+
+y=1  
+
+=======  
+
+branch code i.e. 
+    
+y=2  
+\&gt;\&gt;\&gt;\&gt;\&gt;\&gt;\&gt; branch name     
+
+
+To fix this, you just have to pick which code is appropriate. Delete anything superfluous including the "&lt;, = and &gt;".
+
+If the conflict is found on GitHub, it will walk you through this. 
+
+
+---
+# Other useful Git and GitHub commands and utilities
+
+---
+
+## Forking
+How do I work on someone else's project on GitHub? 
+
+Fork it first. This will create a whole new copy in your GitHub. This gives you the opportunity to edit/add/remove files without any risk.
+
+
+```r
+knitr::include_graphics("../imgs/31.png")
+```
+
+&lt;img src="../imgs/31.png" width="2499" /&gt;
+
+---
+## .gitignore file
+
+Sometimes you have large or private files you do not want to upload to github. A .gitignore file contains any files or directories you want Git to ignore. 
+
+You can use wild cards to exclude whole file types i.e. \*.bams, or \*.bw
+
+Typically a .gitignore will be in top level of the directory. You can also have additional .gitignores in sub-directories. These take precedent. You can use ! to allow something to be seen (i.e. if  all log files blocked in parent directory, but allow a specific log file to be displayed in daughter directory)
+
+
+```r
+knitr::include_graphics("../imgs/32.png")
+```
+
+&lt;img src="../imgs/32.png" width="661" /&gt;
+
+---
+## Moving files
+
+If you move a file Git can get confused and treats it like you have deleted and created a file. This means the new file will not have the history. RStudios git interface figures it out if you stage the "deletion" and "creation" at the same time.   
+
+If you move a file on the command line, there is a special Git move function:
+
+```sh
+git mv FilePath NewFilePath
+```
+
+The above helps with moving a single file. If you have a bunch of files to move, you can just move them in finder/explorer. Then post-hoc fix the staging to fix the move using:
+
+
+```sh
+git add -A .
+```
+
+---
+## Other things to look up
+
+## Remove
+Deleting files
+
+git rm command removes a files and stages it. 
+If you just do rm it will notice it. But not stage it. Can then do git rm to stage it.EVen though the file has alraedy gone. 
+
+## Good for many files
+Make edits you want and remove files that you dont want anymore. 
+git add -u . in your working fdriectory will then stage all the remove files. 
+
+## Stop tracking a file
+git rm --cached
+will stage deletion, but will not actually remove it from your directory
+
+
+
+# rebase
+Take exisitng commits and put it on branch that is new
+rebase allows new edits to master to be integrated into the branch
+Generaly for your own branch then update it if it has lost pace with asmter. Will update it. Replays master, then Adds your commits after to the newly modified amster. 
+ it makes repository easier to udnerstand. better then merging the master to the branch. 
+
+---
+#Reset
+mixed: alters history and wd (defulat)
+soft: will take commit and put it back into staging areaso you can make more edits before then reocmmiting
+hard: 
+
+
+mixed - ie.. reset HEAD. take stuff from staging and put it back in wd back out
+soft  -i.e. rest HEAD~5. takeprevious 5 in this example commits. put into stage again. can then commit again to clean up commits a bit. 
+hard - gets rid of commit completely.
+
+checkout can be used on specific directory or file. -&gt; works on a much more grnaular level. 
+
+
+---
+# Further Resouces
+
+Practise: https://github.com/wesbos/dad-jokes
+
+https://git-scm.com/book/en/v2
+
+
+---
+# Branch topology
+
+Understanding branch topology can be confusing. GitHub have a tool to help you understand how the diffrent branching, checkouts, commits, and merges map out with a graphic. 
+
+http://git-school.github.io/visualizing-git/
+
+##
+
+packages
+
+gh
+gert
+
+
+---
+# Contact
+
+Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
