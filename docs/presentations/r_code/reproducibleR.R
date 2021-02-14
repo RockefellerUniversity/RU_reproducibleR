@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE, tidy = T)
 if(params$isSlides != "yes"){
   cat("# Reproducible Research
 
-
+---
 "    
   )
   
@@ -31,13 +31,13 @@ if(params$isSlides == "yes"){
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
-
+---
 "    
   )
 }else{
   cat("# Creating Documents from R Scripts
 
-
+---
 "    
   )
   
@@ -67,13 +67,13 @@ if(params$isSlides == "yes"){
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
-
+---
 "    
   )
 }else{
   cat("# Comments
 
-
+---
 "    
   )
   
@@ -94,11 +94,11 @@ if(params$isSlides == "yes"){
 
 ## ----eval=F-------------------------------------------------------------------
 ## 
-## #'
+## #' ---
 ## #' title: "BRC making notes example"
 ## #' author: "Tom Carroll"
 ## #' date: "Reproducible R"
-## #'
+## #' ---
 ## #' this would be placed as text in html
 ## # Generate some random numbers (This is a comment with code)
 ## myRandNumbers <- rnorm(100,10,2)
@@ -120,13 +120,13 @@ if(params$isSlides == "yes"){
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
-
+---
 "    
   )
 }else{
   cat("# Markdown
 
-
+---
 "    
   )
   
@@ -142,13 +142,13 @@ if(params$isSlides == "yes"){
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
-
+---
 "    
   )
 }else{
   cat("# Markdown Syntax
 
-
+---
 "    
   )
   
@@ -169,13 +169,13 @@ if(params$isSlides == "yes"){
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
-
+---
 "    
   )
 }else{
   cat("# rMarkdown
 
-
+---
 "    
   )
   
