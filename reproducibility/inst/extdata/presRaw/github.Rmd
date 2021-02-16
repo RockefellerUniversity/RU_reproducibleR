@@ -200,11 +200,13 @@ We initialize repositories to store files related to a project. You can make man
 
 ```{r, echo=F, message=F}
 require(gh)
-Sys.setenv(GITHUB_PAT="4483deb0ef1ede9be7f5f4f6098c657437e6b12f")
+
+
 my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
 
 if(sum(my_repos==("My_GitHub_Project"))>0){
-  gh("DELETE /repos/:owner/:repo", owner = "matthew-paul-2006", 
+  gh("DELETE /repos/:owner/:repo", owner = "RockefellerUniversity
+", 
    repo = "My_GitHub_Project")}
 
 gh("POST /user/repos", name = "My_GitHub_Project")
@@ -448,23 +450,19 @@ Push it up to wherever you're hosting you code i.e. GitHub.
 
 ---
 ## Create a remote repository
-```{r}
-knitr::include_graphics("../imgs/1_createnew.png")
-```
+![alt text](imgs/1_createnew.png)
 
 ---
 ## Get remote address
 The address is shown when you first set up the repo
-```{r}
-knitr::include_graphics("../imgs/2_reposetup.png")
-```
+![alt text](imgs/2_reposetup.png)
+
 
 ---
 ## Get remote address
 If you want to get the address later you can check press the clone button when you open up the repository. 
-```{r}
-knitr::include_graphics("../imgs/16.png")
-```
+![alt text](imgs/16.png)
+
 
 
 ---
@@ -482,34 +480,28 @@ git remote add origin https://github.com/matthew-paul-2006/My_GitHub_Project.git
 git push -u origin master
 ```
 After pushing, your commits will appear on GitHub
-```{r}
-knitr::include_graphics("../imgs/3_postpush.png")
-```
-
+![alt text](imgs/3_postpush.png)
 
 ---
 ## Editing on GitHub
 Broadly you will want to do edits through Git as its has more capabilities. 
 You can make commits on GitHub to single files i.e. if you have a typo, this can be a quick fix.
 
-```{r}
-knitr::include_graphics("../imgs/4_makingedits.png")
-```
+![alt text](imgs/4_makingedits.png)
+
+
+
+---
+## Editing on GitHub
+
+![alt text](imgs/5_madeedits.png)
 
 
 ---
 ## Editing on GitHub
 
-```{r}
-knitr::include_graphics("../imgs/5_madeedits.png")
-```
 
----
-## Editing on GitHub
-
-```{r}
-knitr::include_graphics("../imgs/6_commitedits.png")
-```
+![alt text](imgs/6_commitedits.png)
 
 ---
 ## Updating your local Git - Pull
@@ -560,17 +552,14 @@ They work by accessing the same git repository as used by the command line Git t
 
 It is easy to add remote repositories from GitHub or local repositories from your computer. 
 
-```{r}
-knitr::include_graphics("../imgs/7_addrepo.png")
-```
+![alt text](imgs/7_addrepo.png)
+
 
 
 ---
 ## GitHub Desktop
 We can check the log of the repository with the *history* tab.
-```{r}
-knitr::include_graphics("../imgs/8_history.png")
-```
+![alt text](imgs/8_history.png)
 
 ---
 ## GitHub Desktop
@@ -578,16 +567,12 @@ Staging and committing is simplified:
 
 1. Simply click the checkbox of all files you want to stage
 2. Then add your commit message and press commit.
-```{r}
-knitr::include_graphics("../imgs/10commits.png")
-```
+![alt text](imgs/10commits.png)
 
 ---
 ## GitHub Desktop
 If there is an associated remote on GitHub you can then just push it up.
-```{r}
-knitr::include_graphics("../imgs/11 push.png")
-```
+![alt text](imgs/11 push.png)
 
 ---
 ## GitHub Desktop
@@ -606,15 +591,11 @@ Simply start a project and click the version control option.
 
 
 .pull-left[
-```{r}
-knitr::include_graphics("../imgs/12.png")
-```
+![alt text](imgs/12.png)
   ]
   
 .pull-right[
-```{r}
-knitr::include_graphics("../imgs/13.png")
-```
+![alt text](imgs/13.png)
   ]
 
 
@@ -624,15 +605,11 @@ knitr::include_graphics("../imgs/13.png")
 We can then just pick the Git option and enter the repository information. This is the same information we used when we added a remote on the command line. 
 
 .pull-left[
-```{r}
-knitr::include_graphics("../imgs/14.png")
-```
+![alt text](imgs/14.png)
   ]
   
 .pull-right[
-```{r}
-knitr::include_graphics("../imgs/15.png")
-```
+![alt text](imgs/15.png)
   ]
 
 ---
@@ -641,15 +618,11 @@ knitr::include_graphics("../imgs/15.png")
 We can then just pick the Git option and enter the repository information. This is the same information we used when we added a remote on the command line. 
 
 .pull-left[
-```{r}
-knitr::include_graphics("../imgs/16.png")
-```
+![alt text](imgs/16.png)
   ]
   
 .pull-right[
-```{r}
-knitr::include_graphics("../imgs/17.png")
-```
+![alt text](imgs/17.png)
   ]
 
 ---
@@ -658,15 +631,11 @@ knitr::include_graphics("../imgs/17.png")
 Once you have a new project set up this way there will be a new Git tab in the Environment pane (top right in the standard layout).  
 
 .pull-left[
-```{r}
-knitr::include_graphics("../imgs/18.png")
-```
+![alt text](imgs/18.png)
   ]
   
 .pull-right[
-```{r}
-knitr::include_graphics("../imgs/19.png")
-```
+![alt text](imgs/19.png)
   ]
 
 ---
@@ -674,9 +643,7 @@ knitr::include_graphics("../imgs/19.png")
 
 Commits are similar to GitHub Desktop. You can use the checkbox to stage them. Add a commit message. Then press commit.  
 
-```{r}
-knitr::include_graphics("../imgs/20.png")
-```
+![alt text](imgs/20.png)
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -725,15 +692,11 @@ This can be done by you, a collaborator, or if the repository is public, anyone!
 The workflow can used to reveal a bug. An idea for a feature. Or just simple typos in your documentation. 
 
 .pull-left[
-```{r}
-knitr::include_graphics("../imgs/22.png")
-```
+![alt text](imgs/22.png)
   ]
   
 .pull-right[
-```{r}
-knitr::include_graphics("../imgs/23.png")
-```
+![alt text](imgs/23.png)
   ]
 
 ---
@@ -766,9 +729,7 @@ git branch  # tells you what branches exist
   
 .pull-right[
 *Rstudio*
-```{r}
-knitr::include_graphics("../imgs/24.png")
-```
+![alt text](imgs/24.png)
   ]
 
 ---
@@ -790,9 +751,7 @@ git branch
   
 .pull-right[
 *Rstudio*
-```{r}
-knitr::include_graphics("../imgs/25.png")
-```
+![alt text](imgs/25.png)
   ]
 
 
@@ -817,42 +776,32 @@ git checkout -- filename
 ## Pull requests
 Git has the merge function to allow branches to be merged together. Pull requests are the GitHub equivalent, but have built in steps for review. This can be for you, or for others you are collaborating with. Pull requests are the cornerstone of a collaborative GitHub Environment.
 
-```{r}
-knitr::include_graphics("../imgs/26.png")
-```
+![alt text](imgs/26.png)
 
 
 ---
 ## Pull requests
 When you start a new pull request, you first specify which branches you are bringing together, and what the directionality is. 
 
-```{r}
-knitr::include_graphics("../imgs/27.png")
-```
+![alt text](imgs/27.png)
 
 ---
 ## Pull requests
 Next you add a comment to describe what this merge is doing. At this point you can also add reviewers. If you are working collaboratively this is asking a specific person to review the code and approve the pull request.
 
-```{r}
-knitr::include_graphics("../imgs/28.png")
-```
+![alt text](imgs/28.png)
 
 ---
 ## Pull requests
 Once the pull request is added other people can look at the request, including the reviewer, and add comments and feedback. If this addresses an issue you can use the # to tag it in the pull request. At this point GitHub will check that there are no conflicts ie. the branches can be merged succesfully. 
 
-```{r}
-knitr::include_graphics("../imgs/29.png")
-```
+![alt text](imgs/29.png)
 
 ---
 ## Pull requests
 Once everyone is happy, you can merge the pull request. You will then get the option to delete the old branch.  
 
-```{r}
-knitr::include_graphics("../imgs/30.png")
-```
+![alt text](imgs/30.png)
 
 ---
 ## Pull requests vs. git merge
@@ -919,9 +868,8 @@ How do I work on someone else's project on GitHub?
 
 Fork it first. This will create a whole new copy in your GitHub. This gives you the opportunity to edit/add/remove files without any risk.
 
-```{r}
-knitr::include_graphics("../imgs/31.png")
-```
+![alt text](imgs/31.png)
+
 
 ---
 ## .gitignore file
@@ -932,9 +880,7 @@ You can use wild cards to exclude whole file types i.e. \*.bams, or \*.bw
 
 Typically a .gitignore will be in top level of the directory. You can also have additional .gitignores in sub-directories. These take precedent. You can use ! to allow something to be seen (i.e. if  all log files blocked in parent directory, but allow a specific log file to be displayed in daughter directory)
 
-```{r}
-knitr::include_graphics("../imgs/32.png")
-```
+![alt text](imgs/32.png)
 
 ---
 ## Moving files
