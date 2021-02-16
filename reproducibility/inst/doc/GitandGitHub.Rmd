@@ -1,0 +1,30 @@
+---
+title: "Reproducible R"
+author: "Rockefeller University, Bioinformatics Resource Center"
+date: "https://rockefelleruniversity.github.io/RU_reproducibleR/"
+output: 
+  html_document:
+    number_sections: false  ## if you want number sections at each table header
+    theme: united  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
+params:
+  toMessage: false    
+---
+
+```{r, setup,include=FALSE}
+toMessage <- ifelse(!is.null(params$toMessage),params$toMessage,FALSE)
+message(toMessage)
+```
+
+<p>&nbsp;</p>
+These exercises follow the material in [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
+
+
+- Open up markdownExampleDefaultStyles.Rmd and markdownExample.Rmd in the scripts directory. Have a look at the rMarkdown examples here and the resulting output html files.
+
+[Example HTML Default style.](../../scripts/markdownExampleDefaultStyles.html)  
+[Example HTML with extra style.](../../scripts/markdownExample.html)
+
+- Open scriptToConvertToRMarkdown.r in scripts directory and save as new name.
+
+- Convert this script to an Rmarkdown document using the render() function or inside RStudio.

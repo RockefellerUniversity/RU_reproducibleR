@@ -4,7 +4,7 @@
 [<img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/R-CMD-check-bioc/badge.svg">](https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3AR-CMD-check-bioc)
 
 
-This course introduces how to code in R in a reproducible way.
+This course introduces how to code in R in a reproducible way. Two parallel methods are presented: Rmarkdown and Git. Together, Rmarkdown and Git allow you to generate analysis that is fully integrated with the results, session information is preserved and it is all version controlled so you can track changes as your analysis evolves.
 
 Course material is available as HTML presentations or single page document. An exercise is available at the end.
 
