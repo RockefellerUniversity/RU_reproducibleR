@@ -69,7 +69,7 @@ or in the console.
 
 ```r
 setwd("/PathToMyDownload/Reproducible_R-master/r_course")
-# e.g. setwd("~/Downloads/Reproducible_R-master/r_course")
+# e.g. setwd('~/Downloads/Reproducible_R-master/r_course')
 ```
 
 ---
@@ -140,7 +140,7 @@ The render() function takes the argument **output_format**.
 
 
 ```r
-render("scripts/script.r", output_format="html_document")
+render("scripts/script.r", output_format = "html_document")
 ```
 
 ---
@@ -180,7 +180,7 @@ In R we can use **#** as comments in the code. This is the most basic type of do
 
 ```r
 # Generate some random numbers
-myRandNumbers &lt;- rnorm(100,10,2)
+myRandNumbers &lt;- rnorm(100, 10, 2)
 ```
 
 ---
@@ -192,7 +192,7 @@ If we want to include comments as text then we can use a new comment type **#'**
 ```r
 #' this would be placed as code
 # Generate some random numbers
-myRandNumbers &lt;- rnorm(100,10,2)
+myRandNumbers &lt;- rnorm(100, 10, 2)
 ```
 
 ---
@@ -204,13 +204,13 @@ If we wish to control author, title and date, we can insert metadata into the sc
 
 ```r
 #' ---
-#' title: "BRC making notes example"
-#' author: "Tom Carroll"
-#' date: "Reproducible R"
+#' title: 'BRC making notes example'
+#' author: 'Tom Carroll'
+#' date: 'Reproducible R'
 #' ---
 #' this would be placed as text in html
 # Generate some random numbers (This is a comment with code)
-myRandNumbers &lt;- rnorm(100,10,2)
+myRandNumbers &lt;- rnorm(100, 10, 2)
 ```
 
 We will come back to YAML later.
@@ -564,9 +564,7 @@ rnorm(100  )
 ```
 
 ```r
-        hist( 
-rnorm(100  )
-)
+hist(rnorm(100))
 ```
 
 ![](reproducibleR_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
@@ -587,8 +585,8 @@ temp
 ```r
 temp &lt;- rnorm(10)
 temp
-##  [1]  1.2196799  0.9147986 -0.9583625  0.6459644 -0.6303053  1.0260733
-##  [7] -0.2672973  0.4622327 -0.6926347 -0.5474400
+##  [1]  0.9857087 -0.8961532 -0.3557977  0.7671573  0.4512687  0.3977781
+##  [7] -0.3945518  0.8167122 -0.6751819 -1.5177538
 ```
 
 ---
@@ -613,8 +611,8 @@ kable(dfExample)
 ```r
 temp &lt;- rnorm(3)
 temp2 &lt;- rnorm(3)
-dfExample &lt;- data.frame(temp,temp2)
-kable(dfExample,format="markdown")
+dfExample &lt;- data.frame(temp, temp2)
+kable(dfExample, format = "markdown")
 ```
 
 ---
@@ -624,17 +622,17 @@ kable(dfExample,format="markdown")
 ```r
 temp &lt;- rnorm(3)
 temp2 &lt;- rnorm(3)
-dfExample &lt;- data.frame(temp,temp2)
-kable(dfExample,format="markdown")
+dfExample &lt;- data.frame(temp, temp2)
+kable(dfExample, format = "markdown")
 ```
 
 
 
-|       temp|      temp2|
-|----------:|----------:|
-| -0.1972912| -0.5065962|
-| -0.1839351|  0.1090061|
-|  1.1790492| -0.4044144|
+|      temp|      temp2|
+|---------:|----------:|
+| 0.4641898| -0.1867767|
+| 1.5712195| -0.2821510|
+| 1.4360250|  0.0465789|
 
 ---
 
@@ -651,7 +649,7 @@ more free form text.
 
 ```
 Here is some freeform _markdown_ and the first result
-from an rnorm call is -1.9477117, followed by some more free form text.
+from an rnorm call is 1.1009393, followed by some more free form text.
 
 ---
 ## cache
@@ -786,7 +784,7 @@ Exercise on Reproducibility in R can be found [here](../../exercises/exercises/R
 
 
 ---
-# Contact
+## Contact
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
     </textarea>
