@@ -904,28 +904,16 @@ git add -A .
 ```
 
 ---
-## Other things to look up
+## Other useful commands to be aware of
 
-## Remove
-Deleting files
+* **rm** - A simple command to remove files, but with parameters that help remove it from being tracked by git, or to remove the files entire git history.
 
-git rm command removes a files and stages it. 
-If you just do rm it will notice it. But not stage it. Can then do git rm to stage it.EVen though the file has already gone. 
-
-## Good for many files
-Make edits you want and remove files that you don't want anymore. 
-git add -u . in your working directory will then stage all the remove files. 
-
-## Stop tracking a file
-git rm --cached
-will stage deletion, but will not actually remove it from your directory
+* **rebase** - Helps manage multiple bracnes. When the master is updated, any new commits can then be added to a branch. 
 
 
-
-# rebase
 Take exisitng commits and put it on branch that is new
 rebase allows new edits to master to be integrated into the branch
-Generaly for your own branch then update it if it has lost pace with asmter. Will update it. Replays master, then Adds your commits after to the newly modified amster. 
+Generally for your own branch then update it if it has lost pace with asmter. Will update it. Replays master, then Adds your commits after to the newly modified master. 
  it makes repository easier to udnerstand. better then merging the master to the branch. 
 
 ---
@@ -943,30 +931,28 @@ checkout can be used on specific directory or file. -> works on a much more grna
 
 
 ---
-# Further Resouces
+## Further Resouces
 
-Practise: https://github.com/wesbos/dad-jokes
+* The [Git book](https://git-scm.com/book/en/v2) for all things git.
 
-https://git-scm.com/book/en/v2
+
+* Understanding branch topology can be confusing. Git School have a nice [tool](http://git-school.github.io/visualizing-git/) to help you understand how the different branching, checkouts, commits, and merges map out with a graphic. 
+
+* Getting confident with the collaborative side of GitHub is tough. There are less serious repositories which you can take part in to practice i.e. [Dad Jokes](https://github.com/wesbos/dad-jokes).
+
+---
+## Git/Github and R
+
+In most of our training we talk about how great R is to do bioinformatics. With Git and GitHub this is no exception. I have shown you RStudios user-friendly interface
+for Git. There are also R pacakges that allow you to do much of what we have talked about trhough R itself in a programmatic way:
+
+- [git2r](https://docs.ropensci.org/git2r/) and [gert](https://github.com/r-lib/gert): Git
+- [gh](https://github.com/r-lib/gh): GitHub
+
 
 
 ---
-# Branch topology
-
-Understanding branch topology can be confusing. GitHub have a tool to help you understand how the diffrent branching, checkouts, commits, and merges map out with a graphic. 
-
-http://git-school.github.io/visualizing-git/
-
-##
-
-packages
-
-gh
-gert
-
-
----
-# Contact
+## Contact
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
 
