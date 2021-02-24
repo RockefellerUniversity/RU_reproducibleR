@@ -282,7 +282,12 @@ dir /ah .git
 
 When first working with git, you need to attach your information. This means you are attached to changes you make. And this will be important for connecting to GitHub later. 
 
-
+```{sh, echo=F, message=F, warning=F}
+A=$(git config --global user.name)
+B=$(git config --global user.email)
+C=$(git config credential.username)
+git config credential.username 'BRC-RU'
+```
 ```{sh}
 git config --global user.name 'BRC-RU'
 ```
@@ -870,12 +875,17 @@ if(params$isSlides == "yes"){
 ```
 
 ## Forking
-How do I work on someone else's project on GitHub? 
+How do I work on a project that belongs to someone else on GitHub? 
 
-Fork it first. This will create a whole new copy in your GitHub. This gives you the opportunity to edit/add/remove files without any risk.
+Fork it first. This is like the GitHub equivalent of branching. This will create a whole new copy in your GitHub. This gives you the opportunity to edit/add/remove files without any risk.
 
 ![alt text](imgs/31.png)
 
+## Forking
+
+Forking is a cornerstone of the open source nature of GitHub. You can fork any public repository. Adapt it to your needs and then deploy it in whatever analysis or tool you are working on. You should just check for a license first. 
+
+Alternatively, when collaborating you can take a fork. This is often how bugs are fixed in public tools, as a user may find a way to fix it before the developer. The user can take a fork, fix the bug, create a pull request, then the developer can approve it for integration into the repository. 
 
 ---
 ## .gitignore file
@@ -909,27 +919,11 @@ git add -A .
 
 * **rm** - A simple command to remove files, but with parameters that help remove it from being tracked by git, or to remove the files entire git history.
 
-* **rebase** - Helps manage multiple bracnes. When the master is updated, any new commits can then be added to a branch. 
+* **rebase** - A powerful alternative to marge. Perfect for when the master has updates that are not present in a branch. You can use rebase to update the branch, with the new master commits.
 
+* **reset** - Rewind back staging and commits
 
-Take exisitng commits and put it on branch that is new
-rebase allows new edits to master to be integrated into the branch
-Generally for your own branch then update it if it has lost pace with asmter. Will update it. Replays master, then Adds your commits after to the newly modified master. 
- it makes repository easier to udnerstand. better then merging the master to the branch. 
-
----
-#Reset
-mixed: alters history and wd (defulat)
-soft: will take commit and put it back into staging areaso you can make more edits before then reocmmiting
-hard: 
-
-
-mixed - ie.. reset HEAD. take stuff from staging and put it back in wd back out
-soft  -i.e. rest HEAD~5. takeprevious 5 in this example commits. put into stage again. can then commit again to clean up commits a bit. 
-hard - gets rid of commit completely.
-
-checkout can be used on specific directory or file. -> works on a much more grnaular level. 
-
+Follow up with the [Git book](https://git-scm.com/book/en/v2) for more detail on implementing these commands.
 
 ---
 ## Further Resouces
@@ -956,6 +950,13 @@ for Git. There are also R pacakges that allow you to do much of what we have tal
 ## Contact
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
+
+```{sh}
+git config --global user.name ${A}
+git config --global user.email ${B}
+git config credential.username ${C}
+
+```
 
 ```{r, echo=F, message=F}
 Sys.setenv(GITHUB_PAT=master_PAT)
