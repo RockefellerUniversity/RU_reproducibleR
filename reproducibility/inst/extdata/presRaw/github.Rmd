@@ -203,12 +203,15 @@ We initialize repositories to store files related to a project. You can make man
 ```{r, echo=F, message=F}
 require(gh)
 
+# get both pats
+master_PAT <- Sys.getenv("GITHUB_PAT")
+alt_PAT <- Sys.getenv("GITHUB_PAT_alt")
+Sys.setenv(GITHUB_PAT=alt_PAT)
 
 my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
 
 if(sum(my_repos==("My_GitHub_Project"))>0){
-  gh("DELETE /repos/:owner/:repo", owner = "RockefellerUniversity
-", 
+  gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
    repo = "My_GitHub_Project")}
 
 gh("POST /user/repos", name = "My_GitHub_Project")
@@ -280,13 +283,13 @@ When first working with git, you need to attach your information. This means you
 
 
 ```{sh}
-git config --global user.name 'matthew-paul-2006'
+git config --global user.name 'BRC-RU'
 ```
 ```{sh}
 git config --global user.name
 ```
 ```{sh}
-git config --global user.email 'matthew.paul.2006@gmail.com'
+git config --global user.email 'brc@rockefeller.edu'
 ```
 ```{sh}
 git config --global user.email
@@ -472,7 +475,7 @@ If you want to get the address later you can check press the clone button when y
 
 Add the address to the Git. If you do not want it online on GitHub you can pick somewhere else. A server or someone else laptop. 
 ```{sh}
-git remote add origin https://github.com/matthew-paul-2006/My_GitHub_Project.git
+git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git
 ```
 
 ---
@@ -967,6 +970,10 @@ gert
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
 
+```{r, echo=F, message=F}
+Sys.setenv(GITHUB_PAT=master_PAT)
+
+```
 
 
 
