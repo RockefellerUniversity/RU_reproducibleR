@@ -30,6 +30,7 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_TOKEN: ${{ secrets.GHTOKEN2 }}
       GITHUB_PAT: ${{ secrets.GHTOKEN2 }}
+      GH_alt: ${{ secrets.ALT_ACCOUNT_PAT }}
 
     steps:
       - uses: actions/checkout@v2
