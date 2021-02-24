@@ -205,14 +205,15 @@ require(gh)
 
 # get both pats
 master_PAT <- Sys.getenv("GITHUB_PAT")
-alt_PAT <- Sys.getenv("GITHUB_PAT_alt")
+alt_PAT <- Sys.getenv("GH_alt")
 Sys.setenv(GITHUB_PAT=alt_PAT)
+Sys.setenv(GITHUB_TOKEN=alt_PAT)
 
 my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
 
 if(sum(my_repos==("My_GitHub_Project"))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
-   repo = "My_GitHub_Project")}
+   repo = "My_GitHub_Project"), }
 
 gh("POST /user/repos", name = "My_GitHub_Project")
 ```
@@ -958,7 +959,7 @@ Any suggestions, comments, edits or questions (about content or the slides thems
 
 ```{r, echo=F, message=F}
 Sys.setenv(GITHUB_PAT=master_PAT)
-
+Sys.setenv(GITHUB_TOKEN=master_PAT)
 ```
 
 

@@ -91,7 +91,7 @@ jobs:
       NOT_CRAN: true
       GITHUB_TOKEN: ${{ secrets.GHTOKEN2 }}
       GITHUB_PAT: ${{ secrets.GHTOKEN2 }}
-    #  GITHUB_PAT_alt: ${{ secrets.ALT_ACCOUNT_PAT }}
+      GH_alt: ${{ secrets.ALT_ACCOUNT_PAT }}
       
     ## The docker container to use. Note that we link a directory on the GHA
     ## runner to a docker directory, such that we can then cache the linked
