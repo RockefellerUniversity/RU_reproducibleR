@@ -213,7 +213,7 @@ my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
 
 if(sum(my_repos==("My_GitHub_Project"))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
-   repo = "My_GitHub_Project"), }
+   repo = "My_GitHub_Project") }
 
 gh("POST /user/repos", name = "My_GitHub_Project")
 ```
