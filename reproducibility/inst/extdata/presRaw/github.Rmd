@@ -19,14 +19,17 @@ output:
     highlight: tango  # specifies the syntax highlighting style
 params:
   isSlides: "no"
-  windows: `r if(.Platform$OS.type!="unix"){TRUE}`
-  unix: `r if(.Platform$OS.type=="unix"){TRUE}`
 ---
 
 ```{r setup, include=FALSE}
 suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
 #knitr::opts_knit$set(root.dir = '../My_Project_Folder')
+
+windows <- if(.Platform$OS.type!="unix"){return(TRUE)}
+message(windows)
+unix <- if(.Platform$OS.type=="unix"){return(TRUE)}
+message(unix)
 ```
 
 ```{r, results='asis',include=TRUE,echo=FALSE}
