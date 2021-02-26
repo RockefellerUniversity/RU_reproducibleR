@@ -28,7 +28,7 @@ These exercises follow the material in the GitHub section of [Reproducible R](ht
 - Create a project on GitHub. Add this as a remote to your local Git for GitHub_Training. 
 - Push changes up to the remote.
 
-```{sh, eval=F}
+```{sh, eval=F,echo=toMessage}}
 mkdir GitHub_Training
 cd GitHub_Training
 git init
