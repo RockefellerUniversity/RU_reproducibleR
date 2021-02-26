@@ -92,6 +92,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GHTOKEN2 }}
       GITHUB_PAT: ${{ secrets.GHTOKEN2 }}
       GH_alt: ${{ secrets.ALT_ACCOUNT_PAT }}
+      OS_check: FALSE
       
     ## The docker container to use. Note that we link a directory on the GHA
     ## runner to a docker directory, such that we can then cache the linked
