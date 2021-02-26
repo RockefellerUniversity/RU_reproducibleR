@@ -26,12 +26,18 @@ suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
 #knitr::opts_knit$set(root.dir = '../My_Project_Folder')
 
+
+```
+
+
+
+```{r, echo=F, message=F}
 windows <- if(.Platform$OS.type!="unix"){return(TRUE)}
 message(windows)
 unix <- if(.Platform$OS.type=="unix"){return(TRUE)}
 message(unix)
-```
 
+```
 ```{r, results='asis',include=TRUE,echo=FALSE}
 if(params$isSlides != "yes"){
   cat("# Getting started with Git and GitHub
