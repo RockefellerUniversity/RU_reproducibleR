@@ -21,7 +21,6 @@ params:
   isSlides: "no"
   windows: `r if(.Platform$OS.type!="unix"){TRUE}`
   unix: `r if(.Platform$OS.type=="unix"){TRUE}`
-  Rvers: `r paste0(R.Version()$major,".",R.Version()$minor)`
 ---
 
 ```{r setup, include=FALSE}
@@ -205,11 +204,26 @@ Sys.setenv(GITHUB_TOKEN=alt_PAT)
 
 my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
 
+OS_check <- Sys.getenv("OS_check")
+message(OS_check)
+
+if(OS_check){
+buildname<-paste0(.Platform$OS.type,".",R.Version()$major,".",R.Version()$minor)
+repo_name<-paste0("My_GitHub_Project.",buildname)
+if(sum(my_repos==(repo_name))>0){
+  gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
+   repo = repo_name) }
+
+gh("POST /user/repos", name = repo_name)
+
+}else{
+  
 if(sum(my_repos==("My_GitHub_Project"))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
    repo = "My_GitHub_Project") }
 
 gh("POST /user/repos", name = "My_GitHub_Project")
+}
 ```
 
 ```{sh, eval=T, echo=F}
@@ -474,7 +488,11 @@ If you want to get the address later you can check press the clone button when y
 ## Adding a remote to your local Git
 
 Add the address to the Git. If you do not want it online on GitHub you can pick somewhere else. A server or someone else laptop. 
-```{sh}
+```{r, echo=F, eval=OS_check }
+system(paste0("git remote add origin https://github.com/BRC-RU/", repo_name, ".git"))
+```
+
+```{sh, eval=!OS_check}
 git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git
 ```
 
@@ -484,9 +502,12 @@ git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git
 ```{sh, eval=F}
 git push -u origin master
 ```
-```{sh, eval=T, echo=F}
+```{sh, eval=!OS_check, echo=F}
 git push https://${GH_alt}@github.com/BRC-RU/My_GitHub_Project.git
 
+```
+```{r, echo=F, eval=OS_check }
+system(paste0("git push https://${GH_alt}@github.com/BRC-RU/", repo_name, ".git"))
 ```
 After pushing, your commits will appear on GitHub
 ![alt text](imgs/3_postpush.png)
@@ -516,15 +537,18 @@ You can make commits on GitHub to single files i.e. if you have a typo, this can
 ## Updating your local Git - Pull
 
 Whenever your local Git is behind the remote GitHub, you can grab the updates with Pull.
+
 ```{sh, eval=F}
 git pull -u origin master
 ```
-```{sh, eval=T, echo=F}
+
+```{sh, eval=!OS_check, echo=F}
 git pull https://${GH_alt}@github.com/BRC-RU/My_GitHub_Project.git
 
 ```
-
-
+```{r, echo=F, eval=OS_check }
+system(paste0("git pull https://${GH_alt}@github.com/BRC-RU/", repo_name, ".git"))
+```
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -954,7 +978,25 @@ for Git. There are also R pacakges that allow you to do much of what we have tal
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
 
-```{sh}
+
+```{r, echo=F, message=F}
+
+
+if(OS_check){
+my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
+buildname<-paste0(.Platform$OS.type,".",R.Version()$major,".",R.Version()$minor)
+repo_name<-paste0("My_GitHub_Project.",buildname)
+if(sum(my_repos==(repo_name))>0){
+  gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
+   repo = repo_name) }
+}
+
+```
+
+```{sh, echo=F, message=F}
+
+
+
 git config --global user.name ${A}
 git config --global user.email ${B}
 git config credential.username ${C}
