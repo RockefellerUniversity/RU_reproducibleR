@@ -14,6 +14,14 @@ navbar:
         href: presentations/singlepage/reproducibleR.html
       - text: Code
         href: presentations/r_code/reproducibleR.R
+    - text: Session2
+      menu:
+      - text: Slide
+        href: presentations/slides/github.html
+      - text: Single Page
+        href: presentations/singlepage/github.html
+      - text: Code
+        href: presentations/r_code/github.R
   - text: Exercises
     menu:
     - text: ReproducibleR
@@ -22,6 +30,12 @@ navbar:
         href: exercises/exercises/ReproducibleR_exercise.html
       - text: Solution
         href: exercises/answers/ReproducibleR_answers.html
+    - text: GitandGithub
+      menu:
+      - text: Exercise
+        href: exercises/exercises/GitandGithub_exercise.html
+      - text: Solution
+        href: exercises/answers/GitandGithub_answers.html
   right:
   - text: Getting help!
     href: https://github.com//RockefellerUniversity/RU_reproducibleR/issues
