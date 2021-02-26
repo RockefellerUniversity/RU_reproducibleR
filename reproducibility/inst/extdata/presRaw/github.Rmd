@@ -19,6 +19,9 @@ output:
     highlight: tango  # specifies the syntax highlighting style
 params:
   isSlides: "no"
+  windows: `r if(.Platform$OS.type!="unix"){TRUE}`
+  unix: `r if(.Platform$OS.type=="unix"){TRUE}`
+  Rvers: `r paste0(R.Version()$major,".",R.Version()$minor)`
 ---
 
 ```{r setup, include=FALSE}
@@ -38,15 +41,6 @@ if(params$isSlides != "yes"){
 }
 
 ```
-
-
-## TO DO
-
-##
-## CHECK ALL COMMANDS WORK ON WINDOWS i.e. touch
-##
-
-## Set Up
 
 All prerequisites, links to material and slides for this course can be found on github.
 
@@ -237,20 +231,20 @@ git init
 
 .pull-left[
 *Mac/Linux*
-```{sh}
+```{sh, eval=params$unix}
 ls .
 ```
-```{sh}
+```{sh, eval=params$unix}
 ls -a .
 ```
   ]
   
 .pull-right[
 *Windows*
-```{sh, eval=F}
+```{sh, eval=params$windows}
 dir .
 ```
-```{sh, eval=F}
+```{sh, eval=params$windows}
 dir /ah .
 ```
   ] 
@@ -265,14 +259,14 @@ You can explore it. It is full of simple plain text files.
 
 .pull-left[
 *Mac/Linux*
-```{sh}
+```{sh, eval=params$unix}
 ls -a .git
 ```
   ]
   
 .pull-right[
 *Windows*
-```{sh, eval=F}
+```{sh, eval=params$windows}
 dir /ah .git
 ```
   ]
@@ -938,8 +932,9 @@ Follow up with the [Git book](https://git-scm.com/book/en/v2) for more detail on
 
 * The [Git book](https://git-scm.com/book/en/v2) for all things git.
 
-
 * Understanding branch topology can be confusing. Git School have a nice [tool](http://git-school.github.io/visualizing-git/) to help you understand how the different branching, checkouts, commits, and merges map out with a graphic. 
+
+* The [GitHub help page](https://docs.github.com/en) is put together really well and can help with both Git and GitHub questions.
 
 * Getting confident with the collaborative side of GitHub is tough. There are less serious repositories which you can take part in to practice i.e. [Dad Jokes](https://github.com/wesbos/dad-jokes).
 
