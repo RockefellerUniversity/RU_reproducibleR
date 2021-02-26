@@ -2,7 +2,7 @@ Package: reproducibility
 Type: Package
 Title: Reporoducibility in R
 Version: 0.1.0
-Author: Ji-Dung Luo, Matt Paul, Wei Wang, Doug Barrows and Thomas Carroll.
+Author: Matt Paul and Thomas Carroll.
 Maintainer: Thomas Carroll <tc.infomatics@gmail>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
