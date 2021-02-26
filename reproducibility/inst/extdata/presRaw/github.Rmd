@@ -32,9 +32,9 @@ knitr::opts_chunk$set(echo = TRUE, tidy = T)
 
 
 ```{r, echo=F, message=F}
-windows <- if(.Platform$OS.type!="unix"){return(TRUE)}
+windows <- if(.Platform$OS.type!="unix"){windows<-(TRUE)}else{windows<-(FALSE)}
 message(windows)
-unix <- if(.Platform$OS.type=="unix"){return(TRUE)}
+unix <- if(.Platform$OS.type=="unix"){unix<-(TRUE)}else{unix<-(FALSE)}
 message(unix)
 
 ```
