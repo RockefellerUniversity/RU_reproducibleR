@@ -254,20 +254,20 @@ git init
 
 .pull-left[
 *Mac/Linux*
-```{sh, eval=params$unix}
+```{sh, eval=unix}
 ls .
 ```
-```{sh, eval=params$unix}
+```{sh, eval=unix}
 ls -a .
 ```
   ]
   
 .pull-right[
 *Windows*
-```{sh, eval=params$windows}
+```{sh, eval=windows}
 dir .
 ```
-```{sh, eval=params$windows}
+```{sh, eval=windows}
 dir /ah .
 ```
   ] 
@@ -282,14 +282,14 @@ You can explore it. It is full of simple plain text files.
 
 .pull-left[
 *Mac/Linux*
-```{sh, eval=params$unix}
+```{sh, eval=unix}
 ls -a .git
 ```
   ]
   
 .pull-right[
 *Windows*
-```{sh, eval=params$windows}
+```{sh, eval=windows}
 dir /ah .git
 ```
   ]
