@@ -497,8 +497,12 @@ If you want to get the address later you can check press the clone button when y
 ## Adding a remote to your local Git
 
 Add the address to the Git. If you do not want it online on GitHub you can pick somewhere else. A server or someone else laptop. 
-```{r, echo=F, eval=OS_check }
+```{r, echo=F}
+
+if(OS_check){
 system(paste0("git remote add origin https://github.com/BRC-RU/", repo_name, ".git"))
+}
+
 ```
 
 ```{sh, eval=!OS_check}
@@ -515,8 +519,10 @@ git push -u origin master
 git push https://${GH_alt}@github.com/BRC-RU/My_GitHub_Project.git
 
 ```
-```{r, echo=F, eval=OS_check }
+```{r, echo=F }
+if(OS_check){
 system(paste0("git push https://${GH_alt}@github.com/BRC-RU/", repo_name, ".git"))
+}
 ```
 After pushing, your commits will appear on GitHub
 ![alt text](imgs/3_postpush.png)
