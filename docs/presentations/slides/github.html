@@ -165,8 +165,8 @@ We initialize repositories to store files related to a project. You can make man
 
 ```
 ## {
-##   "id": 342734781,
-##   "node_id": "MDEwOlJlcG9zaXRvcnkzNDI3MzQ3ODE=",
+##   "id": 342738690,
+##   "node_id": "MDEwOlJlcG9zaXRvcnkzNDI3Mzg2OTA=",
 ##   "name": "My_GitHub_Project",
 ##   "full_name": "BRC-RU/My_GitHub_Project",
 ##   "private": false,
@@ -230,9 +230,9 @@ We initialize repositories to store files related to a project. You can make man
 ##   "labels_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/labels{/name}",
 ##   "releases_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/releases{/id}",
 ##   "deployments_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/deployments",
-##   "created_at": "2021-02-27T00:26:12Z",
-##   "updated_at": "2021-02-27T00:26:12Z",
-##   "pushed_at": "2021-02-27T00:26:12Z",
+##   "created_at": "2021-02-27T00:54:48Z",
+##   "updated_at": "2021-02-27T00:54:48Z",
+##   "pushed_at": "2021-02-27T00:54:49Z",
 ##   "git_url": "git://github.com/BRC-RU/My_GitHub_Project.git",
 ##   "ssh_url": "git@github.com:BRC-RU/My_GitHub_Project.git",
 ##   "clone_url": "https://github.com/BRC-RU/My_GitHub_Project.git",
@@ -333,7 +333,7 @@ dir .
 ```
 
 ```sh
-dir /ah .
+dir . /ah
 ```
   ] 
 
@@ -498,7 +498,7 @@ git status .
 ```
 
 ```
-## [master (root-commit) 699d9cd] Made a README
+## [master (root-commit) ae2448c] Made a README
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ##  create mode 100644 README.md
 ## On branch master
@@ -603,7 +603,7 @@ git commit -m 'Added welcome message'
 ## +++ b/README.md
 ## @@ -0,0 +1 @@
 ## +Hello Friends
-## [master 6c367d2] Added welcome message
+## [master ed06e13] Added welcome message
 ##  1 file changed, 1 insertion(+)
 ```
 
@@ -620,15 +620,15 @@ git log
 ```
 
 ```
-## commit 6c367d2d243b0457e49d4ea7a69eae4a166fa5ee
+## commit ed06e139b40a68fca9f0cc8e9c2e0db3a307a7b0
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Sat Feb 27 00:26:13 2021 +0000
+## Date:   Sat Feb 27 00:54:50 2021 +0000
 ## 
 ##     Added welcome message
 ## 
-## commit 699d9cd13db2877f41c9acebc927c1e2bb84451b
+## commit ae2448c07d92fcc1f6b120913248d34409979b9d
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Sat Feb 27 00:26:13 2021 +0000
+## Date:   Sat Feb 27 00:54:49 2021 +0000
 ## 
 ##     Made a README
 ```
@@ -647,8 +647,8 @@ git log --oneline
 ```
 
 ```
-## 6c367d2 Added welcome message
-## 699d9cd Made a README
+## ed06e13 Added welcome message
+## ae2448c Made a README
 ```
 
 ```sh
@@ -656,10 +656,10 @@ git log --oneline --stat
 ```
 
 ```
-## 6c367d2 Added welcome message
+## ed06e13 Added welcome message
 ##  README.md | 1 +
 ##  1 file changed, 1 insertion(+)
-## 699d9cd Made a README
+## ae2448c Made a README
 ##  README.md | 0
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ```
