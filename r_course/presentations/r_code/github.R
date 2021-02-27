@@ -7,6 +7,15 @@ knitr::opts_chunk$set(echo = TRUE, tidy = T)
 #knitr::opts_knit$set(root.dir = '../My_Project_Folder')
 
 
+
+
+## ---- echo=F, message=F-------------------------------------------------------
+windows <- if(.Platform$OS.type!="unix"){windows<-(TRUE)}else{windows<-(FALSE)}
+message(windows)
+unix <- if(.Platform$OS.type=="unix"){unix<-(TRUE)}else{unix<-(FALSE)}
+message(unix)
+
+
 ## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
 if(params$isSlides != "yes"){
   cat("# Getting started with Git and GitHub
@@ -82,11 +91,26 @@ Sys.setenv(GITHUB_TOKEN=alt_PAT)
 
 my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
 
+OS_check <- Sys.getenv("OS_check")
+message(OS_check)
+
+if(OS_check){
+buildname<-paste0(.Platform$OS.type,".",R.Version()$major,".",R.Version()$minor)
+repo_name<-paste0("My_GitHub_Project.",buildname)
+if(sum(my_repos==(repo_name))>0){
+  gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
+   repo = repo_name) }
+
+gh("POST /user/repos", name = repo_name)
+
+}else{
+  
 if(sum(my_repos==("My_GitHub_Project"))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
    repo = "My_GitHub_Project") }
 
 gh("POST /user/repos", name = "My_GitHub_Project")
+}
 
 
 ## rm -rf .git
@@ -103,9 +127,7 @@ gh("POST /user/repos", name = "My_GitHub_Project")
 ## git init
 
 
-## ls .
 
-## ls -a .
 
 
 ## dir .
@@ -113,7 +135,6 @@ gh("POST /user/repos", name = "My_GitHub_Project")
 ## dir /ah .
 
 
-## ls -a .git
 
 
 ## dir /ah .git
@@ -205,17 +226,36 @@ if(params$isSlides == "yes"){
 ## git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git
 
 
+## ---- echo=F------------------------------------------------------------------
+
+if(OS_check){
+system(paste0("git remote add origin https://github.com/BRC-RU/", repo_name, ".git"))
+}else{
+  
+system("git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git")
+}
+
+
+
 ## git push -u origin master
 
-## git push https://${GH_alt}@github.com/BRC-RU/My_GitHub_Project.git
 
-## 
+## ---- echo=F------------------------------------------------------------------
+if(OS_check){
+system(paste0("git push https://${GH_alt}@github.com/BRC-RU/", repo_name, ".git"))
+}else{system("git push https://${GH_alt}@github.com/BRC-RU/My_GitHub_Project.git")}
+
 
 ## git pull -u origin master
 
-## git pull https://${GH_alt}@github.com/BRC-RU/My_GitHub_Project.git
 
-## 
+## ---- echo=F------------------------------------------------------------------
+if(OS_check){
+system(paste0("git pull https://${GH_alt}@github.com/BRC-RU/", repo_name, ".git"))
+}else{
+system(paste0("git pull https://${GH_alt}@github.com/BRC-RU/My_GitHub_Project.git"))
+}
+
 
 ## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
 if(params$isSlides == "yes"){
@@ -317,6 +357,23 @@ if(params$isSlides == "yes"){
 ## git add -A .
 
 
+## ---- echo=F, message=F-------------------------------------------------------
+
+
+if(OS_check){
+my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
+buildname<-paste0(.Platform$OS.type,".",R.Version()$major,".",R.Version()$minor)
+repo_name<-paste0("My_GitHub_Project.",buildname)
+if(sum(my_repos==(repo_name))>0){
+  gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
+   repo = repo_name) }
+}
+
+
+
+## 
+## 
+## 
 ## git config --global user.name ${A}
 
 ## git config --global user.email ${B}
