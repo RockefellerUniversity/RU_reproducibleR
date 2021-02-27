@@ -30,13 +30,7 @@ class: center, middle, inverse, title-slide
 
 
 
-## TO DO
 
-##
-## CHECK ALL COMMANDS WORK ON WINDOWS i.e. touch
-##
-
-## Set Up
 
 All prerequisites, links to material and slides for this course can be found on github.
 
@@ -170,15 +164,9 @@ We initialize repositories to store files related to a project. You can make man
 
 
 ```
-## raw(0)
-## attr(,"class")
-## [1] "gh_response" "raw"
-```
-
-```
 ## {
-##   "id": 342057144,
-##   "node_id": "MDEwOlJlcG9zaXRvcnkzNDIwNTcxNDQ=",
+##   "id": 342734781,
+##   "node_id": "MDEwOlJlcG9zaXRvcnkzNDI3MzQ3ODE=",
 ##   "name": "My_GitHub_Project",
 ##   "full_name": "BRC-RU/My_GitHub_Project",
 ##   "private": false,
@@ -242,9 +230,9 @@ We initialize repositories to store files related to a project. You can make man
 ##   "labels_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/labels{/name}",
 ##   "releases_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/releases{/id}",
 ##   "deployments_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/deployments",
-##   "created_at": "2021-02-24T22:48:45Z",
-##   "updated_at": "2021-02-24T22:48:45Z",
-##   "pushed_at": "2021-02-24T22:48:45Z",
+##   "created_at": "2021-02-27T00:26:12Z",
+##   "updated_at": "2021-02-27T00:26:12Z",
+##   "pushed_at": "2021-02-27T00:26:12Z",
 ##   "git_url": "git://github.com/BRC-RU/My_GitHub_Project.git",
 ##   "ssh_url": "git@github.com:BRC-RU/My_GitHub_Project.git",
 ##   "clone_url": "https://github.com/BRC-RU/My_GitHub_Project.git",
@@ -510,7 +498,7 @@ git status .
 ```
 
 ```
-## [master (root-commit) 13c42a6] Made a README
+## [master (root-commit) 699d9cd] Made a README
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ##  create mode 100644 README.md
 ## On branch master
@@ -615,7 +603,7 @@ git commit -m 'Added welcome message'
 ## +++ b/README.md
 ## @@ -0,0 +1 @@
 ## +Hello Friends
-## [master d1275ce] Added welcome message
+## [master 6c367d2] Added welcome message
 ##  1 file changed, 1 insertion(+)
 ```
 
@@ -632,15 +620,15 @@ git log
 ```
 
 ```
-## commit d1275ce4a66889fcecca2426723d9d4b2ae8e4a7
+## commit 6c367d2d243b0457e49d4ea7a69eae4a166fa5ee
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Wed Feb 24 22:48:46 2021 +0000
+## Date:   Sat Feb 27 00:26:13 2021 +0000
 ## 
 ##     Added welcome message
 ## 
-## commit 13c42a6c8c3c60e3e01b5b23b51c7c065909f5e8
+## commit 699d9cd13db2877f41c9acebc927c1e2bb84451b
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Wed Feb 24 22:48:46 2021 +0000
+## Date:   Sat Feb 27 00:26:13 2021 +0000
 ## 
 ##     Made a README
 ```
@@ -659,8 +647,8 @@ git log --oneline
 ```
 
 ```
-## d1275ce Added welcome message
-## 13c42a6 Made a README
+## 6c367d2 Added welcome message
+## 699d9cd Made a README
 ```
 
 ```sh
@@ -668,10 +656,10 @@ git log --oneline --stat
 ```
 
 ```
-## d1275ce Added welcome message
+## 6c367d2 Added welcome message
 ##  README.md | 1 +
 ##  1 file changed, 1 insertion(+)
-## 13c42a6 Made a README
+## 699d9cd Made a README
 ##  README.md | 0
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ```
@@ -737,9 +725,12 @@ If you want to get the address later you can check press the clone button when y
 
 Add the address to the Git. If you do not want it online on GitHub you can pick somewhere else. A server or someone else laptop. 
 
+
 ```sh
 git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git
 ```
+
+
 
 ---
 ## Updating GitHub - Push
@@ -749,10 +740,7 @@ git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git
 git push -u origin master
 ```
 
-```
-## To https://github.com/BRC-RU/My_GitHub_Project.git
-##  * [new branch]      master -&gt; master
-```
+
 After pushing, your commits will appear on GitHub
 ![alt text](imgs/3_postpush.png)
 
@@ -782,14 +770,9 @@ You can make commits on GitHub to single files i.e. if you have a typo, this can
 
 Whenever your local Git is behind the remote GitHub, you can grab the updates with Pull.
 
+
 ```sh
 git pull -u origin master
-```
-
-```
-## From https://github.com/BRC-RU/My_GitHub_Project
-##  * branch            HEAD       -&gt; FETCH_HEAD
-## Already up to date.
 ```
 
 
@@ -1182,8 +1165,9 @@ Follow up with the [Git book](https://git-scm.com/book/en/v2) for more detail on
 
 * The [Git book](https://git-scm.com/book/en/v2) for all things git.
 
-
 * Understanding branch topology can be confusing. Git School have a nice [tool](http://git-school.github.io/visualizing-git/) to help you understand how the different branching, checkouts, commits, and merges map out with a graphic. 
+
+* The [GitHub help page](https://docs.github.com/en) is put together really well and can help with both Git and GitHub questions.
 
 * Getting confident with the collaborative side of GitHub is tough. There are less serious repositories which you can take part in to practice i.e. [Dad Jokes](https://github.com/wesbos/dad-jokes).
 
@@ -1204,12 +1188,8 @@ for Git. There are also R pacakges that allow you to do much of what we have tal
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
 
 
-```sh
-git config --global user.name ${A}
-git config --global user.email ${B}
-git config credential.username ${C}
 
-```
+
 
 ```
 ## BRC-RU
