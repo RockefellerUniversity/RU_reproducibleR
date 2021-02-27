@@ -217,8 +217,10 @@ OS_check <- Sys.getenv("OS_check")
 message(OS_check)
 
 if(OS_check){
+  
 buildname<-paste0(.Platform$OS.type,".",R.Version()$major,".",R.Version()$minor)
 repo_name<-paste0("My_GitHub_Project.",buildname)
+
 if(sum(my_repos==(repo_name))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
    repo = repo_name) }
@@ -232,6 +234,7 @@ if(sum(my_repos==("My_GitHub_Project"))>0){
    repo = "My_GitHub_Project") }
 
 gh("POST /user/repos", name = "My_GitHub_Project")
+
 }
 ```
 
@@ -268,7 +271,7 @@ ls -a .
 dir .
 ```
 ```{sh, eval=windows}
-dir /ah .
+dir . /ah
 ```
   ] 
 
