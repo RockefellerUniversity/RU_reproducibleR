@@ -89,14 +89,14 @@ alt_PAT <- Sys.getenv("GH_alt")
 Sys.setenv(GITHUB_PAT=alt_PAT)
 Sys.setenv(GITHUB_TOKEN=alt_PAT)
 
-my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
-
 OS_check <- Sys.getenv("OS_check")
 message(OS_check)
 
 if(OS_check){
+  
 buildname<-paste0(.Platform$OS.type,".",R.Version()$major,".",R.Version()$minor)
 repo_name<-paste0("My_GitHub_Project.",buildname)
+my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
 if(sum(my_repos==(repo_name))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
    repo = repo_name) }
@@ -105,11 +105,14 @@ gh("POST /user/repos", name = repo_name)
 
 }else{
   
+my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
+
 if(sum(my_repos==("My_GitHub_Project"))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
    repo = "My_GitHub_Project") }
 
 gh("POST /user/repos", name = "My_GitHub_Project")
+
 }
 
 
@@ -132,7 +135,7 @@ gh("POST /user/repos", name = "My_GitHub_Project")
 
 ## dir .
 
-## dir /ah .
+## dir . /ah
 
 
 
