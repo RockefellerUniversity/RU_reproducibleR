@@ -998,7 +998,7 @@ for Git. There are also R pacakges that allow you to do much of what we have tal
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
 
 
-```{r, echo=F, message=F, warning=F, include=F}}
+```{r, echo=F, message=F, warning=F, include=F}
 
 
 if(OS_check){
@@ -1012,7 +1012,7 @@ if(sum(my_repos==(repo_name))>0){
 
 ```
 
-```{sh, echo=F, message=F, warning=F, include=F}}
+```{sh, echo=F, message=F, warning=F, include=F}
 
 
 
