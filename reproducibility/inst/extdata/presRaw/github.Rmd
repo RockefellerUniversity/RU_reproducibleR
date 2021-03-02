@@ -114,9 +114,8 @@ if(params$isSlides == "yes"){
 
 ```
 
----
 ## The problem
-As you collect code for a project, you are always making updates. What version did you use when? How do organize all of these? How do I stay in lockstep with my collaborators? How do efficiently share code with collaborators?
+As you collect code for a project, you are always making updates. What version did you use when? How do organize all of these? How do I stay in lockstep with my collaborators? How do I efficiently share code with collaborators?
 
 ---
 ## What is Git?
@@ -127,7 +126,7 @@ As you collect code for a project, you are always making updates. What version d
 
 ---
 ## The principles
-In 2005 Linus Torvalds [the main developer of the Linux] was having issues with the version control system they used. So they designed a new one from the ground up with specific set of principles:   
+In 2005 Linus Torvalds [the main developer of Linux] was having issues with the version control system they used. So they designed a new one from the ground up with specific set of principles:   
 
 - Speed
 - Simplicity
@@ -184,7 +183,6 @@ if(params$isSlides == "yes"){
 
 ```
 
----
 ## Git install
 
 You may already have Git installed, as it installed by certain tools i.e. Xcode Command Line Tools. To interact with Git at the most basic level we will use a command prompt. We can run the this command to check.
@@ -202,7 +200,7 @@ https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 We initialize repositories to store files related to a project. You can make many repositories and they are just a regular folder with some extra properties created by git. 
 
-```{r, echo=F, message=F}
+```{r, echo=F, message=F, warning=F, include=F}
 require(gh)
 
 # get both pats
@@ -241,6 +239,8 @@ gh("POST /user/repos", name = "My_GitHub_Project")
 ```{sh, eval=T, echo=F}
 rm -rf .git
 rm -rf README.md
+mkdir My_Project_Folder
+cd My_Project_Folder
 git init
 ```
 
@@ -331,21 +331,21 @@ git status .
 ```
 
 ---
-## The 3 states of Git.
+## The 3 states of Git
 
 1. **Working directory**: Make and save changes to files and git will be aware, but not necessarily involved. New files would be considered *untracked*. 
 
 2. **Staging**: Untracked changes or files can be *added to the staged area*. Staged files are not added to your Git repository.
 
-3. **Local Repository**: Once all the edits are finished and the files are staged,  they can then be *committed*. Commits will put the changes in the staged file into ther repository.
+3. **Local Repository**: Once all the edits are finished and the files are staged,  they can then be *committed*. Commits will put the changes in the staged file into their repository.
 
 
 ---
-## This seems overcomplicated. Right?? Wrong!
+## This seems overcomplicated
 
 There is a culture to making edits:
 * Do **not** commit every time anything is new. 
-* Each commit should be a nice neat little story
+* Each commit should be a nice neat little story:
   * *Example*: If you include new function in a pipeline. Save locally while developing. Update README. Stage both. Commit it together. 
 * The aim is you/others will look back and understand what you were thinking and doing. 
 * **A good rule:** There shouldn't be multiple clauses in your commit message. This will mean you are likely doing multiple things. 
@@ -468,8 +468,8 @@ if(params$isSlides == "yes"){
 * Support rendering of several file formats i.e. Markdown or GeoJSON.
 * GitHub community (almost like a social network).
 
-**Drawbacks**
-It is almost like a monopoly. Which can lead to [problems](https://github.com/1995parham/github-do-not-ban-us).
+**Drawbacks**  
+GitHub almost has a monopoly. Which can lead to [problems](https://github.com/1995parham/github-do-not-ban-us).
 
 ---
 ## Connecting to GitHub
@@ -593,7 +593,6 @@ if(params$isSlides == "yes"){
 ```
 
 
----
 ## GUIs and RStudio
 
 * [GitHub](https://desktop.github.com/) has a desktop Graphical User Interface 
@@ -926,6 +925,7 @@ Fork it first. This is like the GitHub equivalent of branching. This will create
 
 ![alt text](imgs/31.png)
 
+---
 ## Forking
 
 Forking is a cornerstone of the open source nature of GitHub. You can fork any public repository. Adapt it to your needs and then deploy it in whatever analysis or tool you are working on. You should just check for a license first. 
@@ -998,7 +998,7 @@ for Git. There are also R pacakges that allow you to do much of what we have tal
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
 
 
-```{r, echo=F, message=F}
+```{r, echo=F, message=F, warning=F, include=F}}
 
 
 if(OS_check){
@@ -1012,7 +1012,7 @@ if(sum(my_repos==(repo_name))>0){
 
 ```
 
-```{sh, echo=F, message=F}
+```{sh, echo=F, message=F, warning=F, include=F}}
 
 
 
@@ -1022,7 +1022,7 @@ git config credential.username ${C}
 
 ```
 
-```{r, echo=F, message=F}
+```{r, echo=F, message=F, warning=F, include=F}
 Sys.setenv(GITHUB_PAT=master_PAT)
 Sys.setenv(GITHUB_TOKEN=master_PAT)
 ```
