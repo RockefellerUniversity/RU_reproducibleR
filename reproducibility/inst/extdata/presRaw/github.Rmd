@@ -239,8 +239,6 @@ gh("POST /user/repos", name = "My_GitHub_Project")
 ```{sh, eval=T, echo=F}
 rm -rf .git
 rm -rf README.md
-mkdir My_Project_Folder
-cd My_Project_Folder
 git init
 ```
 
