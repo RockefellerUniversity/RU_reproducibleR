@@ -83,9 +83,8 @@ class: inverse, center, middle
 
 ---
 
----
 ## The problem
-As you collect code for a project, you are always making updates. What version did you use when? How do organize all of these? How do I stay in lockstep with my collaborators? How do efficiently share code with collaborators?
+As you collect code for a project, you are always making updates. What version did you use when? How do organize all of these? How do I stay in lockstep with my collaborators? How do I efficiently share code with collaborators?
 
 ---
 ## What is Git?
@@ -96,7 +95,7 @@ As you collect code for a project, you are always making updates. What version d
 
 ---
 ## The principles
-In 2005 Linus Torvalds [the main developer of the Linux] was having issues with the version control system they used. So they designed a new one from the ground up with specific set of principles:   
+In 2005 Linus Torvalds [the main developer of Linux] was having issues with the version control system they used. So they designed a new one from the ground up with specific set of principles:   
 
 - Speed
 - Simplicity
@@ -139,7 +138,6 @@ class: inverse, center, middle
 
 ---
 
----
 ## Git install
 
 You may already have Git installed, as it installed by certain tools i.e. Xcode Command Line Tools. To interact with Git at the most basic level we will use a command prompt. We can run the this command to check.
@@ -163,113 +161,6 @@ https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 We initialize repositories to store files related to a project. You can make many repositories and they are just a regular folder with some extra properties created by git. 
 
 
-```
-## {
-##   "id": 342738690,
-##   "node_id": "MDEwOlJlcG9zaXRvcnkzNDI3Mzg2OTA=",
-##   "name": "My_GitHub_Project",
-##   "full_name": "BRC-RU/My_GitHub_Project",
-##   "private": false,
-##   "owner": {
-##     "login": "BRC-RU",
-##     "id": 79327303,
-##     "node_id": "MDQ6VXNlcjc5MzI3MzAz",
-##     "avatar_url": "https://avatars.githubusercontent.com/u/79327303?v=4",
-##     "gravatar_id": "",
-##     "url": "https://api.github.com/users/BRC-RU",
-##     "html_url": "https://github.com/BRC-RU",
-##     "followers_url": "https://api.github.com/users/BRC-RU/followers",
-##     "following_url": "https://api.github.com/users/BRC-RU/following{/other_user}",
-##     "gists_url": "https://api.github.com/users/BRC-RU/gists{/gist_id}",
-##     "starred_url": "https://api.github.com/users/BRC-RU/starred{/owner}{/repo}",
-##     "subscriptions_url": "https://api.github.com/users/BRC-RU/subscriptions",
-##     "organizations_url": "https://api.github.com/users/BRC-RU/orgs",
-##     "repos_url": "https://api.github.com/users/BRC-RU/repos",
-##     "events_url": "https://api.github.com/users/BRC-RU/events{/privacy}",
-##     "received_events_url": "https://api.github.com/users/BRC-RU/received_events",
-##     "type": "User",
-##     "site_admin": false
-##   },
-##   "html_url": "https://github.com/BRC-RU/My_GitHub_Project",
-##   "description": {},
-##   "fork": false,
-##   "url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project",
-##   "forks_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/forks",
-##   "keys_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/keys{/key_id}",
-##   "collaborators_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/collaborators{/collaborator}",
-##   "teams_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/teams",
-##   "hooks_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/hooks",
-##   "issue_events_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/issues/events{/number}",
-##   "events_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/events",
-##   "assignees_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/assignees{/user}",
-##   "branches_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/branches{/branch}",
-##   "tags_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/tags",
-##   "blobs_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/git/blobs{/sha}",
-##   "git_tags_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/git/tags{/sha}",
-##   "git_refs_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/git/refs{/sha}",
-##   "trees_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/git/trees{/sha}",
-##   "statuses_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/statuses/{sha}",
-##   "languages_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/languages",
-##   "stargazers_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/stargazers",
-##   "contributors_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/contributors",
-##   "subscribers_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/subscribers",
-##   "subscription_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/subscription",
-##   "commits_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/commits{/sha}",
-##   "git_commits_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/git/commits{/sha}",
-##   "comments_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/comments{/number}",
-##   "issue_comment_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/issues/comments{/number}",
-##   "contents_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/contents/{+path}",
-##   "compare_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/compare/{base}...{head}",
-##   "merges_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/merges",
-##   "archive_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/{archive_format}{/ref}",
-##   "downloads_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/downloads",
-##   "issues_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/issues{/number}",
-##   "pulls_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/pulls{/number}",
-##   "milestones_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/milestones{/number}",
-##   "notifications_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/notifications{?since,all,participating}",
-##   "labels_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/labels{/name}",
-##   "releases_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/releases{/id}",
-##   "deployments_url": "https://api.github.com/repos/BRC-RU/My_GitHub_Project/deployments",
-##   "created_at": "2021-02-27T00:54:48Z",
-##   "updated_at": "2021-02-27T00:54:48Z",
-##   "pushed_at": "2021-02-27T00:54:49Z",
-##   "git_url": "git://github.com/BRC-RU/My_GitHub_Project.git",
-##   "ssh_url": "git@github.com:BRC-RU/My_GitHub_Project.git",
-##   "clone_url": "https://github.com/BRC-RU/My_GitHub_Project.git",
-##   "svn_url": "https://github.com/BRC-RU/My_GitHub_Project",
-##   "homepage": {},
-##   "size": 0,
-##   "stargazers_count": 0,
-##   "watchers_count": 0,
-##   "language": {},
-##   "has_issues": true,
-##   "has_projects": true,
-##   "has_downloads": true,
-##   "has_wiki": true,
-##   "has_pages": false,
-##   "forks_count": 0,
-##   "mirror_url": {},
-##   "archived": false,
-##   "disabled": false,
-##   "open_issues_count": 0,
-##   "license": {},
-##   "forks": 0,
-##   "open_issues": 0,
-##   "watchers": 0,
-##   "default_branch": "main",
-##   "permissions": {
-##     "admin": true,
-##     "push": true,
-##     "pull": true
-##   },
-##   "allow_squash_merge": true,
-##   "allow_merge_commit": true,
-##   "allow_rebase_merge": true,
-##   "delete_branch_on_merge": false,
-##   "network_count": 0,
-##   "subscribers_count": 1
-## }
-```
 
 
 ```
@@ -436,21 +327,21 @@ git status .
 ```
 
 ---
-## The 3 states of Git.
+## The 3 states of Git
 
 1. **Working directory**: Make and save changes to files and git will be aware, but not necessarily involved. New files would be considered *untracked*. 
 
 2. **Staging**: Untracked changes or files can be *added to the staged area*. Staged files are not added to your Git repository.
 
-3. **Local Repository**: Once all the edits are finished and the files are staged,  they can then be *committed*. Commits will put the changes in the staged file into ther repository.
+3. **Local Repository**: Once all the edits are finished and the files are staged,  they can then be *committed*. Commits will put the changes in the staged file into their repository.
 
 
 ---
-## This seems overcomplicated. Right?? Wrong!
+## This seems overcomplicated
 
 There is a culture to making edits:
 * Do **not** commit every time anything is new. 
-* Each commit should be a nice neat little story
+* Each commit should be a nice neat little story:
   * *Example*: If you include new function in a pipeline. Save locally while developing. Update README. Stage both. Commit it together. 
 * The aim is you/others will look back and understand what you were thinking and doing. 
 * **A good rule:** There shouldn't be multiple clauses in your commit message. This will mean you are likely doing multiple things. 
@@ -498,7 +389,7 @@ git status .
 ```
 
 ```
-## [master (root-commit) ae2448c] Made a README
+## [master (root-commit) f90c43c] Made a README
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ##  create mode 100644 README.md
 ## On branch master
@@ -603,7 +494,7 @@ git commit -m 'Added welcome message'
 ## +++ b/README.md
 ## @@ -0,0 +1 @@
 ## +Hello Friends
-## [master ed06e13] Added welcome message
+## [master 5829b14] Added welcome message
 ##  1 file changed, 1 insertion(+)
 ```
 
@@ -620,15 +511,15 @@ git log
 ```
 
 ```
-## commit ed06e139b40a68fca9f0cc8e9c2e0db3a307a7b0
+## commit 5829b1482f5bca726548d871bbbfa09430bc34b5
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Sat Feb 27 00:54:50 2021 +0000
+## Date:   Wed Mar 3 01:31:00 2021 +0000
 ## 
 ##     Added welcome message
 ## 
-## commit ae2448c07d92fcc1f6b120913248d34409979b9d
+## commit f90c43c2bae121bfa26f1f0629ec19e09e5e1b62
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Sat Feb 27 00:54:49 2021 +0000
+## Date:   Wed Mar 3 01:31:00 2021 +0000
 ## 
 ##     Made a README
 ```
@@ -647,8 +538,8 @@ git log --oneline
 ```
 
 ```
-## ed06e13 Added welcome message
-## ae2448c Made a README
+## 5829b14 Added welcome message
+## f90c43c Made a README
 ```
 
 ```sh
@@ -656,10 +547,10 @@ git log --oneline --stat
 ```
 
 ```
-## ed06e13 Added welcome message
+## 5829b14 Added welcome message
 ##  README.md | 1 +
 ##  1 file changed, 1 insertion(+)
-## ae2448c Made a README
+## f90c43c Made a README
 ##  README.md | 0
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ```
@@ -692,8 +583,8 @@ class: inverse, center, middle
 * Support rendering of several file formats i.e. Markdown or GeoJSON.
 * GitHub community (almost like a social network).
 
-**Drawbacks**
-It is almost like a monopoly. Which can lead to [problems](https://github.com/1995parham/github-do-not-ban-us).
+**Drawbacks**  
+GitHub almost has a monopoly. Which can lead to [problems](https://github.com/1995parham/github-do-not-ban-us).
 
 ---
 ## Connecting to GitHub
@@ -787,7 +678,6 @@ class: inverse, center, middle
 ---
 
 
----
 ## GUIs and RStudio
 
 * [GitHub](https://desktop.github.com/) has a desktop Graphical User Interface 
@@ -1114,6 +1004,7 @@ Fork it first. This is like the GitHub equivalent of branching. This will create
 
 ![alt text](imgs/31.png)
 
+---
 ## Forking
 
 Forking is a cornerstone of the open source nature of GitHub. You can fork any public repository. Adapt it to your needs and then deploy it in whatever analysis or tool you are working on. You should just check for a license first. 
@@ -1186,16 +1077,6 @@ for Git. There are also R pacakges that allow you to do much of what we have tal
 ## Contact
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
-
-
-
-
-
-```
-## BRC-RU
-## brc@rockefeller.edu
-## BRC-RU
-```
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
