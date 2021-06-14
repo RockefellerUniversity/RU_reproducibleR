@@ -22,7 +22,7 @@ These exercises follow the material in the GitHub section of [Reproducible R](ht
 1. Command line Git
 
 - Create a new folder called GitHub_Training, and turn it into a git repository using the git command line.  
-- Create a README.md. Write in your favorite Movie.
+- Create a README.md. Write in the name of a TV show.
 - Copy the dayOfWeek Rscript from the *data* directory to the GitHub_Training directory.
 - Add and commit each the README and the Rscript separately. 
 - Create a project on GitHub. Add this as a remote to your local Git for GitHub_Training. 
