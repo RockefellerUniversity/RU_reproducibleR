@@ -30,12 +30,12 @@ navbar:
         href: exercises/exercises/ReproducibleR_exercise.html
       - text: Solution
         href: exercises/answers/ReproducibleR_answers.html
-    - text: GitandGithub
+    - text: GitandGitHub
       menu:
       - text: Exercise
-        href: exercises/exercises/GitandGithub_exercise.html
+        href: exercises/exercises/GitandGitHub_exercise.html
       - text: Solution
-        href: exercises/answers/GitandGithub_answers.html
+        href: exercises/answers/GitandGitHub_answers.html
   right:
   - text: Getting help!
     href: https://github.com//RockefellerUniversity/RU_reproducibleR/issues
