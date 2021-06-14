@@ -5,4 +5,4 @@ Presentations:
   titles: Session1 Session2
   PresRmd: reproducibleR.Rmd github.Rmd
   PresOverviewRmd: ReproducibleR_Session1Overview.Rmd ReproducibleR_Session2Overview.Rmd
-  Exercises: ReproducibleR.Rmd GitandGithub.Rmd
+  Exercises: ReproducibleR.Rmd GitandGitHub.Rmd

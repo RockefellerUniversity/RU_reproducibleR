@@ -991,6 +991,13 @@ for Git. There are also R pacakges that allow you to do much of what we have tal
 
 
 ---
+## Exercises
+
+Exercise on Git and GitHub in R can be found [here](../../exercises/exercises/GitandGitHub_exercise.html)
+
+
+
+---
 ## Contact
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.

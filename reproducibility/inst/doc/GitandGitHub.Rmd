@@ -1,5 +1,5 @@
 ---
-title: "Reproducible R"
+title: "Git and GitHub"
 author: "Rockefeller University, Bioinformatics Resource Center"
 date: "https://rockefelleruniversity.github.io/RU_reproducibleR/"
 output: 
