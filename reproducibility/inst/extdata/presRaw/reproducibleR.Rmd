@@ -262,13 +262,6 @@ hist(myRandNumbers)
 ```
 
 ---
-## Exercise
-
-- Have at the example notebook script "scriptWithNotebookExamples.r" in scripts directory and the html document rendered from it of the same name.
-- Open scriptToConvertToNote.r in scripts directory and save as new name.
-- Add notes to this script and compile with render() function or through RStudio. Compare changes between the original html and your html. 
-
----
 ```{r, results='asis',include=TRUE,echo=FALSE}
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
