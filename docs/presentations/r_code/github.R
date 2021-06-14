@@ -80,7 +80,7 @@ if(params$isSlides == "yes"){
 ## git --version
 
 
-## ---- echo=F, message=F-------------------------------------------------------
+## ---- echo=F, message=F, warning=F, include=F---------------------------------
 require(gh)
 
 # get both pats
@@ -360,7 +360,7 @@ if(params$isSlides == "yes"){
 ## git add -A .
 
 
-## ---- echo=F, message=F-------------------------------------------------------
+## ---- echo=F, message=F, warning=F, include=F---------------------------------
 
 
 if(OS_check){
@@ -385,7 +385,7 @@ if(sum(my_repos==(repo_name))>0){
 
 ## 
 
-## ---- echo=F, message=F-------------------------------------------------------
+## ---- echo=F, message=F, warning=F, include=F---------------------------------
 Sys.setenv(GITHUB_PAT=master_PAT)
 Sys.setenv(GITHUB_TOKEN=master_PAT)
 
