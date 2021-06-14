@@ -45,7 +45,7 @@ git push origin master
 2.  RStudio Git Integration
 
 - Create a version controlled R project. Link this to your GitHub_Training remote. Save this in a different place to the Git repository you created in section 1 with command line Git.
-- Update the README.md to include your favorite TV show. 
+- Update the README.md to include the name of a movie. 
 - Create a new Rmarkdown. Within this source the dayOfWeek Rscript. Add session information. and then compile the Rmarkdown to HTML.
 - Update the .gitignore so Rmd files are ignored.
 - Stage and commit changes through RStudio. *Remember to not commit every change together. Commit changes that make sense together.*
