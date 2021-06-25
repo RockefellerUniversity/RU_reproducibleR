@@ -4,7 +4,7 @@
     <title>reproducibleR.knit</title>
     <meta charset="utf-8" />
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
-    <script src="libs/header-attrs-2.8/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
     <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
@@ -579,8 +579,8 @@ temp
 ```r
 temp &lt;- rnorm(10)
 temp
-##  [1] -0.716862151  0.721015157  0.003478571  0.143524430 -2.216193319
-##  [6]  1.319720764  0.363615094  0.627409026 -1.240051879 -1.077233966
+##  [1] -0.8091618 -0.8970707  0.7140842 -0.6098741 -0.2736450 -2.6184368
+##  [7] -0.2950432 -0.9649281  1.4167868  0.7932063
 ```
 
 ---
@@ -624,9 +624,9 @@ kable(dfExample, format = "markdown")
 
 |       temp|      temp2|
 |----------:|----------:|
-|  0.4543811|  0.4434897|
-|  0.2118723| -0.4065589|
-| -0.7373898| -0.1398812|
+|  0.4071542|  0.1941118|
+| -0.1998753|  1.2138977|
+| -0.4781779| -1.7867806|
 
 ---
 
@@ -643,7 +643,7 @@ more free form text.
 
 ```
 Here is some freeform _markdown_ and the first result
-from an rnorm call is -0.0739756, followed by some more free form text.
+from an rnorm call is 1.206881, followed by some more free form text.
 
 ---
 ## cache
