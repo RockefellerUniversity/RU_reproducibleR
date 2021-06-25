@@ -1,4 +1,4 @@
-filesToRead <- dir("../ExpressionResults/",pattern = "*\\.txt",full.names=T)
+filesToRead <- dir("../Data/ExpressionResults/",pattern = "*\\.txt",full.names=T)
 fileRead <- vector("list",length=length(filesToRead))
 for(i in 1:length(filesToRead)){
   fileRead[[i]] <- read.delim(filesToRead[i],header=F,sep="\t")
@@ -17,7 +17,7 @@ for(i in fileRead){
 
 mergedTable[1:3,] 
 
-Annotation <- read.table("../ExpressionResults/Annotation.ann",sep="\t",h=T)
+Annotation <- read.table("../Data/ExpressionResults/Annotation.ann",sep="\t",h=T)
 annotatedExpression <- merge(Annotation,mergedTable,by=1,all.x=F,all.y=T)
 annotatedExpression[1:2,]
 
