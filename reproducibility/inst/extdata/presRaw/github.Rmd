@@ -249,22 +249,22 @@ if(OS_check){
   
 buildname<-paste0(.Platform$OS.type,".",R.Version()$major,".",R.Version()$minor)
 repo_name<-paste0("My_GitHub_Project.",buildname)
-my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
+my_repos <- vapply(gh("/user/repos",per_page=110,.token=alt_PAT), "[[", "", "name")
 if(sum(my_repos==(repo_name))>0){
-  gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
+  gh("DELETE /repos/:owner/:repo",.token=alt_PAT, owner = "BRC-RU", 
    repo = repo_name) }
 
-gh("POST /user/repos", name = repo_name)
+gh("POST /user/repos",.token=alt_PAT, name = repo_name)
 
 }else{
   
-my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
+my_repos <- vapply(gh("/user/repos",per_page=110, .token=alt_PAT), "[[", "", "name")
 
 if(sum(my_repos==("My_GitHub_Project"))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
-   repo = "My_GitHub_Project") }
+   repo = "My_GitHub_Project", .token=alt_PAT) }
 
-gh("POST /user/repos", name = "My_GitHub_Project")
+gh("POST /user/repos", name = "My_GitHub_Project", .token=alt_PAT)
 
 }
 ```
@@ -945,6 +945,8 @@ git add -A .
 * **rebase** - A powerful alternative to marge. Perfect for when the master has updates that are not present in a branch. You can use rebase to update the branch, with the new master commits.
 
 * **reset** - Rewind back staging and commits
+
+* **checkout** - Though we covered checking out a branch, this can also be used to travel back to a specific commit in history or roll back unstaged changes to a specific file. 
 
 Follow up with the [Git book](https://git-scm.com/book/en/v2) for more detail on implementing these commands.
 
