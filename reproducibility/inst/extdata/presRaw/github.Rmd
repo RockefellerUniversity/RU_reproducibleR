@@ -276,7 +276,7 @@ git init
 ```
 
 
-```{sh, eval=F}
+```{sh, eval=T}
 mkdir My_Project_Folder
 cd My_Project_Folder
 git init
