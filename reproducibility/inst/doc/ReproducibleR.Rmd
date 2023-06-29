@@ -27,4 +27,12 @@ These exercises follow the material in [Reproducible R](https://rockefellerunive
 
 - Open scriptToConvertToRMarkdown.r in scripts directory and save as new name.
 
-- Convert this script to an Rmarkdown document using the render() function or inside RStudio.
+- Convert this script to an Rmarkdown document inside RStudio.
+
+- Add appropriate annotation and session information
+
+- Render the document.
+
+
+
+

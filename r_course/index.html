@@ -14,7 +14,7 @@
 
 <title>Reproducible R</title>
 
-<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -423,7 +423,7 @@ div.tocify {
 <h2>Course Overview</h2>
 <div id="course-integrity" class="section level3">
 <h3>Course Integrity</h3>
-<p><strong>This course is compiled automatically on <em>2021-06-14</em> </strong> <br> <a href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3compilation-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/compilation-check/badge.svg"></a></p>
+<p><strong>This course is compiled automatically on <em>2021-06-25</em> </strong> <br> <a href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3compilation-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/compilation-check/badge.svg"></a></p>
 <p><strong>The course is tested and available on MacOS, Windows and Ubuntu Linux for R version 4.1.0 (2021-05-18)</strong> <br> <a href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3AOS-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/OS-check/badge.svg"></a></p>
 <p><br> <br></p>
 </div>
@@ -594,6 +594,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

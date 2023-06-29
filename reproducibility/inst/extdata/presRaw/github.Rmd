@@ -38,6 +38,7 @@ unix <- if(.Platform$OS.type=="unix"){unix<-(TRUE)}else{unix<-(FALSE)}
 message(unix)
 
 ```
+
 ```{r, results='asis',include=TRUE,echo=FALSE}
 if(params$isSlides != "yes"){
   cat("# Getting started with Git and GitHub
@@ -49,6 +50,38 @@ if(params$isSlides != "yes"){
 }
 
 ```
+
+## Overview
+
+- [Set up](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#set-up)
+- [Background to R](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#background-to-r)
+- [Data types in R](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#data_types_in_r)
+
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Set Up
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Set Up
+
+---
+"    
+  )
+  
+}
+
+```
+
+## Set Up
 
 All prerequisites, links to material and slides for this course can be found on github.
 
@@ -216,22 +249,22 @@ if(OS_check){
   
 buildname<-paste0(.Platform$OS.type,".",R.Version()$major,".",R.Version()$minor)
 repo_name<-paste0("My_GitHub_Project.",buildname)
-my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
+my_repos <- vapply(gh("/user/repos",per_page=110,.token=alt_PAT), "[[", "", "name")
 if(sum(my_repos==(repo_name))>0){
-  gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
+  gh("DELETE /repos/:owner/:repo",.token=alt_PAT, owner = "BRC-RU", 
    repo = repo_name) }
 
-gh("POST /user/repos", name = repo_name)
+gh("POST /user/repos",.token=alt_PAT, name = repo_name)
 
 }else{
   
-my_repos <- vapply(gh("/user/repos",per_page=110), "[[", "", "name")
+my_repos <- vapply(gh("/user/repos",per_page=110, .token=alt_PAT), "[[", "", "name")
 
 if(sum(my_repos==("My_GitHub_Project"))>0){
   gh("DELETE /repos/:owner/:repo", owner = "BRC-RU", 
-   repo = "My_GitHub_Project") }
+   repo = "My_GitHub_Project", .token=alt_PAT) }
 
-gh("POST /user/repos", name = "My_GitHub_Project")
+gh("POST /user/repos", name = "My_GitHub_Project", .token=alt_PAT)
 
 }
 ```
@@ -600,41 +633,6 @@ These two tools, of many, that make it easier to manage Git repositories on your
 
 They work by accessing the same git repository as used by the command line Git tools. This means it has the same principles. It just adds a point-and-click interface, which is easier to work with for your day-to-day Git wants and needs.
 
----
-## GitHub Desktop
-
-It is easy to add remote repositories from GitHub or local repositories from your computer. 
-
-![alt text](imgs/7_addrepo.png)
-
-
-
----
-## GitHub Desktop
-We can check the log of the repository with the *history* tab.
-![alt text](imgs/8_history.png)
-
----
-## GitHub Desktop
-Staging and committing is simplified:
-
-1. Simply click the checkbox of all files you want to stage
-2. Then add your commit message and press commit.
-![alt text](imgs/10commits.png)
-
----
-## GitHub Desktop
-If there is an associated remote on GitHub you can then just push it up.
-![alt text](imgs/11 push.png)
-
----
-## GitHub Desktop
-
-* For help setting up:
-https://docs.github.com/en/desktop
-
-* For help using the software:
-https://www.softwaretestinghelp.com/github-desktop-tutorial/
 
 ---
 ## RStudio
@@ -807,24 +805,6 @@ git branch
 ![alt text](imgs/25.png)
   ]
 
-
----
-## Other Checkouts 
-
-Though you will mostly use checkout to move between branches, you can also use it to move backwards and forwards along branches to specific commits or files.
-
-* Commits - Each commit has an ID. You can see this in the log. You can use checkout to go back to this point in the project. 
-
-```{sh, eval=F}
-git checkout commitID
-```
-
-* Files - When you have made local changes to a file, they have not been staged, and you want to actually roll them back to the most recent commit you can checkout that file. 
-
-```{sh, eval=F}
-git checkout -- filename
-```
-
 ---
 ## Pull requests
 Git has the merge function to allow branches to be merged together. Pull requests are the GitHub equivalent, but have built in steps for review. This can be for you, or for others you are collaborating with. Pull requests are the cornerstone of a collaborative GitHub Environment.
@@ -966,6 +946,8 @@ git add -A .
 
 * **reset** - Rewind back staging and commits
 
+* **checkout** - Though we covered checking out a branch, this can also be used to travel back to a specific commit in history or roll back unstaged changes to a specific file. 
+
 Follow up with the [Git book](https://git-scm.com/book/en/v2) for more detail on implementing these commands.
 
 ---
@@ -1003,7 +985,45 @@ Exercise on Git and GitHub in R can be found [here](../../exercises/exercises/Gi
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
 
 
-```{r, echo=F, message=F, warning=F, include=F}
+---
+## GitHub Desktop
+
+It is easy to add remote repositories from GitHub or local repositories from your computer. 
+
+![alt text](imgs/7_addrepo.png)
+
+
+
+---
+## GitHub Desktop
+We can check the log of the repository with the *history* tab.
+![alt text](imgs/8_history.png)
+
+---
+## GitHub Desktop
+Staging and committing is simplified:
+
+1. Simply click the checkbox of all files you want to stage
+2. Then add your commit message and press commit.
+![alt text](imgs/10commits.png)
+
+---
+## GitHub Desktop
+If there is an associated remote on GitHub you can then just push it up.
+![alt text](imgs/11 push.png)
+
+---
+## GitHub Desktop
+
+* For help setting up:
+https://docs.github.com/en/desktop
+
+* For help using the software:
+https://www.softwaretestinghelp.com/github-desktop-tutorial/
+
+
+
+```{r, echo=F, message=F, warning=F, include=F, eval=F}
 
 
 if(OS_check){

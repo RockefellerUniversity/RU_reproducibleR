@@ -4,7 +4,7 @@
     <title>github.knit</title>
     <meta charset="utf-8" />
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
-    <script src="libs/header-attrs-2.8/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
     <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
@@ -193,7 +193,6 @@ ls .
 ## data
 ## Descriptions
 ## imgs
-## My_Project_Folder
 ## presRaw
 ## scripts
 ```
@@ -211,7 +210,6 @@ ls -a .
 ## Descriptions
 ## .git
 ## imgs
-## My_Project_Folder
 ## presRaw
 ## scripts
 ```
@@ -315,7 +313,6 @@ git status .
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
-## 	My_Project_Folder/
 ## 	README.md
 ## 	_course.yml
 ## 	customCSS/
@@ -370,7 +367,6 @@ git status .
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
-## 	My_Project_Folder/
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
@@ -390,14 +386,13 @@ git status .
 ```
 
 ```
-## [master (root-commit) 01fca10] Made a README
+## [master (root-commit) f0fb4f7] Made a README
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ##  create mode 100644 README.md
 ## On branch master
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
-## 	My_Project_Folder/
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
@@ -429,7 +424,6 @@ git diff
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
-## 	My_Project_Folder/
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
@@ -465,7 +459,6 @@ git status .
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
-## 	My_Project_Folder/
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
@@ -495,7 +488,7 @@ git commit -m 'Added welcome message'
 ## +++ b/README.md
 ## @@ -0,0 +1 @@
 ## +Hello Friends
-## [master 50429a6] Added welcome message
+## [master ae89983] Added welcome message
 ##  1 file changed, 1 insertion(+)
 ```
 
@@ -512,15 +505,15 @@ git log
 ```
 
 ```
-## commit 50429a67c6b24bba52eef4f7eca84f43eae684b2
+## commit ae899835f8cb9a4bf5e7dceb4f979195ef6402d1
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Mon Jun 14 21:42:37 2021 +0000
+## Date:   Fri Jun 25 20:46:02 2021 +0000
 ## 
 ##     Added welcome message
 ## 
-## commit 01fca1094ba67f8995ff0279578a604375b62bd7
+## commit f0fb4f712f6bc620145c0cbad5f85ced368572a5
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Mon Jun 14 21:42:37 2021 +0000
+## Date:   Fri Jun 25 20:46:02 2021 +0000
 ## 
 ##     Made a README
 ```
@@ -539,8 +532,8 @@ git log --oneline
 ```
 
 ```
-## 50429a6 Added welcome message
-## 01fca10 Made a README
+## ae89983 Added welcome message
+## f0fb4f7 Made a README
 ```
 
 ```sh
@@ -548,10 +541,10 @@ git log --oneline --stat
 ```
 
 ```
-## 50429a6 Added welcome message
+## ae89983 Added welcome message
 ##  README.md | 1 +
 ##  1 file changed, 1 insertion(+)
-## 01fca10 Made a README
+## f0fb4f7 Made a README
 ##  README.md | 0
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ```
