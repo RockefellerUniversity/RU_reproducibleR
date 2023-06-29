@@ -1,0 +1,65 @@
+---
+title: "Herper"
+author: "Rockefeller University, Bioinformatics Resource Center"
+date: "https://rockefelleruniversity.github.io/RU_reproducibleR/"
+output: 
+  html_document:
+    number_sections: false  ## if you want number sections at each table header
+    theme: united  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
+params:
+  toMessage: false    
+---
+
+```{r, setup,include=FALSE}
+toMessage <- ifelse(!is.null(params$toMessage),params$toMessage,FALSE)
+message(toMessage)
+```
+
+<p>&nbsp;</p>
+These exercises follow the material in the GitHub section of [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
+
+1. Command line Git
+
+- Create a new folder called GitHub_Training, and turn it into a git repository using the git command line.  
+- Create a README.md. Write in the name of a TV show.
+- Copy the dayOfWeek Rscript from the *data* directory to the GitHub_Training directory.
+- Add and commit each the README and the Rscript separately. 
+- Create a project on GitHub. Add this as a remote to your local Git for GitHub_Training. 
+- Push changes up to the remote.
+
+```{sh, eval=F,echo=toMessage}
+mkdir GitHub_Training
+cd GitHub_Training
+git init
+touch README.md
+echo 'The Twilight Zone' >> README.md
+cp ../data/dayOfWeek.r .
+git add README.md
+git commit -m"create README"
+git commit -m"add days of week script"
+git remote add origin https://github.com/BRC-RU/GitHub_Training.git
+git push origin master
+```
+
+2.  RStudio Git Integration
+
+- Create a version controlled R project. Link this to your GitHub_Training remote. Save this in a different place to the Git repository you created in section 1 with command line Git.
+- Update the README.md to include the name of a movie. 
+- Create a new Rmarkdown. Within this source the dayOfWeek Rscript. Add session information. and then compile the Rmarkdown to HTML.
+- Update the .gitignore so Rmd files are ignored.
+- Stage and commit changes through RStudio. *Remember to not commit every change together. Commit changes that make sense together.*
+- Push changes up to GitHub. 
+
+3. Workflow and Collaboration
+Next we will practice the GitHub workflow. To do this we will use the repository [here](https://github.com/BRC-RU/GitHub_Training_GIFS). This is my collection of GIFS for how this training session makes me feel, and you can add to this. 
+
+- Contribute to the issues. Either create a new one, or add comments to existing issues. 
+
+- Take a fork of the repository. You can create a local copy through RStudio or command line git.
+
+- Find GIF that you like. ([GIPHY](https://giphy.com/) has lots of options). Copy the URL.
+
+- Open up the README.md document. Add a line to insert you GIF to the README.md. An example line is here: \<img src="https://my_gif_url_here.gif" width="300"/>
+
+- Create a pull request to merge your fork back into the main repository.
