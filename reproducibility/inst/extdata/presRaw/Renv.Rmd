@@ -85,7 +85,7 @@ setwd("/PathToMyDownload/Reproducible_R-master/r_course")
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# What are containers?
+# Reproducibility?
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -93,7 +93,106 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# What are containers?
+  cat("# Reproducibility?
+
+---
+"    
+  )
+  
+}
+
+```
+
+---
+## Core concepts /pillars
+
+hwa ti sthe point? 
+
+Want to be able to rproduce someson es reulsts. Not as simple as it sounds. 
+
+many fail. 
+
+---
+## FAIRE
+
+https://en.wikipedia.org/wiki/FAIR_data
+https://www.go-fair.org/fair-principles/
+
+NIH calls this FAIRE
+* can mention faire
+
+
+Data sharing plan
+https://sharing.nih.gov/data-management-and-sharing-policy/planning-and-budgeting-for-data-management-and-sharing/writing-a-data-management-and-sharing-plan
+
+
+2.  Related Tools, Software and/or Code
+Indicate whether specialized tools are needed to access or manipulate shared scientific data to support replication or reuse, and name(s) of the needed tool(s) and software. If applicable, specify how needed tools can be accessed.
+
+---
+## NIH new guidleins
+
+* No teeth encesarily forthis yet. But this is the way things ar emoving. 
+
+---
+## compute how to mange.
+
+also mention Rswitch. 
+and docker. 
+Update? not update?
+
+
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Environments
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Environments
+
+---
+"    
+  )
+  
+}
+
+```
+
+
+---
+## What is environ?
+
+Deinfe 
+
+
+---
+## how to use prcatialy
+
+exampels i.e. venv, wine, renv conda, packrat (precednet for renv)
+
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Renv
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Renv
 
 ---
 "    
@@ -105,6 +204,83 @@ if(params$isSlides == "yes"){
 
 
 
+---
+## Renv
+
+link to website. 
+
+this manages everyithgn
+
+
+---
+## Getting started
+
+install, library and init
+?renv::init
+
+renv::init(bioconductor = TRUE)
+
+
+renv::init(bioconductor = "3.14")
+
+---
+## Gneralized workflow
+
+Call renv::init() to initialize a new project-local environment with a private R library,
+
+Work in the project as normal, installing and removing new R packages as they are needed in the project,
+
+Call renv::snapshot() to save the state of the project library to the lockfile (called renv.lock),
+
+Continue working on your project, installing and updating R packages as needed.
+
+Call renv::snapshot() again to save the state of your project library if your attempts to update R packages were successful, or call renv::restore() to revert to the previous state as encoded in the lockfile if your attempts to update packages introduced some new problems.
+
+---
+## what has change/ been added?
+
+.Rprofile	Used to activate renv for new R sessions launched in the project.
+renv.lock	The lockfile, describing the state of your project’s library at some point in time.
+renv/activate.R	The activation script run by the project .Rprofile.
+renv/library	The private project library.
+renv/settings.json	Project settings – see ?settings for more details.
+
+
+---
+lock file
+
+renv uses a lockfile to capture the state of your library at some point in time. It is stored as a collection of records, with different records defining:
+
+The version of renv used when generating the lockfile;
+The version of R used in that project;
+The R repositories that were active when the lockfile was created;
+Package records defining each R package, their version, and their installation source.
+
+
+
+---
+## Adding more packages
+
+
+---
+## Keeping you rlock up to date. 
+
+By default, renv::snapshot() will examine your project’s R files to determine which packages are used in your project, and will include only those packages (alongside their recursive dependencies) in the lockfile. This is done via a call to the renv::dependencies() f
+
+---
+## Restoring
+
+works with bioconudctor - looks at biociews
+
+
+---
+##
+
+
+Cache
+One of renv’s primary features is the use of a global package cache, which is shared across all projects using renv. The renv package cache provides two primary benefits:
+
+Future calls to renv::restore() and renv::install() 
 
 
 
@@ -112,6 +288,17 @@ if(params$isSlides == "yes"){
 
 
 
+
+
+By default, renv reads the .gitignore files in your project (if any) to infer which files should be ignored when scanning for dependencies. If you find that renv’s dependency discovery is scanning files you don’t want to be scanned, you can use an .renvignore file to instruct renv to ignore certain patterns of files in the project. For example, you might us
+
+---
+##
+
+if it all geos wrning
+
+renv::unistall
+renv::deactivate()
 
 
 
