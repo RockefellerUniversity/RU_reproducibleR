@@ -45,6 +45,9 @@ if(params$isSlides != "yes"){
 It was originally developed to help manage packages for Python, but that has expanded beyond python and is very popular with R users as well. 
 
 ---
+## How does Conda work?
+
+---
 ## Why Conda?
 
 * Simplify Package Management
@@ -57,16 +60,18 @@ It was originally developed to help manage packages for Python, but that has exp
 
 There are many different repository tools in the conda ecosystem. They all have key differences. 
 
-Conda -
-Miniconda -
-Anaconda -
-Mamba -
-Minimamba -
+Conda - The core package manager
+Miniconda - A minimal install of Conda
+Anaconda - A maximal install of Conda
+Mamba - A reimplementation of Conda built in C++ [FASTER]
+Minimamba - A minimal install of Mamba
 
 ---
-## Conda best practices (maybe not necessary()
+## Working with Conda
 
-How does it work?
+* Work with miniconda (or Herper)
+* Always install software into new environments (never the base)
+
 
 
 ---
@@ -96,14 +101,14 @@ if(params$isSlides == "yes"){
 
 Herper is an R package that provides a simple toolset to install and manage Conda packages and environments from within the R console.
 
+It is built up from the package *reticulate* which is used to run python from within R.
+
 ---
 ## Installing Tools
 
 The **install_CondaTools()** function allows the user to specify required Conda software and the desired environment to install into.
 
 Miniconda is installed as part of the process (by default into the r-reticulate's default Conda location - `r reticulate::miniconda_path()`) and the user's requested conda environment built within the same directory (by default `r file.path(reticulate::miniconda_path(),"envs","USERS_ENVIRONMENT_HERE")`). 
-
-If you already have Miniconda installed or you would like to install to a custom location, you can specify the path with the *pathToMiniConda* parameter. In this example we are installing in a temporary directory, but most likely you will want to install/use a stable version of Miniconda. 
 
 ```{r}
 library(Herper)
@@ -112,9 +117,9 @@ install_CondaTools(tools = "star", env = "rnaseq")
 ```
 
 ---
-## Installing Tools with speicifc conda
+## Installing Tools with speicific conda
 
-We can specify where we want to install miniconda (or which conda to use if you already jhave it installed). 
+If you already have Miniconda installed or you would like to install to a custom location, you can specify the path with the *pathToMiniConda* parameter.
 
 ```{r}
 my_miniconda <- "~/Desktop/My_Conda"
@@ -126,17 +131,23 @@ install_CondaTools(tools = "star", env = "rnaseq", pathToMiniConda = my_minicond
 ---
 ## Adding more tools
 
+It's easy to add more tools. You just use *install_CondaTools()* again, but an extra argument also needs to be added: *updateEnv = TRUE*.
+
+By default when we run this command, the path to Conda and the environment is returned. We can save this as a variable for later. 
+
 ```{r}
-conda_paths <- install_CondaTools(tools = c("salmon","kallisto"), env = "rnaseq", updateEnv = T, pathToMiniConda = my_miniconda)
+conda_paths <- install_CondaTools(tools = c("salmon","kallisto"), env = "rnaseq", updateEnv = TRUE , pathToMiniConda = my_miniconda)
 
 conda_paths
 
 ```
 
-<br>
 
+---
 ## Checking for packages in an environment with **list_CondaPkgs**
+
 The **list_CondaPkgs** function allows users to check what packages are installed in a given environment.
+
 ```{r list_CondaPkgs}
 list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
 ```
@@ -154,6 +165,8 @@ conda_search("salmo", pathToMiniConda = my_miniconda)
 ---
 ## Finding Conda package versions with **conda_search**
 
+If you have the exact name you can search for what versions are available on Conda. 
+
 ```{r conda_search2}
 conda_search("salmon", pathToMiniConda = my_miniconda)
 ```
@@ -161,18 +174,17 @@ conda_search("salmon", pathToMiniConda = my_miniconda)
 ---
 ## Finding Conda package versions with **conda_search**
 
-Specific package versions can be searched for using the conda format i.e. "salmon==1.3", "salmon>=1.3" or "salmon<=1.3".
+Specific package versions can be searched for using the Conda format i.e. "salmon==1.3", "salmon>=1.3" or "salmon<=1.3".
 
 ```{r conda_search_nuance}
-conda_search("salmon<=1.0", pathToMiniConda = myMiniconda)
+conda_search("salmon<=1.0", pathToMiniConda = my_miniconda)
 
 ```
-
 
 ---
 ## Installing specific versions
 
-We can use the same nomenclature to also install these tools. 
+We can use the same version nomenclature to also install these tools. Here we will downgrade the version of salmon we have installed. 
 
 ```{r}
 conda_paths <- install_CondaTools(tools = "salmon<=1.0", env = "rnaseq", updateEnv = T, pathToMiniConda = my_miniconda)
@@ -181,166 +193,100 @@ conda_paths <- install_CondaTools(tools = "salmon<=1.0", env = "rnaseq", updateE
 
 ---
 ## Installing specific versions
+
+We can now see that we have downgraded 
 ```{r}
-list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
+library(magrittr)
+library(dplyr)
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %>% dplyr::filter(name=="salmon")
 ```
 
 ---
 ## Running software
 
-Once you have installed your tool, you will next want to run it. We can again do this with Herper. 
-
-with and oca are the tools for this
-
-
-they are differnt. 
-
-local will update for this r session
-with will just evaluat code so run it temporarilu.
-
-
----
-## with
-
-```{r}
-
-```
-
-
-## Using external software with the **with_CondaEnv** and **local_CondaEnv** functions.
-
-Once installed within a conda environment, many external software can be executed directly from the conda environment's bin directory without having to perform any additional actions.
-
-
-Some external software however require additional environmental variable to be set in order to execute correctly. An example of this would be **Cytoscape** which requires the java home directory and java library paths to be set prior to its execution.
+Once installed within a conda environment, many external software can be executed directly from the conda environment's bin directory without having to perform any additional actions. 
 
 The Herper package uses the **[withr](https://withr.r-lib.org)** family of functions (**with_CondaEnv()** and **local_CondaEnv()**) to provide methods to **temporarily** alter the system PATH and to add or update any required environmental variables. This is done without formally activating your environment or initializing your conda.
 
+---
+## **with_CondaEnv**
+
 The **with_CondaEnv** allows users to run R code with the required PATH and environmental variables automatically set. The **with_CondaEnv** function simply requires the name of conda environment and the code to be executed within this environment. Additionally we can also the **pathToMiniconda** argument to specify any custom miniconda install location. 
 
-The **with_CondaEnv** function will update the PATH we can now run the above samtools command without specifying the full directory path to samtools.
+Here we use the **with_CondaEnv** to allow us to *see* the tools installed in out our "rnaseq" environment. We can then use the R function *system2()* to run some terminal/command line code from within R. In this case we want to run the salmon help. 
 
 ```{r with_condaenv_SalmonWithCondaEnvEval,echo=TRUE,eval=FALSE,tidy=FALSE}
-res <- with_CondaEnv("herper",
-                      system2(command="samtools",args = "help",stdout = TRUE),
-                      pathToMiniConda=myMiniconda)
+res <- with_CondaEnv("rnaseq",
+                      system2(command="salmon",args = "help",stdout = TRUE),
+                      pathToMiniConda=my_miniconda)
 res
 ```
 
-```{r with_condaenv_SalmonWithCondaEnv, echo=FALSE, eval=F}
-if(!identical(.Platform$OS.type, "windows")){
-  res <- with_CondaEnv("herper",
-                      system2(command="samtools",args = "help",stdout = TRUE),
-                      pathToMiniConda=myMiniconda)
-  cat(res,sep = "\n")
-}
-```
+---
+## **local_CondaEnv**
 
-
-The **local_CondaEnv** function acts in a similar fashion to the **with_CondaEnv** function and allows the user to temporarily update the required PATH and environmental variable from within a function. The PATH and environmental variables will be modified only until the current function ends.
+The **local_CondaEnv** function acts in a similar fashion to the **with_CondaEnv** function: it will update the required PATH and environmental variable so you can access the tools you need. The PATH and environmental variables will persist though until the current function ends.
 
 **local_CondaEnv** is best used within a user-created function, allowing access to the Conda environment's PATH and variables from within the the function itself but resetting all environmental variables once complete.
 
 ```{r with_condaenv_SalmonLocalCondaEnv,echo=TRUE,eval=FALSE}
-samtoolsHelp <- function(){
-  local_CondaEnv("herper", pathToMiniConda=myMiniconda)
-  helpMessage <- system2(command="samtools",args = "help",stdout = TRUE)
+salmonHelp<- function(){
+  local_CondaEnv("rnaseq", pathToMiniConda=my_miniconda)
+  helpMessage <- system2(command="salmon",args = "help",stdout = TRUE)
   helpMessage
 }
-samtoolsHelp()
+salmonHelp()
 ```
 
-```{r with_condaenv_SalmonLocalCondaEnvEval, echo=FALSE, eval=F}
-if(!identical(.Platform$OS.type, "windows")){
-  samtoolsHelp <- function(){
-    local_CondaEnv("herper",  pathToMiniConda=myMiniconda)
-    helpMessage <- system2(command="samtools",args = "help",stdout = TRUE)
-    cat(helpMessage,sep = "\n")
-  }
-  samtoolsHelp()
-}
-``` 
 
+---
+## A practical example
 
 To further demonstrate this we will use the first command from the [seqCNA](https://www.bioconductor.org/packages/release/bioc/html/seqCNA.html) vignette. This step requires samtools. If this is not installed and available there is an error. 
 ```{r with_condaenv_R}
 library(seqCNA)
 data(seqsumm_HCC1143)
+
 try(rco <- readSeqsumm(tumour.data = seqsumm_HCC1143), silent = FALSE)
 ```
 
 Samtools is listed as a System Requirement for seqCNA, so we can first use **install_CondaSysReqs()** to install samtools. In this case we are installing samtools in the environment: seqCNA_env. We can then run the seqCNA command using **with_CondaEnv** specifying that we want to use our environment containing samtools. seqCNA can then find samtools and execute successfully. 
 
 ```{r, echo=T, eval=F}
-install_CondaSysReqs(pkg="seqCNA",env="seqCNA_env",pathToMiniConda=myMiniconda)
+install_CondaSysReqs(pkg="seqCNA",env="seqCNA_env",pathToMiniConda=my_miniconda)
 rco <- with_CondaEnv(new="seqCNA_env",readSeqsumm(tumour.data=seqsumm_HCC1143)
  ,pathToMiniConda = myMiniconda)
 summary(rco)
 ``` 
 
-```{r, echo=F, eval=F}
-if(!identical(.Platform$OS.type, "windows")){
-install_CondaSysReqs("seqCNA",env="seqCNA_env",pathToMiniConda=myMiniconda)
-rco <- with_CondaEnv(new="seqCNA_env",readSeqsumm(tumour.data=seqsumm_HCC1143)
- ,pathToMiniConda = myMiniconda)
-summary(rco)
-}
-``` 
-
-
 ---
-## local
+## Reproducible environments
 
-```{r}
+Once you are done you have an environment that is functioning well you will want to save it. One way to back it up is to export a snapshot. For Conda this snapshot is a *.yml* file. These files contain all information about the environment you would need in order to rebuild or share it for collaboration.
 
-
-```
-
-
-
----
-## Sharing
-
-Once you are done you have an environment that is functioing you will want to save it. One way to back it up is to export a snapshot. i.e. yml. 
-
-These contains all ifnroamtion. anD IT CAN BE USED TO REBUILD IT. 
-
-aDD SANPSHOT HERE OF ONE OF THESE FILES. 
-
-
----
-## Export of Conda environments to YAML files using **export_CondaEnv**.
-
-The **export_CondaEnv** function allows the user to export the environment information to a *.yml* file. These environment YAML files contain all essential information about the package, allowing for reproducibility and easy distribution of Conda system configuration for collaboration. 
 
 ```{r export}
-yml_name <- paste0("herper_", format(Sys.Date(), "%Y%m%d"), ".yml")
-export_CondaEnv("herper", yml_name, pathToMiniConda = myMiniconda)
+yml_name <- paste0("rnaseq_", format(Sys.Date(), "%Y%m%d"), ".yml")
+export_CondaEnv("rnaseq", yml_name, pathToMiniConda = my_miniconda)
 ```
 
 ---
-## Import of Conda environments from YAML files using **import_CondaEnv**.
+## Importing from *.yml*
 
 The **import_CondaEnv** function allows the user to create a new conda environment from a *.yml* file. These can be previously exported from **export_CondaEnv**, conda, renv or manually created. 
 
 Users can simply provide a path to the YAML file for import. They can also specify the environment name, but by default the name will be taken from the YAML. 
 
 ```{r import, eval=F}
-testYML <- system.file("extdata/test.yml",package="Herper")
-import_CondaEnv(yml_import=testYML, pathToMiniConda = myMiniconda)
+testYML <- system.file("extdata/test.yml", package="Herper")
+import_CondaEnv(yml_import=testYML, pathToMiniConda = my_miniconda)
 ```
 
---
+---
 ## Other tricks
-- Mamba
+- Mamba - Mamba 
 - Verbosity
 - list conda env
-
-```{r}
-
-```
-
-
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -379,7 +325,7 @@ Conda is much more considered, and checks installs to make sure that all your de
 ---
 ## Why use Pip?
 
-* Not very Conda build is peffect.
+* Not very Conda build is perfect
 * Not every tool on conda
 
 Sometimes we are forced to use pip. But that does not mean we have to leave our environment behind. 
@@ -387,17 +333,39 @@ Sometimes we are forced to use pip. But that does not mean we have to leave our 
 ---
 ## Export env
 
+```{r}
+
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
+```
+
 
 
 
 
 ---
-## PIp install
+## Pip install
 
+```{r}
+install_CondaTools("pip", "rnaseq", pathToMiniConda = my_miniconda, updateEnv = TRUE)
+
+with_CondaEnv("rnaseq",
+                      system2(command="pip",args = c("install", "scanpy"),stdout = TRUE),
+                      pathToMiniConda=my_miniconda)
+
+
+with_CondaEnv("rnaseq",
+                      system2(command=paste0(conda_paths$pathToEnvBin,"/pip"),args = c("install", "scanpy"),stdout = TRUE),
+                      pathToMiniConda=my_miniconda)
+
+```
 
 ---
 ## Check envs
 
+```{R}
+
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
+```
 
 
 ---
@@ -426,10 +394,21 @@ if(params$isSlides == "yes"){
 
 
 
+```{r}
+renv::use_python(python = "/path/to/python")
+
+```
 
 
 
 
+```{r}
+
+renv::snapshot() calls conda env export > environment.yml to save the set of installed Python packages;
+
+renv::restore() calls conda env [create/update] --file environment.yml to install the previously-recorded set of Python packages
+
+```
 
 
 
