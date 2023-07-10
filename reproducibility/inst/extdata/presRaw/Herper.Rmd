@@ -154,7 +154,7 @@ conda_search("salmo", pathToMiniConda = my_miniconda)
 ---
 ## Finding Conda package versions with **conda_search**
 
-```{r conda_search}
+```{r conda_search2}
 conda_search("salmon", pathToMiniConda = my_miniconda)
 ```
 
