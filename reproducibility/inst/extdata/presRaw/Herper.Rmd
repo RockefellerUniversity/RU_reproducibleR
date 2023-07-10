@@ -227,7 +227,7 @@ res <- with_CondaEnv("herper",
 res
 ```
 
-```{r with_condaenv_SalmonWithCondaEnv, echo=FALSE, eval=TRUE}
+```{r with_condaenv_SalmonWithCondaEnv, echo=FALSE, eval=F}
 if(!identical(.Platform$OS.type, "windows")){
   res <- with_CondaEnv("herper",
                       system2(command="samtools",args = "help",stdout = TRUE),
@@ -250,7 +250,7 @@ samtoolsHelp <- function(){
 samtoolsHelp()
 ```
 
-```{r with_condaenv_SalmonLocalCondaEnvEval, echo=FALSE, eval=TRUE}
+```{r with_condaenv_SalmonLocalCondaEnvEval, echo=FALSE, eval=F}
 if(!identical(.Platform$OS.type, "windows")){
   samtoolsHelp <- function(){
     local_CondaEnv("herper",  pathToMiniConda=myMiniconda)
@@ -278,7 +278,7 @@ rco <- with_CondaEnv(new="seqCNA_env",readSeqsumm(tumour.data=seqsumm_HCC1143)
 summary(rco)
 ``` 
 
-```{r, echo=F, eval=T}
+```{r, echo=F, eval=F}
 if(!identical(.Platform$OS.type, "windows")){
 install_CondaSysReqs("seqCNA",env="seqCNA_env",pathToMiniConda=myMiniconda)
 rco <- with_CondaEnv(new="seqCNA_env",readSeqsumm(tumour.data=seqsumm_HCC1143)
