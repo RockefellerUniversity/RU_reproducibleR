@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Containers ¶  ¶ ¶  ¶ </title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
+    <script src="Docker_files/header-attrs-2.23/header-attrs.js"></script>
+    <link href="Docker_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
+    <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Containers ¶ <html> ¶ ¶ <hr color='#EB811B' size=1px width=796px> ¶ </html>
+]
+.author[
+### Rockefeller University, Bioinformatics Resource Centre
+]
+.date[
+### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/" class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
+]
+
+---
+
+
+
+
+
+## Set Up
+
+All prerequisites, links to material and slides for this course can be found on github.
+
+* [Reproducible_R](https://rockefelleruniversity.github.io/Reproducible_R/)
+
+Or can be downloaded as a zip archive from here.
+
+* [Download zip](https://github.com/rockefelleruniversity/Reproducible_R/zipball/master)
+
+---
+## Course materials
+
+Once the zip file in unarchived. All presentations as HTML slides and pages, their R code and HTML practical sheets will be available in the directories underneath.
+
+* **presentations/slides/**
+Presentations as an HTML slide show.
+* **presentations/singlepage/** 
+Presentations as an HTML single page.
+* **presentations/r_code/**
+R code in presentations.
+* **exercises/**
+Practicals as HTML pages. 
+* **answers/**
+Practicals with answers as HTML pages and R code solutions. 
+
+
+---
+class: inverse, center, middle
+
+# What are containers? &lt;br&gt; Why should we use them?
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+## The problem
+Something (e.g. bioinformatics analysis or software deployment) works on your computer, and you want to make sure that it will work on another computer.
+
+&lt;img src="imgs/jhu_docker_rationale.png" width="75%" /&gt;
+
+
+&lt;font size='1'&gt;&lt;a href="https://jhudatascience.org/Adv_Reproducibility_in_Cancer_Informatics/launching-a-docker-image.html"&gt;https://jhudatascience.org/Adv_Reproducibility_in_Cancer_Informatics/launching-a-docker-image.html - &lt;/a&gt;&lt;a href="https://creativecommons.org/licenses/by/4.0"&gt;CC-BY 4.0&lt;/a&gt;&lt;/font&gt;
+
+---
+
+
+## The solution - Docker!
+
+Docker allows for the creation of an isolated environment that can be shipped across different users, machines, or operating systems, and to virtual machines or the cloud. 
+
+&lt;img src="imgs/jhu_docker_rationale2.png" width="75%" /&gt;
+
+
+&lt;font size='1'&gt;&lt;a href="https://jhudatascience.org/Adv_Reproducibility_in_Cancer_Informatics/launching-a-docker-image.html"&gt;https://jhudatascience.org/Adv_Reproducibility_in_Cancer_Informatics/launching-a-docker-image.html - &lt;/a&gt;&lt;a href="https://creativecommons.org/licenses/by/4.0"&gt;CC-BY 4.0&lt;/a&gt;&lt;/font&gt;
+
+
+---
+
+## Installing Docker
+
+Use [this link](https://www.docker.com/get-started/) to install Docker. 
+
+* Click on the Docker desktop icon and make an account with Docker
+* Docker must be open and running to use the command line interface (CLI), which is how we will primarily use Docker
+* [See here](https://docs.docker.com/engine/reference/commandline/cli/) for Docker CLI commands
+
+Check Docker version to make sure Docker is installed and running
+
+*Code (terminal):*
+
+```sh
+docker --version
+```
+
+---
+
+## Installing Docker
+
+If previous command isn't found check the Docker Desktop advanced settings and make sure CLI tools are available system-wide
+
+&lt;img src="imgs/docker_config.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Docker infrastructure
+
+* The Docker client communicates with the Docker daemon based on user commands
+  + The daemon is the engine that manages Docker services and objects (e.g. images and containers)
+
+
+&lt;img src="imgs/docker_schema_empty.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Docker infrastructure
+
+* The Docker client communicates with the Docker daemon based on user commands
+  + The daemon is the engine that manages Docker services and objects (e.g. images and containers)
+* A Docker image is a read-only template or blueprint for running a container.
+  + The image contains an isolated file system that is defined in a text file called a Dockerfile
+
+
+&lt;img src="imgs/docker_schema_addBuild.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Docker infrastructure
+
+* The Docker client communicates with the Docker daemon based on user commands
+  + The daemon is the engine that manages Docker services and objects (e.g. images and containers)
+* A Docker image is a read-only template or blueprint for running a container.
+  + The image contains an isolated file system that is defined in a text file called a Dockerfile
+* Once an image is built, an instance of this image can be launched as a container
+
+&lt;img src="imgs/docker_schema_addRun.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Pulling Docker images
+
+There are public repositories of Docker images (e.g. [Dockerhub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
+
+&lt;img src="imgs/docker_schema_all.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Pulling Docker images
+
+There are public repositories of Docker images (e.g. [Dockerhub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
+
+[Rocker](https://rocker-project.org/) is a very useful source of images on Dockerhub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R
+
+*Code (terminal):*
+
+```sh
+docker pull rocker/rstudio:4.2.3
+```
+
+---
+
+## Docker images
+
+After pulling, the image is now available on our system to run.
+
+&lt;hr&gt;
+
+*Code (terminal):*
+
+```sh
+docker images
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_images.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+
+---
+
+## Docker images
+
+After pulling, the image is now available on our system to run.
+
+&lt;hr&gt;
+
+*Code (terminal):*
+
+```sh
+docker images
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_images.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+&lt;hr&gt;
+
+Confirm in Docker desktop:
+&lt;img src="imgs/docker_desktop_images.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Running docker containers
+
+Once the image is on our system, we can launch a container with the ['docker run' command](https://docs.docker.com/engine/reference/commandline/run/).
+
+Components of the run command:
+*  --rm: this will automatically remove a container when you exit, otherwise can take up room on computer with old, unused containers
+*  -p: before the colon is the port on your computer to be exposed and after the colon is the port inside the container
+*  -e: an environmental variable is set when the conatiner is run, and this will be the password to login
+*  the last argument is the image name followed by the tag (both seen with 'docker images')
+
+*Code (terminal):*
+
+```sh
+docker run --rm \
+          -p 8787:8787 \
+           -e PASSWORD=password \
+           rocker/rstudio:4.2.3
+```
+
+---
+
+## Running docker containers
+
+While the container is running, we can go to 'http://localhost:8787' in a browser and log in with the password from 'docker run'.
+
+This brings us to a normal RStudio interface
+
+&lt;img src="imgs/rstudio_interface.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Listing active docker containers
+
+To see all containers running in the local environment, use the 'docker ps' command
+
+*Code (terminal):*
+
+```sh
+docker ps
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_ps.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Stopping docker containers
+
+To stop the container currently running, if you are in the terminal tab where it was launched, press Ctrl+C.
+
+Or another tab can be opened and the 'docker stop' command can be used with the ID listed from 'docker ps'
+
+
+*Code (terminal):*
+
+```sh
+docker stop 6ee1e0e97bf8 # this is the ID from 'docker ps'
+docker ps
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_stop.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Adding volumes to containers
+
+The docker container has it's own file system, and we can mount a local directory onto that file system with the '-v' argument to the 'docker run' command
+
+* Navigate to the 'r_course' directory within the downloaded course using the 'cd' command in the terminal
+* Use the 'docker run' command with the '-v' argument
+  + the left side of the colon is the path on your computer to mount
+  + the right side is the location within the docker container file system where that data will be accessible 
+  + /home/rstudio is the working directory of the rstudio session set by the Rocker image
+
+*Code (terminal):*
+
+```sh
+# navigate to 'r_course' directory in downloaded material
+ cd ~/Downloads/Reproducible_R-master/r_course
+ 
+ # launch docker container
+ docker run --rm \
+          -v ./data:/home/rstudio \
+          -p 8787:8787 \
+           -e PASSWORD=password \
+           rocker/rstudio:4.2.3
+```
+
+---
+
+## Adding volumes to containers
+
+The RStudio interface now shows the files in the 'data' directory
+
+&lt;img src="imgs/rstudio_interface_volume.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Adding volumes to containers
+
+These files can be read into R, and also files can be written to the local environment
+
+*Code (R in docker image):*
+
+```r
+dataIn &lt;- read.csv("readThisTable.csv")
+head(dataIn, 2)
+# add gene IDs and write to new file on local computer
+dataIn$Gene_ID &lt;- seq(nrow(dataIn))
+write.csv(dataIn, "rnaseq_table_withIDs.csv")
+```
+
+*Output:*
+&lt;img src="imgs/rstudio_interface_volume_write.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Adding volumes to containers
+
+The R environment files from this RStudio session are written to the working directory in the image, and therefore are copied to the local directory as hidden folders. 
+
+This R environment will then be loaded the next time you launch an RStudio container with this volume mounted. If these folders are removed (.config and .local), then a fresh RStudio session will be launched. 
+
+*Code (terminal):*
+
+```sh
+ls -a data
+```
+
+
+*Output:*
+
+&lt;img src="imgs/docker_hidden_files.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Customizing RStudio Docker image
+
+The image we pull from Rocker contains base R and its associated packages. To customize the image, we will need to make a Dockerfile that builds on top of the Rocker image.
+
+A Dockerfile provides the recipe to make the image, and is a text file that can include a series of [specialized commands](https://docs.docker.com/engine/reference/builder/). This includes instructions to install the R packages and its dependencies. 
+
+Some examples:
+* FROM: sets the base image and further instructions build off of this
+* RUN: executes a command as if in terminal
+* LABEL: add metadata to the image
+* COPY: copies files from the the host system to the image file system
+* CMD: when the container is launched, this is the command that will be run
+
+---
+
+## Dockerfile
+
+&lt;img src="imgs/dockerfile1_all.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Dockerfile
+
+Here we start with the same RStudio base image we used previously, and then add some key R packages.
+
+&lt;img src="imgs/dockerfile1_FROM.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Dockerfile
+
+The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. Adding more R packages could result in missing dependencies, which you can pick up in the log for the build command (next slide). Dependencies for CRAN packages can also be found [here](https://packagemanager.posit.co/client/#/repos/2/packages/A3). 
+
+
+&lt;img src="imgs/dockerfile1_sys_deps.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Dockerfile
+
+Then the R packages are installed using 'install.packages' or 'BiocManager::install' for Bioconductor packages. 
+
+
+&lt;img src="imgs/dockerfile1_Rpackages.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Dockerfile
+
+The port 8787 is exposed and the 'init' script that is included with the base RStudio image  
+
+
+&lt;img src="imgs/dockerfile1_EXPOSE_CMD.png" width="50%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+
+---
+
+## Build image from Dockerfile
+
+* the directory that contains the Dockerfile is the last argument
+* if no filename is given, it will look for a file called 'Dockerfile'
+  + 'Dockerfile' is in the data directory of course materials
+
+*Code (terminal):*
+
+```sh
+docker build -t rstudio_4.2.3_v1 ./data
+```
+
+*Output:*
+
+&lt;img src="imgs/dockerV1_build_log.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Build image from Dockerfile
+
+Use the docker 'images' command to see image
+
+*Code (terminal):*
+
+```sh
+docker images
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_images_v1.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Build image from Dockerfile
+
+As done previously, use the 'docker run' command to launch a container with our customized RStudio session
+
+*Code (terminal):*
+
+```sh
+docker run --rm \
+          -v ./data:/home/rstudio \
+          -p 8787:8787 \
+          -e PASSWORD=password \
+          rstudio_4.2.3_v1 
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_image_v1_interface.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Use Herper for conda packages
+
+&lt;img src="imgs/dockerfile_salmon_all.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Use Herper for conda packages
+
+* the directory that contains the Dockerfile is the last argument
+* here the Dockerfile has a different name, so we specify the exact path with '-f' argument
+
+*Code (terminal):*
+
+```sh
+docker build -t rstudio_4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_salmon_build_log.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Use Herper for conda packages
+
+*Code (terminal):*
+
+```sh
+docker images
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_images_salmon.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Use Herper for conda packages
+
+*Code (R in docker image):*
+
+```r
+library(Herper)
+# the environment name and miniconda path set in the Dockerfile
+Herper::local_CondaEnv(new = "pipe_env", 
+                       pathToMiniConda = "/home/miniconda")
+# test out salmon
+system("salmon -h")
+```
+
+*Output:*
+&lt;img src="imgs/docker_image_salmon_interface.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Run containers from Docker Desktop
+
+
+&lt;img src="imgs/docker_desktop_salmon.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+
+---
+## Run containers from Docker Desktop
+
+
+&lt;img src="imgs/docker_desktop_salmon_running.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+---
+## Further Resources
+
+
+ 
+
+---
+## Exercises
+
+Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
+
+
+---
+## Contact
+
+Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
