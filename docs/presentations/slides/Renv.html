@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Environments and Renv ¶  ¶ ¶  ¶ </title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
+    <script src="libs/header-attrs-2.23/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
+    <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Environments and Renv ¶ <html> ¶ ¶ <hr color='#EB811B' size=1px width=796px> ¶ </html>
+]
+.author[
+### Rockefeller University, Bioinformatics Resource Centre
+]
+.date[
+### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/" class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
+]
+
+---
+
+
+
+
+
+## Set Up
+
+All prerequisites, links to material and slides for this course can be found on github.
+
+* [Reproducible_R](https://rockefelleruniversity.github.io/Reproducible_R/)
+
+Or can be downloaded as a zip archive from here.
+
+* [Download zip](https://github.com/rockefelleruniversity/Reproducible_R/zipball/master)
+
+---
+## Course materials
+
+Once the zip file in unarchived. All presentations as HTML slides and pages, their R code and HTML practical sheets will be available in the directories underneath.
+
+* **presentations/slides/**
+Presentations as an HTML slide show.
+* **presentations/singlepage/** 
+Presentations as an HTML single page.
+* **presentations/r_code/**
+R code in presentations.
+* **exercises/**
+Practicals as HTML pages. 
+* **answers/**
+Practicals with answers as HTML pages and R code solutions. 
+
+
+---
+## Set the Working directory
+
+Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived. 
+
+You may navigate to the unarchived Reproducible_R folder in the Rstudio menu.
+
+**Session -&gt; Set Working Directory -&gt; Choose Directory**
+
+or in the console.
+
+
+```r
+setwd("/PathToMyDownload/Reproducible_R-master/r_course")
+# e.g. setwd('~/Downloads/Reproducible_R-master/r_course')
+```
+
+---
+class: inverse, center, middle
+
+# Reproducibility?
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+---
+## Core concepts /pillars
+
+hwa ti sthe point? 
+
+Want to be able to rproduce someson es reulsts. Not as simple as it sounds. 
+
+many fail. 
+
+---
+## FAIRE
+
+https://en.wikipedia.org/wiki/FAIR_data
+https://www.go-fair.org/fair-principles/
+
+NIH calls this FAIRE
+* can mention faire
+
+
+Data sharing plan
+https://sharing.nih.gov/data-management-and-sharing-policy/planning-and-budgeting-for-data-management-and-sharing/writing-a-data-management-and-sharing-plan
+
+
+2.  Related Tools, Software and/or Code
+Indicate whether specialized tools are needed to access or manipulate shared scientific data to support replication or reuse, and name(s) of the needed tool(s) and software. If applicable, specify how needed tools can be accessed.
+
+---
+## NIH new guidleins
+
+* No teeth encesarily forthis yet. But this is the way things ar emoving. 
+
+---
+## compute how to mange.
+
+also mention Rswitch. 
+and docker. 
+Update? not update?
+
+
+
+---
+class: inverse, center, middle
+
+# Environments
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+
+---
+## What is environ?
+
+Deinfe 
+
+
+---
+## how to use prcatialy
+
+exampels i.e. venv, wine, renv conda, packrat (precednet for renv)
+
+
+---
+class: inverse, center, middle
+
+# Renv
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+
+
+---
+## Renv
+
+link to website. 
+
+this manages everyithgn
+
+
+---
+## Getting started
+
+install, library and init
+?renv::init
+
+renv::init(bioconductor = TRUE)
+
+
+renv::init(bioconductor = "3.14")
+
+---
+## Gneralized workflow
+
+Call renv::init() to initialize a new project-local environment with a private R library,
+
+Work in the project as normal, installing and removing new R packages as they are needed in the project,
+
+Call renv::snapshot() to save the state of the project library to the lockfile (called renv.lock),
+
+Continue working on your project, installing and updating R packages as needed.
+
+Call renv::snapshot() again to save the state of your project library if your attempts to update R packages were successful, or call renv::restore() to revert to the previous state as encoded in the lockfile if your attempts to update packages introduced some new problems.
+
+---
+## what has change/ been added?
+
+.Rprofile	Used to activate renv for new R sessions launched in the project.
+renv.lock	The lockfile, describing the state of your project’s library at some point in time.
+renv/activate.R	The activation script run by the project .Rprofile.
+renv/library	The private project library.
+renv/settings.json	Project settings – see ?settings for more details.
+
+
+---
+lock file
+
+renv uses a lockfile to capture the state of your library at some point in time. It is stored as a collection of records, with different records defining:
+
+The version of renv used when generating the lockfile;
+The version of R used in that project;
+The R repositories that were active when the lockfile was created;
+Package records defining each R package, their version, and their installation source.
+
+
+
+---
+## Adding more packages
+
+
+---
+## Keeping you rlock up to date. 
+
+By default, renv::snapshot() will examine your project’s R files to determine which packages are used in your project, and will include only those packages (alongside their recursive dependencies) in the lockfile. This is done via a call to the renv::dependencies() f
+
+---
+## Restoring
+
+works with bioconudctor - looks at biociews
+
+
+---
+##
+
+
+Cache
+One of renv’s primary features is the use of a global package cache, which is shared across all projects using renv. The renv package cache provides two primary benefits:
+
+Future calls to renv::restore() and renv::install() 
+
+
+
+
+
+
+
+
+
+By default, renv reads the .gitignore files in your project (if any) to infer which files should be ignored when scanning for dependencies. If you find that renv’s dependency discovery is scanning files you don’t want to be scanned, you can use an .renvignore file to instruct renv to ignore certain patterns of files in the project. For example, you might us
+
+---
+##
+
+if it all geos wrning
+
+renv::unistall
+renv::deactivate()
+
+
+
+---
+## Further Resources
+
+
+ 
+
+---
+## Exercises
+
+Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
+
+
+---
+## Contact
+
+Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

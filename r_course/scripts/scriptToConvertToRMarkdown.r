@@ -1,4 +1,4 @@
-filesToRead <- dir("../Data/ExpressionResults/",pattern = "*\\.txt",full.names=T)
+filesToRead <- dir("data/ExpressionResults/",pattern = "*\\.txt",full.names=T)
 fileRead <- vector("list",length=length(filesToRead))
 for(i in 1:length(filesToRead)){
   fileRead[[i]] <- read.delim(filesToRead[i],header=F,sep="\t")
@@ -14,10 +14,10 @@ for(i in fileRead){
   
   print(nrow(mergedTable))
 }
-
+mergedTable <- mergedTable[1:1000,] 
 mergedTable[1:3,] 
 
-Annotation <- read.table("../Data/ExpressionResults/Annotation.ann",sep="\t",h=T)
+Annotation <- read.table("data/Annotation.ann",sep="\t",h=T)
 annotatedExpression <- merge(Annotation,mergedTable,by=1,all.x=F,all.y=T)
 annotatedExpression[1:2,]
 
@@ -30,10 +30,12 @@ boxplot(annotatedExpression[,grep("ExpressionResults",colnames(annotatedExpressi
 
 indexGroupOne <- grep("[1-5].txt",colnames(annotatedExpression))
 indexGroupTwo <- grep("[6-9,0].txt",colnames(annotatedExpression))
-ttestResults <- apply(annotatedExpression,1,function(x) t.test(as.numeric(x[indexGroupOne]),as.numeric(x[indexGroupTwo])))
+ttestResults <- apply(annotatedExpression,1, function(x) {print(x)
+                      t.test(as.numeric(x[indexGroupOne]),
+                                                               as.numeric(x[indexGroupTwo]))})
 
 
-str(ttestResults[[1]])
+broom::tidy(ttestResults[[1]])
 
 testResult <- sapply(ttestResults,function(x) c(log2(x$estimate[2]) - log2(x$estimate[1]), x$statistic,x$p.value))
 testResult <- t(testResult)

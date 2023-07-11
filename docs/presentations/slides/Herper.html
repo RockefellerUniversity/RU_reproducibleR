@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Conda and Herper ¶  ¶ ¶  ¶ </title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
+    <script src="libs/header-attrs-2.23/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
+    <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Conda and Herper ¶ <html> ¶ ¶ <hr color='#EB811B' size=1px width=796px> ¶ </html>
+]
+.author[
+### Rockefeller University, Bioinformatics Resource Centre
+]
+.date[
+### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/" class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
+]
+
+---
+
+
+
+
+
+
+## What is Conda?
+
+(Conda)[https://conda.org/] is an open-source and cross-platform package and environment management system. 
+
+It was originally developed to help manage packages for Python, but that has expanded beyond python and is very popular with R users as well. 
+
+---
+## How does Conda work?
+
+---
+## Why Conda?
+
+* Simplify Package Management
+* Cross-Platform Compatibility
+* Extensive Package Ecosystem
+* Environment Management
+
+---
+## Conda vs miniconda vs ...
+
+There are many different repository tools in the conda ecosystem. They all have key differences. 
+
+Conda - The core package manager
+Miniconda - A minimal install of Conda
+Anaconda - A maximal install of Conda
+Mamba - A reimplementation of Conda built in C++ [FASTER]
+Minimamba - A minimal install of Mamba
+
+---
+## Working with Conda
+
+* Work with miniconda (or Herper)
+* Always install software into new environments (never the base)
+
+
+
+---
+
+
+## What is Herper
+
+Herper is an R package that provides a simple toolset to install and manage Conda packages and environments from within the R console.
+
+It is built up from the package *reticulate* which is used to run python from within R.
+
+---
+## Installing Tools
+
+The **install_CondaTools()** function allows the user to specify required Conda software and the desired environment to install into.
+
+Miniconda is installed as part of the process (by default into the r-reticulate's default Conda location - /github/home/.local/share/r-miniconda) and the user's requested conda environment built within the same directory (by default /github/home/.local/share/r-miniconda/envs/USERS_ENVIRONMENT_HERE). 
+
+
+```r
+library(Herper)
+install_CondaTools(tools = "star", env = "rnaseq")
+```
+
+---
+## Installing Tools with speicific conda
+
+If you already have Miniconda installed or you would like to install to a custom location, you can specify the path with the *pathToMiniConda* parameter.
+
+
+```r
+my_miniconda &lt;- "~/Desktop/My_Conda"
+
+install_CondaTools(tools = "star", env = "rnaseq", pathToMiniConda = my_miniconda)
+```
+
+---
+## Adding more tools
+
+It's easy to add more tools. You just use *install_CondaTools()* again, but an extra argument also needs to be added: *updateEnv = TRUE*.
+
+By default when we run this command, the path to Conda and the environment is returned. We can save this as a variable for later. 
+
+
+```r
+conda_paths &lt;- install_CondaTools(tools = c("salmon", "kallisto"), env = "rnaseq",
+    updateEnv = TRUE, pathToMiniConda = my_miniconda)
+
+conda_paths
+```
+
+
+---
+## Checking for packages in an environment with **list_CondaPkgs**
+
+The **list_CondaPkgs** function allows users to check what packages are installed in a given environment.
+
+
+```r
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
+```
+
+
+---
+## Finding Conda packages with **conda_search**
+
+If the user is unsure of the exact name, or version of a tool available on conda, they can use the **conda_search** function. Searches will find close matches for incorrect queries.
+
+
+```r
+conda_search("salmo", pathToMiniConda = my_miniconda)
+```
+
+---
+## Finding Conda package versions with **conda_search**
+
+If you have the exact name you can search for what versions are available on Conda. 
+
+
+```r
+conda_search("salmon", pathToMiniConda = my_miniconda)
+```
+
+---
+## Finding Conda package versions with **conda_search**
+
+Specific package versions can be searched for using the Conda format i.e. "salmon==1.3", "salmon&gt;=1.3" or "salmon&lt;=1.3".
+
+
+```r
+conda_search("salmon&lt;=1.0", pathToMiniConda = my_miniconda)
+```
+
+---
+## Installing specific versions
+
+We can use the same version nomenclature to also install these tools. Here we will downgrade the version of salmon we have installed. 
+
+
+```r
+conda_paths &lt;- install_CondaTools(tools = "salmon&lt;=1.0", env = "rnaseq", updateEnv = T,
+    pathToMiniConda = my_miniconda)
+```
+
+---
+## Installing specific versions
+
+We can now see that we have downgraded 
+
+```r
+library(magrittr)
+library(dplyr)
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %&gt;%
+    dplyr::filter(name == "salmon")
+```
+
+---
+## Running software
+
+Once installed within a conda environment, many external software can be executed directly from the conda environment's bin directory without having to perform any additional actions. 
+
+The Herper package uses the **[withr](https://withr.r-lib.org)** family of functions (**with_CondaEnv()** and **local_CondaEnv()**) to provide methods to **temporarily** alter the system PATH and to add or update any required environmental variables. This is done without formally activating your environment or initializing your conda.
+
+---
+## **with_CondaEnv**
+
+The **with_CondaEnv** allows users to run R code with the required PATH and environmental variables automatically set. The **with_CondaEnv** function simply requires the name of conda environment and the code to be executed within this environment. Additionally we can also the **pathToMiniconda** argument to specify any custom miniconda install location. 
+
+Here we use the **with_CondaEnv** to allow us to *see* the tools installed in out our "rnaseq" environment. We can then use the R function *system2()* to run some terminal/command line code from within R. In this case we want to run the salmon help. 
+
+
+```r
+res &lt;- with_CondaEnv("rnaseq",
+                      system2(command="salmon",args = "help",stdout = TRUE),
+                      pathToMiniConda=my_miniconda)
+res
+```
+
+---
+## **local_CondaEnv**
+
+The **local_CondaEnv** function acts in a similar fashion to the **with_CondaEnv** function: it will update the required PATH and environmental variable so you can access the tools you need. The PATH and environmental variables will persist though until the current function ends.
+
+**local_CondaEnv** is best used within a user-created function, allowing access to the Conda environment's PATH and variables from within the the function itself but resetting all environmental variables once complete.
+
+
+```r
+salmonHelp &lt;- function() {
+    local_CondaEnv("rnaseq", pathToMiniConda = my_miniconda)
+    helpMessage &lt;- system2(command = "salmon", args = "help", stdout = TRUE)
+    helpMessage
+}
+salmonHelp()
+```
+
+
+---
+## A practical example
+
+To further demonstrate this we will use the first command from the [seqCNA](https://www.bioconductor.org/packages/release/bioc/html/seqCNA.html) vignette. This step requires samtools. If this is not installed and available there is an error. 
+
+```r
+library(seqCNA)
+data(seqsumm_HCC1143)
+
+try(rco &lt;- readSeqsumm(tumour.data = seqsumm_HCC1143), silent = FALSE)
+```
+
+Samtools is listed as a System Requirement for seqCNA, so we can first use **install_CondaSysReqs()** to install samtools. In this case we are installing samtools in the environment: seqCNA_env. We can then run the seqCNA command using **with_CondaEnv** specifying that we want to use our environment containing samtools. seqCNA can then find samtools and execute successfully. 
+
+
+```r
+install_CondaSysReqs(pkg = "seqCNA", env = "seqCNA_env", pathToMiniConda = my_miniconda)
+rco &lt;- with_CondaEnv(new = "seqCNA_env", readSeqsumm(tumour.data = seqsumm_HCC1143),
+    pathToMiniConda = myMiniconda)
+summary(rco)
+```
+
+---
+## Reproducible environments
+
+Once you are done you have an environment that is functioning well you will want to save it. One way to back it up is to export a snapshot. For Conda this snapshot is a *.yml* file. These files contain all information about the environment you would need in order to rebuild or share it for collaboration.
+
+
+
+```r
+yml_name &lt;- paste0("rnaseq_", format(Sys.Date(), "%Y%m%d"), ".yml")
+export_CondaEnv("rnaseq", yml_name, pathToMiniConda = my_miniconda)
+```
+
+---
+## Importing from *.yml*
+
+The **import_CondaEnv** function allows the user to create a new conda environment from a *.yml* file. These can be previously exported from **export_CondaEnv**, conda, renv or manually created. 
+
+Users can simply provide a path to the YAML file for import. They can also specify the environment name, but by default the name will be taken from the YAML. 
+
+
+```r
+testYML &lt;- system.file("extdata/test.yml", package = "Herper")
+import_CondaEnv(yml_import = testYML, pathToMiniConda = my_miniconda)
+```
+
+---
+## Other tricks
+- Mamba - Mamba 
+- Verbosity
+- list conda env
+
+---
+
+
+
+## What about Pip?
+
+Pip is an alternative system to install python tools. But it typically only works with python tools.
+
+Pip doesn't handle conflicting dependencies, and will upgrade/downgrade software without checking if something else depends on it. 
+
+Even if this doesn't break your tools, it may give different results and hinder reproducibility as unsupported versions of tools could be used.
+
+Conda is much more considered, and checks installs to make sure that all your dependencies do not conflict. 
+
+---
+## Why use Pip?
+
+* Not very Conda build is perfect
+* Not every tool on conda
+
+Sometimes we are forced to use pip. But that does not mean we have to leave our environment behind. 
+
+---
+## Export env
+
+
+```r
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
+```
+
+
+
+
+
+---
+## Pip install
+
+
+```r
+install_CondaTools("pip", "rnaseq", pathToMiniConda = my_miniconda, updateEnv = TRUE)
+
+with_CondaEnv("rnaseq", system2(command = "pip", args = c("install", "scanpy"), stdout = TRUE),
+    pathToMiniConda = my_miniconda)
+
+
+with_CondaEnv("rnaseq", system2(command = paste0(conda_paths$pathToEnvBin, "/pip"),
+    args = c("install", "scanpy"), stdout = TRUE), pathToMiniConda = my_miniconda)
+```
+
+---
+## Check envs
+
+
+```r
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
+```
+
+
+---
+
+
+
+
+
+
+```r
+renv::use_python(python = "/path/to/python")
+```
+
+
+
+
+
+```r
+renv::snapshot() calls conda env export &gt; environment.yml to save the set of installed Python packages;
+
+renv::restore() calls conda env [create/update] --file environment.yml to install the previously-recorded set of Python packages
+```
+
+
+
+
+
+---
+## Further Resources
+
+
+ 
+
+---
+## Exercises
+
+Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
+
+
+---
+## Contact
+
+Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
