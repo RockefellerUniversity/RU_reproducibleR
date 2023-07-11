@@ -18,8 +18,8 @@ output:
     theme: united  # many options for theme, this one is my favorite.
     highlight: tango  # specifies the syntax highlighting style
 params:
- isSlides: "no"
- # isSlides: "yes"
+ # isSlides: "no"
+ isSlides: "yes"
 ---
 ```{r setup, include=FALSE}
 suppressPackageStartupMessages(require(knitr))
@@ -184,7 +184,7 @@ knitr::include_graphics("imgs/docker_schema_addRun.png")
 
 ## Pulling Docker images
 
-There are public repositories of Docker images (e.g. [Dockerhub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
+There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
 
 ```{r, echo=FALSE, out.width="70%", fig.align='center'}
 knitr::include_graphics("imgs/docker_schema_all.png")
@@ -194,9 +194,9 @@ knitr::include_graphics("imgs/docker_schema_all.png")
 
 ## Pulling Docker images
 
-There are public repositories of Docker images (e.g. [Dockerhub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
+There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
 
-[Rocker](https://rocker-project.org/) is a very useful source of images on Dockerhub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R
+[Rocker](https://rocker-project.org/) is a very useful source of images on Docker Hub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R
 
 *Code (terminal):*
 ```{sh, eval=F}
@@ -247,6 +247,41 @@ knitr::include_graphics("imgs/docker_images.png")
 Confirm in Docker desktop:
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
 knitr::include_graphics("imgs/docker_desktop_images.png")
+```
+
+---
+
+## Docker image tags
+
+Images have names, tags, and image IDs as shown in the output from 'docker images'. Tags allow you to track different versions of an image, and the ID is the unique identifier for the name:tag combination. If a tag is not specified, Docker will use 'latest' by default
+
+*Code (terminal):*
+```{sh, eval=F}
+docker images
+```
+
+*Output:*
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/docker_images.png")
+```
+
+---
+
+## Docker image tags
+
+To add a tag, use the 'docker tag' command.
+
+*Code (terminal):*
+```{sh, eval=F}
+docker tag cba94b3b9ed6 rocker/rstudio:new_version
+docker images
+```
+
+*Output:*
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/docker_images_after_tag.png")
 ```
 
 ---
@@ -354,6 +389,19 @@ The RStudio interface now shows the files in the 'data' directory
 knitr::include_graphics("imgs/rstudio_interface_volume.png")
 ```
 
+
+
+---
+
+## Adding volumes to containers
+
+These files can be read into R, and also files can be written to the local environment
+
+*Output:*
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+knitr::include_graphics("imgs/rstudio_interface_volume_write.png")
+```
+
 ---
 
 ## Adding volumes to containers
@@ -367,11 +415,6 @@ head(dataIn, 2)
 # add gene IDs and write to new file on local computer
 dataIn$Gene_ID <- seq(nrow(dataIn))
 write.csv(dataIn, "rnaseq_table_withIDs.csv")
-```
-
-*Output:*
-```{r, echo=FALSE, out.width="75%", fig.align='left'}
-knitr::include_graphics("imgs/rstudio_interface_volume_write.png")
 ```
 
 ---
@@ -413,7 +456,7 @@ Some examples:
 
 ## Dockerfile
 
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
+```{r, echo=FALSE, out.width="85%", fig.align='left'}
 knitr::include_graphics("imgs/dockerfile1_all.png")
 ```
 
@@ -423,7 +466,7 @@ knitr::include_graphics("imgs/dockerfile1_all.png")
 
 Here we start with the same RStudio base image we used previously, and then add some key R packages.
 
-```{r, echo=FALSE, out.width="75%", fig.align='left'}
+```{r, echo=FALSE, out.width="85%", fig.align='left'}
 knitr::include_graphics("imgs/dockerfile1_FROM.png")
 ```
 
@@ -434,7 +477,7 @@ knitr::include_graphics("imgs/dockerfile1_FROM.png")
 The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. Adding more R packages could result in missing dependencies, which you can pick up in the log for the build command (next slide). Dependencies for CRAN packages can also be found [here](https://packagemanager.posit.co/client/#/repos/2/packages/A3). 
 
 
-```{r, echo=FALSE, out.width="75%", fig.align='left'}
+```{r, echo=FALSE, out.width="85%", fig.align='left'}
 knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
 ```
 
@@ -444,8 +487,10 @@ knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
 
 Then the R packages are installed using 'install.packages' or 'BiocManager::install' for Bioconductor packages. 
 
+Note: The 'options(warn=2)' at the beginning of the R command will stop the installation when there is a warning, making it easier to debug.
 
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
+
+```{r, echo=FALSE, out.width="85%", fig.align='left'}
 knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 ```
 
@@ -456,7 +501,7 @@ knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 The port 8787 is exposed and the 'init' script that is included with the base RStudio image  
 
 
-```{r, echo=FALSE, out.width="50%", fig.align='left'}
+```{r, echo=FALSE, out.width="85%", fig.align='left'}
 knitr::include_graphics("imgs/dockerfile1_EXPOSE_CMD.png")
 ```
 
@@ -512,8 +557,14 @@ docker run --rm \
           rstudio_4.2.3_v1 
 ```
 
+---
+
+## Build image from Dockerfile
+
+As done previously, use the 'docker run' command to launch a container with our customized RStudio session
+
 *Output:*
-```{r, echo=FALSE, out.width="90%", fig.align='left'}
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
 knitr::include_graphics("imgs/docker_image_v1_interface.png")
 ```
@@ -521,9 +572,22 @@ knitr::include_graphics("imgs/docker_image_v1_interface.png")
 ---
 ## Use Herper for conda packages
 
-```{r, echo=FALSE, out.width="90%", fig.align='left'}
+```{r, echo=FALSE, out.width="110%", fig.align='left'}
 
 knitr::include_graphics("imgs/dockerfile_salmon_all.png")
+```
+
+---
+
+## Use Herper for conda packages
+
+* the directory that contains the Dockerfile is the last argument
+* here the Dockerfile has a different name, so we specify the exact path with '-f' argument
+
+*Output:*
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/docker_salmon_build_log.png")
 ```
 
 ---
@@ -538,11 +602,7 @@ knitr::include_graphics("imgs/dockerfile_salmon_all.png")
 docker build -t rstudio_4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 ```
 
-*Output:*
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
-cat("\n")
-knitr::include_graphics("imgs/docker_salmon_build_log.png")
-```
+
 
 ---
 ## Use Herper for conda packages
@@ -592,6 +652,112 @@ knitr::include_graphics("imgs/docker_desktop_salmon.png")
 cat("\n")
 knitr::include_graphics("imgs/docker_desktop_salmon_running.png")
 ```
+
+---
+## Pushing images to Docker Hub
+
+If we then want to share our images with someone else, or simply store them elsewhere for future use, we can push to Docker Hub.
+
+Make sure you have an account on [Docker Hub](https://hub.docker.com/).
+
+*Code (terminal):*
+```{sh, eval=F}
+# log in and provide credentials used to sign into Docker Hub
+# this will prompt you to enter username and password
+docker login
+
+# tag the image you want to push with your Docker Hub username and a tag name after the colon
+# the ID is from the 'docker images' command
+docker tag 9465219824aa dougbarrows/rstudio_4.2.3_v1:topush
+
+# push to Docker Hub
+docker push dougbarrows/rstudio_4.2.3_v1:topush
+```
+
+---
+## Pushing images to Docker Hub
+
+If we then want to share our images with someone else, or simply store them elsewhere for future use, we can push to Docker Hub.
+
+Make sure you have an account on [Docker Hub](https://hub.docker.com/).
+
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+knitr::include_graphics("imgs/dockerhub_after_push.png")
+```
+
+---
+## Use renv and Docker together
+
+renv and Docker can be used in tandem to easily recreate and R environment.
+
+
+```{r, eval=F}
+setwd("/PathToMyDownload/Reproducible_R-master/r_course/Data/renv_docker")
+
+# load in packages to recreate environment we used previously
+library(renv)
+library(BiocManager)
+library(Herper)
+library(dplyr)
+library(DESeq2)
+library(tximport)
+
+# initialize renv
+renv::init()
+
+```
+
+---
+## Use renv and Docker together
+
+The lock file generated by renv shows the versions of R and the loaded packages on my local computer. 
+
+At the time, I was using older versions of R and Bioconductor, and specific versions of each package. With Docker, we can easily use this lock file to recreate that exact same R environment. 
+
+```{r, echo=FALSE, out.width="75%", fig.align='left'}
+knitr::include_graphics("imgs/lock_file_docker.png")
+```
+
+
+---
+## Use renv and Docker together
+
+R still needs to be installed to use renv, so we use Rocker again to install a specific version of R to match the renv lock file.
+
+```{r, echo=FALSE, out.width="80%", fig.align='left'}
+knitr::include_graphics("imgs/dockerfile_renv_rver.png")
+```
+
+---
+## Use renv and Docker together
+
+The lock file is in the same directory as the Dockerfile, and when building the image the lock file is copied to the image into a directory that is created and set as the working directory with the WORKDIR command. 
+
+
+```{r, echo=FALSE, out.width="80%", fig.align='left'}
+knitr::include_graphics("imgs/dockerfile_renv_restore.png")
+```
+
+---
+## Use renv and Docker together
+
+Build the image with the build context (last argument) set to the directory containing the Dockerfile and the lock file, then launch a container.
+
+
+```{sh, eval=F}
+
+# build the image 
+docker build -t rstudio_4.1.1_renv ./data/renv_docker
+
+# launch a container
+docker run --rm \
+          -v ./data:/home/rstudio \
+          -p 8787:8787 \
+           -e PASSWORD=password \
+           rstudio_4.1.1_renv
+```
+
+
 ---
 ## Further Resources
 

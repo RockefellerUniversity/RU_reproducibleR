@@ -1,4 +1,3 @@
-
 FROM rocker/rstudio:4.2.3
 
 RUN apt-get update && \
@@ -18,12 +17,12 @@ RUN apt-get update && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN Rscript -e "install.packages(c('dplyr', 'renv', 'BiocManager'));"
-RUN Rscript -e "BiocManager::install(version = '3.16')"
-RUN Rscript -e "BiocManager::install(c('Herper', 'DESeq2', 'tximport'))"
+RUN Rscript -e "options(warn=2); install.packages(c('dplyr', 'renv', 'BiocManager'));"
+RUN Rscript -e "options(warn=2); BiocManager::install(version = '3.16')"
+RUN Rscript -e "options(warn=2); BiocManager::install(c('Herper', 'DESeq2', 'tximport'))"
 
 RUN mkdir /home/miniconda
-RUN Rscript -e "Herper::install_CondaTools(tools = 'salmon', env = 'pipe_env', pathToMiniConda = '/home/miniconda')"
+RUN Rscript -e "options(warn=2); Herper::install_CondaTools(tools = 'salmon', env = 'pipe_env', pathToMiniConda = '/home/miniconda')"
 
 EXPOSE 8787
 
