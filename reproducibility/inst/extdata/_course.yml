@@ -2,7 +2,7 @@ Description:
   CourseName: Reproducible R
   OverviewRmd: CourseOverview.Rmd
 Presentations:
-  titles: Session1 Session2 Session3 Session4
-  PresRmd: reproducibleR.Rmd Renv.Rmd Herper.Rmd Docker.Rmd
-  PresOverviewRmd: ReproducibleR_Session1Overview.Rmd ReproducibleR_Session2Overview.Rmd ReproducibleR_Session3Overview.Rmd ReproducibleR_Session4Overview.Rmd
-  Exercises: ReproducibleR.Rmd Renv.Rmd Herper.Rmd Docker.Rmd
+  titles: Session1 Session2 Session3
+  PresRmd: Renv.Rmd Herper.Rmd Docker.Rmd
+  PresOverviewRmd: ReproducibleR_Session1Overview.Rmd ReproducibleR_Session2Overview.Rmd ReproducibleR_Session3Overview.Rmd
+  Exercises: Renv.Rmd Herper.Rmd Docker.Rmd
