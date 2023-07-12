@@ -14,8 +14,8 @@
 
 <title>Reproducible R</title>
 
-<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -30,7 +30,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
@@ -65,6 +65,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -85,6 +86,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -142,11 +146,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -175,8 +183,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -184,16 +192,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -310,7 +311,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -323,68 +324,93 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Slides
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Session1</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session1</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="presentations/slides/reproducibleR.html">Slide</a>
+          <a href="presentations/slides/Renv.html">Slide</a>
         </li>
         <li>
-          <a href="presentations/singlepage/reproducibleR.html">Single Page</a>
+          <a href="presentations/singlepage/Renv.html">Single Page</a>
         </li>
         <li>
-          <a href="presentations/r_code/reproducibleR.R">Code</a>
+          <a href="presentations/r_code/Renv.R">Code</a>
         </li>
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Session2</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session2</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="presentations/slides/github.html">Slide</a>
+          <a href="presentations/slides/Herper.html">Slide</a>
         </li>
         <li>
-          <a href="presentations/singlepage/github.html">Single Page</a>
+          <a href="presentations/singlepage/Herper.html">Single Page</a>
         </li>
         <li>
-          <a href="presentations/r_code/github.R">Code</a>
+          <a href="presentations/r_code/Herper.R">Code</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session3</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="presentations/slides/Docker.html">Slide</a>
+        </li>
+        <li>
+          <a href="presentations/singlepage/Docker.html">Single Page</a>
+        </li>
+        <li>
+          <a href="presentations/r_code/Docker.R">Code</a>
         </li>
       </ul>
     </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Exercises
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ReproducibleR</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Renv</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="exercises/exercises/ReproducibleR_exercise.html">Exercise</a>
+          <a href="exercises/exercises/Renv_exercise.html">Exercise</a>
         </li>
         <li>
-          <a href="exercises/answers/ReproducibleR_answers.html">Solution</a>
+          <a href="exercises/answers/Renv_answers.html">Solution</a>
         </li>
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">GitandGitHub</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Herper</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="exercises/exercises/GitandGitHub_exercise.html">Exercise</a>
+          <a href="exercises/exercises/Herper_exercise.html">Exercise</a>
         </li>
         <li>
-          <a href="exercises/answers/GitandGitHub_answers.html">Solution</a>
+          <a href="exercises/answers/Herper_answers.html">Solution</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Docker</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="exercises/exercises/Docker_exercise.html">Exercise</a>
+        </li>
+        <li>
+          <a href="exercises/answers/Docker_answers.html">Solution</a>
         </li>
       </ul>
     </li>
@@ -412,7 +438,8 @@ div.tocify {
 
 <h1 class="title toc-ignore"><strong>Reproducible R</strong></h1>
 <h4 class="author">Bioinformatics Resource Center</h4>
-<h4 class="date"><a href="mailto:brc@rockefeller.edu" class="email">brc@rockefeller.edu</a></h4>
+<h4 class="date"><a href="mailto:brc@rockefeller.edu"
+class="email">brc@rockefeller.edu</a></h4>
 
 </div>
 
@@ -423,15 +450,27 @@ div.tocify {
 <h2>Course Overview</h2>
 <div id="course-integrity" class="section level3">
 <h3>Course Integrity</h3>
-<p><strong>This course is compiled automatically on <em>2021-06-25</em> </strong> <br> <a href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3compilation-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/compilation-check/badge.svg"></a></p>
-<p><strong>The course is tested and available on MacOS, Windows and Ubuntu Linux for R version 4.1.0 (2021-05-18)</strong> <br> <a href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3AOS-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/OS-check/badge.svg"></a></p>
+<p><strong>This course is compiled automatically on <em>2023-07-11</em>
+</strong> <br> <a
+href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3compilation-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/compilation-check/badge.svg"></a></p>
+<p><strong>The course is tested and available on MacOS, Windows and
+Ubuntu Linux for R version 4.3.0 (2023-04-21)</strong> <br> <a
+href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3AOS-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/OS-check/badge.svg"></a></p>
 <p><br> <br></p>
 </div>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
-<p>This course introduces how to code in R in a reproducible way. Two parallel methods are presented: Rmarkdown and Git. Together, Rmarkdown and Git allow you to generate analysis that is fully integrated with the results, session information is preserved and it is all version controlled so you can track changes as your analysis evolves.</p>
-<p>Course material is available as HTML presentations or single page document. An exercise is available at the end.</p>
-<p>Course material and exercises are available to view as rendered HTML at <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/" class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>. All material is available to download under GPL v2 license.</p>
+<p>This course introduces how to code in R in a reproducible way. Two
+parallel methods are presented: Rmarkdown and Git. Together, Rmarkdown
+and Git allow you to generate analysis that is fully integrated with the
+results, session information is preserved and it is all version
+controlled so you can track changes as your analysis evolves.</p>
+<p>Course material is available as HTML presentations or single page
+document. An exercise is available at the end.</p>
+<p>Course material and exercises are available to view as rendered HTML
+at <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/"
+class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>.
+All material is available to download under GPL v2 license.</p>
 <p><br><br></p>
 </div>
 </div>
@@ -443,30 +482,44 @@ div.tocify {
 </div>
 <div id="install-git" class="section level4">
 <h4>Install Git</h4>
-<p>Git is available from the projects website <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">here</a>. Follow the instructions here for your operating system.</p>
-<p>Some user may already have Git installed. To test you can just run the code below.</p>
+<p>Git is available from the projects website <a
+href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">here</a>.
+Follow the instructions here for your operating system.</p>
+<p>Some user may already have Git installed. To test you can just run
+the code below.</p>
 <pre><code>git --version</code></pre>
 <p><br></p>
 </div>
 <div id="install-r" class="section level4">
 <h4>Install R</h4>
 <p>R can be installed from the R-project website.</p>
-<p>The R website can be found here <a href="http://www.r-project.org/" class="uri">http://www.r-project.org/</a>.</p>
-<p>The download links and associated installation instructions for multiple platforms can be found below provided by Revolution Analytics. <a href="https://cran.revolutionanalytics.com" class="uri">https://cran.revolutionanalytics.com</a></p>
-<p>We recommend installing R 4.1.0 as this is the version used to compile the course. Direct downloads for R 4.1.0 for the main platforms can be found below:</p>
+<p>The R website can be found here <a href="http://www.r-project.org/"
+class="uri">http://www.r-project.org/</a>.</p>
+<p>The download links and associated installation instructions for
+multiple platforms can be found below provided by Revolution Analytics.
+<a href="https://cran.revolutionanalytics.com"
+class="uri">https://cran.revolutionanalytics.com</a></p>
+<p>We recommend installing R 4.3.0 as this is the version used to
+compile the course. Direct downloads for R 4.3.0 for the main platforms
+can be found below:</p>
 <ul>
-<li><a href="https://cran.revolutionanalytics.com/bin/macosx/R-4.1.0.pkg">Mac</a></li>
-<li><a href="https://cran.revolutionanalytics.com/bin/windows/base/old/4.1.0/R-4.1.0-win.exe">Windows</a></li>
-<li><a href="https://cran.revolutionanalytics.com">Linux platforms</a></li>
+<li><a
+href="https://cran.revolutionanalytics.com/bin/macosx/R-4.3.0.pkg">Mac</a></li>
+<li><a
+href="https://cran.revolutionanalytics.com/bin/windows/base/old/4.3.0/R-4.3.0-win.exe">Windows</a></li>
+<li><a href="https://cran.revolutionanalytics.com">Linux
+platforms</a></li>
 </ul>
 <p><br></p>
 </div>
 <div id="install-rstudio" class="section level4">
 <h4>Install RStudio</h4>
 <p>RStudio can be installed from the RStudio website.</p>
-<p><a href="http://www.rstudio.com/" class="uri">http://www.rstudio.com/</a></p>
+<p><a href="http://www.rstudio.com/"
+class="uri">http://www.rstudio.com/</a></p>
 <p>RStudio can be downloaded for all platforms at the link below</p>
-<p><a href="https://rstudio.com/products/rstudio/download/" class="uri">https://rstudio.com/products/rstudio/download/</a></p>
+<p><a href="https://rstudio.com/products/rstudio/download/"
+class="uri">https://rstudio.com/products/rstudio/download/</a></p>
 <p><br></p>
 </div>
 <div id="install-required-packages" class="section level4">
@@ -488,13 +541,17 @@ BiocManager::install(&#39;tidyverse&#39;)
 BiocManager::install(&#39;knitr&#39;)
 BiocManager::install(&#39;gh&#39;)
 BiocManager::install(&#39;formatR&#39;)
+BiocManager::install(&#39;reticulate&#39;)
+BiocManager::install(&#39;Herper&#39;)
 BiocManager::install(&#39;testthat&#39;)
 BiocManager::install(&#39;yaml&#39;)</code></pre>
 <p><br></p>
 </div>
 <div id="download-the-material" class="section level4">
 <h4><strong>Download the material</strong></h4>
-<p><a href="https://github.com/RockefellerUniversity/RU_reproducibleR/archive/master.zip">Download the material</a></p>
+<p><a
+href="https://github.com/RockefellerUniversity/RU_reproducibleR/archive/master.zip">Download
+the material</a></p>
 <p><br><br><br></p>
 </div>
 </div>
@@ -503,7 +560,8 @@ BiocManager::install(&#39;yaml&#39;)</code></pre>
 <p><br></p>
 <div id="reproducible-reports" class="section level4">
 <h4><strong>Reproducible Reports</strong></h4>
-<p>In Reproducible Reports, we will review how to make reports using knitr and rmarkdown</p>
+<p>In Reproducible Reports, we will review how to make reports using
+knitr and rmarkdown</p>
 <p>Session sections:</p>
 <ul>
 <li>Notes</li>
@@ -511,32 +569,65 @@ BiocManager::install(&#39;yaml&#39;)</code></pre>
 <li>Rmarkdown</li>
 <li>Customization of reports</li>
 </ul>
-<iframe src="presentations/slides/reproducibleR.html" width="100%" height="400" title="Session1">
+<iframe src="presentations/slides/Renv.html" width="100%" height="400" title="Session1">
 </iframe>
 <div id="links-to-presentations" class="section level5">
 <h5><em>Links to presentations:</em></h5>
-<p>The html slide presentation can be found at this link <a href="presentations/slides/reproducibleR.html"><strong>Slide</strong></a></p>
-<p>The single page html presentation can be found at this link <a href="presentations/singlepage/reproducibleR.html"><strong>Single Page</strong></a></p>
-<p>The code use in the presentations can be found at <a href="presentations/r_code/reproducibleR.R"><strong>R code</strong></a></p>
+<p>The html slide presentation can be found at this link <a
+href="presentations/slides/Renv.html"><strong>Slide</strong></a></p>
+<p>The single page html presentation can be found at this link <a
+href="presentations/singlepage/Renv.html"><strong>Single
+Page</strong></a></p>
+<p>The code use in the presentations can be found at <a
+href="presentations/r_code/Renv.R"><strong>R code</strong></a></p>
 <p><br></p>
 </div>
 </div>
 <div id="git-and-github" class="section level4">
 <h4><strong>Git and GitHub</strong></h4>
-<p>In Git and GitHub we will review the widely used version control and web hosting systems.</p>
+<p>In Git and GitHub we will review the widely used version control and
+web hosting systems.</p>
 <p>Session sections:</p>
 <ul>
 <li>What is Git and GitHub?</li>
 <li>Working locally and remotely to version control projects</li>
 <li>Typical project work flows</li>
 </ul>
-<iframe src="presentations/slides/github.html" width="100%" height="400" title="Session2">
+<iframe src="presentations/slides/Herper.html" width="100%" height="400" title="Session2">
 </iframe>
 <div id="links-to-presentations-1" class="section level5">
 <h5><em>Links to presentations:</em></h5>
-<p>The html slide presentation can be found at this link <a href="presentations/slides/github.html"><strong>Slide</strong></a></p>
-<p>The single page html presentation can be found at this link <a href="presentations/singlepage/github.html"><strong>Single Page</strong></a></p>
-<p>The code use in the presentations can be found at <a href="presentations/r_code/github.R"><strong>R code</strong></a></p>
+<p>The html slide presentation can be found at this link <a
+href="presentations/slides/Herper.html"><strong>Slide</strong></a></p>
+<p>The single page html presentation can be found at this link <a
+href="presentations/singlepage/Herper.html"><strong>Single
+Page</strong></a></p>
+<p>The code use in the presentations can be found at <a
+href="presentations/r_code/Herper.R"><strong>R code</strong></a></p>
+<p><br></p>
+</div>
+</div>
+<div id="git-and-github-1" class="section level4">
+<h4><strong>Git and GitHub</strong></h4>
+<p>In Git and GitHub we will review the widely used version control and
+web hosting systems.</p>
+<p>Session sections:</p>
+<ul>
+<li>What is Git and GitHub?</li>
+<li>Working locally and remotely to version control projects</li>
+<li>Typical project work flows</li>
+</ul>
+<iframe src="presentations/slides/Docker.html" width="100%" height="400" title="Session3">
+</iframe>
+<div id="links-to-presentations-2" class="section level5">
+<h5><em>Links to presentations:</em></h5>
+<p>The html slide presentation can be found at this link <a
+href="presentations/slides/Docker.html"><strong>Slide</strong></a></p>
+<p>The single page html presentation can be found at this link <a
+href="presentations/singlepage/Docker.html"><strong>Single
+Page</strong></a></p>
+<p>The code use in the presentations can be found at <a
+href="presentations/r_code/Docker.R"><strong>R code</strong></a></p>
 <p><br><br></p>
 </div>
 </div>
@@ -546,13 +637,19 @@ BiocManager::install(&#39;yaml&#39;)</code></pre>
 <p><br></p>
 <div id="course-help" class="section level4">
 <h4><strong>Course help</strong></h4>
-<p><em>For advice, help and comments for the material covered in this course</em> please contact us at the issues page associated to this course.</p>
-<p>The link to the help pages can be found <a href="https://github.com/RockefellerUniversity/RU_reproducibleR/issues">here</a></p>
+<p><em>For advice, help and comments for the material covered in this
+course</em> please contact us at the issues page associated to this
+course.</p>
+<p>The link to the help pages can be found <a
+href="https://github.com/RockefellerUniversity/RU_reproducibleR/issues">here</a></p>
 <p><br></p>
 </div>
 <div id="general-bioinformatics-support" class="section level4">
 <h4><strong>General Bioinformatics support</strong></h4>
-<p><em>If you would like contact us about general bioinformatics advice, support or collaboration,</em> please contact us the Bioinformatics Resource Center at <strong><a href="mailto:brc@rockefeller.edu" class="email">brc@rockefeller.edu</a></strong>.</p>
+<p><em>If you would like contact us about general bioinformatics advice,
+support or collaboration,</em> please contact us the Bioinformatics
+Resource Center at <strong><a href="mailto:brc@rockefeller.edu"
+class="email">brc@rockefeller.edu</a></strong>.</p>
 </div>
 </div>
 

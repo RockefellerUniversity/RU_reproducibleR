@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Reproducible Reports    </title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
+    <script src="reproducibleR_files/header-attrs-2.13/header-attrs.js"></script>
+    <link href="reproducibleR_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
+    <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Reproducible Reports<br />
+<html><br />
+<br />
+<hr color='#EB811B' size=1px width=796px><br />
+</html>
+### Rockefeller University, Bioinformatics Resource Centre
+### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/"
+class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
+
+---
+
+
+
+
+
+## Overview
+
+- [Set up](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#set-up)
+- [Background to R](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#background-to-r)
+- [Data types in R](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#data_types_in_r)
+
+
+
+---
+class: inverse, center, middle
+
+# Set Up
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+## Set Up
+
+All prerequisites, links to material and slides for this course can be found on github.
+
+* [Reproducible_R](https://rockefelleruniversity.github.io/Reproducible_R/)
+
+Or can be downloaded as a zip archive from here.
+
+* [Download zip](https://github.com/rockefelleruniversity/Reproducible_R/zipball/master)
+
+---
+## Course materials
+
+Once the zip file in unarchived. All presentations as HTML slides and pages, their R code and HTML practical sheets will be available in the directories underneath.
+
+* **presentations/slides/**
+Presentations as an HTML slide show.
+* **presentations/singlepage/** 
+Presentations as an HTML single page.
+* **presentations/r_code/**
+R code in presentations.
+* **exercises/**
+Practicals as HTML pages. 
+* **answers/**
+Practicals with answers as HTML pages and R code solutions. 
+
+
+---
+## Set the Working directory
+
+Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived. 
+
+You may navigate to the unarchived Reproducible_R folder in the Rstudio menu.
+
+**Session -&gt; Set Working Directory -&gt; Choose Directory**
+
+or in the console.
+
+
+```r
+setwd("/PathToMyDownload/Reproducible_R-master/r_course")
+# e.g. setwd('~/Downloads/Reproducible_R-master/r_course')
+```
+
+
+---
+class: inverse, center, middle
+
+# Reproducible Research
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+---
+## Reproducible Research
+
+&gt;"Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to humans what we want the computer to do."
+ -- Donald E. Knuth, Literate Programming, 1984
+ 
+---
+## Reproducible Research in R
+
+  
+Sometime in the future, I, or someone else, will need to understand what analysis I did here.  
+
+There is a growing push to ensure all research is open and reproducible. New NIH guidelines are going to require plans for preservation and sharing of data, which includes your code. 
+
+Using RStudio to make reproducible documents is very easy, so why not?
+
+---
+## A very quick reproducible document in R
+
+- Find your R script of interest.
+- Add comments with # to describe  what you are doing.
+- Add the sessionInfo() function to the last line.
+- Click the "Compile Notebook function" -&gt; Select HTML document as output format.
+
+
+```r
+# Generate some random numbers and plot them
+myRandNumbers &lt;- rnorm(100, 10, 2)
+
+plot(myRandNumbers)
+
+sessionInfo()
+```
+
+---
+class: inverse, center, middle
+
+# R Markdown
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+## The Gold Standard
+
+When we do some analysis the ideal situation is ALL aspects of the analysis in a single document. 
+
+Rmarkdown can help with this.
+
+[Here](scripts/markdownExample.html) is an example of a report generated from Rmd. The Rmd from which this is made is in the scripts directory. 
+
+*scripts/markdownExample.html*
+*scripts/markdownExample.Rmd*
+
+---
+## R Markdown
+
+R Markdown is built on Markdown. 
+
+Github and Sourceforge make use of Markdown syntax in their Readme files and renders these in their web pages. It is also used by other notebook tools like Jupyter. 
+
+https://github.com/github/markup/blob/master/README.md
+
+
+## Markdown syntax
+
+Markdown uses simple syntax to control text output.
+
+This allows for the inclusion of font styles, text structures, images and code chunks.
+
+---
+## R Markdown Structure
+
+There are 3 main parts
+
+1. Header - YAML format
+2. Body - Markdown 
+3. Code Chunks -  R, python, shell etc.
+
+
+---
+class: inverse, center, middle
+
+# R Markdown Header
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+## R Markdown Header
+
+In R Markdown the options for document processing are stored in YAML format at the top of the document. Most of this is automatically generated when you open a new Rmd. 
+
+````verbatim
+---
+title: "My New Analysis"
+author: "Tom Carroll"
+date: "19th October 2022"
+output: html_document
+---
+````
+
+---
+## Controlling output type
+
+The **output** YAML option specifies the document type to be produced. THere are several options.
+
+````verbatim
+---
+output: html_document
+---
+````
+````verbatim
+---
+output: pdf_document
+---
+````
+````verbatim
+---
+output: ioslides_presentation
+---
+````
+
+---
+## Figure options in YAML
+
+Global default options can also be set in the YAML. For example figure sizes can be set within the YAML metadata.
+
+````verbatim
+---
+output: 
+  html_document:
+    fig_width: 7
+    fig_height: 6
+---
+````
+---
+## Adding styles
+
+Styles for HTML can be applied using the **theme** option and syntax highlighting styles control by the **highlight** option.
+
+````verbatim
+---
+output: 
+  html_document:
+    theme: journal
+    highlight: espresso
+---
+````
+
+For a full list of theme options see -
+http://rmarkdown.rstudio.com/html_document_format.html
+
+
+---
+class: inverse, center, middle
+
+# R Markdown Body
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+## R Markdown Body
+
+The free form text and annotation is set in Markdown. This written as plain text and has a specific set of formatting rules. For example it ignores new lines. 
+
+To include a new line in markdown, you need to end the previous line with two spaces.
+
+````verbatim
+This is my first line.  # the comment here shows the line end  
+This would be a new line.
+This wouldn't be a new line.
+````
+
+This is my first line.  
+This would be a new line.
+This wouldn't be a new line.
+
+---
+## Font emphasis
+
+Emphasis can be added to text in markdown documents using either the **_** or __*__
+
+````verbatim
+Italics = _Italics_ or *Italics*
+Bold  =  __Bold__ or **Bold**
+````
+_Italics_  
+__Bold__
+
+---
+## Including images
+
+Figures or external images can be used in markdown documents.  
+Files may be local or accessible from http URL.
+
+````verbatim
+![alt text](imgs/Dist.jpg)
+![alt text](https://rockefelleruniversity.github.io//r_course/imgs/Dist.jpg)
+````
+
+---
+## HTML links
+
+HTML links can be included in Markdown documents either by simply including address in text or by using **[]** for the phrase to add link to, followed the link in **()**
+```
+https://rockefelleruniversity.github.io/
+[Github site](https://rockefelleruniversity.github.io/)
+
+---
+## Creating headers
+
+Section headers can be added to Markdown documents.
+
+Headers follow the same conventions as used in HTML markup and can implemented at multiple levels of size. Section headers in Markdown are created by using the **#** symbol
+
+```
+# Top level section
+## Middle level section
+### Bottom level section
+```
+
+### Rendered Bottom level section
+
+---
+## Lists
+
+Lists can be created in Markdown using the __-__ symbol.  
+Nested lists be specified with **+** symbol.
+
+````verbatim
+- First item
+- Second item
+    + Second item A
+    + Second item B
+````
+
+My list rendered:  
+
+- First item
+- Second item
+    + Second item A
+    + Second item B
+
+
+    
+---
+class: inverse, center, middle
+
+# R Markdown Code Chunks
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+## Code chunks
+
+In RMarkdown, text may be highlighted as if code by placing the text between apostrophes in triplicate: '''. The engine used to evaluate the code is in curly brackets, in this case R.
+
+
+````default
+```{r}
+hist(rnorm(100))
+```
+````
+
+This is what the code chunk renders to in your report:
+
+```r
+hist(rnorm(100))
+```
+
+![](reproducibleR_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+## Code chunk options
+
+Many other options can be supplied to an individual code chunk
+
+R can produce a lot of output not related to your results. To control whether messages and warnings are reported in the rendered document we can specify the **message** and **warning** arguments. 
+
+Loading libraries in R Markdown is often somewhere you would specify these as FALSE.
+
+````verbatim
+
+```r
+library(ggplot2)
+```
+````
+
+---
+## Code chunk options
+
+There are many chunk control options
+* eval - Run the code?
+* echo - Include code in final report?
+* tidy - tidy up the code?
+* cache - save a cache 
+* fig.height/fig.width - size of plot made by code
+* fig.path and dev - save plots to specified path in specified format
+
+
+---
+class: inverse, center, middle
+
+# Other R Markdown tricks
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+---
+## Inserting tables
+
+The results of printing data frames or matrices in the console aren't neat.
+
+We can insert tables into R Markdown by using the knitr function **kable()**.
+
+
+```r
+temp &lt;- rnorm(3)
+temp2 &lt;- rnorm(3)
+dfExample &lt;- data.frame(temp, temp2)
+kable(dfExample)
+```
+
+
+
+|       temp|      temp2|
+|----------:|----------:|
+| -0.5383654|  1.6994581|
+|  0.0216983| -0.0571108|
+| -0.8714786| -1.4561692|
+
+---
+
+## Evaluating code in the body
+
+Most of your code will be in code chunks. But it may be useful to report the results of R within the block of Markdown. This can be done adding the code to evalulate within **'r  '**
+
+````verbatim
+Here is some freeform _markdown_ and the first result
+from an rnorm call is 'r rnorm(3)[1]', followed by some 
+more free form text.
+````
+
+Here is some freeform _markdown_ and the first result
+from an rnorm call is 0.3665901, followed by some more free form text.
+
+---
+## Resources
+
+* [Rmarkdown website](http://rmarkdown.rstudio.com/)  
+* [Rmarkdown Book](https://bookdown.org/yihui/rmarkdown/)
+* [Rmarkdown Cheatsheet Download](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
+
+---
+## Exercises
+
+Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
+
+
+---
+## Contact
+
+Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

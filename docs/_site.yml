@@ -9,33 +9,47 @@ navbar:
     - text: Session1
       menu:
       - text: Slide
-        href: presentations/slides/reproducibleR.html
+        href: presentations/slides/Renv.html
       - text: Single Page
-        href: presentations/singlepage/reproducibleR.html
+        href: presentations/singlepage/Renv.html
       - text: Code
-        href: presentations/r_code/reproducibleR.R
+        href: presentations/r_code/Renv.R
     - text: Session2
       menu:
       - text: Slide
-        href: presentations/slides/github.html
+        href: presentations/slides/Herper.html
       - text: Single Page
-        href: presentations/singlepage/github.html
+        href: presentations/singlepage/Herper.html
       - text: Code
-        href: presentations/r_code/github.R
+        href: presentations/r_code/Herper.R
+    - text: Session3
+      menu:
+      - text: Slide
+        href: presentations/slides/Docker.html
+      - text: Single Page
+        href: presentations/singlepage/Docker.html
+      - text: Code
+        href: presentations/r_code/Docker.R
   - text: Exercises
     menu:
-    - text: ReproducibleR
+    - text: Renv
       menu:
       - text: Exercise
-        href: exercises/exercises/ReproducibleR_exercise.html
+        href: exercises/exercises/Renv_exercise.html
       - text: Solution
-        href: exercises/answers/ReproducibleR_answers.html
-    - text: GitandGitHub
+        href: exercises/answers/Renv_answers.html
+    - text: Herper
       menu:
       - text: Exercise
-        href: exercises/exercises/GitandGitHub_exercise.html
+        href: exercises/exercises/Herper_exercise.html
       - text: Solution
-        href: exercises/answers/GitandGitHub_answers.html
+        href: exercises/answers/Herper_answers.html
+    - text: Docker
+      menu:
+      - text: Exercise
+        href: exercises/exercises/Docker_exercise.html
+      - text: Solution
+        href: exercises/answers/Docker_answers.html
   right:
   - text: Getting help!
     href: https://github.com//RockefellerUniversity/RU_reproducibleR/issues
