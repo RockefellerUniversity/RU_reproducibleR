@@ -1,5 +1,5 @@
 params <-
-list(isSlides = "no")
+list(isSlides = "yes")
 
 ## ----setup, include=FALSE-----------------------------------------------------
 suppressPackageStartupMessages(require(knitr))
@@ -94,6 +94,24 @@ knitr::include_graphics("imgs/docker_images.png")
 knitr::include_graphics("imgs/docker_desktop_images.png")
 
 
+## docker images
+
+
+## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
+cat("\n")
+knitr::include_graphics("imgs/docker_images.png")
+
+
+## docker tag cba94b3b9ed6 rocker/rstudio:new_version
+
+## docker images
+
+
+## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
+cat("\n")
+knitr::include_graphics("imgs/docker_images_after_tag.png")
+
+
 ## docker run --rm \
 
 ##           -p 8787:8787 \
@@ -148,16 +166,16 @@ knitr::include_graphics("imgs/docker_stop.png")
 knitr::include_graphics("imgs/rstudio_interface_volume.png")
 
 
+## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
+knitr::include_graphics("imgs/rstudio_interface_volume_write.png")
+
+
 ## ---- eval=F------------------------------------------------------------------
 ## dataIn <- read.csv("readThisTable.csv")
 ## head(dataIn, 2)
 ## # add gene IDs and write to new file on local computer
 ## dataIn$Gene_ID <- seq(nrow(dataIn))
 ## write.csv(dataIn, "rnaseq_table_withIDs.csv")
-
-
-## ---- echo=FALSE, out.width="75%", fig.align='left'---------------------------
-knitr::include_graphics("imgs/rstudio_interface_volume_write.png")
 
 
 ## ls -a data
@@ -168,23 +186,23 @@ cat("\n")
 knitr::include_graphics("imgs/docker_hidden_files.png")
 
 
-## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
+## ---- echo=FALSE, out.width="85%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/dockerfile1_all.png")
 
 
-## ---- echo=FALSE, out.width="75%", fig.align='left'---------------------------
+## ---- echo=FALSE, out.width="85%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/dockerfile1_FROM.png")
 
 
-## ---- echo=FALSE, out.width="75%", fig.align='left'---------------------------
+## ---- echo=FALSE, out.width="85%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
 
 
-## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
+## ---- echo=FALSE, out.width="85%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 
 
-## ---- echo=FALSE, out.width="50%", fig.align='left'---------------------------
+## ---- echo=FALSE, out.width="85%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/dockerfile1_EXPOSE_CMD.png")
 
 
@@ -215,22 +233,22 @@ knitr::include_graphics("imgs/docker_images_v1.png")
 ##           rstudio_4.2.3_v1
 
 
-## ---- echo=FALSE, out.width="90%", fig.align='left'---------------------------
+## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
 cat("\n")
 knitr::include_graphics("imgs/docker_image_v1_interface.png")
 
 
-## ---- echo=FALSE, out.width="90%", fig.align='left'---------------------------
+## ---- echo=FALSE, out.width="110%", fig.align='left'--------------------------
 
 knitr::include_graphics("imgs/dockerfile_salmon_all.png")
-
-
-## docker build -t rstudio_4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 
 
 ## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
 cat("\n")
 knitr::include_graphics("imgs/docker_salmon_build_log.png")
+
+
+## docker build -t rstudio_4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 
 
 ## docker images
@@ -262,4 +280,78 @@ knitr::include_graphics("imgs/docker_desktop_salmon.png")
 ## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
 cat("\n")
 knitr::include_graphics("imgs/docker_desktop_salmon_running.png")
+
+
+## # log in and provide credentials used to sign into Docker Hub
+
+## # this will prompt you to enter username and password
+
+## docker login
+
+## 
+
+## # tag the image you want to push with your Docker Hub username and a tag name after the colon
+
+## # the ID is from the 'docker images' command
+
+## docker tag 9465219824aa dougbarrows/rstudio_4.2.3_v1:topush
+
+## 
+
+## # push to Docker Hub
+
+## docker push dougbarrows/rstudio_4.2.3_v1:topush
+
+
+## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
+knitr::include_graphics("imgs/dockerhub_after_push.png")
+
+
+## ---- eval=F------------------------------------------------------------------
+## setwd("/PathToMyDownload/Reproducible_R-master/r_course/Data/renv_docker")
+## 
+## # load in packages to recreate environment we used previously
+## library(renv)
+## library(BiocManager)
+## library(Herper)
+## library(dplyr)
+## library(DESeq2)
+## library(tximport)
+## 
+## # initialize renv
+## renv::init()
+## 
+
+
+## ---- echo=FALSE, out.width="75%", fig.align='left'---------------------------
+knitr::include_graphics("imgs/lock_file_docker.png")
+
+
+## ---- echo=FALSE, out.width="80%", fig.align='left'---------------------------
+knitr::include_graphics("imgs/dockerfile_renv_rver.png")
+
+
+## ---- echo=FALSE, out.width="80%", fig.align='left'---------------------------
+knitr::include_graphics("imgs/dockerfile_renv_restore.png")
+
+
+## 
+
+## # build the image
+
+## docker build -t rstudio_4.1.1_renv ./data/renv_docker
+
+## 
+
+## # launch a container
+
+## docker run --rm \
+
+##           -v ./data:/home/rstudio \
+
+##           -p 8787:8787 \
+
+##            -e PASSWORD=password \
+
+##            rstudio_4.1.1_renv
 

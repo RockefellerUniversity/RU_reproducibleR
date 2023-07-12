@@ -150,7 +150,7 @@ If previous command isn't found check the Docker Desktop advanced settings and m
 
 ## Pulling Docker images
 
-There are public repositories of Docker images (e.g. [Dockerhub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
+There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
 
 &lt;img src="imgs/docker_schema_all.png" width="70%" style="display: block; margin: auto;" /&gt;
 
@@ -158,9 +158,9 @@ There are public repositories of Docker images (e.g. [Dockerhub](https://hub.doc
 
 ## Pulling Docker images
 
-There are public repositories of Docker images (e.g. [Dockerhub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
+There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
 
-[Rocker](https://rocker-project.org/) is a very useful source of images on Dockerhub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R
+[Rocker](https://rocker-project.org/) is a very useful source of images on Docker Hub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R
 
 *Code (terminal):*
 
@@ -209,6 +209,39 @@ docker images
 
 Confirm in Docker desktop:
 &lt;img src="imgs/docker_desktop_images.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Docker image tags
+
+Images have names, tags, and image IDs as shown in the output from 'docker images'. Tags allow you to track different versions of an image, and the ID is the unique identifier for the name:tag combination. If a tag is not specified, Docker will use 'latest' by default
+
+*Code (terminal):*
+
+```sh
+docker images
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_images.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Docker image tags
+
+To add a tag, use the 'docker tag' command.
+
+*Code (terminal):*
+
+```sh
+docker tag cba94b3b9ed6 rocker/rstudio:new_version
+docker images
+```
+
+*Output:*
+
+&lt;img src="imgs/docker_images_after_tag.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -311,6 +344,17 @@ The RStudio interface now shows the files in the 'data' directory
 
 &lt;img src="imgs/rstudio_interface_volume.png" width="100%" style="display: block; margin: auto;" /&gt;
 
+
+
+---
+
+## Adding volumes to containers
+
+These files can be read into R, and also files can be written to the local environment
+
+*Output:*
+&lt;img src="imgs/rstudio_interface_volume_write.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
 ---
 
 ## Adding volumes to containers
@@ -326,9 +370,6 @@ head(dataIn, 2)
 dataIn$Gene_ID &lt;- seq(nrow(dataIn))
 write.csv(dataIn, "rnaseq_table_withIDs.csv")
 ```
-
-*Output:*
-&lt;img src="imgs/rstudio_interface_volume_write.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -368,7 +409,7 @@ Some examples:
 
 ## Dockerfile
 
-&lt;img src="imgs/dockerfile1_all.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/dockerfile1_all.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -376,7 +417,7 @@ Some examples:
 
 Here we start with the same RStudio base image we used previously, and then add some key R packages.
 
-&lt;img src="imgs/dockerfile1_FROM.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/dockerfile1_FROM.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -385,7 +426,7 @@ Here we start with the same RStudio base image we used previously, and then add 
 The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. Adding more R packages could result in missing dependencies, which you can pick up in the log for the build command (next slide). Dependencies for CRAN packages can also be found [here](https://packagemanager.posit.co/client/#/repos/2/packages/A3). 
 
 
-&lt;img src="imgs/dockerfile1_sys_deps.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/dockerfile1_sys_deps.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -393,8 +434,10 @@ The first RUN command installs system dependencies that are common to R packages
 
 Then the R packages are installed using 'install.packages' or 'BiocManager::install' for Bioconductor packages. 
 
+Note: The 'options(warn=2)' at the beginning of the R command will stop the installation when there is a warning, making it easier to debug.
 
-&lt;img src="imgs/dockerfile1_Rpackages.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+&lt;img src="imgs/dockerfile1_Rpackages.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -403,7 +446,7 @@ Then the R packages are installed using 'install.packages' or 'BiocManager::inst
 The port 8787 is exposed and the 'init' script that is included with the base RStudio image  
 
 
-&lt;img src="imgs/dockerfile1_EXPOSE_CMD.png" width="50%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/dockerfile1_EXPOSE_CMD.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 
 ---
@@ -456,14 +499,31 @@ docker run --rm \
           rstudio_4.2.3_v1 
 ```
 
+---
+
+## Build image from Dockerfile
+
+As done previously, use the 'docker run' command to launch a container with our customized RStudio session
+
 *Output:*
 
-&lt;img src="imgs/docker_image_v1_interface.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/docker_image_v1_interface.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 ## Use Herper for conda packages
 
-&lt;img src="imgs/dockerfile_salmon_all.png" width="90%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/dockerfile_salmon_all.png" width="110%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Use Herper for conda packages
+
+* the directory that contains the Dockerfile is the last argument
+* here the Dockerfile has a different name, so we specify the exact path with '-f' argument
+
+*Output:*
+
+&lt;img src="imgs/docker_salmon_build_log.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -478,9 +538,7 @@ docker run --rm \
 docker build -t rstudio_4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 ```
 
-*Output:*
 
-&lt;img src="imgs/docker_salmon_build_log.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 ## Use Herper for conda packages
@@ -524,6 +582,106 @@ system("salmon -h")
 
 
 &lt;img src="imgs/docker_desktop_salmon_running.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Pushing images to Docker Hub
+
+If we then want to share our images with someone else, or simply store them elsewhere for future use, we can push to Docker Hub.
+
+Make sure you have an account on [Docker Hub](https://hub.docker.com/).
+
+*Code (terminal):*
+
+```sh
+# log in and provide credentials used to sign into Docker Hub
+# this will prompt you to enter username and password
+docker login
+
+# tag the image you want to push with your Docker Hub username and a tag name after the colon
+# the ID is from the 'docker images' command
+docker tag 9465219824aa dougbarrows/rstudio_4.2.3_v1:topush
+
+# push to Docker Hub
+docker push dougbarrows/rstudio_4.2.3_v1:topush
+```
+
+---
+## Pushing images to Docker Hub
+
+If we then want to share our images with someone else, or simply store them elsewhere for future use, we can push to Docker Hub.
+
+Make sure you have an account on [Docker Hub](https://hub.docker.com/).
+
+&lt;img src="imgs/dockerhub_after_push.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Use renv and Docker together
+
+renv and Docker can be used in tandem to easily recreate and R environment.
+
+
+
+```r
+setwd("/PathToMyDownload/Reproducible_R-master/r_course/Data/renv_docker")
+
+# load in packages to recreate environment we used previously
+library(renv)
+library(BiocManager)
+library(Herper)
+library(dplyr)
+library(DESeq2)
+library(tximport)
+
+# initialize renv
+renv::init()
+```
+
+---
+## Use renv and Docker together
+
+The lock file generated by renv shows the versions of R and the loaded packages on my local computer. 
+
+At the time, I was using older versions of R and Bioconductor, and specific versions of each package. With Docker, we can easily use this lock file to recreate that exact same R environment. 
+
+&lt;img src="imgs/lock_file_docker.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+
+---
+## Use renv and Docker together
+
+R still needs to be installed to use renv, so we use Rocker again to install a specific version of R to match the renv lock file.
+
+&lt;img src="imgs/dockerfile_renv_rver.png" width="80%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Use renv and Docker together
+
+The lock file is in the same directory as the Dockerfile, and when building the image the lock file is copied to the image into a directory that is created and set as the working directory with the WORKDIR command. 
+
+
+&lt;img src="imgs/dockerfile_renv_restore.png" width="80%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Use renv and Docker together
+
+Build the image with the build context (last argument) set to the directory containing the Dockerfile and the lock file, then launch a container.
+
+
+
+```sh
+
+# build the image 
+docker build -t rstudio_4.1.1_renv ./data/renv_docker
+
+# launch a container
+docker run --rm \
+          -v ./data:/home/rstudio \
+          -p 8787:8787 \
+           -e PASSWORD=password \
+           rstudio_4.1.1_renv
+```
+
+
 ---
 ## Further Resources
 
