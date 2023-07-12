@@ -19,7 +19,7 @@ output:
     highlight: tango  # specifies the syntax highlighting style
 params:
  isSlides: "no"
- #isSlides: "yes"
+ # isSlides: "yes"
 ---
 ```{r setup, include=FALSE}
 suppressPackageStartupMessages(require(knitr))
@@ -89,7 +89,7 @@ if(params$isSlides == "yes"){
 ```
 
 ## The problem
-Something (e.g. bioinformatics analysis or software deployment) works on your computer, and you want to make sure that it will work on another computer.
+Something works on your computer (e.g. bioinformatics analysis or software deployment), and you want to make sure that it will work on another computer.
 
 ```{r, echo=FALSE, out.width="75%"}
 knitr::include_graphics("imgs/jhu_docker_rationale.png")
@@ -112,6 +112,52 @@ knitr::include_graphics("imgs/jhu_docker_rationale2.png")
 
 <font size='1'><a href="https://jhudatascience.org/Adv_Reproducibility_in_Cancer_Informatics/launching-a-docker-image.html">https://jhudatascience.org/Adv_Reproducibility_in_Cancer_Informatics/launching-a-docker-image.html - </a><a href="https://creativecommons.org/licenses/by/4.0">CC-BY 4.0</a></font>
 
+---
+
+## Docker client and host
+
+The Docker client communicates with the Docker daemon based on [user commands](https://docs.docker.com/engine/reference/commandline/cli/)
+
+A daemon is a program that runs as a background process and is not under direct control of the computer user, and the Docker daemon is the engine that manages Docker services and objects 
+
+
+```{r, echo=FALSE, out.width="85%", fig.align='center'}
+knitr::include_graphics("imgs/docker_schema_empty.png")
+```
+
+---
+
+## Creating Docker images
+
+The 'docker build' command uses a Dockerfile to create an image
+
+A Docker image is a read-only, isolated file system that contains all software, dependencies, scripts, and metadata required to run a container.
+
+
+```{r, echo=FALSE, out.width="85%", fig.align='center'}
+knitr::include_graphics("imgs/docker_schema_addBuild.png")
+```
+
+---
+
+## Launching Docker containers
+
+Once an image is built, an instance of this image can be launched as a stand-alone application, also known as a container
+
+```{r, echo=FALSE, out.width="85%", fig.align='center'}
+knitr::include_graphics("imgs/docker_schema_addRun.png")
+```
+
+---
+
+
+## Pulling Docker images
+
+There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
+
+```{r, echo=FALSE, out.width="70%", fig.align='center'}
+knitr::include_graphics("imgs/docker_schema_all.png")
+```
 
 ---
 
@@ -130,6 +176,12 @@ Check Docker version to make sure Docker is installed and running
 docker --version
 ```
 
+*Output:*
+```{r, echo=FALSE, out.width="40%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/docker_version.png")
+```
+
 ---
 
 ## Installing Docker
@@ -140,61 +192,32 @@ If previous command isn't found check the Docker Desktop advanced settings and m
 knitr::include_graphics("imgs/docker_config.png")
 ```
 
+
 ---
 
-## Docker infrastructure
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
 
-* The Docker client communicates with the Docker daemon based on user commands
-  + The daemon is the engine that manages Docker services and objects (e.g. images and containers)
+# Running Docker containers<br>from Docker Hub images
 
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
-```{r, echo=FALSE, out.width="80%", fig.align='center'}
-knitr::include_graphics("imgs/docker_schema_empty.png")
+---
+"    
+  )
+}else{
+  cat("# Running Docker containers from Docker Hub images
+
+---
+"    
+  )
+  
+}
+
 ```
 
----
-
-## Docker infrastructure
-
-* The Docker client communicates with the Docker daemon based on user commands
-  + The daemon is the engine that manages Docker services and objects (e.g. images and containers)
-* A Docker image is a read-only template or blueprint for running a container.
-  + The image contains an isolated file system that is defined in a text file called a Dockerfile
-
-
-```{r, echo=FALSE, out.width="80%", fig.align='center'}
-knitr::include_graphics("imgs/docker_schema_addBuild.png")
-```
-
----
-
-## Docker infrastructure
-
-* The Docker client communicates with the Docker daemon based on user commands
-  + The daemon is the engine that manages Docker services and objects (e.g. images and containers)
-* A Docker image is a read-only template or blueprint for running a container.
-  + The image contains an isolated file system that is defined in a text file called a Dockerfile
-* Once an image is built, an instance of this image can be launched as a container
-
-```{r, echo=FALSE, out.width="80%", fig.align='center'}
-knitr::include_graphics("imgs/docker_schema_addRun.png")
-```
-
----
-
-## Pulling Docker images
-
-There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
-
-```{r, echo=FALSE, out.width="70%", fig.align='center'}
-knitr::include_graphics("imgs/docker_schema_all.png")
-```
-
----
-
-## Pulling Docker images
-
-There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
+## Pulling Docker images - Rocker
 
 [Rocker](https://rocker-project.org/) is a very useful source of images on Docker Hub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R
 
@@ -205,11 +228,12 @@ docker pull rocker/rstudio:4.2.3
 
 ---
 
-## Docker images
+## Viewing local Docker images
 
 After pulling, the image is now available on our system to run.
 
-<hr>
+Images have names, tags, and image IDs as shown in the output. The ID is a hash of the metadata and filesystem of the Docker image. 
+
 
 *Code (terminal):*
 ```{sh, eval=F}
@@ -225,11 +249,12 @@ knitr::include_graphics("imgs/docker_images.png")
 
 ---
 
-## Docker images
+## Viewing local Docker images
 
 After pulling, the image is now available on our system to run.
 
-<hr>
+Images have names, tags, and image IDs as shown in the output. The ID is a hash of the metadata and filesystem of the Docker image. 
+
 
 *Code (terminal):*
 ```{sh, eval=F}
@@ -245,44 +270,10 @@ knitr::include_graphics("imgs/docker_images.png")
 <hr>
 
 Confirm in Docker desktop:
-```{r, echo=FALSE, out.width="100%", fig.align='center'}
+```{r, echo=FALSE, out.width="80%", fig.align='center'}
 knitr::include_graphics("imgs/docker_desktop_images.png")
 ```
 
----
-
-## Docker image tags
-
-Images have names, tags, and image IDs as shown in the output from 'docker images'. Tags allow you to track different versions of an image, and the ID is the unique identifier for the name:tag combination. If a tag is not specified, Docker will use 'latest' by default
-
-*Code (terminal):*
-```{sh, eval=F}
-docker images
-```
-
-*Output:*
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
-cat("\n")
-knitr::include_graphics("imgs/docker_images.png")
-```
-
----
-
-## Docker image tags
-
-To add a tag, use the 'docker tag' command.
-
-*Code (terminal):*
-```{sh, eval=F}
-docker tag cba94b3b9ed6 rocker/rstudio:new_version
-docker images
-```
-
-*Output:*
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
-cat("\n")
-knitr::include_graphics("imgs/docker_images_after_tag.png")
-```
 
 ---
 
@@ -293,8 +284,8 @@ Once the image is on our system, we can launch a container with the ['docker run
 Components of the run command:
 *  --rm: this will automatically remove a container when you exit, otherwise can take up room on computer with old, unused containers
 *  -p: before the colon is the port on your computer to be exposed and after the colon is the port inside the container
-*  -e: an environmental variable is set when the conatiner is run, and this will be the password to login
-*  the last argument is the image name followed by the tag (both seen with 'docker images')
+*  -e: an environmental variable is set when the container is run, and this will be the password to login
+*  the last argument is the image name and tag (both seen with 'docker images')
 
 *Code (terminal):*
 ```{sh, eval=F}
@@ -308,9 +299,7 @@ docker run --rm \
 
 ## Running docker containers
 
-While the container is running, we can go to 'http://localhost:8787' in a browser and log in with the password from 'docker run'.
-
-This brings us to a normal RStudio interface
+While the container is running, we can go to 'http://localhost:8787' in a browser and log in with the the user 'rstudio' and the password from 'docker run'.
 
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
 knitr::include_graphics("imgs/rstudio_interface.png")
@@ -337,9 +326,9 @@ knitr::include_graphics("imgs/docker_ps.png")
 
 ## Stopping docker containers
 
-To stop the container currently running, if you are in the terminal tab where it was launched, press Ctrl+C.
+To stop the container currently running, if you are in the terminal tab where it was launched press Ctrl+C.
 
-Or another tab can be opened and the 'docker stop' command can be used with the ID listed from 'docker ps'
+Or open up another tab and the 'docker stop' command can be used with the ID listed from 'docker ps'
 
 
 *Code (terminal):*
@@ -358,18 +347,18 @@ knitr::include_graphics("imgs/docker_stop.png")
 
 ## Adding volumes to containers
 
-The docker container has it's own file system, and we can mount a local directory onto that file system with the '-v' argument to the 'docker run' command
+The docker container has it's own file system, and we can mount a local directory onto that file system with the '-v' flag for the 'docker run' command.
 
 * Navigate to the 'r_course' directory within the downloaded course using the 'cd' command in the terminal
-* Use the 'docker run' command with the '-v' argument
+* Use the 'docker run' command with the '-v' flag
   + the left side of the colon is the path on your computer to mount
   + the right side is the location within the docker container file system where that data will be accessible 
-  + /home/rstudio is the working directory of the rstudio session set by the Rocker image
+  + '/home/rstudio' is set by the container to be the working directory of Rstudio 
 
 *Code (terminal):*
 ```{sh, eval=F}
 # navigate to 'r_course' directory in downloaded material
- cd ~/Downloads/Reproducible_R-master/r_course
+ cd /PathToDownloadedCourse/Reproducible_R-master/r_course
  
  # launch docker container
  docker run --rm \
@@ -421,7 +410,7 @@ write.csv(dataIn, "rnaseq_table_withIDs.csv")
 
 ## Adding volumes to containers
 
-The R environment files from this RStudio session are written to the working directory in the image, and therefore are copied to the local directory as hidden folders. 
+The R environment files from this RStudio session are written to the working directory in the container, and therefore are copied to the local directory as hidden folders. 
 
 This R environment will then be loaded the next time you launch an RStudio container with this volume mounted. If these folders are removed (.config and .local), then a fresh RStudio session will be launched. 
 
@@ -439,11 +428,33 @@ knitr::include_graphics("imgs/docker_hidden_files.png")
 
 ---
 
-## Customizing RStudio Docker image
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
 
-The image we pull from Rocker contains base R and its associated packages. To customize the image, we will need to make a Dockerfile that builds on top of the Rocker image.
+# Building custom images<br>from a Dockerfile
 
-A Dockerfile provides the recipe to make the image, and is a text file that can include a series of [specialized commands](https://docs.docker.com/engine/reference/builder/). This includes instructions to install the R packages and its dependencies. 
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Building custom images from a Dockerfile
+
+---
+"    
+  )
+  
+}
+
+```
+
+## Dockerfile basics and commands
+
+The image we pull from Rocker contains base R and its associated packages. To customize the image, we will need to make a Dockerfile that adds to the Rocker image.
+
+A Dockerfile provides the recipe to make the image. Using [specialized commands](https://docs.docker.com/engine/reference/builder/), this file provides instructions to install the R packages and its dependencies. 
 
 Some examples:
 * FROM: sets the base image and further instructions build off of this
@@ -454,7 +465,7 @@ Some examples:
 
 ---
 
-## Dockerfile
+## Dockerfile components
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
 knitr::include_graphics("imgs/dockerfile1_all.png")
@@ -462,7 +473,7 @@ knitr::include_graphics("imgs/dockerfile1_all.png")
 
 ---
 
-## Dockerfile
+## Dockerfile components
 
 Here we start with the same RStudio base image we used previously, and then add some key R packages.
 
@@ -472,9 +483,9 @@ knitr::include_graphics("imgs/dockerfile1_FROM.png")
 
 ---
 
-## Dockerfile
+## Dockerfile components
 
-The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. Adding more R packages could result in missing dependencies, which you can pick up in the log for the build command (next slide). Dependencies for CRAN packages can also be found [here](https://packagemanager.posit.co/client/#/repos/2/packages/A3). 
+The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. Adding more R packages could result in missing dependencies, which you can pick up in the log for the build command. Dependencies for CRAN packages can also be found [here](https://packagemanager.posit.co/client/#/repos/2/packages). 
 
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
@@ -483,7 +494,7 @@ knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
 
 ---
 
-## Dockerfile
+## Dockerfile components
 
 Then the R packages are installed using 'install.packages' or 'BiocManager::install' for Bioconductor packages. 
 
@@ -496,7 +507,7 @@ knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 
 ---
 
-## Dockerfile
+## Dockerfile components
 
 The port 8787 is exposed and the 'init' script that is included with the base RStudio image  
 
@@ -508,15 +519,16 @@ knitr::include_graphics("imgs/dockerfile1_EXPOSE_CMD.png")
 
 ---
 
-## Build image from Dockerfile
+## Building an image with a Dockerfile
 
-* the directory that contains the Dockerfile is the last argument
-* if no filename is given, it will look for a file called 'Dockerfile'
+* A tag is added to distinguish this image
+* The directory that contains the Dockerfile is the last argument
+* If no file name is given, it will look for a file called 'Dockerfile'
   + 'Dockerfile' is in the data directory of course materials
 
 *Code (terminal):*
 ```{sh, eval=F}
-docker build -t rstudio_4.2.3_v1 ./data
+docker build -t rocker/rstudio:4.2.3_v2 ./data
 ```
 
 *Output:*
@@ -527,7 +539,7 @@ knitr::include_graphics("imgs/dockerV1_build_log.png")
 
 ---
 
-## Build image from Dockerfile
+## Building an image with a Dockerfile
 
 Use the docker 'images' command to see image
 
@@ -537,14 +549,14 @@ docker images
 ```
 
 *Output:*
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
+```{r, echo=FALSE, out.width="65%", fig.align='left'}
 cat("\n")
 knitr::include_graphics("imgs/docker_images_v1.png")
 ```
 
 ---
 
-## Build image from Dockerfile
+## Running the custom container
 
 As done previously, use the 'docker run' command to launch a container with our customized RStudio session
 
@@ -553,13 +565,13 @@ As done previously, use the 'docker run' command to launch a container with our 
 docker run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
-          -e PASSWORD=password \
-          rstudio_4.2.3_v1 
+           -e PASSWORD=password \
+           rocker/rstudio:4.2.3_v2
 ```
 
 ---
 
-## Build image from Dockerfile
+## Running the custom container
 
 As done previously, use the 'docker run' command to launch a container with our customized RStudio session
 
@@ -570,9 +582,32 @@ knitr::include_graphics("imgs/docker_image_v1_interface.png")
 ```
 
 ---
+
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Install conda packages<br>in a Docker image
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Install conda packages in a Docker image
+
+---
+"    
+  )
+  
+}
+
+```
+
 ## Use Herper for conda packages
 
-```{r, echo=FALSE, out.width="110%", fig.align='left'}
+```{r, echo=FALSE, out.width="120%", fig.align='left'}
 
 knitr::include_graphics("imgs/dockerfile_salmon_all.png")
 ```
@@ -581,28 +616,20 @@ knitr::include_graphics("imgs/dockerfile_salmon_all.png")
 
 ## Use Herper for conda packages
 
-* the directory that contains the Dockerfile is the last argument
-* here the Dockerfile has a different name, so we specify the exact path with '-f' argument
+The directory that contains the Dockerfile is the last argument
 
-*Output:*
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
-cat("\n")
-knitr::include_graphics("imgs/docker_salmon_build_log.png")
-```
-
----
-
-## Use Herper for conda packages
-
-* the directory that contains the Dockerfile is the last argument
-* here the Dockerfile has a different name, so we specify the exact path with '-f' argument
+This Dockerfile is not named 'Dockerfile', so we specify the exact path with '-f' argument
 
 *Code (terminal):*
 ```{sh, eval=F}
-docker build -t rstudio_4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
+docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 ```
 
-
+*Output:*
+```{r, echo=FALSE, out.width="110%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/docker_salmon_build_log.png")
+```
 
 ---
 ## Use Herper for conda packages
@@ -613,12 +640,21 @@ docker images
 ```
 
 *Output:*
-```{r, echo=FALSE, out.width="90%", fig.align='left'}
+```{r, echo=FALSE, out.width="70%", fig.align='left'}
 cat("\n")
 knitr::include_graphics("imgs/docker_images_salmon.png")
 ```
 
+*Code (terminal):*
+```{sh, eval=F}
+docker run --rm \
+          -v ./data:/home/rstudio \
+          -p 8787:8787 \
+           -e PASSWORD=password \
+           rocker/rstudio:4.2.3_salmon
+```
 ---
+
 ## Use Herper for conda packages
 
 *Code (R in docker image):*
@@ -637,7 +673,7 @@ knitr::include_graphics("imgs/docker_image_salmon_interface.png")
 ```
 
 ---
-## Run containers from Docker Desktop
+## Running containers from Docker Desktop
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
@@ -646,7 +682,7 @@ knitr::include_graphics("imgs/docker_desktop_salmon.png")
 
 
 ---
-## Run containers from Docker Desktop
+## Running containers from Docker Desktop
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
@@ -668,10 +704,10 @@ docker login
 
 # tag the image you want to push with your Docker Hub username and a tag name after the colon
 # the ID is from the 'docker images' command
-docker tag 9465219824aa dougbarrows/rstudio_4.2.3_v1:topush
+docker tag 98579f07a026 dougbarrows/rstudio_4.2.3_salmon:topush
 
 # push to Docker Hub
-docker push dougbarrows/rstudio_4.2.3_v1:topush
+docker push dougbarrows/rstudio_4.2.3_salmon:topush
 ```
 
 ---
@@ -686,11 +722,35 @@ knitr::include_graphics("imgs/dockerhub_after_push.png")
 ```
 
 ---
-## Use renv and Docker together
+
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Use renv and Docker together
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Use renv and Docker together
+
+---
+"    
+  )
+  
+}
+
+```
+
+
+## Make a lock file
 
 renv and Docker can be used in tandem to easily recreate and R environment.
 
-
+*Code (R on local computer):*
 ```{r, eval=F}
 setwd("/PathToMyDownload/Reproducible_R-master/r_course/Data/renv_docker")
 
@@ -708,19 +768,19 @@ renv::init()
 ```
 
 ---
-## Use renv and Docker together
+## Make a lock file
 
 The lock file generated by renv shows the versions of R and the loaded packages on my local computer. 
 
 At the time, I was using older versions of R and Bioconductor, and specific versions of each package. With Docker, we can easily use this lock file to recreate that exact same R environment. 
 
-```{r, echo=FALSE, out.width="75%", fig.align='left'}
+```{r, echo=FALSE, out.width="60%", fig.align='left'}
 knitr::include_graphics("imgs/lock_file_docker.png")
 ```
 
 
 ---
-## Use renv and Docker together
+## Dockerfile with renv
 
 R still needs to be installed to use renv, so we use Rocker again to install a specific version of R to match the renv lock file.
 
@@ -729,7 +789,7 @@ knitr::include_graphics("imgs/dockerfile_renv_rver.png")
 ```
 
 ---
-## Use renv and Docker together
+## Dockerfile with renv
 
 The lock file is in the same directory as the Dockerfile, and when building the image the lock file is copied to the image into a directory that is created and set as the working directory with the WORKDIR command. 
 
@@ -739,7 +799,7 @@ knitr::include_graphics("imgs/dockerfile_renv_restore.png")
 ```
 
 ---
-## Use renv and Docker together
+## Building immage and running container 
 
 Build the image with the build context (last argument) set to the directory containing the Dockerfile and the lock file, then launch a container.
 
@@ -747,14 +807,14 @@ Build the image with the build context (last argument) set to the directory cont
 ```{sh, eval=F}
 
 # build the image 
-docker build -t rstudio_4.1.1_renv ./data/renv_docker
+docker build -t rocker/rstudio:4.1.1_renv ./data/renv_docker
 
 # launch a container
 docker run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
            -e PASSWORD=password \
-           rstudio_4.1.1_renv
+           rrocker/rstudio:4.1.1_renv
 ```
 
 
