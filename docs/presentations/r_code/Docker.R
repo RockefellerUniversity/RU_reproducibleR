@@ -48,27 +48,54 @@ knitr::include_graphics("imgs/jhu_docker_rationale.png")
 knitr::include_graphics("imgs/jhu_docker_rationale2.png")
 
 
+## ---- echo=FALSE, out.width="85%", fig.align='center'-------------------------
+knitr::include_graphics("imgs/docker_schema_empty.png")
+
+
+## ---- echo=FALSE, out.width="85%", fig.align='center'-------------------------
+knitr::include_graphics("imgs/docker_schema_addBuild.png")
+
+
+## ---- echo=FALSE, out.width="85%", fig.align='center'-------------------------
+knitr::include_graphics("imgs/docker_schema_addRun.png")
+
+
+## ---- echo=FALSE, out.width="70%", fig.align='center'-------------------------
+knitr::include_graphics("imgs/docker_schema_all.png")
+
+
 ## docker --version
+
+
+## ---- echo=FALSE, out.width="40%", fig.align='left'---------------------------
+cat("\n")
+knitr::include_graphics("imgs/docker_version.png")
 
 
 ## ---- echo=FALSE, out.width="100%", fig.align='center'------------------------
 knitr::include_graphics("imgs/docker_config.png")
 
 
-## ---- echo=FALSE, out.width="80%", fig.align='center'-------------------------
-knitr::include_graphics("imgs/docker_schema_empty.png")
+## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
 
+# Running Docker containers<br>from Docker Hub images
 
-## ---- echo=FALSE, out.width="80%", fig.align='center'-------------------------
-knitr::include_graphics("imgs/docker_schema_addBuild.png")
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
+---
+"    
+  )
+}else{
+  cat("# Running Docker containers from Docker Hub images
 
-## ---- echo=FALSE, out.width="80%", fig.align='center'-------------------------
-knitr::include_graphics("imgs/docker_schema_addRun.png")
+---
+"    
+  )
+  
+}
 
-
-## ---- echo=FALSE, out.width="70%", fig.align='center'-------------------------
-knitr::include_graphics("imgs/docker_schema_all.png")
 
 
 ## docker pull rocker/rstudio:4.2.3
@@ -90,26 +117,8 @@ cat("\n")
 knitr::include_graphics("imgs/docker_images.png")
 
 
-## ---- echo=FALSE, out.width="100%", fig.align='center'------------------------
+## ---- echo=FALSE, out.width="80%", fig.align='center'-------------------------
 knitr::include_graphics("imgs/docker_desktop_images.png")
-
-
-## docker images
-
-
-## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
-cat("\n")
-knitr::include_graphics("imgs/docker_images.png")
-
-
-## docker tag cba94b3b9ed6 rocker/rstudio:new_version
-
-## docker images
-
-
-## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
-cat("\n")
-knitr::include_graphics("imgs/docker_images_after_tag.png")
 
 
 ## docker run --rm \
@@ -145,7 +154,7 @@ knitr::include_graphics("imgs/docker_stop.png")
 
 ## # navigate to 'r_course' directory in downloaded material
 
-##  cd ~/Downloads/Reproducible_R-master/r_course
+##  cd /PathToDownloadedCourse/Reproducible_R-master/r_course
 
 ## 
 
@@ -186,6 +195,28 @@ cat("\n")
 knitr::include_graphics("imgs/docker_hidden_files.png")
 
 
+## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Building custom images<br>from a Dockerfile
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Building custom images from a Dockerfile
+
+---
+"    
+  )
+  
+}
+
+
+
 ## ---- echo=FALSE, out.width="85%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/dockerfile1_all.png")
 
@@ -206,7 +237,7 @@ knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 knitr::include_graphics("imgs/dockerfile1_EXPOSE_CMD.png")
 
 
-## docker build -t rstudio_4.2.3_v1 ./data
+## docker build -t rocker/rstudio:4.2.3_v2 ./data
 
 
 ## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
@@ -217,7 +248,7 @@ knitr::include_graphics("imgs/dockerV1_build_log.png")
 ## docker images
 
 
-## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
+## ---- echo=FALSE, out.width="65%", fig.align='left'---------------------------
 cat("\n")
 knitr::include_graphics("imgs/docker_images_v1.png")
 
@@ -228,9 +259,9 @@ knitr::include_graphics("imgs/docker_images_v1.png")
 
 ##           -p 8787:8787 \
 
-##           -e PASSWORD=password \
+##            -e PASSWORD=password \
 
-##           rstudio_4.2.3_v1
+##            rocker/rstudio:4.2.3_v2
 
 
 ## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
@@ -238,25 +269,58 @@ cat("\n")
 knitr::include_graphics("imgs/docker_image_v1_interface.png")
 
 
-## ---- echo=FALSE, out.width="110%", fig.align='left'--------------------------
+## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Install conda packages<br>in a Docker image
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Install conda packages in a Docker image
+
+---
+"    
+  )
+  
+}
+
+
+
+## ---- echo=FALSE, out.width="120%", fig.align='left'--------------------------
 
 knitr::include_graphics("imgs/dockerfile_salmon_all.png")
 
 
-## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
+## docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
+
+
+## ---- echo=FALSE, out.width="110%", fig.align='left'--------------------------
 cat("\n")
 knitr::include_graphics("imgs/docker_salmon_build_log.png")
-
-
-## docker build -t rstudio_4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 
 
 ## docker images
 
 
-## ---- echo=FALSE, out.width="90%", fig.align='left'---------------------------
+## ---- echo=FALSE, out.width="70%", fig.align='left'---------------------------
 cat("\n")
 knitr::include_graphics("imgs/docker_images_salmon.png")
+
+
+## docker run --rm \
+
+##           -v ./data:/home/rstudio \
+
+##           -p 8787:8787 \
+
+##            -e PASSWORD=password \
+
+##            rocker/rstudio:4.2.3_salmon
 
 
 ## ---- eval=F, tidy=FALSE------------------------------------------------------
@@ -294,17 +358,39 @@ knitr::include_graphics("imgs/docker_desktop_salmon_running.png")
 
 ## # the ID is from the 'docker images' command
 
-## docker tag 9465219824aa dougbarrows/rstudio_4.2.3_v1:topush
+## docker tag 98579f07a026 dougbarrows/rstudio_4.2.3_salmon:topush
 
 ## 
 
 ## # push to Docker Hub
 
-## docker push dougbarrows/rstudio_4.2.3_v1:topush
+## docker push dougbarrows/rstudio_4.2.3_salmon:topush
 
 
 ## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
 knitr::include_graphics("imgs/dockerhub_after_push.png")
+
+
+## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Use renv and Docker together
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Use renv and Docker together
+
+---
+"    
+  )
+  
+}
+
 
 
 ## ---- eval=F------------------------------------------------------------------
@@ -323,7 +409,7 @@ knitr::include_graphics("imgs/dockerhub_after_push.png")
 ## 
 
 
-## ---- echo=FALSE, out.width="75%", fig.align='left'---------------------------
+## ---- echo=FALSE, out.width="60%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/lock_file_docker.png")
 
 
@@ -339,7 +425,7 @@ knitr::include_graphics("imgs/dockerfile_renv_restore.png")
 
 ## # build the image
 
-## docker build -t rstudio_4.1.1_renv ./data/renv_docker
+## docker build -t rocker/rstudio:4.1.1_renv ./data/renv_docker
 
 ## 
 
@@ -353,5 +439,5 @@ knitr::include_graphics("imgs/dockerfile_renv_restore.png")
 
 ##            -e PASSWORD=password \
 
-##            rstudio_4.1.1_renv
+##            rrocker/rstudio:4.1.1_renv
 
