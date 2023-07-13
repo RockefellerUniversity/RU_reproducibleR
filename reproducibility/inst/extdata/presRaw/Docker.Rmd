@@ -800,7 +800,7 @@ knitr::include_graphics("imgs/dockerfile_renv_restore.png")
 ```
 
 ---
-## Building immage and running container 
+## Building image and running container 
 
 Build the image with the build context (last argument) set to the directory containing the Dockerfile and the lock file, then launch a container.
 
