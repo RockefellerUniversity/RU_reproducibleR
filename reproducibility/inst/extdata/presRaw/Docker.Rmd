@@ -94,7 +94,7 @@ if(params$isSlides == "yes"){
 Something works on your computer (e.g. bioinformatics analysis or software deployment), and you want to make sure that it will work on another computer.
 
 ```{r, echo=FALSE, out.width="75%"}
-knitr::include_graphics("imgs/jhu_docker_rationale.png")
+knitr::include_graphics("../imgs/jhu_docker_rationale.png")
 ```
 
 
@@ -107,7 +107,7 @@ knitr::include_graphics("imgs/jhu_docker_rationale.png")
 Docker allows for the creation of an isolated environment that can be shipped across different users, machines, or operating systems, and to virtual machines or the cloud. 
 
 ```{r, echo=FALSE, out.width="75%"}
-knitr::include_graphics("imgs/jhu_docker_rationale2.png")
+knitr::include_graphics("../imgs/jhu_docker_rationale2.png")
 ```
 
 
@@ -123,7 +123,7 @@ A daemon is a program that runs as a background process and is not under direct 
 
 
 ```{r, echo=FALSE, out.width="85%", fig.align='center'}
-knitr::include_graphics("imgs/docker_schema_empty.png")
+knitr::include_graphics("../imgs/docker_schema_empty.png")
 ```
 
 ---
@@ -136,7 +136,7 @@ A Docker image is a read-only, isolated file system that contains all software, 
 
 
 ```{r, echo=FALSE, out.width="85%", fig.align='center'}
-knitr::include_graphics("imgs/docker_schema_addBuild.png")
+knitr::include_graphics("../imgs/docker_schema_addBuild.png")
 ```
 
 ---
@@ -146,7 +146,7 @@ knitr::include_graphics("imgs/docker_schema_addBuild.png")
 Once an image is built, an instance of this image can be launched as a stand-alone application, also known as a container.
 
 ```{r, echo=FALSE, out.width="85%", fig.align='center'}
-knitr::include_graphics("imgs/docker_schema_addRun.png")
+knitr::include_graphics("../imgs/docker_schema_addRun.png")
 ```
 
 ---
@@ -157,7 +157,7 @@ knitr::include_graphics("imgs/docker_schema_addRun.png")
 There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
 
 ```{r, echo=FALSE, out.width="70%", fig.align='center'}
-knitr::include_graphics("imgs/docker_schema_all.png")
+knitr::include_graphics("../imgs/docker_schema_all.png")
 ```
 
 ---
@@ -180,7 +180,7 @@ docker --version
 *Output:*
 ```{r, echo=FALSE, out.width="40%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_version.png")
+knitr::include_graphics("../imgs/docker_version.png")
 ```
 
 ---
@@ -190,7 +190,7 @@ knitr::include_graphics("imgs/docker_version.png")
 If previous command isn't found check the Docker Desktop advanced settings and make sure CLI tools are available system-wide.
 
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
-knitr::include_graphics("imgs/docker_config.png")
+knitr::include_graphics("../imgs/docker_config.png")
 ```
 
 
@@ -244,7 +244,7 @@ docker images
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_images.png")
+knitr::include_graphics("../imgs/docker_images.png")
 ```
 
 
@@ -265,14 +265,14 @@ docker images
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_images.png")
+knitr::include_graphics("../imgs/docker_images.png")
 ```
 
 <hr>
 
 Confirm in Docker desktop:
 ```{r, echo=FALSE, out.width="80%", fig.align='center'}
-knitr::include_graphics("imgs/docker_desktop_images.png")
+knitr::include_graphics("../imgs/docker_desktop_images.png")
 ```
 
 
@@ -303,7 +303,7 @@ docker run --rm \
 While the container is running, we can go to 'http://localhost:8787' in a browser and log in with the the user 'rstudio' and the password from 'docker run'.
 
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
-knitr::include_graphics("imgs/rstudio_interface.png")
+knitr::include_graphics("../imgs/rstudio_interface.png")
 ```
 
 ---
@@ -320,7 +320,7 @@ docker ps
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
 cat("\n")
-knitr::include_graphics("imgs/docker_ps.png")
+knitr::include_graphics("../imgs/docker_ps.png")
 ```
 
 ---
@@ -341,7 +341,7 @@ docker ps
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
 cat("\n")
-knitr::include_graphics("imgs/docker_stop.png")
+knitr::include_graphics("../imgs/docker_stop.png")
 ```
 
 ---
@@ -376,7 +376,7 @@ The docker container has it's own file system, and we can mount a local director
 The RStudio interface now shows the files in the 'data' directory
 
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
-knitr::include_graphics("imgs/rstudio_interface_volume.png")
+knitr::include_graphics("../imgs/rstudio_interface_volume.png")
 ```
 
 
@@ -389,7 +389,7 @@ These files can be read into R, and also files can be written to the local envir
 
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
-knitr::include_graphics("imgs/rstudio_interface_volume_write.png")
+knitr::include_graphics("../imgs/rstudio_interface_volume_write.png")
 ```
 
 ---
@@ -411,20 +411,21 @@ write.csv(dataIn, "rnaseq_table_withIDs.csv")
 
 ## Adding volumes to containers
 
-The R environment files from this RStudio session are written to the working directory in the container, and therefore are copied to the local directory as hidden folders. 
+In addition to the files deliberately written to the local directory, the R environment files from this RStudio session are written to the working directory in the container, and therefore are copied to the local directory as hidden folders (.config and .local). 
 
-This R environment will then be loaded the next time you launch an RStudio container with this volume mounted. If these folders are removed (.config and .local), then a fresh RStudio session will be launched. 
+This R environment will then be loaded the next time you launch an RStudio container with this volume mounted. While this is normally okay, if desired a fresh RStudio session can be launched with the same mounted volume by removing these hidden directories.
 
 *Code (terminal):*
 ```{sh, eval=F}
 ls -a data
+rm -r data/.local data/.config
 ```
 
 
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
 cat("\n")
-knitr::include_graphics("imgs/docker_hidden_files.png")
+knitr::include_graphics("../imgs/docker_hidden_files.png")
 ```
 
 ---
@@ -469,7 +470,7 @@ Some examples:
 ## Dockerfile components
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
-knitr::include_graphics("imgs/dockerfile1_all.png")
+knitr::include_graphics("../imgs/dockerfile1_all.png")
 ```
 
 ---
@@ -479,7 +480,7 @@ knitr::include_graphics("imgs/dockerfile1_all.png")
 Here we start with the same RStudio base image we used previously, and then add some key R packages.
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
-knitr::include_graphics("imgs/dockerfile1_FROM.png")
+knitr::include_graphics("../imgs/dockerfile1_FROM.png")
 ```
 
 ---
@@ -490,7 +491,7 @@ The first RUN command installs system dependencies that are common to R packages
 
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
-knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
+knitr::include_graphics("../imgs/dockerfile1_sys_deps.png")
 ```
 
 ---
@@ -503,7 +504,7 @@ Note: The 'options(warn=2)' at the beginning of the R command will stop the inst
 
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
-knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
+knitr::include_graphics("../imgs/dockerfile1_Rpackages.png")
 ```
 
 ---
@@ -514,7 +515,7 @@ The port 8787 is exposed and the 'init' script that is included with the base RS
 
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
-knitr::include_graphics("imgs/dockerfile1_EXPOSE_CMD.png")
+knitr::include_graphics("../imgs/dockerfile1_EXPOSE_CMD.png")
 ```
 
 
@@ -535,7 +536,7 @@ docker build -t rocker/rstudio:4.2.3_v2 ./data
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/dockerV1_build_log.png")
+knitr::include_graphics("../imgs/dockerV1_build_log.png")
 ```
 
 ---
@@ -552,7 +553,7 @@ docker images
 *Output:*
 ```{r, echo=FALSE, out.width="65%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_images_v1.png")
+knitr::include_graphics("../imgs/docker_images_v1.png")
 ```
 
 ---
@@ -579,7 +580,7 @@ As done previously, use the 'docker run' command to launch a container with our 
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_image_v1_interface.png")
+knitr::include_graphics("../imgs/docker_image_v1_interface.png")
 ```
 
 ---
@@ -608,9 +609,9 @@ if(params$isSlides == "yes"){
 
 ## Use Herper for conda packages
 
-```{r, echo=FALSE, out.width="120%", fig.align='left'}
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
 
-knitr::include_graphics("imgs/dockerfile_salmon_all.png")
+knitr::include_graphics("../imgs/dockerfile_salmon_all.png")
 ```
 
 ---
@@ -627,9 +628,9 @@ docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 ```
 
 *Output:*
-```{r, echo=FALSE, out.width="110%", fig.align='left'}
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_salmon_build_log.png")
+knitr::include_graphics("../imgs/docker_salmon_build_log.png")
 ```
 
 ---
@@ -643,7 +644,7 @@ docker images
 *Output:*
 ```{r, echo=FALSE, out.width="70%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_images_salmon.png")
+knitr::include_graphics("../imgs/docker_images_salmon.png")
 ```
 
 *Code (terminal):*
@@ -670,24 +671,28 @@ system("salmon -h")
 
 *Output:*
 ```{r, echo=FALSE, out.width="75%", fig.align='left'}
-knitr::include_graphics("imgs/docker_image_salmon_interface.png")
+knitr::include_graphics("../imgs/docker_image_salmon_interface.png")
 ```
 
 ---
-## Running containers from Docker Desktop
+## Docker Desktop
+
+We can also run containers from Docker Desktop
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_desktop_salmon.png")
+knitr::include_graphics("../imgs/docker_desktop_salmon.png")
 ```
 
 
 ---
-## Running containers from Docker Desktop
+## Docker Desktop
+
+We can also run containers from Docker Desktop
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_desktop_salmon_running.png")
+knitr::include_graphics("../imgs/docker_desktop_salmon_running.png")
 ```
 
 ---
@@ -719,7 +724,7 @@ If we then want to share our images with someone else, or simply store them else
 Make sure you have an account on [Docker Hub](https://hub.docker.com/).
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
-knitr::include_graphics("imgs/dockerhub_after_push.png")
+knitr::include_graphics("../imgs/dockerhub_after_push.png")
 ```
 
 ---
@@ -776,7 +781,7 @@ The lock file generated by renv shows the versions of R and the loaded packages 
 At the time, I was using older versions of R and Bioconductor, and specific versions of each package. With Docker, we can easily use this lock file to recreate that exact same R environment. 
 
 ```{r, echo=FALSE, out.width="60%", fig.align='left'}
-knitr::include_graphics("imgs/lock_file_docker.png")
+knitr::include_graphics("../imgs/lock_file_docker.png")
 ```
 
 
@@ -786,7 +791,7 @@ knitr::include_graphics("imgs/lock_file_docker.png")
 R still needs to be installed to use renv, so we use Rocker again to install a specific version of R to match the renv lock file.
 
 ```{r, echo=FALSE, out.width="80%", fig.align='left'}
-knitr::include_graphics("imgs/dockerfile_renv_rver.png")
+knitr::include_graphics("../imgs/dockerfile_renv_rver.png")
 ```
 
 ---
@@ -796,7 +801,7 @@ The lock file is in the same directory as the Dockerfile, and when building the 
 
 
 ```{r, echo=FALSE, out.width="80%", fig.align='left'}
-knitr::include_graphics("imgs/dockerfile_renv_restore.png")
+knitr::include_graphics("../imgs/dockerfile_renv_restore.png")
 ```
 
 ---
