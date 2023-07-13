@@ -352,9 +352,10 @@ Of particular interest to version control and reproducibility are the **Depends,
 
 * Depends - Packages listed here are also loaded at time of package load. Functions are available to user.
 * Imports - Packages are attached and available to package. Functions are not available to user.
+* LinkingTo - Packages are used for their C/C++ header files. Functions are not available to user.
 * Suggests - Packages used in examples or vignette but not required for package functionality.
 
-Packages listed **Depends and Imports** are dependencies of this package and if not already installed are installed alongside this package.
+Packages listed **Depends, Imports and LinkingTo** are dependencies of this package and if not already installed are installed alongside this package.
 
 ![](imgs/Depends.png)
 
