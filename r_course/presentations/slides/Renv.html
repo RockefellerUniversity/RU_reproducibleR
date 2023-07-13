@@ -76,193 +76,635 @@ setwd("/PathToMyDownload/Reproducible_R-master/r_course")
 ---
 class: inverse, center, middle
 
-# Reproducibility?
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
-
----
-
----
-## Core concepts /pillars
-
-hwa ti sthe point? 
-
-Want to be able to rproduce someson es reulsts. Not as simple as it sounds. 
-
-many fail. 
-
----
-## FAIRE
-
-https://en.wikipedia.org/wiki/FAIR_data
-https://www.go-fair.org/fair-principles/
-
-NIH calls this FAIRE
-* can mention faire
-
-
-Data sharing plan
-https://sharing.nih.gov/data-management-and-sharing-policy/planning-and-budgeting-for-data-management-and-sharing/writing-a-data-management-and-sharing-plan
-
-
-2.  Related Tools, Software and/or Code
-Indicate whether specialized tools are needed to access or manipulate shared scientific data to support replication or reuse, and name(s) of the needed tool(s) and software. If applicable, specify how needed tools can be accessed.
-
----
-## NIH new guidleins
-
-* No teeth encesarily forthis yet. But this is the way things ar emoving. 
-
----
-## compute how to mange.
-
-also mention Rswitch. 
-and docker. 
-Update? not update?
-
-
-
----
-class: inverse, center, middle
-
-# Environments
+# Reproducibility
 
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
 ---
 
 
----
-## What is environ?
+## Base R
 
-Deinfe 
+R contains a ton of useful tools and functions which allow us to perfrom more complex operations _out of the box_.
 
+We get access to these when R loads without having to install or load any packages.
 
----
-## how to use prcatialy
-
-exampels i.e. venv, wine, renv conda, packrat (precednet for renv)
+These include arithmetic operations, functions for reading/writing data and utlity functions.
 
 
----
-class: inverse, center, middle
-
-# Renv
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+```r
+myMat &lt;- matrix(1:100, ncol = 10, byrow = TRUE)
+means &lt;- colMeans(myMat)
+write.csv(myMat, file = "Test.csv")
+```
 
 ---
+## Base R
+
+We get access to these functions through base packages loaded as R starts.
+
+These base packages include
+
+* base
+* graphics
+* grDevices
+* utils
+* datasets
+* methods
+
+---
+## Base R
+
+We can get a comprehensive list of functions available in these packages using R help.
+
+We can type **?base** into R and get an index of all functions in the **base** package.
+
+
+
+```r
+`?`(base)
+```
+
+---
+## R and Base R versions
+
+If we review the help index we can see that the version of the base R package matches the version of R we are using.
+
+![base r version](imgs/R_Version.png)
+
+---
+## Versioning
+
+Versioning of software allows developers to make updates to their software while maintaining availability/trackability of previous versions of their software.
+
+This also allows users to track the exact version of software they use to maintain essential reproducibility within their own work.
+
+The current version of the R software is **4.3.1**
+
+---
+## Versioning in R packages
+
+R package versions follow the convention of 3 numbers representing the major, minor and patch versions of the software.
+
+**PackageName** **major**_._**minor**_._**patch**
+
+e.g. ggplot2 current version is **ggplot2** - **3**_._**4**_._**2**
+
+
+* Major - A major version update usually involves changes that affect backwards capability with previous versions and substantial changes to an API
+* Minor - A minor version update typically occurs when adding new functionality to a package
+* Patch - A patch update will occur when bugs/issues are fixed within a package but no new functionality is added.
+
+---
+## Finding R package versions
+
+To find current package versions of libraries we are using in the current R session as well as information on the version of R in use we can take advantage of functions within another base package - the **utils** package.
+
+The **utils** package contains many functions on package installation and version management.
+
+
+To get a look at all the available functions in base we can use the R help again
+
+
+```r
+`?`(utils)
+```
+
+---
+## The sessionInfo function
+
+One very useful function within the **utils** package is **sessionInfo()**.
+
+First we can run sessionInfo() function with no arguments.
+
+
+```r
+sessionInfo()
+```
+
+![](imgs/sessionInfo1.png)
+
+---
+## The sessionInfo function
+
+
+![](imgs/sessionInfo1.png)
+
+
+* R Version information.
+* Attached base packages
+  - Attached packages are loaded and their functions available
+* Loaded via a namespace.
+  - These packages are used by other attached packages but functions are not available to R user 
+
+---
+## The sessionInfo function
+
+If we load a few more packages into R we can see this reflected in the sessionInfo() output under the **other attached packages**.
+
+
+```r
+library(ggplot2)
+library(dplyr)
+sessionInfo()
+```
+
+![](imgs/sessionInfo2.png)
+
+---
+## The sessionInfo function
+
+We can also use the sessionInfo function to provide the version information on a specified package.
+
+We simply need to add an argument to the sessionInfo function call of the package name and the specified package's versions is shown under the **other attached packages** section.
+
+
+```r
+sessionInfo("ggplot2")
+```
+
+![](imgs/sessionInfo.png)
+
+---
+## The sessionInfo function
+
+The sessionInfo function returns an object of class sessioninfo containing the R/package version information.
+
+
+```r
+sess_info &lt;- sessionInfo()
+class(sess_info)
+```
+
+```
+## [1] "sessionInfo"
+```
+
+```r
+names(sess_info)
+```
+
+```
+##  [1] "R.version"   "platform"    "locale"      "tzone"       "tzcode_type"
+##  [6] "running"     "RNGkind"     "basePkgs"    "otherPkgs"   "loadedOnly" 
+## [11] "matprod"     "BLAS"        "LAPACK"      "LA_version"
+```
+
+
+
+---
+## Finding R package versions in Rstudio
+
+.pull-left[
+Rstudio makes package version discovery easy using the **packages panel**
+
+Here you can see - 
+
+* Package Name
+* Package Description
+* Package Version
+* Link to package page
+* Button to delete package
+
+]
+.pull-right[
+
+![](imgs/Studio_Packages.png)
+
+]
+
+---
+## Getting access to new packages
+
+Although we have access to all the functions within the base packages by default we most likely will want to take advantage functions in the 1000s of packages available in the many R package repositories.
+
+Package repositories hold collections of packages under differing versions available for download or review.
+
+The two most popular R package repositories are:- 
+
+* CRAN
+* Bioconductor
+
+
+---
+## CRAN
+
+.pull-left[
+[CRAN](https://cran.r-project.org) , Comprehensive R Archive Network, was the first and is the most popular R package repository.
+
+It takes it's name from CTAN, Comprehensive Tex Archive Network, and inspiration from CPAN, Comprehensive Perl Archive Network. 
+
+CRAN provides both R software download links as well as hosts versioned R packages 
+]
+
+.pull-right[
+![](imgs/CRAN.png)
+
+
+
+]
+
+
+---
+## CRAN package page
+
+Each package on CRAN has its own package page containing usefull information on the package.
+
+![](imgs/packagePage.png)
+
+
+---
+## CRAN package page
+
+Of particular interest to version control and reproducibility are the **Depends, Import and Suggests** field.
+
+* Depends - Packages listed here are also loaded at time of package load. Functions are available to user.
+* Imports - Packages are attached and available to package. Functions are not available to user.
+* Suggests - Packages used in examples or vignette but not required for package functionality.
+
+Packages listed **Depends and Imports** are dependencies of this package and if not already installed are installed alongside this package.
+
+![](imgs/Depends.png)
+
+---
+## SessionInfo again
+
+Now it is installed we can load the library and check the sessionInfo to see where our DEPENDS and IMPORTS packages are within the session information.
+
+
+```r
+library(redist)
+sessionInfo()
+```
+![](imgs/redist_SessionInfo.png)
+
+---
+## Installing CRAN packages
+
+R provides another function from the **utils** base package which allows us to install a package from the CRAN repositories - **install.packages()**.
+
+In simplicity, to install a package into our R we can just use the **install.packages()** function supplying the name of the package we want to install.
+
+This will install the package and all required dependencies (the packages listed in DEPENDS and IMPORTS).
+
+
+```r
+install.packages("redist")
+```
+![](imgs/installDepends.png)
+
+---
+## Setting the R package repositories
+
+.pull-left[
+By default the first time you install an R package in a new version of R it will ask you which mirror you want to use. 
+
+A mirror is simply a copy of the packages databases in a distinct location.
+
+We can induce R to ask us which mirror to use by using the chooseCRANmirror() function.
+
+
+```r
+chooseCRANmirror()
+```
+]
+.pull-right[
+![](imgs/selectCran.png)
+]
+
+---
+## Mirrors for install.packages()
+
+The install.packages() function can take an additional parameter **repos** to tell it which repository mirror to use. 
+
+We can get a full list of CRAN mirrors from [here](https://cran.r-project.org/mirrors.html)
+
+Once we have chosen a mirror (typically based on closest location) we can supply the URL to the repos argument of install.packages(). Here will use the University of Michigan mirrow.
+
+
+```r
+install.packages("redis", repos = "https://repo.miserver.it.umich.edu/cran/")
+```
+
+
+---
+## Bioconductor
+
+.pull-left[
+Another R package repository we will most likely want to make use is the **Bioconductor** repositories.
+
+Bioconductor focuses on packages related to biological data (analysis, annotation, datasets) and follows many of the conventions set out in CRAN.
+]
+.pull-right[
+![](imgs/Bioconductor.png)
+]
+
+---
+## Bioconductor Package page
+.pull-left[
+Bioconductor package pages contain similar information to CRAN pages including the DEPENDS, IMPORTS, SUGGESTS.
+]
+.pull-right[
+&lt;div align="center"&gt;
+&lt;img src="imgs/biocPage.png" alt="igv" height="500" width="500"&gt;
+&lt;/div&gt;
+]
+
+---
+## Bioconductor Versions
+
+.pull-left[
+In contrast to CRAN, Bioconductor packages are released on an every 6 month schedule.
+
+With every 6 month release we get a new Bioconductor version and all packages in Bioconductor get their minor versions incremented by default.
+
+This means that to make use of new packages you may need to update your version of Bioconductor you are using.
+]
+.pull-right[
+![](imgs/BiocReleases.png)
+]
+
+
+---
+## Installing Bioconductor packages
+
+Every Bioconductor package has instructions on how to install which you can simply copy and paste into the R console.
+
+To do this, Bioconductor members have created the BiocManager package which is itself on CRAN. This allows it to be installed using base R functions and then to manage install the appropriate Biocnductor version of a package.
+
+![](imgs/biocInstall.png)
+
+
+---
+## Biocmanager package
+
+The BiocManager package can be used to install packages from CRAN and Bioconductor
+
+
+```r
+install.packages("BiocManager")
+library(BiocManager)
+install("DESeq2")
+```
+
+![](imgs/version.png)
+
+---
+## Biocmanager package
+
+It also contains useful functions to manage Bioconductor versions.
+
+Here we check the version of Bioconductor we are using by way of the **version()** function.
+
+
+```r
+version()
+```
+
+![](imgs/version.png)
+
+---
+## Biocmanager package update
+
+If we want to update all packages to a specific of bioconductor we can set the version argument in the install() function and not set a specific package.
+
+NOTE: Dont do this unless absolutely sure.
+
+
+```r
+install(version = "3.15")
+```
+
+---
+## Managing package versions
+
+At this point we can install packages from CRAN and/or Bioconductor and we can use the sessionInfo() argument to list all the package versions we have been using.
+
+So where is the reproducibility problem?
+
+Lets take a look at a very simple example.
+
+---
+## Managing package versions
+
+Lets load 2 packages which are very common in Bioinformatics - ggplot2 and DESeq2
+
+
+```r
+library(ggplot2)
+library(DESeq2)
+sessionInfo()
+```
+![](imgs/simpleDependencies.png)
+
+---
+## Managing package versions
+
+![](imgs/simpleDependencies.png)
+
+By simply loading two libraries i wanted to use, i am now managing the dependencies of these packages as well adding up to ~ 70 packages in total.
+
+I need to be able to not just capture versions but rebuild all these packages with the same versions in a new R or most likely for someone else to rebuild all these versions.
 
 
 
 ---
 ## Renv
 
-link to website. 
+.pull-left[
+Renv is a package to create and manage reproducible environments from within R.
 
-this manages everyithgn
+Written by Posit/Rstudio, Renv replaces much of the functionality of previous reprodubility packages such as packrat and is easily integrated into project analysis workflows.
+
+Its main use is to capture R and R package versions used within a project and provide functionality to rapodily rebuild these environments.
+]
+.pull-right[
+![](imgs/renvPage.png)
+]
+
+---
+## New projects with Renv
+.pull-left[
+The best place to start to use Renv is with a new project. We first create a new directory/project for us to work in.
+
+Rstudio in fact offers to set-up new projects with renv but we will skip this for now in order to set this up ourselves.
+
+Next we can install **renv** package from CRAN.
+
+
+```r
+install.packages("renv")
+```
+]
+.pull-right[
+![](imgs/createNewProject2.png)
+
+]
+
+---
+## Initialise a project
+
+With a new project directory, we can see that we have nothing in the environment and no scripts.
+
+Lets then now initialise renv by using the init() function.
+
+We can see that renv will discover project dependencies and then copy any required packages from your main R libraries to a project specific library cache. 
+
+Following this it creates a renv.lock file in the present directory containing R and R package version information.
+
+
+```r
+library(renv)
+init()
+```
+![](imgs/renv1.png)
+
+---
+## Project directory
+
+.pull-left[
+If we now review the project directory we can see renv has included a few essential files and directories
+
+* .Rprofile - This file is read at project start up and sources the activate script within the renv/ directory
+* renv.lock - This is the file containing all the information on R version and R package versions.
+* renv/ - This directory contains the local copy/cache of project libraries as well as the activate.R script referenced in the .Rprofile and required to set-up renv.
+]
+
+.pull-right[
+**Top level directory**
+![](imgs/renv2.png)
+**renv directory**
+![](imgs/renv3.png)
+]
+
+---
+## The renv.lock file
+
+.pull-left[
+The renv.lock file contains the most important information for reproducibility in JSON format.
+
+Within the lock file structure we have two sections at the moment. 
+
+1. R version information
+  + R version
+  + Repositories used and URL for the repository
+2. Package version information
+  + package name
+  + package version
+  + package source
+  + package repository
+  + package hash 
+
+]
+.pull-right[
+
+**renv.lock**
+![](imgs/lockFile.png)
+]
+
+---
+## Versions and Hashes.
+
+Renv uses a HASH of the Description file within a package to assess whether a package has updated.
+
+A Hash simply represents a piece of data with a fixed length string such that if the file/directory is changed a different hash would now represent the file/directory.
+
+In a well maintained package, the Hash should only change with a package version change but this is not always the case so a Hash is a more robust way to check a package is the same as expected.
 
 
 ---
-## Getting started
+## Adding packages
+.pull-left[
+Now we have started our project we can add a simple ggplot2 plotting script we are using within our analysis within this directory.
+]
+.pull-right[
+![](imgs/renvb.png)
 
-install, library and init
-?renv::init
-
-renv::init(bioconductor = TRUE)
-
-
-renv::init(bioconductor = "3.14")
-
----
-## Gneralized workflow
-
-Call renv::init() to initialize a new project-local environment with a private R library,
-
-Work in the project as normal, installing and removing new R packages as they are needed in the project,
-
-Call renv::snapshot() to save the state of the project library to the lockfile (called renv.lock),
-
-Continue working on your project, installing and updating R packages as needed.
-
-Call renv::snapshot() again to save the state of your project library if your attempts to update R packages were successful, or call renv::restore() to revert to the previous state as encoded in the lockfile if your attempts to update packages introduced some new problems.
+![](imgs/renvA.png)
+]
 
 ---
-## what has change/ been added?
+## Access required packages
 
-.Rprofile	Used to activate renv for new R sessions launched in the project.
-renv.lock	The lockfile, describing the state of your project’s library at some point in time.
-renv/activate.R	The activation script run by the project .Rprofile.
-renv/library	The private project library.
-renv/settings.json	Project settings – see ?settings for more details.
+.pull-left[
+Once a new script is within the directory we can first check whether the script contains any new packages and whether we need to update our renv environment.
 
+We can do this by using the renv status() function.
+
+
+```r
+status()
+```
+]
+
+.pull-right[
+![](imgs/renv_p1.png)
+]
+---
+## Record required packages
+
+.pull-left[
+Now we have accessed the packages in use within the project but not captured in the lock file we can run the renv snapshot() function to update our lock file.
+
+
+```r
+snapshot()
+```
+]
+
+.pull-right[
+![](imgs/renv_p2.png)
+]
 
 ---
-lock file
+## Updated lock file
 
-renv uses a lockfile to capture the state of your library at some point in time. It is stored as a collection of records, with different records defining:
+.pull-left[
 
-The version of renv used when generating the lockfile;
-The version of R used in that project;
-The R repositories that were active when the lockfile was created;
-Package records defining each R package, their version, and their installation source.
+The lock file now contains all the packages required within the project.
 
+We can see we have many more packages than just ggplot2 which was the only package called in the script.
 
+All these remaining packages were DEPENDS or IMPORTS for the ggplot2 package and so have had versions recorded as part of the ggplot2 package install.
 
----
-## Adding more packages
+]
 
+.pull-right[
 
----
-## Keeping you rlock up to date. 
+![](imgs/renvFull.png)
 
-By default, renv::snapshot() will examine your project’s R files to determine which packages are used in your project, and will include only those packages (alongside their recursive dependencies) in the lockfile. This is done via a call to the renv::dependencies() f
+]
 
 ---
-## Restoring
+## Sharing reproducible environments.
 
-works with bioconudctor - looks at biociews
+Once we have our final script as well as our renv initialised and up to date we most likely want to share with others so they can repeat the work.
 
+The key components of this to share with others are.
 
----
-##
+* The script/s used in analysis
+* renv.lock
+* renv/settings.json
+* .Rprofile
+* renv/activate.R
 
-
-Cache
-One of renv’s primary features is the use of a global package cache, which is shared across all projects using renv. The renv package cache provides two primary benefits:
-
-Future calls to renv::restore() and renv::install() 
-
-
-
-
-
-
-
-
-
-By default, renv reads the .gitignore files in your project (if any) to infer which files should be ignored when scanning for dependencies. If you find that renv’s dependency discovery is scanning files you don’t want to be scanned, you can use an .renvignore file to instruct renv to ignore certain patterns of files in the project. For example, you might us
+With this set-up your project should be reproducible with others.
 
 ---
-##
+## Reproducing from Renv
+.pull-left[
+Now we have sent these files to another user (or shared on GitHub) we can initialise the project on the new computer/system by entering the project directory containing the required renv files and running renv's restore function.
 
-if it all geos wrning
-
-renv::unistall
-renv::deactivate()
-
+This will update the project to have all the required packages installed and available to this project.
 
 
----
-## Further Resources
-
-
- 
-
----
-## Exercises
-
-Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
+```r
+restore()
+```
+]
+.pull-right[
+![](imgs/resotre2.png)
+]
 
 
 ---
