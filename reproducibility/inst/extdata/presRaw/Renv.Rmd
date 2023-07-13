@@ -113,7 +113,7 @@ People often face reproducibility issues when trying to repeat someone else's an
 
 In theory it should be easy. Just take the raw data and reprocess it in the same way. But there are often gaps in documentation.  
 
---
+---
 ## NIH and FAIR
 
 New funding applications now require a more extensive data management plan. Though this doesn't seem to have strong teeth for code, the [policy](https://sharing.nih.gov/data-management-and-sharing-policy/planning-and-budgeting-for-data-management-and-sharing/writing-a-data-management-and-sharing-plan) does say:
