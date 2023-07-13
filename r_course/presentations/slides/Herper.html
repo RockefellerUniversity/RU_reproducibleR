@@ -32,14 +32,14 @@ class: center, middle, inverse, title-slide
 
 ## What is Conda?
 
-(Conda)[https://conda.org/] is an open-source and cross-platform package and environment management system. 
+[Conda](https://conda.org/) is an open-source and cross-platform package and environment management system. 
 
 It was originally developed to help manage packages for Python, but that has expanded beyond python and is very popular with R users as well. 
 
 ---
 ## How does Conda work?
 
-
+![condaoverview](imgs/1_conda_overview.png)
 
 ---
 ## Why Conda?
@@ -55,9 +55,13 @@ It was originally developed to help manage packages for Python, but that has exp
 There are many different repository tools in the Conda ecosystem. They all have slight differences. 
 
 Conda - The core package manager
+
 Miniconda - A minimal install of Conda
+
 Anaconda - A maximal install of Conda
+
 Mamba - A reimplementation of Conda built in C++ [FASTER]
+
 Minimamba - A minimal install of Mamba
 
 ---
@@ -127,9 +131,21 @@ conda_paths &lt;- install_CondaTools(tools = c("salmon", "kallisto"), env = "rna
 conda_paths
 ```
 
+```
+$pathToConda
+[1] "/Users/mattpaul/Desktop/My_Conda/bin/conda"
+
+$environment
+[1] "rnaseq"
+
+$pathToEnvBin
+[1] "/Users/mattpaul/Desktop/My_Conda/envs/rnaseq/bin"
+
+```
+
 
 ---
-## Checking for packages in an environment with **list_CondaPkgs**
+## Checking packages in an environment
 
 The **list_CondaPkgs** function allows users to check what packages are installed in a given environment.
 
@@ -151,7 +167,7 @@ libaec            1.0.6       conda-forge	osx-64
 ```
 
 ---
-## Finding Conda packages with **conda_search**
+## Finding Conda packages
 
 If the user is unsure of the exact name, or version of a tool available on conda, they can use the **conda_search** function. Searches will find close matches for incorrect queries.
 
@@ -167,7 +183,7 @@ There are no exact matches for the query 'kall', but multiple packages contain t
 ```
 
 ---
-## Finding Conda package versions with **conda_search**
+## Finding Conda package versions
 
 If you have the exact name you can search for what versions are available on Conda. 
 
@@ -192,7 +208,7 @@ conda_search("kallisto", pathToMiniConda = my_miniconda)
 ```
 
 ---
-## Finding Conda package versions with **conda_search**
+## Finding Conda package versions
 
 Specific package versions can be searched for using the Conda format i.e. "kallisto==0.46", "kallisto&gt;=0.48" or "kallisto&lt;=0.45".
 
@@ -318,7 +334,7 @@ export_CondaEnv("rnaseq", yml_name, pathToMiniConda = my_miniconda)
 
 The yml that is output contains all the information you need to rebuild the environment. This is also a a nice resource for when it comes to writing your methods. 
 
-
+![yml](imgs/yml.png)
 
 ---
 ## Importing from *.yml*
@@ -337,9 +353,9 @@ import_CondaEnv(yml_import = testYML, pathToMiniConda = my_miniconda)
 
 ---
 ## Other tricks
-- Verbosity - We can Herper either very chatty or compltely silent using the *verbose* argument. This is especially useful for troubleshooting or building pipelines. 
-- list_CondaEnv() - This will list every version of Conda, and every environment you have installed. 
-- Mamba - This will speed up your Conda. We are in the process of adding an option that will allow you to use Mamba resolution with Herper.
+- **Verbosity** - We can Herper either very chatty or compltely silent using the *verbose* argument. This is especially useful for troubleshooting or building pipelines. 
+- **list_CondaEnv()** - This will list every version of Conda, and every environment you have installed. 
+- **Mamba** - This will speed up your Conda. We are in the process of adding an option that will allow you to use Mamba resolution with Herper.
 
 
 ---
@@ -367,6 +383,8 @@ Sometimes we have to use pip. But that does not mean we have to leave our enviro
 
 ---
 ## Pip install
+
+First we need to mkae sure we have pip installed. Oftent his is not the case in new environments. Then we provide the direct path to our command and the isntall should run. 
 
 
 ```r
