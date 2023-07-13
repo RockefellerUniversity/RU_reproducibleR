@@ -19,6 +19,38 @@ message(toMessage)
 <p>&nbsp;</p>
 These exercises follow the material in the GitHub section of [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
 
-1. 
+1. Lets setup an environment to do some basic counting for RNAseq. We will follow the example in the salmon [guide](https://combine-lab.github.io/salmon/getting_started/), but we will modify it for S. cerevisiae to make it quicker as the genomes smaller. 
+  - Install Salmon with Herper
+  - Download reference data from Ensembl ("http://ftp.ensemblgenomes.org/pub/fungi/release-56/fasta/saccharomyces_cerevisiae/cdna/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa.gz")
+  - Use *with_CondaEnv()* to build the salmon index
+  - Next lets download a yeast dataset. Here's a link to a meiotic yeast RNAseq fastq file: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/065/SRR18072865/SRR18072865_1.fastq.gz
+  - Use *with_CondaEnv()* to quantify the yeast counts
+  - Save your conda environment with 
+  
+  
+```{r, eval=F}
+library(Herper)
+install_CondaTools(tools = "salmon", env = "rnaseq")
 
+download.file("http://ftp.ensemblgenomes.org/pub/fungi/release-56/fasta/saccharomyces_cerevisiae/cdna/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa.gz", "~/Desktop/Saccharomyces_cerevisiae.R64.fa.gz")
+
+with_CondaEnv(new = "rnaseq", code = system2("salmon", c("index", 
+                                                         "-t", "~/Desktop/Saccharomyces_cerevisiae.R64.fa.gz",
+                                                         "-i", "~/Desktop/Saccharomyces_cerevisiae.R64_index")))
+
+download.file("ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/065/SRR18072865/SRR18072865_1.fastq.gz", "~/Desktop/yeast_fastq.fastq.qz")
+
+with_CondaEnv(new = "rnaseq", code = system2("salmon", c("quant",
+                                                         "-i", "~/Desktop/Saccharomyces_cerevisiae.R64_index",
+                                                         "-l", "A",
+                                                         "-r", "~/Desktop/yeast_fastq.fastq.qz",
+                                                         "-p", "8",
+                                                         "--validateMappings",
+                                                         "-o", "~/Desktop/yeast_quant")))
+
+export_CondaEnv("rnaseq", "~/Desktop/my_yeast_salmon_conda_envrionment.yml")
+                                                         
+```
+  
+  
 - 
