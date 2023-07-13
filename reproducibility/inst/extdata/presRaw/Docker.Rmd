@@ -100,7 +100,6 @@ knitr::include_graphics("imgs/jhu_docker_rationale.png")
 
 ---
 
-
 ## The solution - Docker!
 
 Docker allows for the creation of an isolated environment that can be shipped across different users, machines, or operating systems, and to virtual machines or the cloud. 
@@ -116,9 +115,9 @@ knitr::include_graphics("imgs/jhu_docker_rationale2.png")
 
 ## Docker client and host
 
-The Docker client communicates with the Docker daemon based on [user commands](https://docs.docker.com/engine/reference/commandline/cli/)
+The Docker client communicates with the Docker daemon based on [user commands.](https://docs.docker.com/engine/reference/commandline/cli/)
 
-A daemon is a program that runs as a background process and is not under direct control of the computer user, and the Docker daemon is the engine that manages Docker services and objects 
+A daemon is a program that runs as a background process and is not under direct control of the computer user, and the Docker daemon is the engine that manages Docker services and objects. 
 
 
 ```{r, echo=FALSE, out.width="85%", fig.align='center'}
@@ -129,7 +128,7 @@ knitr::include_graphics("imgs/docker_schema_empty.png")
 
 ## Creating Docker images
 
-The 'docker build' command uses a Dockerfile to create an image
+The 'docker build' command uses a Dockerfile to create an image.
 
 A Docker image is a read-only, isolated file system that contains all software, dependencies, scripts, and metadata required to run a container.
 
@@ -142,7 +141,7 @@ knitr::include_graphics("imgs/docker_schema_addBuild.png")
 
 ## Launching Docker containers
 
-Once an image is built, an instance of this image can be launched as a stand-alone application, also known as a container
+Once an image is built, an instance of this image can be launched as a stand-alone application, also known as a container.
 
 ```{r, echo=FALSE, out.width="85%", fig.align='center'}
 knitr::include_graphics("imgs/docker_schema_addRun.png")
@@ -165,11 +164,11 @@ knitr::include_graphics("imgs/docker_schema_all.png")
 
 Use [this link](https://www.docker.com/get-started/) to install Docker. 
 
-* Click on the Docker desktop icon and make an account with Docker
-* Docker must be open and running to use the command line interface (CLI), which is how we will primarily use Docker
-* [See here](https://docs.docker.com/engine/reference/commandline/cli/) for Docker CLI commands
+* Click on the Docker desktop icon and make an account with Docker.
+* Docker must be open and running to use the command line interface (CLI), which is how we will primarily use Docker.
+* [See here](https://docs.docker.com/engine/reference/commandline/cli/) for Docker CLI commands.
 
-Check Docker version to make sure Docker is installed and running
+Check Docker version to make sure Docker is installed and running.
 
 *Code (terminal):*
 ```{sh, eval=F}
@@ -186,7 +185,7 @@ knitr::include_graphics("imgs/docker_version.png")
 
 ## Installing Docker
 
-If previous command isn't found check the Docker Desktop advanced settings and make sure CLI tools are available system-wide
+If previous command isn't found check the Docker Desktop advanced settings and make sure CLI tools are available system-wide.
 
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
 knitr::include_graphics("imgs/docker_config.png")
@@ -219,7 +218,7 @@ if(params$isSlides == "yes"){
 
 ## Pulling Docker images - Rocker
 
-[Rocker](https://rocker-project.org/) is a very useful source of images on Docker Hub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R
+[Rocker](https://rocker-project.org/) is a very useful source of images on Docker Hub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R.
 
 *Code (terminal):*
 ```{sh, eval=F}
