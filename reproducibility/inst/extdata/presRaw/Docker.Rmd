@@ -417,6 +417,7 @@ This R environment will then be loaded the next time you launch an RStudio conta
 
 *Code (terminal):*
 ```{sh, eval=F}
+# For windows use: dir /a
 ls -a data
 rm -r data/.local data/.config
 ```
