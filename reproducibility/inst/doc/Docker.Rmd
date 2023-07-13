@@ -19,47 +19,135 @@ message(toMessage)
 <p>&nbsp;</p>
 These exercises follow the material in the GitHub section of [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
 
-1. Command line Git
+1. Run R using a Docker container from Docker Hub
 
-- Create a new folder called GitHub_Training, and turn it into a git repository using the git command line.  
-- Create a README.md. Write in the name of a TV show.
-- Copy the dayOfWeek Rscript from the *data* directory to the GitHub_Training directory.
-- Add and commit each the README and the Rscript separately. 
-- Create a project on GitHub. Add this as a remote to your local Git for GitHub_Training. 
-- Push changes up to the remote.
+- Pull the Rocker R image for version 4.2.3 from Docker Hub
+- Confirm that this image is available on your computer
+- Launch a container from this image 
+  + HINT: is the -i and -t flags in the docker run command to run R interactively in container
+- execute R code from within the container
 
 ```{sh, eval=F,echo=toMessage}
-mkdir GitHub_Training
-cd GitHub_Training
-git init
-touch README.md
-echo 'The Twilight Zone' >> README.md
-cp ../data/dayOfWeek.r .
-git add README.md
-git commit -m"create README"
-git commit -m"add days of week script"
-git remote add origin https://github.com/BRC-RU/GitHub_Training.git
-git push origin master
+docker pull rocker/r-ver:4.2.3
+docker images
+docker run --rm -ti rocker/r-ver:4.2.3
+# an R prompt should appear in the terminal allowing you to write R code
 ```
 
-2.  RStudio Git Integration
+2.  Customize the Rocker R Docker image
 
-- Create a version controlled R project. Link this to your GitHub_Training remote. Save this in a different place to the Git repository you created in section 1 with command line Git.
-- Update the README.md to include the name of a movie. 
-- Create a new Rmarkdown. Within this source the dayOfWeek Rscript. Add session information. and then compile the Rmarkdown to HTML.
-- Update the .gitignore so Rmd files are ignored.
-- Stage and commit changes through RStudio. *Remember to not commit every change together. Commit changes that make sense together.*
-- Push changes up to GitHub. 
+- Make a Dockerfile that contains R version 4.2.3, the CRAN packages dplyr and ggplot2, the Bioconductor packages DESeq2 and rtracklayer, and the conda package samtools.
+  + HINT: Make sure you install BiocManager from CRAN so that you can install Bioconductor packages and also install Herper so that you can install samtools
+- Build an image using this Dockerfile
 
-3. Workflow and Collaboration
-Next we will practice the GitHub workflow. To do this we will use the repository [here](https://github.com/BRC-RU/GitHub_Training_GIFS). This is my collection of GIFS for how this training session makes me feel, and you can add to this. 
+```{sh, eval=F,echo=toMessage}
+# navigate to 'r_course' directory in downloaded material
+ cd /PathToDownloadedCourse/Reproducible_R-master/r_course
+ 
+docker build -t rocker/r-ver:4.2.3_v2 ./data/docker_exercise
+docker images
+```
 
-- Contribute to the issues. Either create a new one, or add comments to existing issues. 
+- Launch a container with this image with a volume from your local computer mounted
+- Confirm that the container is running
+- Confirm that you can see the files in the mounted folder
+  + HINT: The R Rocker image does not set the working directory. You need to mount the local directory somewhere within the docker image and then navigate to that location from R to see those files. I recommend mounting your local directory to '/home/local_data' within that container's file system (this folder will automatically be made in container)
+  + HINT #2: you can also use the 'docker exec' command from a separate terminal tab to run a command within a container. You can type 'docker exec IMAGEID ls' to list the file system.
 
-- Take a fork of the repository. You can create a local copy through RStudio or command line git.
+```{sh, eval=F,echo=toMessage}
+# Code in terminal 
+docker run --rm -ti -v ./data:/home/local_data rocker/r-ver:4.2.3_v2
+docker ps
 
-- Find GIF that you like. ([GIPHY](https://giphy.com/) has lots of options). Copy the URL.
+# see the mounted files
+docker exec 13223bfef159 ls home # this command contains the container ID from 'docker ps'
+# you should see both the miniconda directory that was made in the Dockerfile and the 'local_data' directory that contians the mounted directory
 
-- Open up the README.md document. Add a line to insert you GIF to the README.md. An example line is here: \<img src="https://my_gif_url_here.gif" width="300"/>
 
-- Create a pull request to merge your fork back into the main repository.
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+knitr::include_graphics("imgs/dockEx_docker_ps.png")
+cat("\n")
+```
+
+
+- make a plot from the 'mtcars' data set shows the relationship between weight (wt) and miles per gallon (mpg) that comes with R and save to your computer
+  + HINT: this table is available as a variable called 'mtcars'
+  
+```{r, eval=F,echo=toMessage}
+# R code 
+
+# set working directory to be the mounted directory
+setwd("home/local_data")
+# see files in mounted folder
+list.files()
+```
+
+```{r, echo=FALSE, out.width="75%", fig.align='left'}
+knitr::include_graphics("imgs/dockerExx_list_files.png")
+cat("\n")
+```
+
+
+
+```{r, eval=F,echo=toMessage}
+library(ggplot2)
+
+# make and save plot
+ggplot(mtcars, aes(x = wt, y = mpg)) + 
+  geom_point()
+ggsave("mpg_vs_weight.pdf")
+
+# now look in the directory on your computer that is mounted and this plot should be there
+```
+
+- confirm that samtools is installed
+
+```{r, eval=F,echo=toMessage}
+# R code
+library(Herper)
+
+# the environment name and miniconda path set in the Dockerfile
+Herper::local_CondaEnv(new = "docker_exercises", 
+                       pathToMiniConda = "/home/miniconda")
+# test out samtools
+system("samtools --version")
+
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+knitr::include_graphics("imgs/dockerEx_samtools_version.png")
+cat("\n")
+```
+- push this image to Docker Hub
+
+
+```{sh, eval=F,echo=toMessage}
+# Code in terminal 
+
+# log in and provide credentials used to sign into Docker Hub
+# this will prompt you to enter username and password
+docker login
+
+# get image ID to tag and push 
+docker images
+
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+knitr::include_graphics("imgs/dockEx_docker_images.png")
+cat("\n")
+```
+
+```{sh, eval=F,echo=toMessage}
+# tag the image you want to push with your Docker Hub username and a tag name after the colon
+# the ID is from the 'docker images' command
+docker tag a8954d8caa31 dougbarrows/r-ver_4.2.3_v2:topush
+
+# push to Docker Hub
+docker push dougbarrows/r-ver_4.2.3_v2:topush
+```
+
+
+```

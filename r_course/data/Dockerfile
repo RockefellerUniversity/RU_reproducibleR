@@ -17,9 +17,9 @@ RUN apt-get update && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN Rscript -e "install.packages(c('dplyr', 'renv', 'BiocManager'));"
-RUN Rscript -e "BiocManager::install(version = '3.16')"
-RUN Rscript -e "BiocManager::install(c('Herper', 'DESeq2', 'tximport'))"
+RUN Rscript -e "options(warn=2); install.packages(c('dplyr', 'renv', 'BiocManager'));"
+RUN Rscript -e "options(warn=2); BiocManager::install(version = '3.16')"
+RUN Rscript -e "options(warn=2); BiocManager::install(c('Herper', 'DESeq2', 'tximport'))"
 
 EXPOSE 8787
 
