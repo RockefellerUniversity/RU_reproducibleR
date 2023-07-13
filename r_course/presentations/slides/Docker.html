@@ -77,7 +77,6 @@ Something works on your computer (e.g. bioinformatics analysis or software deplo
 
 ---
 
-
 ## The solution - Docker!
 
 Docker allows for the creation of an isolated environment that can be shipped across different users, machines, or operating systems, and to virtual machines or the cloud. 
@@ -91,9 +90,9 @@ Docker allows for the creation of an isolated environment that can be shipped ac
 
 ## Docker client and host
 
-The Docker client communicates with the Docker daemon based on [user commands](https://docs.docker.com/engine/reference/commandline/cli/)
+The Docker client communicates with the Docker daemon based on [user commands.](https://docs.docker.com/engine/reference/commandline/cli/)
 
-A daemon is a program that runs as a background process and is not under direct control of the computer user, and the Docker daemon is the engine that manages Docker services and objects 
+A daemon is a program that runs as a background process and is not under direct control of the computer user, and the Docker daemon is the engine that manages Docker services and objects. 
 
 
 &lt;img src="imgs/docker_schema_empty.png" width="85%" style="display: block; margin: auto;" /&gt;
@@ -102,7 +101,7 @@ A daemon is a program that runs as a background process and is not under direct 
 
 ## Creating Docker images
 
-The 'docker build' command uses a Dockerfile to create an image
+The 'docker build' command uses a Dockerfile to create an image.
 
 A Docker image is a read-only, isolated file system that contains all software, dependencies, scripts, and metadata required to run a container.
 
@@ -113,7 +112,7 @@ A Docker image is a read-only, isolated file system that contains all software, 
 
 ## Launching Docker containers
 
-Once an image is built, an instance of this image can be launched as a stand-alone application, also known as a container
+Once an image is built, an instance of this image can be launched as a stand-alone application, also known as a container.
 
 &lt;img src="imgs/docker_schema_addRun.png" width="85%" style="display: block; margin: auto;" /&gt;
 
@@ -132,11 +131,11 @@ There are public repositories of Docker images (e.g. [Docker Hub](https://hub.do
 
 Use [this link](https://www.docker.com/get-started/) to install Docker. 
 
-* Click on the Docker desktop icon and make an account with Docker
-* Docker must be open and running to use the command line interface (CLI), which is how we will primarily use Docker
-* [See here](https://docs.docker.com/engine/reference/commandline/cli/) for Docker CLI commands
+* Click on the Docker desktop icon and make an account with Docker.
+* Docker must be open and running to use the command line interface (CLI), which is how we will primarily use Docker.
+* [See here](https://docs.docker.com/engine/reference/commandline/cli/) for Docker CLI commands.
 
-Check Docker version to make sure Docker is installed and running
+Check Docker version to make sure Docker is installed and running.
 
 *Code (terminal):*
 
@@ -152,7 +151,7 @@ docker --version
 
 ## Installing Docker
 
-If previous command isn't found check the Docker Desktop advanced settings and make sure CLI tools are available system-wide
+If previous command isn't found check the Docker Desktop advanced settings and make sure CLI tools are available system-wide.
 
 &lt;img src="imgs/docker_config.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -169,7 +168,7 @@ class: inverse, center, middle
 
 ## Pulling Docker images - Rocker
 
-[Rocker](https://rocker-project.org/) is a very useful source of images on Docker Hub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R
+[Rocker](https://rocker-project.org/) is a very useful source of images on Docker Hub for R and RStudio. We can pull these images immediately after installing Docker. Here we pull an image containing RStudio and a specific version of R.
 
 *Code (terminal):*
 
@@ -669,7 +668,7 @@ The lock file is in the same directory as the Dockerfile, and when building the 
 &lt;img src="imgs/dockerfile_renv_restore.png" width="80%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
-## Building immage and running container 
+## Building image and running container 
 
 Build the image with the build context (last argument) set to the directory containing the Dockerfile and the lock file, then launch a container.
 
