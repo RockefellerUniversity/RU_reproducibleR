@@ -827,7 +827,7 @@ docker run --rm \
 ---
 ## Exercises
 
-Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
+Exercise on Reproducibility in R can be found [here](../../exercises/exercises/Docker_exercise.html)
 
 
 ---
