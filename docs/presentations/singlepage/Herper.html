@@ -1586,17 +1586,17 @@ well.</p>
 </div>
 <div id="conda-vs-miniconda-vs" class="section level2">
 <h2>Conda vs miniconda vs …</h2>
-<p>There are many different repository tools in the conda ecosystem.
-They all have key differences.</p>
+<p>There are many different repository tools in the Conda ecosystem.
+They all have slight differences.</p>
 <p>Conda - The core package manager Miniconda - A minimal install of
 Conda Anaconda - A maximal install of Conda Mamba - A reimplementation
 of Conda built in C++ [FASTER] Minimamba - A minimal install of
 Mamba</p>
 </div>
-<div id="working-with-conda" class="section level2">
-<h2>Working with Conda</h2>
+<div id="a-few-tips" class="section level2">
+<h2>A few tips</h2>
 <ul>
-<li>Work with miniconda (or Herper)</li>
+<li>Work with miniconda or even better use Herper</li>
 <li>Always install software into new environments (never the base)</li>
 </ul>
 </div>
@@ -1619,15 +1619,24 @@ environment built within the same directory (by default
 /github/home/.local/share/r-miniconda/envs/USERS_ENVIRONMENT_HERE).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Herper)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_CondaTools</span>(<span class="at">tools =</span> <span class="st">&quot;star&quot;</span>, <span class="at">env =</span> <span class="st">&quot;rnaseq&quot;</span>)</span></code></pre></div>
+<pre><code>$pathToConda
+[1] &quot;/Users/mattpaul/Desktop/My_Conda/bin/conda&quot;
+
+$environment
+[1] &quot;rnaseq&quot;
+
+$pathToEnvBin
+[1] &quot;/Users/mattpaul/Desktop/My_Conda/envs/rnaseq/bin&quot;
+</code></pre>
 </div>
 <div id="installing-tools-with-speicific-conda" class="section level2">
 <h2>Installing Tools with speicific conda</h2>
 <p>If you already have Miniconda installed or you would like to install
 to a custom location, you can specify the path with the
 <em>pathToMiniConda</em> parameter.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_miniconda <span class="ot">&lt;-</span> <span class="st">&quot;~/Desktop/My_Conda&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install_CondaTools</span>(<span class="at">tools =</span> <span class="st">&quot;star&quot;</span>, <span class="at">env =</span> <span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_miniconda <span class="ot">&lt;-</span> <span class="st">&quot;~/Desktop/My_Conda&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install_CondaTools</span>(<span class="at">tools =</span> <span class="st">&quot;star&quot;</span>, <span class="at">env =</span> <span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
 </div>
 <div id="adding-more-tools" class="section level2">
 <h2>Adding more tools</h2>
@@ -1636,58 +1645,82 @@ to a custom location, you can specify the path with the
 be added: <em>updateEnv = TRUE</em>.</p>
 <p>By default when we run this command, the path to Conda and the
 environment is returned. We can save this as a variable for later.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>conda_paths <span class="ot">&lt;-</span> <span class="fu">install_CondaTools</span>(<span class="at">tools =</span> <span class="fu">c</span>(<span class="st">&quot;salmon&quot;</span>, <span class="st">&quot;kallisto&quot;</span>), <span class="at">env =</span> <span class="st">&quot;rnaseq&quot;</span>,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">updateEnv =</span> <span class="cn">TRUE</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>conda_paths</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>conda_paths <span class="ot">&lt;-</span> <span class="fu">install_CondaTools</span>(<span class="at">tools =</span> <span class="fu">c</span>(<span class="st">&quot;salmon&quot;</span>, <span class="st">&quot;kallisto&quot;</span>), <span class="at">env =</span> <span class="st">&quot;rnaseq&quot;</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">updateEnv =</span> <span class="cn">TRUE</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>conda_paths</span></code></pre></div>
 </div>
 <div id="checking-for-packages-in-an-environment-with-list_condapkgs" class="section level2">
 <h2>Checking for packages in an environment with
 <strong>list_CondaPkgs</strong></h2>
 <p>The <strong>list_CondaPkgs</strong> function allows users to check
 what packages are installed in a given environment.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_CondaPkgs</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_CondaPkgs</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<pre><code>boost-cpp         1.78.0      conda-forge   osx-64  
+bzip2               1.0.8       pkgs/main   osx-64  
+c-ares            1.19.0        pkgs/main   osx-64  
+ca-certificates   2023.05.30    pkgs/main   osx-64  
+hdf5              1.12.2      conda-forge   osx-64  
+htslib            1.17        bioconda  osx-64  
+icu               70.1        conda-forge   osx-64  
+kallisto            0.50.0      bioconda    osx-64  
+krb5                1.20.1      pkgs/main   osx-64  
+libaec            1.0.6       conda-forge   osx-64</code></pre>
 </div>
 <div id="finding-conda-packages-with-conda_search" class="section level2">
 <h2>Finding Conda packages with <strong>conda_search</strong></h2>
 <p>If the user is unsure of the exact name, or version of a tool
 available on conda, they can use the <strong>conda_search</strong>
 function. Searches will find close matches for incorrect queries.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_search</span>(<span class="st">&quot;salmo&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_search</span>(<span class="st">&quot;kall&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<pre><code>There are no exact matches for the query &#39;kall&#39;, but multiple packages contain this text:
+- kallisto
+- r-merge-kallisto</code></pre>
 </div>
 <div id="finding-conda-package-versions-with-conda_search" class="section level2">
 <h2>Finding Conda package versions with
 <strong>conda_search</strong></h2>
 <p>If you have the exact name you can search for what versions are
 available on Conda.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_search</span>(<span class="st">&quot;salmon&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_search</span>(<span class="st">&quot;kallisto&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<pre><code>2   kallisto    0.43.1  https://conda.anaconda.org/bioconda/osx-64  
+4   kallisto    0.44.0  https://conda.anaconda.org/bioconda/osx-64  
+5   kallisto    0.45.0  https://conda.anaconda.org/bioconda/osx-64  
+6   kallisto    0.45.1  https://conda.anaconda.org/bioconda/osx-64  
+8   kallisto    0.46.0  https://conda.anaconda.org/bioconda/osx-64  
+9   kallisto    0.46.1  https://conda.anaconda.org/bioconda/osx-64  
+12  kallisto    0.46.2  https://conda.anaconda.org/bioconda/osx-64  
+15  kallisto    0.48.0  https://conda.anaconda.org/bioconda/osx-64  
+16  kallisto    0.50.0  https://conda.anaconda.org/bioconda/osx-64</code></pre>
 </div>
 <div id="finding-conda-package-versions-with-conda_search-1" class="section level2">
 <h2>Finding Conda package versions with
 <strong>conda_search</strong></h2>
 <p>Specific package versions can be searched for using the Conda format
-i.e. “salmon==1.3”, “salmon&gt;=1.3” or “salmon&lt;=1.3”.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_search</span>(<span class="st">&quot;salmon&lt;=1.0&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+i.e. “kallisto==0.46”, “kallisto&gt;=0.48” or “kallisto&lt;=0.45”.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conda_search</span>(<span class="st">&quot;kallisto&lt;=0.45&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<pre><code>2   kallisto    0.43.1  https://conda.anaconda.org/bioconda/osx-64  
+4   kallisto    0.44.0  https://conda.anaconda.org/bioconda/osx-64</code></pre>
 </div>
 <div id="installing-specific-versions" class="section level2">
 <h2>Installing specific versions</h2>
 <p>We can use the same version nomenclature to also install these tools.
-Here we will downgrade the version of salmon we have installed.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>conda_paths <span class="ot">&lt;-</span> <span class="fu">install_CondaTools</span>(<span class="at">tools =</span> <span class="st">&quot;salmon&lt;=1.0&quot;</span>, <span class="at">env =</span> <span class="st">&quot;rnaseq&quot;</span>, <span class="at">updateEnv =</span> T,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+Here we will downgrade the version of Kallisto we have installed.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>conda_paths <span class="ot">&lt;-</span> <span class="fu">install_CondaTools</span>(<span class="at">tools =</span> <span class="st">&quot;kallisto&lt;=0.45&quot;</span>, <span class="at">env =</span> <span class="st">&quot;rnaseq&quot;</span>, <span class="at">updateEnv =</span> T,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
 </div>
 <div id="installing-specific-versions-1" class="section level2">
 <h2>Installing specific versions</h2>
-<p>We can now see that we have downgraded</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list_CondaPkgs</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
+<p>We can now see that we have downgraded Kallisto.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list_CondaPkgs</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">&quot;kallisto&quot;</span>)</span></code></pre></div>
 </div>
 <div id="running-software" class="section level2">
 <h2>Running software</h2>
-<p>Once installed within a conda environment, many external software can
-be executed directly from the conda environment’s bin directory without
+<p>Once installed within a Conda environment, many external software can
+be executed directly from the Conda environment’s bin directory without
 having to perform any additional actions.</p>
 <p>The Herper package uses the <strong><a href="https://withr.r-lib.org">withr</a></strong> family of functions
 (<strong>with_CondaEnv()</strong> and <strong>local_CondaEnv()</strong>)
@@ -1709,10 +1742,23 @@ to specify any custom miniconda install location.</p>
 then use the R function <em>system2()</em> to run some terminal/command
 line code from within R. In this case we want to run the salmon
 help.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">with_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">system2</span>(<span class="at">command=</span><span class="st">&quot;salmon&quot;</span>,<span class="at">args =</span> <span class="st">&quot;help&quot;</span>,<span class="at">stdout =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pathToMiniConda=</span>my_miniconda)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">with_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">system2</span>(<span class="at">command=</span><span class="st">&quot;salmon&quot;</span>,<span class="at">args =</span> <span class="st">&quot;help&quot;</span>,<span class="at">stdout =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pathToMiniConda=</span>my_miniconda)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div>
+<pre><code> [1] &quot;salmon v1.10.2&quot;                                                     
+ [2] &quot;&quot;                                                                   
+ [3] &quot;Usage:  salmon -h|--help or &quot;                                       
+ [4] &quot;        salmon -v|--version or &quot;                                    
+ [5] &quot;        salmon -c|--cite or &quot;                                       
+ [6] &quot;        salmon [--no-version-check] &lt;COMMAND&gt; [-h | options]&quot;       
+ [7] &quot;&quot;                                                                   
+ [8] &quot;Commands:&quot;                                                          
+ [9] &quot;     index      : create a salmon index&quot;                            
+[10] &quot;     quant      : quantify a sample&quot;                                
+[11] &quot;     alevin     : single cell analysis&quot;                             
+[12] &quot;     swim       : perform super-secret operation&quot;                   
+[13] &quot;     quantmerge : merge multiple quantifications into a single file&quot;</code></pre>
 </div>
 <div id="local_condaenv" class="section level2">
 <h2><strong>local_CondaEnv</strong></h2>
@@ -1725,32 +1771,25 @@ the current function ends.</p>
 function, allowing access to the Conda environment’s PATH and variables
 from within the the function itself but resetting all environmental
 variables once complete.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>salmonHelp <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">local_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    helpMessage <span class="ot">&lt;-</span> <span class="fu">system2</span>(<span class="at">command =</span> <span class="st">&quot;salmon&quot;</span>, <span class="at">args =</span> <span class="st">&quot;help&quot;</span>, <span class="at">stdout =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    helpMessage</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">salmonHelp</span>()</span></code></pre></div>
-</div>
-<div id="a-practical-example" class="section level2">
-<h2>A practical example</h2>
-<p>To further demonstrate this we will use the first command from the <a href="https://www.bioconductor.org/packages/release/bioc/html/seqCNA.html">seqCNA</a>
-vignette. This step requires samtools. If this is not installed and
-available there is an error.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seqCNA)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(seqsumm_HCC1143)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">try</span>(rco <span class="ot">&lt;-</span> <span class="fu">readSeqsumm</span>(<span class="at">tumour.data =</span> seqsumm_HCC1143), <span class="at">silent =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p>Samtools is listed as a System Requirement for seqCNA, so we can
-first use <strong>install_CondaSysReqs()</strong> to install samtools.
-In this case we are installing samtools in the environment: seqCNA_env.
-We can then run the seqCNA command using <strong>with_CondaEnv</strong>
-specifying that we want to use our environment containing samtools.
-seqCNA can then find samtools and execute successfully.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_CondaSysReqs</span>(<span class="at">pkg =</span> <span class="st">&quot;seqCNA&quot;</span>, <span class="at">env =</span> <span class="st">&quot;seqCNA_env&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>rco <span class="ot">&lt;-</span> <span class="fu">with_CondaEnv</span>(<span class="at">new =</span> <span class="st">&quot;seqCNA_env&quot;</span>, <span class="fu">readSeqsumm</span>(<span class="at">tumour.data =</span> seqsumm_HCC1143),</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">pathToMiniConda =</span> myMiniconda)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rco)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>salmonHelp <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">local_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    helpMessage <span class="ot">&lt;-</span> <span class="fu">system2</span>(<span class="at">command =</span> <span class="st">&quot;salmon&quot;</span>, <span class="at">args =</span> <span class="st">&quot;help&quot;</span>, <span class="at">stdout =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    helpMessage</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">salmonHelp</span>()</span></code></pre></div>
+<pre><code> [1] &quot;salmon v1.10.2&quot;                                                     
+ [2] &quot;&quot;                                                                   
+ [3] &quot;Usage:  salmon -h|--help or &quot;                                       
+ [4] &quot;        salmon -v|--version or &quot;                                    
+ [5] &quot;        salmon -c|--cite or &quot;                                       
+ [6] &quot;        salmon [--no-version-check] &lt;COMMAND&gt; [-h | options]&quot;       
+ [7] &quot;&quot;                                                                   
+ [8] &quot;Commands:&quot;                                                          
+ [9] &quot;     index      : create a salmon index&quot;                            
+[10] &quot;     quant      : quantify a sample&quot;                                
+[11] &quot;     alevin     : single cell analysis&quot;                             
+[12] &quot;     swim       : perform super-secret operation&quot;                   
+[13] &quot;     quantmerge : merge multiple quantifications into a single file&quot;</code></pre>
 </div>
 <div id="reproducible-environments" class="section level2">
 <h2>Reproducible environments</h2>
@@ -1759,8 +1798,14 @@ you will want to save it. One way to back it up is to export a snapshot.
 For Conda this snapshot is a <em>.yml</em> file. These files contain all
 information about the environment you would need in order to rebuild or
 share it for collaboration.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>yml_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;rnaseq_&quot;</span>, <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%Y%m%d&quot;</span>), <span class="st">&quot;.yml&quot;</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">export_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>, yml_name, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>yml_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;rnaseq_&quot;</span>, <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%Y%m%d&quot;</span>), <span class="st">&quot;.yml&quot;</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">export_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>, yml_name, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+</div>
+<div id="our-.yml-file" class="section level2">
+<h2>Our <em>.yml</em> file</h2>
+<p>The yml that is output contains all the information you need to
+rebuild the environment. This is also a a nice resource for when it
+comes to writing your methods.</p>
 </div>
 <div id="importing-from-.yml" class="section level2">
 <h2>Importing from <em>.yml</em></h2>
@@ -1771,15 +1816,20 @@ or manually created.</p>
 <p>Users can simply provide a path to the YAML file for import. They can
 also specify the environment name, but by default the name will be taken
 from the YAML.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>testYML <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata/test.yml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;Herper&quot;</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">import_CondaEnv</span>(<span class="at">yml_import =</span> testYML, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>testYML <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata/test.yml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;Herper&quot;</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">import_CondaEnv</span>(<span class="at">yml_import =</span> testYML, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
 </div>
 <div id="other-tricks" class="section level2">
 <h2>Other tricks</h2>
 <ul>
-<li>Mamba - Mamba</li>
-<li>Verbosity</li>
-<li>list conda env</li>
+<li>Verbosity - We can Herper either very chatty or compltely silent
+using the <em>verbose</em> argument. This is especially useful for
+troubleshooting or building pipelines.</li>
+<li>list_CondaEnv() - This will list every version of Conda, and every
+environment you have installed.</li>
+<li>Mamba - This will speed up your Conda. We are in the process of
+adding an option that will allow you to use Mamba resolution with
+Herper.</li>
 </ul>
 </div>
 <div id="what-about-pip" class="section level2">
@@ -1799,40 +1849,35 @@ all your dependencies do not conflict.</p>
 <h2>Why use Pip?</h2>
 <ul>
 <li>Not very Conda build is perfect</li>
-<li>Not every tool on conda</li>
+<li>Not every tool is on Conda</li>
 </ul>
-<p>Sometimes we are forced to use pip. But that does not mean we have to
-leave our environment behind.</p>
-</div>
-<div id="export-env" class="section level2">
-<h2>Export env</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_CondaPkgs</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<p>Sometimes we have to use pip. But that does not mean we have to leave
+our environment behind.</p>
 </div>
 <div id="pip-install" class="section level2">
 <h2>Pip install</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_CondaTools</span>(<span class="st">&quot;pip&quot;</span>, <span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda, <span class="at">updateEnv =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">with_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="fu">system2</span>(<span class="at">command =</span> <span class="st">&quot;pip&quot;</span>, <span class="at">args =</span> <span class="fu">c</span>(<span class="st">&quot;install&quot;</span>, <span class="st">&quot;scanpy&quot;</span>), <span class="at">stdout =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">pathToMiniConda =</span> my_miniconda)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">with_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="fu">system2</span>(<span class="at">command =</span> <span class="fu">paste0</span>(conda_paths<span class="sc">$</span>pathToEnvBin, <span class="st">&quot;/pip&quot;</span>),</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">args =</span> <span class="fu">c</span>(<span class="st">&quot;install&quot;</span>, <span class="st">&quot;scanpy&quot;</span>), <span class="at">stdout =</span> <span class="cn">TRUE</span>), <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_CondaTools</span>(<span class="st">&quot;pip&quot;</span>, <span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda, <span class="at">updateEnv =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">with_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="fu">system2</span>(<span class="at">command =</span> <span class="fu">paste0</span>(conda_paths<span class="sc">$</span>pathToEnvBin, <span class="st">&quot;/pip&quot;</span>),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">args =</span> <span class="fu">c</span>(<span class="st">&quot;install&quot;</span>, <span class="st">&quot;scanpy&quot;</span>), <span class="at">stdout =</span> <span class="cn">TRUE</span>), <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
 </div>
 <div id="check-envs" class="section level2">
 <h2>Check envs</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_CondaPkgs</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda)</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">use_python</span>(<span class="at">python =</span> <span class="st">&quot;/path/to/python&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>() calls conda env export <span class="sc">&gt;</span> environment.yml to save the set of installed Python packages;</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>() calls conda env [create<span class="sc">/</span>update] <span class="sc">--</span>file environment.yml to install the previously<span class="sc">-</span>recorded set of Python packages</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_CondaPkgs</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="at">pathToMiniConda =</span> my_miniconda) <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">&quot;scanpy&quot;</span>)</span></code></pre></div>
+<pre><code>scanpy  1.9.3   pypi    pypi
+</code></pre>
 </div>
 <div id="further-resources" class="section level2">
 <h2>Further Resources</h2>
+<ul>
+<li>The Herper <a href="https://rockefelleruniversity.github.io/Herper_Page/">guide</a></li>
+<li>The Anaconda package <a href="https://anaconda.org/anaconda/repo">directory</a></li>
+</ul>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p>Exercise on Reproducibility in R can be found <a href="../../exercises/exercises/ReproducibleR_exercise.html">here</a></p>
+<p>Exercise on Conda and Herper can be found <a href="../../exercises/exercises/Herper_exercise.html">here</a></p>
 </div>
 <div id="contact" class="section level2">
 <h2>Contact</h2>

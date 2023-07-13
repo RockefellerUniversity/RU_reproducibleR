@@ -18,6 +18,10 @@ if(params$isSlides != "yes"){
 
 
 
+## ---- echo=FALSE, fig.align='center'------------------------------------------
+knitr::include_graphics("imgs/1_conda_overview.png")
+
+
 ## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
@@ -65,27 +69,32 @@ list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
 
 
 ## ----conda_search-------------------------------------------------------------
-conda_search("salmo", pathToMiniConda = my_miniconda)
+conda_search("kall", pathToMiniConda = my_miniconda)
+
+
+## ----conda_search22, eval=F, echo=F-------------------------------------------
+## test <-capture.output(conda_search("salmon", pathToMiniConda = my_miniconda))
+## write.csv(test,"../data/search_res.csv")
 
 
 ## ----conda_search2------------------------------------------------------------
-conda_search("salmon", pathToMiniConda = my_miniconda)
+conda_search("kallisto", pathToMiniConda = my_miniconda)
 
 
 ## ----conda_search_nuance------------------------------------------------------
-conda_search("salmon<=1.0", pathToMiniConda = my_miniconda)
+conda_search("kallisto<=0.45", pathToMiniConda = my_miniconda)
 
 
 
 ## -----------------------------------------------------------------------------
-conda_paths <- install_CondaTools(tools = "salmon<=1.0", env = "rnaseq", updateEnv = T, pathToMiniConda = my_miniconda)
+conda_paths <- install_CondaTools(tools = "kallisto<=0.45", env = "rnaseq", updateEnv = T, pathToMiniConda = my_miniconda)
 
 
 
 ## -----------------------------------------------------------------------------
 library(magrittr)
 library(dplyr)
-list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %>% dplyr::filter(name=="salmon")
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %>% dplyr::filter(name=="kallisto")
 
 
 ## ----with_condaenv_SalmonWithCondaEnvEval,echo=TRUE,eval=FALSE,tidy=FALSE-----
@@ -104,28 +113,41 @@ list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %>% dplyr::filter(name=
 ## salmonHelp()
 
 
-## ----with_condaenv_R----------------------------------------------------------
-library(seqCNA)
-data(seqsumm_HCC1143)
-
-try(rco <- readSeqsumm(tumour.data = seqsumm_HCC1143), silent = FALSE)
-
-
-## ---- echo=T, eval=F----------------------------------------------------------
-## install_CondaSysReqs(pkg="seqCNA",env="seqCNA_env",pathToMiniConda=my_miniconda)
-## rco <- with_CondaEnv(new="seqCNA_env",readSeqsumm(tumour.data=seqsumm_HCC1143)
-##  ,pathToMiniConda = myMiniconda)
-## summary(rco)
-
-
 ## ----export-------------------------------------------------------------------
 yml_name <- paste0("rnaseq_", format(Sys.Date(), "%Y%m%d"), ".yml")
 export_CondaEnv("rnaseq", yml_name, pathToMiniConda = my_miniconda)
 
 
-## ----import, eval=F-----------------------------------------------------------
-## testYML <- system.file("extdata/test.yml", package="Herper")
-## import_CondaEnv(yml_import=testYML, pathToMiniConda = my_miniconda)
+## ---- echo=FALSE, fig.align='center'------------------------------------------
+knitr::include_graphics("imgs/yml.png")
+
+
+## -----------------------------------------------------------------------------
+testYML <- system.file("extdata/test.yml", package="Herper")
+import_CondaEnv(yml_import=testYML, pathToMiniConda = my_miniconda)
+
+
+## ----import, eval=F, echo=F---------------------------------------------------
+## 
+## is_windows <- function() {
+##     identical(.Platform$OS.type, "windows")
+## }
+## miniconda_conda <- function(path = miniconda_path()) {
+##     exe <- if (is_windows()) {
+##         "condabin/conda.bat"
+##     } else {
+##         "bin/conda"
+##     }
+##     file.path(path, exe)
+## }
+## pathToCondaInstall <- my_miniconda
+## pathToConda <-miniconda_conda(pathToCondaInstall)
+## pathToConda
+## yml_import=testYML
+## args <- paste0("-f", yml_import)
+## 
+## result <- system2(pathToConda, shQuote(c("env", "create", "--quiet", "--json", args)), stdout = TRUE, stderr = TRUE)
+## result
 
 
 ## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
@@ -151,60 +173,15 @@ if(params$isSlides == "yes"){
 
 
 ## -----------------------------------------------------------------------------
-
-list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
-
-
-## -----------------------------------------------------------------------------
 install_CondaTools("pip", "rnaseq", pathToMiniConda = my_miniconda, updateEnv = TRUE)
 
 with_CondaEnv("rnaseq",
-                      system2(command="pip",args = c("install", "scanpy"),stdout = TRUE),
-                      pathToMiniConda=my_miniconda)
-
-
-with_CondaEnv("rnaseq",
-                      system2(command=paste0(conda_paths$pathToEnvBin,"/pip"),args = c("install", "scanpy"),stdout = TRUE),
+                      system2(command=paste0(conda_paths$pathToEnvBin,"/pip"),args = c("install", "scanpy"), stdout = TRUE),
                       pathToMiniConda=my_miniconda)
 
 
 
 ## -----------------------------------------------------------------------------
 
-list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
-
-
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
-if(params$isSlides == "yes"){
-  cat("class: inverse, center, middle
-
-# Renv and Conda
-
-<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
-
----
-"    
-  )
-}else{
-  cat("# Renv and Conda
-
----
-"    
-  )
-  
-}
-
-
-
-## -----------------------------------------------------------------------------
-renv::use_python(python = "/path/to/python")
-
-
-
-## -----------------------------------------------------------------------------
-
-renv::snapshot() calls conda env export > environment.yml to save the set of installed Python packages;
-
-renv::restore() calls conda env [create/update] --file environment.yml to install the previously-recorded set of Python packages
-
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)  %>% dplyr::filter(name=="scanpy")
 
