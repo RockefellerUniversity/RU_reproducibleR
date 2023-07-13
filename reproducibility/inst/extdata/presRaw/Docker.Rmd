@@ -411,14 +411,15 @@ write.csv(dataIn, "rnaseq_table_withIDs.csv")
 
 ## Adding volumes to containers
 
-The R environment files from this RStudio session are written to the working directory in the container, and therefore are copied to the local directory as hidden folders. 
+In addition to the files deliberately written to the local directory, the R environment files from this RStudio session are written to the working directory in the container, and therefore are copied to the local directory as hidden folders (.config and .local). 
 
-This R environment will then be loaded the next time you launch an RStudio container with this volume mounted. If these folders are removed (.config and .local), then a fresh RStudio session will be launched. 
+This R environment will then be loaded the next time you launch an RStudio container with this volume mounted. While this is normally okay, if desired a fresh RStudio session can be launched with the same mounted volume by removing these hidden directories.
 
 *Code (terminal):*
 ```{sh, eval=F}
 # For windows use: dir /a
 ls -a data
+rm -r data/.local data/.config
 ```
 
 
@@ -609,7 +610,7 @@ if(params$isSlides == "yes"){
 
 ## Use Herper for conda packages
 
-```{r, echo=FALSE, out.width="120%", fig.align='left'}
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
 
 knitr::include_graphics("imgs/dockerfile_salmon_all.png")
 ```
@@ -628,7 +629,7 @@ docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 ```
 
 *Output:*
-```{r, echo=FALSE, out.width="110%", fig.align='left'}
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
 knitr::include_graphics("imgs/docker_salmon_build_log.png")
 ```
@@ -675,7 +676,9 @@ knitr::include_graphics("imgs/docker_image_salmon_interface.png")
 ```
 
 ---
-## Running containers from Docker Desktop
+## Docker Desktop
+
+We can also run containers from Docker Desktop
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
@@ -684,7 +687,9 @@ knitr::include_graphics("imgs/docker_desktop_salmon.png")
 
 
 ---
-## Running containers from Docker Desktop
+## Docker Desktop
+
+We can also run containers from Docker Desktop
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
