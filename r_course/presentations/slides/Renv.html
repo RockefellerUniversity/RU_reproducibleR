@@ -110,7 +110,7 @@ Often where people struggle to repeat work, it is not to do with issues with the
 ---
 class: inverse, center, middle
 
-# Reproducibility
+# Reproducibility in R
 
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
@@ -119,7 +119,7 @@ class: inverse, center, middle
 
 ## Base R
 
-R contains a ton of useful tools and functions which allow us to perform more complex operations _out of the box_.
+R contains a ton of useful tools and functions which allow us to perfrom more complex operations _out of the box_.
 
 We get access to these when R loads without having to install or load any packages.
 
@@ -154,9 +154,8 @@ We can get a comprehensive list of functions available in these packages using R
 We can type **?base** into R and get an index of all functions in the **base** package.
 
 
-
-```r
-`?`(base)
+```
+?base
 ```
 
 ---
@@ -199,9 +198,8 @@ The **utils** package contains many functions on package installation and versio
 
 To get a look at all the available functions in base we can use the R help again
 
-
-```r
-`?`(utils)
+```
+?utils
 ```
 
 ---
@@ -216,13 +214,13 @@ First we can run sessionInfo() function with no arguments.
 sessionInfo()
 ```
 
-![](imgs/sessionInfo1.png)
+![](imgs/sessioninfo1.png)
 
 ---
 ## The sessionInfo function
 
 
-![](imgs/sessionInfo1.png)
+![](imgs/sessioninfo1.png)
 
 
 * R Version information.
@@ -361,18 +359,6 @@ Packages listed **Depends and Imports** are dependencies of this package and if 
 ![](imgs/Depends.png)
 
 ---
-## SessionInfo again
-
-Now it is installed we can load the library and check the sessionInfo to see where our DEPENDS and IMPORTS packages are within the session information.
-
-
-```r
-library(redist)
-sessionInfo()
-```
-![](imgs/redist_SessionInfo.png)
-
----
 ## Installing CRAN packages
 
 R provides another function from the **utils** base package which allows us to install a package from the CRAN repositories - **install.packages()**.
@@ -386,6 +372,19 @@ This will install the package and all required dependencies (the packages listed
 install.packages("redist")
 ```
 ![](imgs/installDepends.png)
+
+---
+## SessionInfo again
+
+Now it is installed we can load the library and check the sessionInfo to see where our DEPENDS and IMPORTS packages are within the session information.
+
+
+```r
+library(redist)
+sessionInfo()
+```
+![](imgs/redist_SessionInfo.png)
+
 
 ---
 ## Setting the R package repositories
@@ -448,11 +447,14 @@ Bioconductor package pages contain similar information to CRAN pages including t
 ## Bioconductor Versions
 
 .pull-left[
-In contrast to CRAN, Bioconductor packages are released on an every 6 month schedule.
+In contrast to CRAN, Bioconductor packages are released on an every 6 month schedule. 
+
+These releases are tied to the yearly release of new R versions. 
 
 With every 6 month release we get a new Bioconductor version and all packages in Bioconductor get their minor versions incremented by default.
 
 This means that to make use of new packages you may need to update your version of Bioconductor you are using.
+
 ]
 .pull-right[
 ![](imgs/BiocReleases.png)
@@ -480,8 +482,6 @@ install.packages("BiocManager")
 library(BiocManager)
 install("DESeq2")
 ```
-
-![](imgs/version.png)
 
 ---
 ## Biocmanager package
@@ -536,12 +536,24 @@ sessionInfo()
 
 ![](imgs/simpleDependencies.png)
 
-By simply loading two libraries i wanted to use, i am now managing the dependencies of these packages as well adding up to ~ 70 packages in total.
+By simply loading two libraries i wanted to use, i am now managing the dependencies of these packages as well. This has added up to ~ 70 packages in total.
 
 I need to be able to not just capture versions but rebuild all these packages with the same versions in a new R or most likely for someone else to rebuild all these versions.
 
+---
+## Installing package versions
+
+To install a particular package version we can do this by pointing our install.packages function at an archive on a packages CRAN/Bioconductor page.
+
+Additionally i need to supply the parameters repos = NULL and type = "source"
 
 
+
+```r
+install.packages("https://cran.r-project.org/src/contrib/Archive/unmarked/unmarked_0.8-1.tar.gz",
+    repos = NULL, type = "source")
+```
+![](imgs/archiveinstall.png)
 ---
 ## Renv
 
@@ -637,7 +649,7 @@ Within the lock file structure we have two sections at the moment.
 ]
 
 ---
-## Versions and Hashes
+## Versions and Hashes.
 
 Renv uses a HASH of the Description file within a package to assess whether a package has updated.
 
@@ -710,7 +722,7 @@ All these remaining packages were DEPENDS or IMPORTS for the ggplot2 package and
 ]
 
 ---
-## Sharing reproducible environments
+## Sharing reproducible environments.
 
 Once we have our final script as well as our renv initialised and up to date we most likely want to share with others so they can repeat the work.
 

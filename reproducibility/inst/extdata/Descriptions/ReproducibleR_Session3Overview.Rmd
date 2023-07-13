@@ -1,11 +1,10 @@
 <br>
 
-####  **Git and GitHub**
+####  **Docker**
 
-In Git and GitHub we will review the widely used version control and web hosting systems.
+In Docker we will review the basics of Docker Containers.
 
 Session sections:
 
-* What is Git and GitHub?
-* Working locally and remotely to version control projects
-* Typical project work flows
+* What is Docker?
+* How to work with Docker and R

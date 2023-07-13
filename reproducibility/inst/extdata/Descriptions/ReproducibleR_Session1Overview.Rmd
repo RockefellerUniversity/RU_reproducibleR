@@ -1,12 +1,12 @@
 <br>
 
-####  **Reproducible Reports**
+####  **Reproducible R and R packages**
 
-In Reproducible Reports, we will review how to make reports using knitr and rmarkdown
+In Reproducible R and R packages, we will review how to install and manage R packages
 
 Session sections:
 
-* Notes
-* Markdown
-* Rmarkdown
-* Customization of reports
+* Packages and package versions
+* Installing from CRAN
+* Installing from Bioconductor
+* Renv and package management

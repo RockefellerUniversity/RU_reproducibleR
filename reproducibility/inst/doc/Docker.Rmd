@@ -17,7 +17,7 @@ message(toMessage)
 ```
 
 <p>&nbsp;</p>
-These exercises follow the material in the GitHub section of [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
+These exercises follow the material in the Docker section of [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
 
 1. Run R using a Docker container from Docker Hub
 
@@ -66,7 +66,7 @@ docker exec 13223bfef159 ls home # this command contains the container ID from '
 
 ```
 
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
+```{r, echo=FALSE, eval=toMessage, out.width="100%", fig.align='left'}
 knitr::include_graphics("imgs/dockEx_docker_ps.png")
 cat("\n")
 ```
@@ -84,7 +84,7 @@ setwd("home/local_data")
 list.files()
 ```
 
-```{r, echo=FALSE, out.width="75%", fig.align='left'}
+```{r, echo=FALSE, eval=toMessage, out.width="75%", fig.align='left'}
 knitr::include_graphics("imgs/dockerExx_list_files.png")
 cat("\n")
 ```
@@ -116,7 +116,7 @@ system("samtools --version")
 
 ```
 
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
+```{r, echo=FALSE, eval=toMessage, out.width="100%", fig.align='left'}
 knitr::include_graphics("imgs/dockerEx_samtools_version.png")
 cat("\n")
 ```
@@ -135,7 +135,7 @@ docker images
 
 ```
 
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
+```{r, echo=FALSE, eval=toMessage, out.width="100%", fig.align='left'}
 knitr::include_graphics("imgs/dockEx_docker_images.png")
 cat("\n")
 ```
@@ -149,5 +149,3 @@ docker tag a8954d8caa31 dougbarrows/r-ver_4.2.3_v2:topush
 docker push dougbarrows/r-ver_4.2.3_v2:topush
 ```
 
-
-```
