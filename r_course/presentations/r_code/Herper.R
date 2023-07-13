@@ -18,10 +18,6 @@ if(params$isSlides != "yes"){
 
 
 
-## ---- echo=FALSE, fig.align='center'------------------------------------------
-knitr::include_graphics("imgs/1_conda_overview.png")
-
-
 ## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
@@ -73,7 +69,7 @@ conda_search("kall", pathToMiniConda = my_miniconda)
 
 
 ## ----conda_search22, eval=F, echo=F-------------------------------------------
-## test <-capture.output(conda_search("salmon", pathToMiniConda = my_miniconda))
+## test <- capture.output(conda_search("salmon", pathToMiniConda = my_miniconda))
 ## write.csv(test,"../data/search_res.csv")
 
 
@@ -116,10 +112,6 @@ list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %>% dplyr::filter(name=
 ## ----export-------------------------------------------------------------------
 yml_name <- paste0("rnaseq_", format(Sys.Date(), "%Y%m%d"), ".yml")
 export_CondaEnv("rnaseq", yml_name, pathToMiniConda = my_miniconda)
-
-
-## ---- echo=FALSE, fig.align='center'------------------------------------------
-knitr::include_graphics("imgs/yml.png")
 
 
 ## -----------------------------------------------------------------------------

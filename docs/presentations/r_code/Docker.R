@@ -187,7 +187,11 @@ knitr::include_graphics("imgs/rstudio_interface_volume_write.png")
 ## write.csv(dataIn, "rnaseq_table_withIDs.csv")
 
 
+## # For windows use: dir /a
+
 ## ls -a data
+
+## rm -r data/.local data/.config
 
 
 ## ---- echo=FALSE, out.width="100%", fig.align='center'------------------------
@@ -291,7 +295,7 @@ if(params$isSlides == "yes"){
 
 
 
-## ---- echo=FALSE, out.width="120%", fig.align='left'--------------------------
+## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
 
 knitr::include_graphics("imgs/dockerfile_salmon_all.png")
 
@@ -299,7 +303,7 @@ knitr::include_graphics("imgs/dockerfile_salmon_all.png")
 ## docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 
 
-## ---- echo=FALSE, out.width="110%", fig.align='left'--------------------------
+## ---- echo=FALSE, out.width="100%", fig.align='left'--------------------------
 cat("\n")
 knitr::include_graphics("imgs/docker_salmon_build_log.png")
 

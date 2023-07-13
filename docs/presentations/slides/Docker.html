@@ -351,14 +351,16 @@ write.csv(dataIn, "rnaseq_table_withIDs.csv")
 
 ## Adding volumes to containers
 
-The R environment files from this RStudio session are written to the working directory in the container, and therefore are copied to the local directory as hidden folders. 
+In addition to the files deliberately written to the local directory, the R environment files from this RStudio session are written to the working directory in the container, and therefore are copied to the local directory as hidden folders (.config and .local). 
 
-This R environment will then be loaded the next time you launch an RStudio container with this volume mounted. If these folders are removed (.config and .local), then a fresh RStudio session will be launched. 
+This R environment will then be loaded the next time you launch an RStudio container with this volume mounted. While this is normally okay, if desired a fresh RStudio session can be launched with the same mounted volume by removing these hidden directories.
 
 *Code (terminal):*
 
 ```sh
+# For windows use: dir /a
 ls -a data
+rm -r data/.local data/.config
 ```
 
 
@@ -506,7 +508,7 @@ class: inverse, center, middle
 
 ## Use Herper for conda packages
 
-&lt;img src="imgs/dockerfile_salmon_all.png" width="120%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/dockerfile_salmon_all.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -524,7 +526,7 @@ docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 
 *Output:*
 
-&lt;img src="imgs/docker_salmon_build_log.png" width="110%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/docker_salmon_build_log.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 ## Use Herper for conda packages
@@ -567,14 +569,18 @@ system("salmon -h")
 &lt;img src="imgs/docker_image_salmon_interface.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
-## Running containers from Docker Desktop
+## Docker Desktop
+
+We can also run containers from Docker Desktop
 
 
 &lt;img src="imgs/docker_desktop_salmon.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 
 ---
-## Running containers from Docker Desktop
+## Docker Desktop
+
+We can also run containers from Docker Desktop
 
 
 &lt;img src="imgs/docker_desktop_salmon_running.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
