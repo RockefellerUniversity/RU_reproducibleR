@@ -247,13 +247,13 @@ First we can run sessionInfo() function with no arguments.
 sessionInfo()
 ```
 
-![](imgs/sessionInfo1.png)
+![](imgs/sessioninfo1.png)
 
 ---
 ## The sessionInfo function
 
 
-![](imgs/sessionInfo1.png)
+![](imgs/sessioninfo1.png)
 
 
 * R Version information.
