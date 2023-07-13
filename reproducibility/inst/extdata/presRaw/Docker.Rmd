@@ -19,7 +19,7 @@ output:
     highlight: tango  # specifies the syntax highlighting style
 params:
  isSlides: "no"
- # isSlides: "yes"
+ #isSlides: "yes"
 ---
 ```{r setup, include=FALSE}
 suppressPackageStartupMessages(require(knitr))
@@ -63,6 +63,8 @@ R code in presentations.
 Practicals as HTML pages. 
 * **answers/**
 Practicals with answers as HTML pages and R code solutions. 
+* **data/**
+Data used in this presentation.
 
 
 ---

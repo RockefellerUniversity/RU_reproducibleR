@@ -17,7 +17,7 @@ message(toMessage)
 ```
 
 <p>&nbsp;</p>
-These exercises follow the material in the GitHub section of [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
+These exercises follow the material in the Docker section of [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
 
 1. Run R using a Docker container from Docker Hub
 
@@ -149,5 +149,3 @@ docker tag a8954d8caa31 dougbarrows/r-ver_4.2.3_v2:topush
 docker push dougbarrows/r-ver_4.2.3_v2:topush
 ```
 
-
-```
