@@ -47,6 +47,10 @@ It was originally developed to help manage packages for Python, but that has exp
 ---
 ## How does Conda work?
 
+```{r, echo=FALSE, fig.align='center'}
+knitr::include_graphics("imgs/1_conda_overview.png")
+```
+
 ---
 ## Why Conda?
 
@@ -58,7 +62,7 @@ It was originally developed to help manage packages for Python, but that has exp
 ---
 ## Conda vs miniconda vs ...
 
-There are many different repository tools in the conda ecosystem. They all have key differences. 
+There are many different repository tools in the Conda ecosystem. They all have slight differences. 
 
 Conda - The core package manager
 Miniconda - A minimal install of Conda
@@ -67,12 +71,10 @@ Mamba - A reimplementation of Conda built in C++ [FASTER]
 Minimamba - A minimal install of Mamba
 
 ---
-## Working with Conda
+## A few tips
 
-* Work with miniconda (or Herper)
+* Work with miniconda or even better use Herper
 * Always install software into new environments (never the base)
-
-
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -116,6 +118,18 @@ install_CondaTools(tools = "star", env = "rnaseq")
 
 ```
 
+```
+$pathToConda
+[1] "/Users/mattpaul/Desktop/My_Conda/bin/conda"
+
+$environment
+[1] "rnaseq"
+
+$pathToEnvBin
+[1] "/Users/mattpaul/Desktop/My_Conda/envs/rnaseq/bin"
+
+```
+
 ---
 ## Installing Tools with speicific conda
 
@@ -151,7 +165,18 @@ The **list_CondaPkgs** function allows users to check what packages are installe
 ```{r list_CondaPkgs}
 list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
 ```
-
+```
+boost-cpp         1.78.0      conda-forge	osx-64	
+bzip2	            1.0.8       pkgs/main	osx-64	
+c-ares            1.19.0	    pkgs/main	osx-64	
+ca-certificates	  2023.05.30	pkgs/main	osx-64	
+hdf5              1.12.2      conda-forge	osx-64	
+htslib            1.17        bioconda	osx-64	
+icu	              70.1        conda-forge	osx-64	
+kallisto	        0.50.0	    bioconda	osx-64	
+krb5	            1.20.1	    pkgs/main	osx-64	
+libaec            1.0.6       conda-forge	osx-64
+```
 
 ---
 ## Finding Conda packages with **conda_search**
@@ -159,7 +184,13 @@ list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
 If the user is unsure of the exact name, or version of a tool available on conda, they can use the **conda_search** function. Searches will find close matches for incorrect queries.
 
 ```{r conda_search}
-conda_search("salmo", pathToMiniConda = my_miniconda)
+conda_search("kall", pathToMiniConda = my_miniconda)
+```
+
+```
+There are no exact matches for the query 'kall', but multiple packages contain this text:
+- kallisto
+- r-merge-kallisto
 ```
 
 ---
@@ -167,44 +198,68 @@ conda_search("salmo", pathToMiniConda = my_miniconda)
 
 If you have the exact name you can search for what versions are available on Conda. 
 
+```{r conda_search22, eval=F, echo=F}
+test <-capture.output(conda_search("salmon", pathToMiniConda = my_miniconda))
+write.csv(test,"../data/search_res.csv")
+```
+
+
 ```{r conda_search2}
-conda_search("salmon", pathToMiniConda = my_miniconda)
+conda_search("kallisto", pathToMiniConda = my_miniconda)
+```
+
+```
+2	kallisto	0.43.1	https://conda.anaconda.org/bioconda/osx-64	
+4	kallisto	0.44.0	https://conda.anaconda.org/bioconda/osx-64	
+5	kallisto	0.45.0	https://conda.anaconda.org/bioconda/osx-64	
+6	kallisto	0.45.1	https://conda.anaconda.org/bioconda/osx-64	
+8	kallisto	0.46.0	https://conda.anaconda.org/bioconda/osx-64	
+9	kallisto	0.46.1	https://conda.anaconda.org/bioconda/osx-64	
+12	kallisto	0.46.2	https://conda.anaconda.org/bioconda/osx-64	
+15	kallisto	0.48.0	https://conda.anaconda.org/bioconda/osx-64	
+16	kallisto	0.50.0	https://conda.anaconda.org/bioconda/osx-64
 ```
 
 ---
 ## Finding Conda package versions with **conda_search**
 
-Specific package versions can be searched for using the Conda format i.e. "salmon==1.3", "salmon>=1.3" or "salmon<=1.3".
+Specific package versions can be searched for using the Conda format i.e. "kallisto==0.46", "kallisto>=0.48" or "kallisto<=0.45".
 
 ```{r conda_search_nuance}
-conda_search("salmon<=1.0", pathToMiniConda = my_miniconda)
+conda_search("kallisto<=0.45", pathToMiniConda = my_miniconda)
 
+```
+
+```
+2	kallisto	0.43.1	https://conda.anaconda.org/bioconda/osx-64	
+4	kallisto	0.44.0	https://conda.anaconda.org/bioconda/osx-64
 ```
 
 ---
 ## Installing specific versions
 
-We can use the same version nomenclature to also install these tools. Here we will downgrade the version of salmon we have installed. 
+We can use the same version nomenclature to also install these tools. Here we will downgrade the version of Kallisto we have installed. 
 
 ```{r}
-conda_paths <- install_CondaTools(tools = "salmon<=1.0", env = "rnaseq", updateEnv = T, pathToMiniConda = my_miniconda)
+conda_paths <- install_CondaTools(tools = "kallisto<=0.45", env = "rnaseq", updateEnv = T, pathToMiniConda = my_miniconda)
 
 ```
 
 ---
 ## Installing specific versions
 
-We can now see that we have downgraded 
+We can now see that we have downgraded Kallisto. 
+
 ```{r}
 library(magrittr)
 library(dplyr)
-list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %>% dplyr::filter(name=="salmon")
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %>% dplyr::filter(name=="kallisto")
 ```
 
 ---
 ## Running software
 
-Once installed within a conda environment, many external software can be executed directly from the conda environment's bin directory without having to perform any additional actions. 
+Once installed within a Conda environment, many external software can be executed directly from the Conda environment's bin directory without having to perform any additional actions. 
 
 The Herper package uses the **[withr](https://withr.r-lib.org)** family of functions (**with_CondaEnv()** and **local_CondaEnv()**) to provide methods to **temporarily** alter the system PATH and to add or update any required environmental variables. This is done without formally activating your environment or initializing your conda.
 
@@ -220,6 +275,22 @@ res <- with_CondaEnv("rnaseq",
                       system2(command="salmon",args = "help",stdout = TRUE),
                       pathToMiniConda=my_miniconda)
 res
+```
+
+```
+ [1] "salmon v1.10.2"                                                     
+ [2] ""                                                                   
+ [3] "Usage:  salmon -h|--help or "                                       
+ [4] "        salmon -v|--version or "                                    
+ [5] "        salmon -c|--cite or "                                       
+ [6] "        salmon [--no-version-check] <COMMAND> [-h | options]"       
+ [7] ""                                                                   
+ [8] "Commands:"                                                          
+ [9] "     index      : create a salmon index"                            
+[10] "     quant      : quantify a sample"                                
+[11] "     alevin     : single cell analysis"                             
+[12] "     swim       : perform super-secret operation"                   
+[13] "     quantmerge : merge multiple quantifications into a single file"
 ```
 
 ---
@@ -238,26 +309,21 @@ salmonHelp<- function(){
 salmonHelp()
 ```
 
-
----
-## A practical example
-
-To further demonstrate this we will use the first command from the [seqCNA](https://www.bioconductor.org/packages/release/bioc/html/seqCNA.html) vignette. This step requires samtools. If this is not installed and available there is an error. 
-```{r with_condaenv_R}
-library(seqCNA)
-data(seqsumm_HCC1143)
-
-try(rco <- readSeqsumm(tumour.data = seqsumm_HCC1143), silent = FALSE)
 ```
-
-Samtools is listed as a System Requirement for seqCNA, so we can first use **install_CondaSysReqs()** to install samtools. In this case we are installing samtools in the environment: seqCNA_env. We can then run the seqCNA command using **with_CondaEnv** specifying that we want to use our environment containing samtools. seqCNA can then find samtools and execute successfully. 
-
-```{r, echo=T, eval=F}
-install_CondaSysReqs(pkg="seqCNA",env="seqCNA_env",pathToMiniConda=my_miniconda)
-rco <- with_CondaEnv(new="seqCNA_env",readSeqsumm(tumour.data=seqsumm_HCC1143)
- ,pathToMiniConda = myMiniconda)
-summary(rco)
-``` 
+ [1] "salmon v1.10.2"                                                     
+ [2] ""                                                                   
+ [3] "Usage:  salmon -h|--help or "                                       
+ [4] "        salmon -v|--version or "                                    
+ [5] "        salmon -c|--cite or "                                       
+ [6] "        salmon [--no-version-check] <COMMAND> [-h | options]"       
+ [7] ""                                                                   
+ [8] "Commands:"                                                          
+ [9] "     index      : create a salmon index"                            
+[10] "     quant      : quantify a sample"                                
+[11] "     alevin     : single cell analysis"                             
+[12] "     swim       : perform super-secret operation"                   
+[13] "     quantmerge : merge multiple quantifications into a single file"
+```
 
 ---
 ## Reproducible environments
@@ -271,22 +337,55 @@ export_CondaEnv("rnaseq", yml_name, pathToMiniConda = my_miniconda)
 ```
 
 ---
+## Our *.yml* file
+
+The yml that is output contains all the information you need to rebuild the environment. This is also a a nice resource for when it comes to writing your methods. 
+
+```{r, echo=FALSE, fig.align='center'}
+knitr::include_graphics("imgs/yml.png")
+```
+
+---
 ## Importing from *.yml*
 
 The **import_CondaEnv** function allows the user to create a new conda environment from a *.yml* file. These can be previously exported from **export_CondaEnv**, conda, renv or manually created. 
 
 Users can simply provide a path to the YAML file for import. They can also specify the environment name, but by default the name will be taken from the YAML. 
 
-```{r import, eval=F}
+```{r}
 testYML <- system.file("extdata/test.yml", package="Herper")
 import_CondaEnv(yml_import=testYML, pathToMiniConda = my_miniconda)
 ```
 
+```{r import, eval=F, echo=F}
+
+is_windows <- function() {
+    identical(.Platform$OS.type, "windows")
+}
+miniconda_conda <- function(path = miniconda_path()) {
+    exe <- if (is_windows()) {
+        "condabin/conda.bat"
+    } else {
+        "bin/conda"
+    }
+    file.path(path, exe)
+}
+pathToCondaInstall <- my_miniconda
+pathToConda <-miniconda_conda(pathToCondaInstall)
+pathToConda
+yml_import=testYML
+args <- paste0("-f", yml_import)
+
+result <- system2(pathToConda, shQuote(c("env", "create", "--quiet", "--json", args)), stdout = TRUE, stderr = TRUE)
+result
+```
+
 ---
 ## Other tricks
-- Mamba - Mamba 
-- Verbosity
-- list conda env
+- Verbosity - We can Herper either very chatty or compltely silent using the *verbose* argument. This is especially useful for troubleshooting or building pipelines. 
+- list_CondaEnv() - This will list every version of Conda, and every environment you have installed. 
+- Mamba - This will speed up your Conda. We are in the process of adding an option that will allow you to use Mamba resolution with Herper.
+
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -326,20 +425,9 @@ Conda is much more considered, and checks installs to make sure that all your de
 ## Why use Pip?
 
 * Not very Conda build is perfect
-* Not every tool on conda
+* Not every tool is on Conda
 
-Sometimes we are forced to use pip. But that does not mean we have to leave our environment behind. 
-
----
-## Export env
-
-```{r}
-
-list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
-```
-
-
-
+Sometimes we have to use pip. But that does not mean we have to leave our environment behind. 
 
 
 ---
@@ -349,12 +437,7 @@ list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
 install_CondaTools("pip", "rnaseq", pathToMiniConda = my_miniconda, updateEnv = TRUE)
 
 with_CondaEnv("rnaseq",
-                      system2(command="pip",args = c("install", "scanpy"),stdout = TRUE),
-                      pathToMiniConda=my_miniconda)
-
-
-with_CondaEnv("rnaseq",
-                      system2(command=paste0(conda_paths$pathToEnvBin,"/pip"),args = c("install", "scanpy"),stdout = TRUE),
+                      system2(command=paste0(conda_paths$pathToEnvBin,"/pip"),args = c("install", "scanpy"), stdout = TRUE),
                       pathToMiniConda=my_miniconda)
 
 ```
@@ -364,66 +447,25 @@ with_CondaEnv("rnaseq",
 
 ```{R}
 
-list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
+list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)  %>% dplyr::filter(name=="scanpy")
 ```
 
-
----
-```{r, results='asis',include=TRUE,echo=FALSE}
-if(params$isSlides == "yes"){
-  cat("class: inverse, center, middle
-
-# Renv and Conda
-
-<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
-
----
-"    
-  )
-}else{
-  cat("# Renv and Conda
-
----
-"    
-  )
-  
-}
+```
+scanpy	1.9.3   pypi    pypi
 
 ```
-
-
-
-
-```{r}
-renv::use_python(python = "/path/to/python")
-
-```
-
-
-
-
-```{r}
-
-renv::snapshot() calls conda env export > environment.yml to save the set of installed Python packages;
-
-renv::restore() calls conda env [create/update] --file environment.yml to install the previously-recorded set of Python packages
-
-```
-
-
-
-
 
 ---
 ## Further Resources
 
+* The Herper [guide](https://rockefelleruniversity.github.io/Herper_Page/)
+* The Anaconda package [directory](https://anaconda.org/anaconda/repo)
 
- 
 
 ---
 ## Exercises
 
-Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
+Exercise on Conda and Herper can be found [here](../../exercises/exercises/Herper_exercise.html)
 
 
 ---
