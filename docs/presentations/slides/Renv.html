@@ -73,6 +73,40 @@ setwd("/PathToMyDownload/Reproducible_R-master/r_course")
 # e.g. setwd('~/Downloads/Reproducible_R-master/r_course')
 ```
 
+
+---
+class: inverse, center, middle
+
+# Why does reproducibility matter?
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+
+## Reproducible Bioinformatics
+
+Good science is built on being reproducible. This does not end at the bench. 
+
+People often face reproducibility issues when trying to repeat someone else's analysis (or even their own).
+
+In theory it should be easy. Just take the raw data and reprocess it in the same way. But there are often gaps in documentation.  
+
+--
+## NIH and FAIR
+
+New funding applications now require a more extensive data management plan. Though this doesn't seem to have strong teeth for code, the [policy](https://sharing.nih.gov/data-management-and-sharing-policy/planning-and-budgeting-for-data-management-and-sharing/writing-a-data-management-and-sharing-plan) does say:
+
+"Related Tools, Software and/or Code
+Indicate whether specialized tools are needed to access or manipulate shared scientific data to support replication or reuse, and name(s) of the needed tool(s) and software. If applicable, specify how needed tools can be accessed."
+
+This fits with their ethos of data following the FAIR principles of being: Findable, Accesible, Interoperable, and **Reusable**. Over time we can see this becoming a more necessary part of published work. 
+
+---
+## Environments and package management  
+
+Often where people struggle to repeat work, it is not to do with issues with the data. It is instead bad documentation of the workflow. By accurately recording what packages and versions were used we circumvent a lot of these issues. 
+
 ---
 class: inverse, center, middle
 
@@ -85,7 +119,7 @@ class: inverse, center, middle
 
 ## Base R
 
-R contains a ton of useful tools and functions which allow us to perfrom more complex operations _out of the box_.
+R contains a ton of useful tools and functions which allow us to perform more complex operations _out of the box_.
 
 We get access to these when R loads without having to install or load any packages.
 
@@ -603,7 +637,7 @@ Within the lock file structure we have two sections at the moment.
 ]
 
 ---
-## Versions and Hashes.
+## Versions and Hashes
 
 Renv uses a HASH of the Description file within a package to assess whether a package has updated.
 
@@ -676,7 +710,7 @@ All these remaining packages were DEPENDS or IMPORTS for the ggplot2 package and
 ]
 
 ---
-## Sharing reproducible environments.
+## Sharing reproducible environments
 
 Once we have our final script as well as our renv initialised and up to date we most likely want to share with others so they can repeat the work.
 
@@ -705,6 +739,14 @@ restore()
 .pull-right[
 ![](imgs/resotre2.png)
 ]
+
+
+---
+## Further Resources
+
+* The Renv [guide](https://rstudio.github.io/renv/articles/renv.html)
+* [RSwitch](https://rud.is/rswitch/)
+
 
 
 ---

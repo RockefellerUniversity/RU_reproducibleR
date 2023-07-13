@@ -480,6 +480,89 @@ All material is available to download under GPL v2 license.</p>
 <div id="system-requirements" class="section level4">
 <h4><strong>System Requirements</strong></h4>
 </div>
+<div id="install-herper-and-conda" class="section level4">
+<h4>Install Herper and Conda</h4>
+<p>Conda can be installed using the Herper package.</p>
+<pre class="r"><code>install.packages(&quot;Herper&quot;)</code></pre>
+<pre><code>## Installing package into &#39;/usr/local/lib/R/host-site-library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## Warning: package &#39;Herper&#39; is not available for this version of R
+## 
+## A version of this package for your version of R might be available elsewhere,
+## see the ideas at
+## https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+<pre class="r"><code>library(Herper)</code></pre>
+<pre><code>## Loading required package: reticulate</code></pre>
+<pre class="r"><code>install_CondaTools(tools = &quot;python&quot;, env = &quot;test&quot;)</code></pre>
+<pre><code>## * No Miniconda found at: /github/home/.local/share/r-miniconda</code></pre>
+<pre><code>## * Installing Miniconda along with core packages -- please wait a moment ...</code></pre>
+<pre><code>## * Downloading &#39;https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh&#39; ...</code></pre>
+<pre><code>## * Making sure Miniconda is up to date ...</code></pre>
+<pre><code>## * Miniconda has been successfully installed at /github/home/.local/share/r-miniconda</code></pre>
+<pre><code>## * The environment &#39;test&#39; does not currently exist.</code></pre>
+<pre><code>## * Creating the environment &#39;test&#39; and installing tools ...</code></pre>
+<pre><code>## * The package(s) (python) are in the &#39;test&#39; environment.</code></pre>
+<pre><code>## Conda and Environment Information</code></pre>
+<pre><code>## pathToConda : /github/home/.local/share/r-miniconda/bin/conda</code></pre>
+<pre><code>## environment : test</code></pre>
+<pre><code>## pathToEnvBin : /github/home/.local/share/r-miniconda/envs/test/bin</code></pre>
+<pre><code>## $pathToConda
+## [1] &quot;/github/home/.local/share/r-miniconda/bin/conda&quot;
+## 
+## $environment
+## [1] &quot;test&quot;
+## 
+## $pathToEnvBin
+## [1] &quot;/github/home/.local/share/r-miniconda/envs/test/bin&quot;</code></pre>
+<p>Some people have errors running this command. Often this is the case
+for newer Macs with the ARM chip. The newest version of Herper on GitHub
+should help.</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)</code></pre>
+<pre><code>## Installing package into &#39;/usr/local/lib/R/host-site-library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre class="r"><code>library(devtools)</code></pre>
+<pre><code>## Loading required package: usethis</code></pre>
+<pre class="r"><code>devtools::install_github(&quot;https://github.com/RockefellerUniversity/Herper.git&quot;)</code></pre>
+<pre><code>## Using github PAT from envvar GITHUB_PAT</code></pre>
+<pre><code>## Downloading GitHub repo RockefellerUniversity/Herper@HEAD</code></pre>
+<pre><code>## 
+## ── R CMD build ─────────────────────────────────────────────────────────────────
+## * checking for file ‘/tmp/RtmpIuHLz9/remotes16c670c38424/RockefellerUniversity-Herper-60986f6/DESCRIPTION’ ... OK
+## * preparing ‘Herper’:
+## * checking DESCRIPTION meta-information ... OK
+## * checking for LF line-endings in source and make files and shell scripts
+## * checking for empty or unneeded directories
+## Omitted ‘LazyData’ from DESCRIPTION
+## * building ‘Herper_1.10.0.tar.gz’</code></pre>
+<pre><code>## Installing package into &#39;/usr/local/lib/R/host-site-library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre class="r"><code>library(Herper)
+install_CondaTools(tools = &quot;python&quot;, env = &quot;test&quot;)</code></pre>
+<pre><code>## * Using Miniconda at: /github/home/.local/share/r-miniconda</code></pre>
+<pre><code>## The environment &#39;test&#39; already exists but the tools were not installed because the &#39;updateEnv&#39; argument was set to FALSE.</code></pre>
+<pre><code>## Conda and Environment Information</code></pre>
+<pre><code>## pathToConda : /github/home/.local/share/r-miniconda/bin/conda</code></pre>
+<pre><code>## environment : test</code></pre>
+<pre><code>## pathToEnvBin : /github/home/.local/share/r-miniconda/envs/test/bin</code></pre>
+<pre><code>## $pathToConda
+## [1] &quot;/github/home/.local/share/r-miniconda/bin/conda&quot;
+## 
+## $environment
+## [1] &quot;test&quot;
+## 
+## $pathToEnvBin
+## [1] &quot;/github/home/.local/share/r-miniconda/envs/test/bin&quot;</code></pre>
+<p>Alternatively Miniconda can be installed manually by going to the
+Conda <a
+href="https://docs.conda.io/en/latest/miniconda.html">website</a>.</p>
+<p><br></p>
+</div>
+<div id="install-docker" class="section level4">
+<h4>Install Docker</h4>
+<p>Conda can be installed using the Herper package</p>
+<p>install.packages(“Herper”)</p>
+<p><br></p>
+</div>
 <div id="install-git" class="section level4">
 <h4>Install Git</h4>
 <p>Git is available from the projects website <a

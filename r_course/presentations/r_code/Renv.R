@@ -27,6 +27,28 @@ if(params$isSlides != "yes"){
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
+# Why does reproducibility matter?
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Why does reproducibility matter?
+
+---
+"    
+  )
+  
+}
+
+
+
+## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
 # Reproducibility
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
@@ -35,7 +57,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Reproducibility?
+  cat("# Reproducibility
 
 ---
 "    
