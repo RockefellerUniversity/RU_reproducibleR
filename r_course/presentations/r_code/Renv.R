@@ -27,7 +27,7 @@ if(params$isSlides != "yes"){
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Reproducibility?
+# Reproducibility
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -45,46 +45,94 @@ if(params$isSlides == "yes"){
 
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
-if(params$isSlides == "yes"){
-  cat("class: inverse, center, middle
-
-# Environments
-
-<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
-
----
-"    
-  )
-}else{
-  cat("# Environments
-
----
-"    
-  )
-  
-}
+## -----------------------------------------------------------------------------
+myMat <- matrix(1:100,ncol=10,byrow=TRUE)
+means <- colMeans(myMat)
+write.csv(myMat,file="Test.csv")
 
 
+## ----eval=FALSE---------------------------------------------------------------
+## ?base
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
-if(params$isSlides == "yes"){
-  cat("class: inverse, center, middle
 
-# Renv
+## ---- eval=FALSE--------------------------------------------------------------
+## ?utils
 
-<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
----
-"    
-  )
-}else{
-  cat("# Renv
+## ----eval=FALSE---------------------------------------------------------------
+## sessionInfo()
 
----
-"    
-  )
-  
-}
 
+## ----eval=FALSE---------------------------------------------------------------
+## library(ggplot2)
+## library(dplyr)
+## sessionInfo()
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## sessionInfo("ggplot2")
+
+
+## ----eval=TRUE----------------------------------------------------------------
+sess_info <- sessionInfo()
+class(sess_info)
+names(sess_info)
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## library(redist)
+## sessionInfo()
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## install.packages("redist")
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## chooseCRANmirror()
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## install.packages("redis",repos = "https://repo.miserver.it.umich.edu/cran/")
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## install.packages("BiocManager")
+## library(BiocManager)
+## install("DESeq2")
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## version()
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## install(version = "3.15")
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## library(ggplot2)
+## library(DESeq2)
+## sessionInfo()
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## install.packages("renv")
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## library(renv)
+## init()
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## status()
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## snapshot()
+
+
+## ---- eval=FALSE--------------------------------------------------------------
+## restore()
 
