@@ -12,6 +12,6 @@ Depends: methods, ggplot2, rmarkdown, tidyverse, knitr, gh, formatR, reticulate,
 Suggests: rmarkdown,
     testthat,
     yaml
-SystemRequirements: R, RStudio, Git
+SystemRequirements: R, RStudio, Git, Conda, Docker
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
