@@ -49,7 +49,7 @@ if(params$isSlides == "yes"){
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Reproducibility
+# Reproducibility in R
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -57,7 +57,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Reproducibility
+  cat("# Reproducibility?
 
 ---
 "    
@@ -71,14 +71,6 @@ if(params$isSlides == "yes"){
 myMat <- matrix(1:100,ncol=10,byrow=TRUE)
 means <- colMeans(myMat)
 write.csv(myMat,file="Test.csv")
-
-
-## ----eval=FALSE---------------------------------------------------------------
-## ?base
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## ?utils
 
 
 ## ----eval=FALSE---------------------------------------------------------------
@@ -102,12 +94,12 @@ names(sess_info)
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## library(redist)
-## sessionInfo()
+## install.packages("redist")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## install.packages("redist")
+## library(redist)
+## sessionInfo()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
@@ -136,6 +128,12 @@ names(sess_info)
 ## library(ggplot2)
 ## library(DESeq2)
 ## sessionInfo()
+
+
+## ----eval=FALSE---------------------------------------------------------------
+## install.packages("https://cran.r-project.org/src/contrib/Archive/unmarked/unmarked_0.8-1.tar.gz",
+##                  repos = NULL,
+##                  type = "source")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
