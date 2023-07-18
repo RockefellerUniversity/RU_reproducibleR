@@ -30,6 +30,14 @@ navbar:
         href: presentations/singlepage/Docker.html
       - text: Code
         href: presentations/r_code/Docker.R
+    - text: Session4
+      menu:
+      - text: Slide
+        href: presentations/slides/github.html
+      - text: Single Page
+        href: presentations/singlepage/github.html
+      - text: Code
+        href: presentations/r_code/github.R
   - text: Exercises
     menu:
     - text: Renv
@@ -50,6 +58,12 @@ navbar:
         href: exercises/exercises/Docker_exercise.html
       - text: Solution
         href: exercises/answers/Docker_answers.html
+    - text: GitandGitHub
+      menu:
+      - text: Exercise
+        href: exercises/exercises/GitandGitHub_exercise.html
+      - text: Solution
+        href: exercises/answers/GitandGitHub_answers.html
   right:
   - text: Getting help!
     href: https://github.com//RockefellerUniversity/RU_reproducibleR/issues
