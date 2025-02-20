@@ -1,11 +1,10 @@
 <br>
 
-####  **Git and GitHub**
+####  **Reproducible code and Rmarkdown**
 
-In Git and GitHub we will review the widely used version control and web hosting systems.
+In Reproducible code and Rmarkdown we will review how to make dynamic reports and their role reproducible research.
 
 Session sections:
 
-* What is Git and GitHub?
-* Working locally and remotely to version control projects
-* Typical project work flows
+* What is Rmarkdown?
+* Creating dynamic reports
