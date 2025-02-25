@@ -20,6 +20,7 @@ output:
 params:
   isSlides: "no"
 ---
+
 ```{r setup, include=FALSE}
 suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
@@ -42,7 +43,6 @@ if(params$isSlides != "yes"){
 - [Set up](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#set-up)
 - [Background to R](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#background-to-r)
 - [Data types in R](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#data_types_in_r)
-
 
 
 ---
@@ -274,11 +274,13 @@ The **output** YAML option specifies the document type to be produced. THere are
 output: html_document
 ---
 ````
+
 ````{verbatim}
 ---
 output: pdf_document
 ---
 ````
+
 ````{verbatim}
 ---
 output: ioslides_presentation
@@ -298,6 +300,7 @@ output:
     fig_height: 6
 ---
 ````
+
 ---
 ## Adding styles
 
@@ -364,6 +367,7 @@ Emphasis can be added to text in markdown documents using either the **_** or __
 Italics = _Italics_ or *Italics*
 Bold  =  __Bold__ or **Bold**
 ````
+
 _Italics_  
 __Bold__
 
@@ -382,7 +386,12 @@ Files may be local or accessible from http URL.
 ## HTML links
 
 HTML links can be included in Markdown documents either by simply including address in text or by using **[]** for the phrase to add link to, followed the link in **()**
-```
+
+````{verbatim}
+https://rockefelleruniversity.github.io/
+[Github site](https://rockefelleruniversity.github.io/)
+````
+
 https://rockefelleruniversity.github.io/
 [Github site](https://rockefelleruniversity.github.io/)
 
@@ -393,11 +402,11 @@ Section headers can be added to Markdown documents.
 
 Headers follow the same conventions as used in HTML markup and can implemented at multiple levels of size. Section headers in Markdown are created by using the **#** symbol
 
-```
+````{verbatim}
 # Top level section
 ## Middle level section
 ### Bottom level section
-```
+````
 
 ### Rendered Bottom level section
 
@@ -422,7 +431,8 @@ My list rendered:
     + Second item B
 
 
-    
+
+
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
 if(params$isSlides == "yes"){
@@ -557,5 +567,4 @@ Exercise on Reproducibility in R can be found [here](../../exercises/exercises/R
 ## Contact
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
-
 
