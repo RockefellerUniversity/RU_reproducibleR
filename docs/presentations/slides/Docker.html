@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Containers ¶  ¶ ¶  ¶ </title>
+    <title>Containers    </title>
     <meta charset="utf-8" />
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
-    <script src="Docker_files/header-attrs-2.23/header-attrs.js"></script>
+    <script src="Docker_files/header-attrs-2.29/header-attrs.js"></script>
     <link href="Docker_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
     <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
@@ -14,7 +14,11 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Containers ¶ <html> ¶ ¶ <hr color='#EB811B' size=1px width=796px> ¶ </html>
+# Containers<br />
+<html><br />
+<br />
+<hr color='#EB811B' size=1px width=796px><br />
+</html>
 ]
 .author[
 ### Rockefeller University, Bioinformatics Resource Centre
@@ -139,7 +143,7 @@ Check Docker version to make sure Docker is installed and running.
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker --version
 ```
 
@@ -172,7 +176,7 @@ class: inverse, center, middle
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker pull rocker/rstudio:4.2.3
 ```
 
@@ -187,7 +191,7 @@ Images have names, tags, and image IDs as shown in the output. The ID is a hash 
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker images
 ```
 
@@ -207,7 +211,7 @@ Images have names, tags, and image IDs as shown in the output. The ID is a hash 
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker images
 ```
 
@@ -235,7 +239,7 @@ Components of the run command:
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker run --rm \
           -p 8787:8787 \
            -e PASSWORD=password \
@@ -258,7 +262,7 @@ To see all containers running in the local environment, use the 'docker ps' comm
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker ps
 ```
 
@@ -277,7 +281,7 @@ Or open up another tab and the 'docker stop' command can be used with the ID lis
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker stop 6ee1e0e97bf8 # this is the ID from 'docker ps'
 docker ps
 ```
@@ -300,7 +304,7 @@ The docker container has it's own file system, and we can mount a local director
 
 *Code (terminal):*
 
-```sh
+``` sh
 # navigate to 'r_course' directory in downloaded material
  cd /PathToDownloadedCourse/Reproducible_R-master/r_course
  
@@ -339,7 +343,7 @@ These files can be read into R, and also files can be written to the local envir
 
 *Code (R in docker image):*
 
-```r
+``` r
 dataIn &lt;- read.csv("readThisTable.csv")
 head(dataIn, 2)
 # add gene IDs and write to new file on local computer
@@ -357,7 +361,7 @@ This R environment will then be loaded the next time you launch an RStudio conta
 
 *Code (terminal):*
 
-```sh
+``` sh
 # For windows use: dir /a
 ls -a data
 rm -r data/.local data/.config
@@ -446,7 +450,7 @@ The port 8787 is exposed and the 'init' script that is included with the base RS
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker build -t rocker/rstudio:4.2.3_v2 ./data
 ```
 
@@ -462,7 +466,7 @@ Use the docker 'images' command to see image
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker images
 ```
 
@@ -478,7 +482,7 @@ As done previously, use the 'docker run' command to launch a container with our 
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
@@ -520,7 +524,7 @@ This Dockerfile is not named 'Dockerfile', so we specify the exact path with '-f
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 ```
 
@@ -533,7 +537,7 @@ docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker images
 ```
 
@@ -543,7 +547,7 @@ docker images
 
 *Code (terminal):*
 
-```sh
+``` sh
 docker run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
@@ -556,7 +560,7 @@ docker run --rm \
 
 *Code (R in docker image):*
 
-```r
+``` r
 library(Herper)
 # the environment name and miniconda path set in the Dockerfile
 Herper::local_CondaEnv(new = "pipe_env", 
@@ -594,7 +598,7 @@ Make sure you have an account on [Docker Hub](https://hub.docker.com/).
 
 *Code (terminal):*
 
-```sh
+``` sh
 # log in and provide credentials used to sign into Docker Hub
 # this will prompt you to enter username and password
 docker login
@@ -633,7 +637,7 @@ renv and Docker can be used in tandem to easily recreate and R environment.
 
 *Code (R on local computer):*
 
-```r
+``` r
 setwd("/PathToMyDownload/Reproducible_R-master/r_course/Data/renv_docker")
 
 # load in packages to recreate environment we used previously
@@ -680,7 +684,7 @@ Build the image with the build context (last argument) set to the directory cont
 
 
 
-```sh
+``` sh
 
 # build the image 
 docker build -t rocker/rstudio:4.1.1_renv ./data/renv_docker
@@ -716,9 +720,9 @@ Any suggestions, comments, edits or questions (about content or the slides thems
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

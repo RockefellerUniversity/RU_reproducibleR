@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Conda and Herper ¶  ¶ ¶  ¶ </title>
+    <title>Conda and Herper    </title>
     <meta charset="utf-8" />
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
-    <script src="libs/header-attrs-2.23/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
     <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
@@ -14,7 +14,11 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Conda and Herper ¶ <html> ¶ ¶ <hr color='#EB811B' size=1px width=796px> ¶ </html>
+# Conda and Herper<br />
+<html><br />
+<br />
+<hr color='#EB811B' size=1px width=796px><br />
+</html>
 ]
 .author[
 ### Rockefeller University, Bioinformatics Resource Centre
@@ -87,7 +91,7 @@ The **install_CondaTools()** function allows the user to specify required Conda 
 Miniconda is installed as part of the process (by default into the r-reticulate's default Conda location - /github/home/.local/share/r-miniconda) and the user's requested conda environment built within the same directory (by default /github/home/.local/share/r-miniconda/envs/USERS_ENVIRONMENT_HERE). 
 
 
-```r
+``` r
 library(Herper)
 install_CondaTools(tools = "star", env = "rnaseq")
 ```
@@ -110,7 +114,7 @@ $pathToEnvBin
 If you already have Miniconda installed or you would like to install to a custom location, you can specify the path with the *pathToMiniConda* parameter.
 
 
-```r
+``` r
 my_miniconda &lt;- "~/Desktop/My_Conda"
 
 install_CondaTools(tools = "star", env = "rnaseq", pathToMiniConda = my_miniconda)
@@ -124,7 +128,7 @@ It's easy to add more tools. You just use *install_CondaTools()* again, but an e
 By default when we run this command, the path to Conda and the environment is returned. We can save this as a variable for later. 
 
 
-```r
+``` r
 conda_paths &lt;- install_CondaTools(tools = c("salmon", "kallisto"), env = "rnaseq",
     updateEnv = TRUE, pathToMiniConda = my_miniconda)
 
@@ -150,7 +154,7 @@ $pathToEnvBin
 The **list_CondaPkgs** function allows users to check what packages are installed in a given environment.
 
 
-```r
+``` r
 list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda)
 ```
 ```
@@ -172,7 +176,7 @@ libaec            1.0.6       conda-forge	osx-64
 If the user is unsure of the exact name, or version of a tool available on conda, they can use the **conda_search** function. Searches will find close matches for incorrect queries.
 
 
-```r
+``` r
 conda_search("kall", pathToMiniConda = my_miniconda)
 ```
 
@@ -191,7 +195,7 @@ If you have the exact name you can search for what versions are available on Con
 
 
 
-```r
+``` r
 conda_search("kallisto", pathToMiniConda = my_miniconda)
 ```
 
@@ -213,7 +217,7 @@ conda_search("kallisto", pathToMiniConda = my_miniconda)
 Specific package versions can be searched for using the Conda format i.e. "kallisto==0.46", "kallisto&gt;=0.48" or "kallisto&lt;=0.45".
 
 
-```r
+``` r
 conda_search("kallisto&lt;=0.45", pathToMiniConda = my_miniconda)
 ```
 
@@ -228,7 +232,7 @@ conda_search("kallisto&lt;=0.45", pathToMiniConda = my_miniconda)
 We can use the same version nomenclature to also install these tools. Here we will downgrade the version of Kallisto we have installed. 
 
 
-```r
+``` r
 conda_paths &lt;- install_CondaTools(tools = "kallisto&lt;=0.45", env = "rnaseq", updateEnv = T,
     pathToMiniConda = my_miniconda)
 ```
@@ -239,7 +243,7 @@ conda_paths &lt;- install_CondaTools(tools = "kallisto&lt;=0.45", env = "rnaseq"
 We can now see that we have downgraded Kallisto. 
 
 
-```r
+``` r
 library(magrittr)
 library(dplyr)
 list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %&gt;%
@@ -261,7 +265,7 @@ The **with_CondaEnv** allows users to run R code with the required PATH and envi
 Here we use the **with_CondaEnv** to allow us to *see* the tools installed in out our "rnaseq" environment. We can then use the R function *system2()* to run some terminal/command line code from within R. In this case we want to run the salmon help. 
 
 
-```r
+``` r
 res &lt;- with_CondaEnv("rnaseq",
                       system2(command="salmon",args = "help",stdout = TRUE),
                       pathToMiniConda=my_miniconda)
@@ -292,7 +296,7 @@ The **local_CondaEnv** function acts in a similar fashion to the **with_CondaEnv
 **local_CondaEnv** is best used within a user-created function, allowing access to the Conda environment's PATH and variables from within the the function itself but resetting all environmental variables once complete.
 
 
-```r
+``` r
 salmonHelp &lt;- function() {
     local_CondaEnv("rnaseq", pathToMiniConda = my_miniconda)
     helpMessage &lt;- system2(command = "salmon", args = "help", stdout = TRUE)
@@ -324,7 +328,7 @@ Once you are done you have an environment that is functioning well you will want
 
 
 
-```r
+``` r
 yml_name &lt;- paste0("rnaseq_", format(Sys.Date(), "%Y%m%d"), ".yml")
 export_CondaEnv("rnaseq", yml_name, pathToMiniConda = my_miniconda)
 ```
@@ -344,7 +348,7 @@ The **import_CondaEnv** function allows the user to create a new conda environme
 Users can simply provide a path to the YAML file for import. They can also specify the environment name, but by default the name will be taken from the YAML. 
 
 
-```r
+``` r
 testYML &lt;- system.file("extdata/test.yml", package = "Herper")
 import_CondaEnv(yml_import = testYML, pathToMiniConda = my_miniconda)
 ```
@@ -387,7 +391,7 @@ Sometimes we have to use pip. But that does not mean we have to leave our enviro
 First we need to mkae sure we have pip installed. Oftent his is not the case in new environments. Then we provide the direct path to our command and the isntall should run. 
 
 
-```r
+``` r
 install_CondaTools("pip", "rnaseq", pathToMiniConda = my_miniconda, updateEnv = TRUE)
 
 with_CondaEnv("rnaseq", system2(command = paste0(conda_paths$pathToEnvBin, "/pip"),
@@ -398,7 +402,7 @@ with_CondaEnv("rnaseq", system2(command = paste0(conda_paths$pathToEnvBin, "/pip
 ## Check envs
 
 
-```r
+``` r
 list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %&gt;%
     dplyr::filter(name == "scanpy")
 ```
@@ -431,9 +435,9 @@ Any suggestions, comments, edits or questions (about content or the slides thems
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

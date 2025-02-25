@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Environments and Renv ¶  ¶ ¶  ¶ </title>
+    <title>Environments and Renv    </title>
     <meta charset="utf-8" />
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
-    <script src="libs/header-attrs-2.23/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
     <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
@@ -14,7 +14,11 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Environments and Renv ¶ <html> ¶ ¶ <hr color='#EB811B' size=1px width=796px> ¶ </html>
+# Environments and Renv<br />
+<html><br />
+<br />
+<hr color='#EB811B' size=1px width=796px><br />
+</html>
 ]
 .author[
 ### Rockefeller University, Bioinformatics Resource Centre
@@ -68,7 +72,7 @@ You may navigate to the unarchived Reproducible_R folder in the Rstudio menu.
 or in the console.
 
 
-```r
+``` r
 setwd("/PathToMyDownload/Reproducible_R-master/r_course")
 # e.g. setwd('~/Downloads/Reproducible_R-master/r_course')
 ```
@@ -127,7 +131,7 @@ We get access to these when R loads without having to install or load any packag
 These include arithmetic operations, functions for reading/writing data and utlity functions.
 
 
-```r
+``` r
 myMat &lt;- matrix(1:100, ncol = 10, byrow = TRUE)
 means &lt;- colMeans(myMat)
 write.csv(myMat, file = "Test.csv")
@@ -211,7 +215,7 @@ One very useful function within the **utils** package is **sessionInfo()**.
 First we can run sessionInfo() function with no arguments.
 
 
-```r
+``` r
 sessionInfo()
 ```
 
@@ -236,7 +240,7 @@ sessionInfo()
 If we load a few more packages into R we can see this reflected in the sessionInfo() output under the **other attached packages**.
 
 
-```r
+``` r
 library(ggplot2)
 library(dplyr)
 sessionInfo()
@@ -252,7 +256,7 @@ We can also use the sessionInfo function to provide the version information on a
 We simply need to add an argument to the sessionInfo function call of the package name and the specified package's versions is shown under the **other attached packages** section.
 
 
-```r
+``` r
 sessionInfo("ggplot2")
 ```
 
@@ -264,7 +268,7 @@ sessionInfo("ggplot2")
 The sessionInfo function returns an object of class sessioninfo containing the R/package version information.
 
 
-```r
+``` r
 sess_info &lt;- sessionInfo()
 class(sess_info)
 ```
@@ -273,7 +277,7 @@ class(sess_info)
 ## [1] "sessionInfo"
 ```
 
-```r
+``` r
 names(sess_info)
 ```
 
@@ -370,7 +374,7 @@ In simplicity, to install a package into our R we can just use the **install.pac
 This will install the package and all required dependencies (the packages listed in DEPENDS and IMPORTS).
 
 
-```r
+``` r
 install.packages("redist")
 ```
 ![](imgs/installDepends.png)
@@ -381,7 +385,7 @@ install.packages("redist")
 Now it is installed we can load the library and check the sessionInfo to see where our DEPENDS and IMPORTS packages are within the session information.
 
 
-```r
+``` r
 library(redist)
 sessionInfo()
 ```
@@ -399,7 +403,7 @@ A mirror is simply a copy of the packages databases in a distinct location.
 We can induce R to ask us which mirror to use by using the chooseCRANmirror() function.
 
 
-```r
+``` r
 chooseCRANmirror()
 ```
 ]
@@ -417,7 +421,7 @@ We can get a full list of CRAN mirrors from [here](https://cran.r-project.org/mi
 Once we have chosen a mirror (typically based on closest location) we can supply the URL to the repos argument of install.packages(). Here will use the University of Michigan mirrow.
 
 
-```r
+``` r
 install.packages("redis", repos = "https://repo.miserver.it.umich.edu/cran/")
 ```
 
@@ -479,7 +483,7 @@ To do this, Bioconductor members have created the BiocManager package which is i
 The BiocManager package can be used to install packages from CRAN and Bioconductor
 
 
-```r
+``` r
 install.packages("BiocManager")
 library(BiocManager)
 install("DESeq2")
@@ -493,7 +497,7 @@ It also contains useful functions to manage Bioconductor versions.
 Here we check the version of Bioconductor we are using by way of the **version()** function.
 
 
-```r
+``` r
 version()
 ```
 
@@ -507,7 +511,7 @@ If we want to update all packages to a specific of bioconductor we can set the v
 NOTE: Dont do this unless absolutely sure.
 
 
-```r
+``` r
 install(version = "3.15")
 ```
 
@@ -526,7 +530,7 @@ Lets take a look at a very simple example.
 Lets load 2 packages which are very common in Bioinformatics - ggplot2 and DESeq2
 
 
-```r
+``` r
 library(ggplot2)
 library(DESeq2)
 sessionInfo()
@@ -551,7 +555,7 @@ Additionally i need to supply the parameters repos = NULL and type = "source"
 
 
 
-```r
+``` r
 install.packages("https://cran.r-project.org/src/contrib/Archive/unmarked/unmarked_0.8-1.tar.gz",
     repos = NULL, type = "source")
 ```
@@ -580,7 +584,7 @@ Rstudio in fact offers to set-up new projects with renv but we will skip this fo
 Next we can install **renv** package from CRAN.
 
 
-```r
+``` r
 install.packages("renv")
 ```
 ]
@@ -601,7 +605,7 @@ We can see that renv will discover project dependencies and then copy any requir
 Following this it creates a renv.lock file in the present directory containing R and R package version information.
 
 
-```r
+``` r
 library(renv)
 init()
 ```
@@ -680,7 +684,7 @@ Once a new script is within the directory we can first check whether the script 
 We can do this by using the renv status() function.
 
 
-```r
+``` r
 status()
 ```
 ]
@@ -695,7 +699,7 @@ status()
 Now we have accessed the packages in use within the project but not captured in the lock file we can run the renv snapshot() function to update our lock file.
 
 
-```r
+``` r
 snapshot()
 ```
 ]
@@ -746,7 +750,7 @@ Now we have sent these files to another user (or shared on GitHub) we can initia
 This will update the project to have all the required packages installed and available to this project.
 
 
-```r
+``` r
 restore()
 ```
 ]
@@ -773,9 +777,9 @@ Any suggestions, comments, edits or questions (about content or the slides thems
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

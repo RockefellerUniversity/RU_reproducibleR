@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Getting started with Git and GitHub ¶  ¶ ¶  ¶ </title>
+    <title>Getting started with Git and GitHub    </title>
     <meta charset="utf-8" />
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
-    <script src="libs/header-attrs-2.23/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
     <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
@@ -14,7 +14,11 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Getting started with Git and GitHub ¶ <html> ¶ ¶ <hr color='#EB811B' size=1px width=796px> ¶ </html>
+# Getting started with Git and GitHub<br />
+<html><br />
+<br />
+<hr color='#EB811B' size=1px width=796px><br />
+</html>
 ]
 .author[
 ### Rockefeller University, Bioinformatics Resource Centre
@@ -89,7 +93,7 @@ You may navigate to the unarchived Reproducible_R folder in the Rstudio menu.
 or in the console.
 
 
-```r
+``` r
 setwd("/PathToMyDownload/Reproducible_R-master/r_course")
 # e.g. setwd('~/Downloads/Reproducible_R-master/r_course')
 ```
@@ -163,7 +167,7 @@ class: inverse, center, middle
 You may already have Git installed, as it installed by certain tools i.e. Xcode Command Line Tools. To interact with Git at the most basic level we will use a command prompt. We can run the this command to check.
 
 
-```sh
+``` sh
 git --version
 ```
 
@@ -189,7 +193,7 @@ We initialize repositories to store files related to a project. You can make man
 
 
 
-```sh
+``` sh
 mkdir My_Project_Folder
 cd My_Project_Folder
 git init
@@ -202,38 +206,36 @@ git init
 .pull-left[
 *Mac/Linux*
 
-```sh
+``` sh
 ls .
 ```
 
 ```
+## Descriptions
+## Test.csv
 ## _course.yml
 ## customCSS
 ## data
-## Descriptions
 ## imgs
 ## presRaw
-## reproducibleR.html
-## reproducibleR.Rmd
 ## scripts
 ```
 
-```sh
+``` sh
 ls -a .
 ```
 
 ```
 ## .
 ## ..
+## .git
+## Descriptions
+## Test.csv
 ## _course.yml
 ## customCSS
 ## data
-## Descriptions
-## .git
 ## imgs
 ## presRaw
-## reproducibleR.html
-## reproducibleR.Rmd
 ## scripts
 ```
   ]
@@ -241,11 +243,11 @@ ls -a .
 .pull-right[
 *Windows*
 
-```sh
+``` sh
 dir .
 ```
 
-```sh
+``` sh
 dir . /ah
 ```
   ] 
@@ -261,17 +263,17 @@ You can explore it. It is full of simple plain text files.
 .pull-left[
 *Mac/Linux*
 
-```sh
+``` sh
 ls -a .git
 ```
 
 ```
 ## .
 ## ..
+## HEAD
 ## branches
 ## config
 ## description
-## HEAD
 ## hooks
 ## info
 ## objects
@@ -282,7 +284,7 @@ ls -a .git
 .pull-right[
 *Windows*
 
-```sh
+``` sh
 dir /ah .git
 ```
   ]
@@ -294,11 +296,11 @@ When first working with git, you need to attach your information. This means you
 
 
 
-```sh
+``` sh
 git config --global user.name 'BRC-RU'
 ```
 
-```sh
+``` sh
 git config --global user.name
 ```
 
@@ -306,11 +308,11 @@ git config --global user.name
 ## BRC-RU
 ```
 
-```sh
+``` sh
 git config --global user.email 'brc@rockefeller.edu'
 ```
 
-```sh
+``` sh
 git config --global user.email
 ```
 
@@ -323,7 +325,7 @@ git config --global user.email
 ## Lets use the repository
 I have added a new file called README. We can check the *status* of our git once we have added this. 
 
-```sh
+``` sh
 touch README.md
 git status .
 ```
@@ -337,13 +339,12 @@ git status .
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
 ## 	README.md
+## 	Test.csv
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
 ## 	imgs/
 ## 	presRaw/
-## 	reproducibleR.Rmd
-## 	reproducibleR.html
 ## 	scripts/
 ## 
 ## nothing added to commit but untracked files present (use "git add" to track)
@@ -375,7 +376,7 @@ It is all about balance between having a good log of your changes, without havin
 ## Staging - git add  
 Add the README file to your staged area
 
-```sh
+``` sh
 git add README.md
 git status .
 ```
@@ -392,13 +393,12 @@ git status .
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
+## 	Test.csv
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
 ## 	imgs/
 ## 	presRaw/
-## 	reproducibleR.Rmd
-## 	reproducibleR.html
 ## 	scripts/
 ```
 
@@ -407,26 +407,25 @@ git status .
 Commit the README file into your repository with a message.
 If you do not add a message, you will get prompted.
 
-```sh
+``` sh
 git commit -m'Made a README'
 git status .
 ```
 
 ```
-## [master (root-commit) 7a33908] Made a README
+## [master (root-commit) 1455715] Made a README
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ##  create mode 100644 README.md
 ## On branch master
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
+## 	Test.csv
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
 ## 	imgs/
 ## 	presRaw/
-## 	reproducibleR.Rmd
-## 	reproducibleR.html
 ## 	scripts/
 ## 
 ## nothing added to commit but untracked files present (use "git add" to track)
@@ -437,7 +436,7 @@ git status .
 You might have 3 different versions i.e. committed, staged, and working directory version. Diff can tell you the changes between these files. 
 
 
-```sh
+``` sh
 echo 'Hello Friends' &gt;&gt; README.md
 git status .
 git diff
@@ -453,13 +452,12 @@ git diff
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
+## 	Test.csv
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
 ## 	imgs/
 ## 	presRaw/
-## 	reproducibleR.Rmd
-## 	reproducibleR.html
 ## 	scripts/
 ## 
 ## no changes added to commit (use "git add" and/or "git commit -a")
@@ -476,7 +474,7 @@ git diff
 Always good to check what is changed in your staged files before you commit.
 
 
-```sh
+``` sh
 git add README.md
 git status .
 ```
@@ -490,17 +488,16 @@ git status .
 ## Untracked files:
 ##   (use "git add &lt;file&gt;..." to include in what will be committed)
 ## 	Descriptions/
+## 	Test.csv
 ## 	_course.yml
 ## 	customCSS/
 ## 	data/
 ## 	imgs/
 ## 	presRaw/
-## 	reproducibleR.Rmd
-## 	reproducibleR.html
 ## 	scripts/
 ```
 
-```sh
+``` sh
 git diff
 ```
 
@@ -509,7 +506,7 @@ git diff
 Always good to check what is changed in your staged files before you commit.
 
 
-```sh
+``` sh
 git diff --staged
 git commit -m 'Added welcome message'
 ```
@@ -521,7 +518,7 @@ git commit -m 'Added welcome message'
 ## +++ b/README.md
 ## @@ -0,0 +1 @@
 ## +Hello Friends
-## [master bea4f78] Added welcome message
+## [master 18a42dd] Added welcome message
 ##  1 file changed, 1 insertion(+)
 ```
 
@@ -531,22 +528,22 @@ git commit -m 'Added welcome message'
 * There is a hexadecimal code that is unique ID for each commit. 
 * Other information i.e. Time and Author
 
-```sh
+``` sh
 
 git log
 
 ```
 
 ```
-## commit bea4f7806a35e266b3da0479aeba431c0d4a1846
+## commit 18a42dd5986668c1a0a6772b16c57afc9ba0bef9
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Tue Jul 18 21:18:57 2023 +0000
+## Date:   Tue Feb 25 19:00:49 2025 +0000
 ## 
 ##     Added welcome message
 ## 
-## commit 7a33908db65b2020f84bcfd4fc4ecc413edbf730
+## commit 1455715074cc67bb5575bfaa5e9fb48ed215c2a7
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Tue Jul 18 21:18:57 2023 +0000
+## Date:   Tue Feb 25 19:00:49 2025 +0000
 ## 
 ##     Made a README
 ```
@@ -560,24 +557,24 @@ Can modify the log response to specific information that you need. This is impor
 * --patch = What content changes
 
 
-```sh
+``` sh
 git log --oneline
 ```
 
 ```
-## bea4f78 Added welcome message
-## 7a33908 Made a README
+## 18a42dd Added welcome message
+## 1455715 Made a README
 ```
 
-```sh
+``` sh
 git log --oneline --stat
 ```
 
 ```
-## bea4f78 Added welcome message
+## 18a42dd Added welcome message
 ##  README.md | 1 +
 ##  1 file changed, 1 insertion(+)
-## 7a33908 Made a README
+## 1455715 Made a README
 ##  README.md | 0
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ```
@@ -644,7 +641,7 @@ If you want to get the address later you can check press the clone button when y
 Add the address to the Git. If you do not want it online on GitHub you can pick somewhere else. A server or someone else laptop. 
 
 
-```sh
+``` sh
 git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git
 ```
 
@@ -654,7 +651,7 @@ git remote add origin https://github.com/BRC-RU/My_GitHub_Project.git
 ## Updating GitHub - Push
 
 
-```sh
+``` sh
 git push -u origin master
 ```
 
@@ -689,7 +686,7 @@ You can make commits on GitHub to single files i.e. if you have a typo, this can
 Whenever your local Git is behind the remote GitHub, you can grab the updates with Pull.
 
 
-```sh
+``` sh
 git pull -u origin master
 ```
 
@@ -836,12 +833,12 @@ Master should reflect what is 'published'. This is your core repository. Branchi
 
 *Git*
 
-```sh
+``` sh
 git branch 'newbranch' # to build new one.
 ```
 
 
-```sh
+``` sh
 git branch  # tells you what branches exist
 ```
 
@@ -865,7 +862,7 @@ Once you have made a branch and want to work on it, you will need to make this b
 
 *Git*
 
-```sh
+``` sh
 git checkout newbranch 
 ```
 
@@ -874,7 +871,7 @@ git checkout newbranch
 ```
 
 
-```sh
+``` sh
 git branch
 ```
 
@@ -1001,14 +998,14 @@ If you move a file Git can get confused and treats it like you have deleted and 
 
 If you move a file on the command line, there is a special Git move function:
 
-```sh
+``` sh
 git mv FilePath NewFilePath
 ```
 
 The above helps with moving a single file. If you have a bunch of files to move, you can just move them in finder/explorer. Then post-hoc fix the staging to fix the move using:
 
 
-```sh
+``` sh
 git add -A .
 ```
 
@@ -1111,9 +1108,9 @@ https://www.softwaretestinghelp.com/github-desktop-tutorial/
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

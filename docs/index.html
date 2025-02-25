@@ -14,7 +14,7 @@
 
 <title>Reproducible R</title>
 
-<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -334,6 +334,20 @@ div.tocify {
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session1</a>
       <ul class="dropdown-menu" role="menu">
         <li>
+          <a href="presentations/slides/reproducibleR.html">Slide</a>
+        </li>
+        <li>
+          <a href="presentations/singlepage/reproducibleR.html">Single Page</a>
+        </li>
+        <li>
+          <a href="presentations/r_code/reproducibleR.R">Code</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session2</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
           <a href="presentations/slides/Renv.html">Slide</a>
         </li>
         <li>
@@ -345,7 +359,7 @@ div.tocify {
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session2</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session3</a>
       <ul class="dropdown-menu" role="menu">
         <li>
           <a href="presentations/slides/Herper.html">Slide</a>
@@ -359,7 +373,7 @@ div.tocify {
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session3</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session4</a>
       <ul class="dropdown-menu" role="menu">
         <li>
           <a href="presentations/slides/Docker.html">Slide</a>
@@ -373,7 +387,7 @@ div.tocify {
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session4</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Session5</a>
       <ul class="dropdown-menu" role="menu">
         <li>
           <a href="presentations/slides/github.html">Slide</a>
@@ -395,6 +409,17 @@ div.tocify {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">reproducibleR</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="exercises/exercises/reproducibleR_exercise.html">Exercise</a>
+        </li>
+        <li>
+          <a href="exercises/answers/reproducibleR_answers.html">Solution</a>
+        </li>
+      </ul>
+    </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Renv</a>
       <ul class="dropdown-menu" role="menu">
@@ -475,11 +500,11 @@ class="email">brc@rockefeller.edu</a></h4>
 <h2>Course Overview</h2>
 <div id="course-integrity" class="section level3">
 <h3>Course Integrity</h3>
-<p><strong>This course is compiled automatically on <em>2023-07-18</em>
+<p><strong>This course is compiled automatically on <em>2025-02-25</em>
 </strong> <br> <a
 href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3compilation-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/compilation-check/badge.svg"></a></p>
 <p><strong>The course is tested and available on MacOS, Windows and
-Ubuntu Linux for R version 4.3.0 (2023-04-21)</strong> <br> <a
+Ubuntu Linux for R version 4.4.0 (2024-04-24)</strong> <br> <a
 href="https://github.com/RockefellerUniversity/RU_reproducibleR/actions?query=workflow%3AOS-check"><img src="https://github.com/RockefellerUniversity/RU_reproducibleR/workflows/OS-check/badge.svg"></a></p>
 <p><br> <br></p>
 </div>
@@ -544,20 +569,14 @@ the code below.</p>
 <h4>Install R</h4>
 <p>R can be installed from the R-project website.</p>
 <p>The R website can be found here <a href="http://www.r-project.org/"
-class="uri">http://www.r-project.org/</a>.</p>
-<p>The download links and associated installation instructions for
-multiple platforms can be found below provided by Revolution Analytics.
-<a href="https://cran.revolutionanalytics.com"
-class="uri">https://cran.revolutionanalytics.com</a></p>
-<p>We recommend installing R 4.3.0 as this is the version used to
-compile the course. Direct downloads for R 4.3.0 for the main platforms
-can be found below:</p>
+class="uri">http://www.r-project.org/</a>. This website has all the
+latest information about R updates, conferences and installation</p>
+<p>You can use this direct links to the install for each major OS:</p>
 <ul>
+<li><a href="https://cloud.r-project.org/bin/macosx/">Mac</a></li>
 <li><a
-href="https://cran.revolutionanalytics.com/bin/macosx/R-4.3.0.pkg">Mac</a></li>
-<li><a
-href="https://cran.revolutionanalytics.com/bin/windows/base/old/4.3.0/R-4.3.0-win.exe">Windows</a></li>
-<li><a href="https://cran.revolutionanalytics.com">Linux
+href="https://cloud.r-project.org/bin/windows/base/release.html">Windows</a></li>
+<li><a href="https://cloud.r-project.org/bin/linux/">Linux
 platforms</a></li>
 </ul>
 <p><br></p>
@@ -572,18 +591,22 @@ class="uri">http://www.rstudio.com/</a></p>
 class="uri">https://rstudio.com/products/rstudio/download/</a></p>
 <p><br></p>
 </div>
-<div id="install-required-packages" class="section level4">
-<h4><strong>Install required packages</strong></h4>
-</div>
-<div id="from-the-course-package" class="section level4">
-<h4>From the course package</h4>
-<pre class="{r}"><code>install.packages(&#39;BiocManager&#39;)
+<div id="install-required-r-packages" class="section level4">
+<h4><strong>Install required R packages</strong></h4>
+<p>R Packages can be installed from the course package <em>or</em> from
+CRAN/Bioconductor. These commands should be written into the R console.
+Once R and RStudio is installed, you can copy and paste these install
+commands into lower left pane of RStudio which should be labelled
+“Console”. If you run into any errors, do this one line at a time.</p>
+<div id="from-the-course-package" class="section level5">
+<h5>From the course package</h5>
+<pre><code>install.packages(&#39;BiocManager&#39;)
+install.packages(&#39;remotes&#39;)
 BiocManager::install(&#39;RockefellerUniversity/RU_reproducibleR&#39;,subdir=&#39;reproducibility&#39;)</code></pre>
-<p><br></p>
 </div>
-<div id="from-cran-and-bioconductor" class="section level4">
-<h4>From CRAN and Bioconductor</h4>
-<pre class="{r}"><code>install.packages(&#39;BiocManager&#39;)
+<div id="from-cran-and-bioconductor" class="section level5">
+<h5>From CRAN and Bioconductor</h5>
+<pre><code>install.packages(&#39;BiocManager&#39;)
 BiocManager::install(&#39;methods&#39;)
 BiocManager::install(&#39;ggplot2&#39;)
 BiocManager::install(&#39;rmarkdown&#39;)
@@ -596,7 +619,7 @@ BiocManager::install(&#39;Herper&#39;)
 BiocManager::install(&#39;renv&#39;)
 BiocManager::install(&#39;testthat&#39;)
 BiocManager::install(&#39;yaml&#39;)</code></pre>
-<p><br></p>
+</div>
 </div>
 <div id="download-the-material" class="section level4">
 <h4><strong>Download the material</strong></h4>
@@ -609,6 +632,30 @@ the material</a></p>
 <div id="the-presentations" class="section level2">
 <h2>The Presentations</h2>
 <p><br></p>
+<div id="reproducible-code-and-rmarkdown" class="section level4">
+<h4><strong>Reproducible code and Rmarkdown</strong></h4>
+<p>In Reproducible code and Rmarkdown we will review how to make dynamic
+reports and their role reproducible research.</p>
+<p>Session sections:</p>
+<ul>
+<li>What is Rmarkdown?</li>
+<li>Creating dynamic reports</li>
+</ul>
+<iframe src="presentations/slides/reproducibleR.html" width="100%" height="400" title="Session1">
+</iframe>
+<div id="links-to-presentations" class="section level5">
+<h5><em>Links to presentations:</em></h5>
+<p>The html slide presentation can be found at this link <a
+href="presentations/slides/reproducibleR.html"><strong>Slide</strong></a></p>
+<p>The single page html presentation can be found at this link <a
+href="presentations/singlepage/reproducibleR.html"><strong>Single
+Page</strong></a></p>
+<p>The code use in the presentations can be found at <a
+href="presentations/r_code/reproducibleR.R"><strong>R
+code</strong></a></p>
+<p><br></p>
+</div>
+</div>
 <div id="reproducible-r-and-r-packages" class="section level4">
 <h4><strong>Reproducible R and R packages</strong></h4>
 <p>In Reproducible R and R packages, we will review how to install and
@@ -620,9 +667,9 @@ manage R packages</p>
 <li>Installing from Bioconductor</li>
 <li>Renv and package management</li>
 </ul>
-<iframe src="presentations/slides/Renv.html" width="100%" height="400" title="Session1">
+<iframe src="presentations/slides/Renv.html" width="100%" height="400" title="Session2">
 </iframe>
-<div id="links-to-presentations" class="section level5">
+<div id="links-to-presentations-1" class="section level5">
 <h5><em>Links to presentations:</em></h5>
 <p>The html slide presentation can be found at this link <a
 href="presentations/slides/Renv.html"><strong>Slide</strong></a></p>
@@ -643,9 +690,9 @@ environments using Herper.</p>
 <li>What is Conda?</li>
 <li>Using Herper to manage conda environments</li>
 </ul>
-<iframe src="presentations/slides/Herper.html" width="100%" height="400" title="Session2">
+<iframe src="presentations/slides/Herper.html" width="100%" height="400" title="Session3">
 </iframe>
-<div id="links-to-presentations-1" class="section level5">
+<div id="links-to-presentations-2" class="section level5">
 <h5><em>Links to presentations:</em></h5>
 <p>The html slide presentation can be found at this link <a
 href="presentations/slides/Herper.html"><strong>Slide</strong></a></p>
@@ -665,9 +712,9 @@ href="presentations/r_code/Herper.R"><strong>R code</strong></a></p>
 <li>What is Docker?</li>
 <li>How to work with Docker and R</li>
 </ul>
-<iframe src="presentations/slides/Docker.html" width="100%" height="400" title="Session3">
+<iframe src="presentations/slides/Docker.html" width="100%" height="400" title="Session4">
 </iframe>
-<div id="links-to-presentations-2" class="section level5">
+<div id="links-to-presentations-3" class="section level5">
 <h5><em>Links to presentations:</em></h5>
 <p>The html slide presentation can be found at this link <a
 href="presentations/slides/Docker.html"><strong>Slide</strong></a></p>
@@ -689,9 +736,9 @@ web hosting systems.</p>
 <li>Working locally and remotely to version control projects</li>
 <li>Typical project work flows</li>
 </ul>
-<iframe src="presentations/slides/github.html" width="100%" height="400" title="Session4">
+<iframe src="presentations/slides/github.html" width="100%" height="400" title="Session5">
 </iframe>
-<div id="links-to-presentations-3" class="section level5">
+<div id="links-to-presentations-4" class="section level5">
 <h5><em>Links to presentations:</em></h5>
 <p>The html slide presentation can be found at this link <a
 href="presentations/slides/github.html"><strong>Slide</strong></a></p>
