@@ -255,7 +255,7 @@ if(params$isSlides == "yes"){
 
 In R Markdown the options for document processing are stored in YAML format at the top of the document. Most of this is automatically generated when you open a new Rmd. 
 
-````verbatim
+````{verbatim}
 ---
 title: "My New Analysis"
 author: "Tom Carroll"
@@ -269,17 +269,17 @@ output: html_document
 
 The **output** YAML option specifies the document type to be produced. THere are several options.
 
-````verbatim
+````{verbatim}
 ---
 output: html_document
 ---
 ````
-````verbatim
+````{verbatim}
 ---
 output: pdf_document
 ---
 ````
-````verbatim
+````{verbatim}
 ---
 output: ioslides_presentation
 ---
@@ -290,7 +290,7 @@ output: ioslides_presentation
 
 Global default options can also be set in the YAML. For example figure sizes can be set within the YAML metadata.
 
-````verbatim
+````{verbatim}
 ---
 output: 
   html_document:
@@ -303,7 +303,7 @@ output:
 
 Styles for HTML can be applied using the **theme** option and syntax highlighting styles control by the **highlight** option.
 
-````verbatim
+````{verbatim}
 ---
 output: 
   html_document:
@@ -345,7 +345,7 @@ The free form text and annotation is set in Markdown. This written as plain text
 
 To include a new line in markdown, you need to end the previous line with two spaces.
 
-````verbatim
+````{verbatim}
 This is my first line.  # the comment here shows the line end  
 This would be a new line.
 This wouldn't be a new line.
@@ -360,7 +360,7 @@ This wouldn't be a new line.
 
 Emphasis can be added to text in markdown documents using either the **_** or __*__
 
-````verbatim
+````{verbatim}
 Italics = _Italics_ or *Italics*
 Bold  =  __Bold__ or **Bold**
 ````
@@ -373,7 +373,7 @@ __Bold__
 Figures or external images can be used in markdown documents.  
 Files may be local or accessible from http URL.
 
-````verbatim
+````{verbatim}
 ![alt text](imgs/Dist.jpg)
 ![alt text](https://rockefelleruniversity.github.io//r_course/imgs/Dist.jpg)
 ````
@@ -407,7 +407,7 @@ Headers follow the same conventions as used in HTML markup and can implemented a
 Lists can be created in Markdown using the __-__ symbol.  
 Nested lists be specified with **+** symbol.
 
-````verbatim
+````{verbatim}
 - First item
 - Second item
     + Second item A
@@ -470,7 +470,7 @@ R can produce a lot of output not related to your results. To control whether me
 
 Loading libraries in R Markdown is often somewhere you would specify these as FALSE.
 
-````verbatim
+````{verbatim}
 ```{r,warning=F,message=F} 
 library(ggplot2)
 ```
@@ -531,7 +531,7 @@ kable(dfExample)
 
 Most of your code will be in code chunks. But it may be useful to report the results of R within the block of Markdown. This can be done adding the code to evalulate within **'r  '**
 
-````verbatim
+````{verbatim}
 Here is some freeform _markdown_ and the first result
 from an rnorm call is 'r rnorm(3)[1]', followed by some 
 more free form text.
