@@ -224,7 +224,7 @@ if(params$isSlides == "yes"){
 
 *Code (terminal):*
 ```{sh, eval=F}
-docker pull rocker/rstudio:4.2.3
+docker pull rocker/rstudio:4.4.0
 ```
 
 ---
@@ -292,8 +292,8 @@ Components of the run command:
 ```{sh, eval=F}
 docker run --rm \
           -p 8787:8787 \
-           -e PASSWORD=password \
-           rocker/rstudio:4.2.3
+           -e PASSWORD=password123 \
+           rocker/rstudio:4.4.0
 ```
 
 ---
@@ -334,7 +334,7 @@ Or open up another tab and the 'docker stop' command can be used with the ID lis
 
 *Code (terminal):*
 ```{sh, eval=F}
-docker stop 6ee1e0e97bf8 # this is the ID from 'docker ps'
+docker stop 08ac0df5a76b # this is the ID from 'docker ps'
 docker ps
 ```
 
@@ -359,14 +359,14 @@ The docker container has it's own file system, and we can mount a local director
 *Code (terminal):*
 ```{sh, eval=F}
 # navigate to 'r_course' directory in downloaded material
- cd /PathToDownloadedCourse/Reproducible_R-master/r_course
+ cd ~/Downloads/RU_reproducibleR-master/r_course
  
  # launch docker container
  docker run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
-           -e PASSWORD=password \
-           rocker/rstudio:4.2.3
+           -e PASSWORD=password123 \
+           rocker/rstudio:4.4.0
 ```
 
 ---
@@ -531,7 +531,7 @@ knitr::include_graphics("imgs/dockerfile1_EXPOSE_CMD.png")
 
 *Code (terminal):*
 ```{sh, eval=F}
-docker build -t rocker/rstudio:4.2.3_v2 ./data
+docker build -t rocker/rstudio:4.4.0_v2 ./data
 ```
 
 *Output:*
@@ -568,8 +568,8 @@ As done previously, use the 'docker run' command to launch a container with our 
 docker run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
-           -e PASSWORD=password \
-           rocker/rstudio:4.2.3_v2
+           -e PASSWORD=password123 \
+           rocker/rstudio:4.4.0_v2
 ```
 
 ---
@@ -612,7 +612,7 @@ if(params$isSlides == "yes"){
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 
-knitr::include_graphics("imgs/dockerfile_salmon_all.png")
+knitr::include_graphics("imgs/dockerfile_samtools_all.png")
 ```
 
 ---
@@ -625,13 +625,13 @@ This Dockerfile is not named 'Dockerfile', so we specify the exact path with '-f
 
 *Code (terminal):*
 ```{sh, eval=F}
-docker build -t rocker/rstudio:4.2.3_salmon -f ./data/Dockerfile_salmon ./data/
+docker build -t rocker/rstudio:4.4.0_samtools -f ./data/Dockerfile_samtools ./data/
 ```
 
 *Output:*
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_salmon_build_log.png")
+knitr::include_graphics("imgs/docker_samtools_build_log.png")
 ```
 
 ---
@@ -645,7 +645,7 @@ docker images
 *Output:*
 ```{r, echo=FALSE, out.width="70%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_images_salmon.png")
+knitr::include_graphics("imgs/docker_images_samtools.png")
 ```
 
 *Code (terminal):*
@@ -653,8 +653,8 @@ knitr::include_graphics("imgs/docker_images_salmon.png")
 docker run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
-           -e PASSWORD=password \
-           rocker/rstudio:4.2.3_salmon
+           -e PASSWORD=password123 \
+           rocker/rstudio:4.4.0_samtools
 ```
 ---
 
@@ -667,12 +667,12 @@ library(Herper)
 Herper::local_CondaEnv(new = "pipe_env", 
                        pathToMiniConda = "/home/miniconda")
 # test out salmon
-system("salmon -h")
+system("samtools --help")
 ```
 
 *Output:*
 ```{r, echo=FALSE, out.width="75%", fig.align='left'}
-knitr::include_graphics("imgs/docker_image_salmon_interface.png")
+knitr::include_graphics("imgs/docker_image_samtools_interface.png")
 ```
 
 ---
@@ -682,7 +682,7 @@ We can also run containers from Docker Desktop
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_desktop_salmon.png")
+knitr::include_graphics("imgs/docker_desktop_samtools.png")
 ```
 
 
@@ -693,7 +693,7 @@ We can also run containers from Docker Desktop
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
-knitr::include_graphics("imgs/docker_desktop_salmon_running.png")
+knitr::include_graphics("imgs/docker_desktop_samtools_running.png")
 ```
 
 ---
@@ -711,10 +711,10 @@ docker login
 
 # tag the image you want to push with your Docker Hub username and a tag name after the colon
 # the ID is from the 'docker images' command
-docker tag 98579f07a026 dougbarrows/rstudio_4.2.3_salmon:topush
+docker tag 292c85d1812f dougbarrows/rstudio_4.4.0_samtools:topush
 
 # push to Docker Hub
-docker push dougbarrows/rstudio_4.2.3_salmon:topush
+docker push brc/rstudio_4.4.0_samtools:topush
 ```
 
 ---
@@ -759,15 +759,12 @@ renv and Docker can be used in tandem to easily recreate and R environment.
 
 *Code (R on local computer):*
 ```{r, eval=F}
-setwd("/PathToMyDownload/Reproducible_R-master/r_course/Data/renv_docker")
+setwd("/Users/douglasbarrows/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
 
 # load in packages to recreate environment we used previously
 library(renv)
 library(BiocManager)
 library(Herper)
-library(dplyr)
-library(DESeq2)
-library(tximport)
 
 # initialize renv
 renv::init()
@@ -814,14 +811,14 @@ Build the image with the build context (last argument) set to the directory cont
 ```{sh, eval=F}
 
 # build the image 
-docker build -t rocker/rstudio:4.1.1_renv ./data/renv_docker
+docker build -t rocker/rstudio:4.3.1_renv ./data/renv_docker
 
 # launch a container
 docker run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
-           -e PASSWORD=password \
-           rrocker/rstudio:4.1.1_renv
+           -e PASSWORD=password123 \
+           rocker/rstudio:4.3.1_renv
 ```
 
 
