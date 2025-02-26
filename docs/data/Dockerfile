@@ -1,4 +1,5 @@
-FROM rocker/rstudio:4.2.3
+
+FROM rocker/rstudio:4.4.0
 
 RUN apt-get update && \
     apt-get install -y \
@@ -18,8 +19,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN Rscript -e "options(warn=2); install.packages(c('dplyr', 'renv', 'BiocManager'));"
-RUN Rscript -e "options(warn=2); BiocManager::install(version = '3.16')"
-RUN Rscript -e "options(warn=2); BiocManager::install(c('Herper', 'DESeq2', 'tximport'))"
+RUN Rscript -e "options(warn=2); BiocManager::install(version = '3.20')"
+RUN Rscript -e "options(warn=2); BiocManager::install(c('Herper'))"
 
 EXPOSE 8787
 

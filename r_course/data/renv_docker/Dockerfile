@@ -1,4 +1,5 @@
-FROM rocker/rstudio:4.1.1
+
+FROM rocker/rstudio:4.3.1
 
 RUN apt-get clean all && \
     apt-get update && \
@@ -29,7 +30,7 @@ COPY renv.lock renv.lock
 RUN R -e "renv::restore()"
 
 RUN mkdir /home/miniconda
-RUN Rscript -e "Herper::install_CondaTools(tools = 'salmon', env = 'pipe_env', pathToMiniConda = '/home/miniconda')"
+RUN Rscript -e "Herper::install_CondaTools(tools = 'samtools', env = 'pipe_env', pathToMiniConda = '/home/miniconda')"
 
 
 EXPOSE 8787
