@@ -579,7 +579,7 @@ docker run --rm \
 As done previously, use the 'docker run' command to launch a container with our customized RStudio session
 
 *Output:*
-```{r, echo=FALSE, out.width="100%", fig.align='left'}
+```{r, echo=FALSE, out.width="100%", fig.align='left', out.width="80%"}
 cat("\n")
 knitr::include_graphics("imgs/docker_image_v1_interface.png")
 ```
