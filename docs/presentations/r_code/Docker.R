@@ -238,7 +238,7 @@ knitr::include_graphics("imgs/docker_images_v1.png")
 ##            -e PASSWORD=password123 \
 ##            rocker/rstudio:4.4.0_v2
 
-## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
+## ----echo=FALSE, out.width="100%", fig.align='left', out.width="80%"----------
 cat("\n")
 knitr::include_graphics("imgs/docker_image_v1_interface.png")
 
