@@ -6,7 +6,7 @@ suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides != "yes"){
   cat("# Environments
 
@@ -19,11 +19,11 @@ if(params$isSlides != "yes"){
 
 
 ## ----setwd_introtoR,eval=F----------------------------------------------------
-## setwd("/PathToMyDownload/Reproducible_R-master/r_course")
-## # e.g. setwd("~/Downloads/Reproducible_R-master/r_course")
+# setwd("/PathToMyDownload/Reproducible_R-master/r_course")
+# # e.g. setwd("~/Downloads/Reproducible_R-master/r_course")
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
@@ -45,7 +45,7 @@ if(params$isSlides == "yes"){
 
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
@@ -74,17 +74,17 @@ write.csv(myMat,file="Test.csv")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## sessionInfo()
+# sessionInfo()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## library(ggplot2)
-## library(dplyr)
-## sessionInfo()
+# library(ggplot2)
+# library(dplyr)
+# sessionInfo()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## sessionInfo("ggplot2")
+# sessionInfo("ggplot2")
 
 
 ## ----eval=TRUE----------------------------------------------------------------
@@ -94,65 +94,65 @@ names(sess_info)
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## install.packages("redist")
+# install.packages("redist")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## library(redist)
-## sessionInfo()
+# library(redist)
+# sessionInfo()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## chooseCRANmirror()
+# chooseCRANmirror()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## install.packages("redis",repos = "https://repo.miserver.it.umich.edu/cran/")
+# install.packages("redis",repos = "https://repo.miserver.it.umich.edu/cran/")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## install.packages("BiocManager")
-## library(BiocManager)
-## install("DESeq2")
+# install.packages("BiocManager")
+# library(BiocManager)
+# install("DESeq2")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## version()
+# version()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## install(version = "3.15")
+# install(version = "3.15")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## library(ggplot2)
-## library(DESeq2)
-## sessionInfo()
+# library(ggplot2)
+# library(DESeq2)
+# sessionInfo()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## install.packages("https://cran.r-project.org/src/contrib/Archive/unmarked/unmarked_0.8-1.tar.gz",
-##                  repos = NULL,
-##                  type = "source")
+# install.packages("https://cran.r-project.org/src/contrib/Archive/unmarked/unmarked_0.8-1.tar.gz",
+#                  repos = NULL,
+#                  type = "source")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## install.packages("renv")
+# install.packages("renv")
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## library(renv)
-## init()
+# library(renv)
+# init()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## status()
+# status()
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## snapshot()
+# snapshot()
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## restore()
+## ----eval=FALSE---------------------------------------------------------------
+# restore()
 

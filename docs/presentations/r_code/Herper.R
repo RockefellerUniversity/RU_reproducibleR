@@ -6,7 +6,7 @@ suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T, eval=F)
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides != "yes"){
   cat("# Conda
 
@@ -18,7 +18,7 @@ if(params$isSlides != "yes"){
 
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
@@ -69,8 +69,8 @@ conda_search("kall", pathToMiniConda = my_miniconda)
 
 
 ## ----conda_search22, eval=F, echo=F-------------------------------------------
-## test <- capture.output(conda_search("salmon", pathToMiniConda = my_miniconda))
-## write.csv(test,"../data/search_res.csv")
+# test <- capture.output(conda_search("salmon", pathToMiniConda = my_miniconda))
+# write.csv(test,"../data/search_res.csv")
 
 
 ## ----conda_search2------------------------------------------------------------
@@ -94,19 +94,19 @@ list_CondaPkgs("rnaseq", pathToMiniConda = my_miniconda) %>% dplyr::filter(name=
 
 
 ## ----with_condaenv_SalmonWithCondaEnvEval,echo=TRUE,eval=FALSE,tidy=FALSE-----
-## res <- with_CondaEnv("rnaseq",
-##                       system2(command="salmon",args = "help",stdout = TRUE),
-##                       pathToMiniConda=my_miniconda)
-## res
+# res <- with_CondaEnv("rnaseq",
+#                       system2(command="salmon",args = "help",stdout = TRUE),
+#                       pathToMiniConda=my_miniconda)
+# res
 
 
 ## ----with_condaenv_SalmonLocalCondaEnv,echo=TRUE,eval=FALSE-------------------
-## salmonHelp<- function(){
-##   local_CondaEnv("rnaseq", pathToMiniConda=my_miniconda)
-##   helpMessage <- system2(command="salmon",args = "help",stdout = TRUE)
-##   helpMessage
-## }
-## salmonHelp()
+# salmonHelp<- function(){
+#   local_CondaEnv("rnaseq", pathToMiniConda=my_miniconda)
+#   helpMessage <- system2(command="salmon",args = "help",stdout = TRUE)
+#   helpMessage
+# }
+# salmonHelp()
 
 
 ## ----export-------------------------------------------------------------------
@@ -120,29 +120,29 @@ import_CondaEnv(yml_import=testYML, pathToMiniConda = my_miniconda)
 
 
 ## ----import, eval=F, echo=F---------------------------------------------------
-## 
-## is_windows <- function() {
-##     identical(.Platform$OS.type, "windows")
-## }
-## miniconda_conda <- function(path = miniconda_path()) {
-##     exe <- if (is_windows()) {
-##         "condabin/conda.bat"
-##     } else {
-##         "bin/conda"
-##     }
-##     file.path(path, exe)
-## }
-## pathToCondaInstall <- my_miniconda
-## pathToConda <-miniconda_conda(pathToCondaInstall)
-## pathToConda
-## yml_import=testYML
-## args <- paste0("-f", yml_import)
-## 
-## result <- system2(pathToConda, shQuote(c("env", "create", "--quiet", "--json", args)), stdout = TRUE, stderr = TRUE)
-## result
+# 
+# is_windows <- function() {
+#     identical(.Platform$OS.type, "windows")
+# }
+# miniconda_conda <- function(path = miniconda_path()) {
+#     exe <- if (is_windows()) {
+#         "condabin/conda.bat"
+#     } else {
+#         "bin/conda"
+#     }
+#     file.path(path, exe)
+# }
+# pathToCondaInstall <- my_miniconda
+# pathToConda <-miniconda_conda(pathToCondaInstall)
+# pathToConda
+# yml_import=testYML
+# args <- paste0("-f", yml_import)
+# 
+# result <- system2(pathToConda, shQuote(c("env", "create", "--quiet", "--json", args)), stdout = TRUE, stderr = TRUE)
+# result
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
