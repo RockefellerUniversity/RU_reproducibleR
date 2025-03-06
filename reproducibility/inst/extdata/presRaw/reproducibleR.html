@@ -4,29 +4,35 @@
     <title>Reproducible Reports    </title>
     <meta charset="utf-8" />
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
-    <script src="reproducibleR_files/header-attrs-2.13/header-attrs.js"></script>
+    <script src="reproducibleR_files/header-attrs-2.26/header-attrs.js"></script>
     <link href="reproducibleR_files/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
-    <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
+    <link href="reproducibleR_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Reproducible Reports<br />
 <html><br />
 <br />
 <hr color='#EB811B' size=1px width=796px><br />
 </html>
+]
+.author[
 ### Rockefeller University, Bioinformatics Resource Centre
-### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/"
-class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
+]
+.date[
+### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/" class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
+]
 
 ---
 
 
 
+# Reproducible Research
 
+---
 
 ## Overview
 
@@ -35,13 +41,8 @@ class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
 - [Data types in R](https://rockefelleruniversity.github.io/RU_introtoR_abridged/presentations/singlepage/introToR_Session1.html#data_types_in_r)
 
 
-
 ---
-class: inverse, center, middle
-
 # Set Up
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
 ---
 
@@ -91,11 +92,7 @@ setwd("/PathToMyDownload/Reproducible_R-master/r_course")
 
 
 ---
-class: inverse, center, middle
-
 # Reproducible Research
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
 ---
 
@@ -134,11 +131,7 @@ sessionInfo()
 ```
 
 ---
-class: inverse, center, middle
-
 # R Markdown
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
 ---
 
@@ -180,11 +173,7 @@ There are 3 main parts
 
 
 ---
-class: inverse, center, middle
-
 # R Markdown Header
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
 ---
 
@@ -192,73 +181,76 @@ class: inverse, center, middle
 
 In R Markdown the options for document processing are stored in YAML format at the top of the document. Most of this is automatically generated when you open a new Rmd. 
 
-````verbatim
+
+```default
 ---
 title: "My New Analysis"
 author: "Tom Carroll"
 date: "19th October 2022"
 output: html_document
 ---
-````
+```
 
 ---
 ## Controlling output type
 
 The **output** YAML option specifies the document type to be produced. THere are several options.
 
-````verbatim
+
+```default
 ---
 output: html_document
 ---
-````
-````verbatim
+```
+
+```default
 ---
 output: pdf_document
 ---
-````
-````verbatim
+```
+
+```default
 ---
 output: ioslides_presentation
 ---
-````
+```
 
 ---
 ## Figure options in YAML
 
 Global default options can also be set in the YAML. For example figure sizes can be set within the YAML metadata.
 
-````verbatim
+
+```default
 ---
 output: 
   html_document:
     fig_width: 7
     fig_height: 6
 ---
-````
+```
+
 ---
 ## Adding styles
 
 Styles for HTML can be applied using the **theme** option and syntax highlighting styles control by the **highlight** option.
 
-````verbatim
+
+```default
 ---
 output: 
   html_document:
     theme: journal
     highlight: espresso
 ---
-````
+```
 
 For a full list of theme options see -
 http://rmarkdown.rstudio.com/html_document_format.html
 
 
 ---
-class: inverse, center, middle
-
 # R Markdown Body
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
 ---
 
@@ -268,11 +260,12 @@ The free form text and annotation is set in Markdown. This written as plain text
 
 To include a new line in markdown, you need to end the previous line with two spaces.
 
-````verbatim
+
+```default
 This is my first line.  # the comment here shows the line end  
 This would be a new line.
 This wouldn't be a new line.
-````
+```
 
 This is my first line.  
 This would be a new line.
@@ -283,10 +276,11 @@ This wouldn't be a new line.
 
 Emphasis can be added to text in markdown documents using either the **_** or __*__
 
-````verbatim
+
+```default
 Italics = _Italics_ or *Italics*
 Bold  =  __Bold__ or **Bold**
-````
+```
 _Italics_  
 __Bold__
 
@@ -296,10 +290,11 @@ __Bold__
 Figures or external images can be used in markdown documents.  
 Files may be local or accessible from http URL.
 
-````verbatim
+
+```default
 ![alt text](imgs/Dist.jpg)
 ![alt text](https://rockefelleruniversity.github.io//r_course/imgs/Dist.jpg)
-````
+```
 
 ---
 ## HTML links
@@ -330,12 +325,13 @@ Headers follow the same conventions as used in HTML markup and can implemented a
 Lists can be created in Markdown using the __-__ symbol.  
 Nested lists be specified with **+** symbol.
 
-````verbatim
+
+```default
 - First item
 - Second item
     + Second item A
     + Second item B
-````
+```
 
 My list rendered:  
 
@@ -345,13 +341,10 @@ My list rendered:
     + Second item B
 
 
-    
+
+
 ---
-class: inverse, center, middle
-
 # R Markdown Code Chunks
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
 ---
 
@@ -372,7 +365,7 @@ This is what the code chunk renders to in your report:
 hist(rnorm(100))
 ```
 
-![](reproducibleR_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+![](reproducibleR_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ---
 ## Code chunk options
@@ -383,9 +376,9 @@ R can produce a lot of output not related to your results. To control whether me
 
 Loading libraries in R Markdown is often somewhere you would specify these as FALSE.
 
-````verbatim
 
-```r
+````default
+```{r,warning=F,message=F} 
 library(ggplot2)
 ```
 ````
@@ -403,11 +396,7 @@ There are many chunk control options
 
 
 ---
-class: inverse, center, middle
-
 # Other R Markdown tricks
-
-&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
 
 ---
 
@@ -430,9 +419,9 @@ kable(dfExample)
 
 |       temp|      temp2|
 |----------:|----------:|
-| -0.5383654|  1.6994581|
-|  0.0216983| -0.0571108|
-| -0.8714786| -1.4561692|
+|  2.1976418| -1.3098603|
+|  0.4561754|  0.3930021|
+| -0.8575890| -0.5279079|
 
 ---
 
@@ -440,14 +429,15 @@ kable(dfExample)
 
 Most of your code will be in code chunks. But it may be useful to report the results of R within the block of Markdown. This can be done adding the code to evalulate within **'r  '**
 
-````verbatim
+
+```default
 Here is some freeform _markdown_ and the first result
 from an rnorm call is 'r rnorm(3)[1]', followed by some 
 more free form text.
-````
+```
 
 Here is some freeform _markdown_ and the first result
-from an rnorm call is 0.3665901, followed by some more free form text.
+from an rnorm call is -1.1199541, followed by some more free form text.
 
 ---
 ## Resources
@@ -466,7 +456,6 @@ Exercise on Reproducibility in R can be found [here](../../exercises/exercises/R
 ## Contact
 
 Any suggestions, comments, edits or questions (about content or the slides themselves) please reach out to our [GitHub](https://github.com/RockefellerUniversity/Reproducible_R/issues) and raise an issue.
-
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
@@ -515,6 +504,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

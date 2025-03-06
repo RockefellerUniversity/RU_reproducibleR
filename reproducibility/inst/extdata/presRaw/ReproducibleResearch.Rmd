@@ -1,0 +1,257 @@
+---
+title: "Reproducible Research <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+author: "Rockefeller University, Bioinformatics Resource Centre"
+date: "https://rockefelleruniversity.github.io/RU_reproducibleR/"
+output: 
+  xaringan::moon_reader:
+    css: ["default", "metropolisCustom.css", "metropolis-fontsCustom.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+  html_document:
+    toc: true # table of content true
+    toc_float: yes
+    depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+    theme: united  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
+params:
+  isSlides: "no"
+---
+
+```{r setup, include=FALSE}
+suppressPackageStartupMessages(require(knitr))
+knitr::opts_chunk$set(echo = TRUE, tidy = T)
+```
+
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides != "yes"){
+  cat("# Reproducible Research
+
+---
+"    
+  )
+  
+}
+
+```
+
+# Reproducible Research
+
+Widely agreed that reproducibility is a cornerstone of good science. 
+
+If a result cannot be validated are they reliable or even worthwhile?
+
+---
+# What does Reproducibility mean?
+
+There is not a clear vision of the details though. A recent paper collated various definitions from papers. This snapshot shows they can be quite different:
+
+* Reproducibility is the ability to run software that produced figures
+
+* Reproducibility is establishing the validity of
+the reported findings with new data
+ 
+There is a confluence and mixture of the terms reproducibility, replicability and repeatibility that seems to cause this confusion.
+
+[(Gundersen, et al, 2020)](https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.2020.0210)
+
+ 
+---
+# Reproducibility and bioinformatics
+
+For bioinforatics we typically focus on ensure integrity of findings by ensuring the results can be refound by repeating the analysis. Specifically in the field of bioinformatics there are many levels of focus for reproducibilty.
+
+.pull-left[
+What:
+* Data
+* Methods
+* Metadata
+* Code
+* Software
+  ]
+
+.pull-right[
+Who:
+* Individual
+* Project/Paper
+* Lab/Consortium
+  ]
+
+---
+# Reproducibility crisis
+
+This is a complex issue and enough care has not been taken to ensure results are reproducible. 
+
+![repro cancer biology](imgs/repro_issues.jpg)
+https://iiif.elifesciences.org/lax:67995%2Felife-67995-fig1-v2.tif/full/,1500/0/default.jpg
+
+[(Errington, et al, 2021)](https://elifesciences.org/articles/67995)
+
+
+---
+# A common example
+
+
+
+
+https://www.reddit.com/r/bioinformatics/comments/194ee1v/same_seurat_code_on_same_dataset_on_two_different/
+
+
+---    
+# When to be reproducible?
+
+In the world of 'publish or perish' there is an emphasis on expediency to wrap up and move on to the next project. Any friction to the process will hamper your progress. 
+
+As a result, neing fully reproducible can seem like an obstacle. Especially as most people do not think about it until the they are submitting a paper. But it is much easier if you start early. 
+
+As with phrase goes:
+
+*"The best time to start was yesterday, the next best time is now"*
+        
+---
+# Current challenge
+
+Even if you have the good intentions and start early it can be tough as there is no consistent SOP for reproduciblity (though several attempts ahve been [made](https://link.springer.com/article/10.1186/1471-2164-11-S4-S27)). Sometimes it seems like the wild west. But it can be inherently challenging to tackle when and how to be reproducible.
+
+It is clear:
+
+* Regularly used automated pipelines should have robust reproducibility. They are worth the time investment. 
+
+* Quick one-line queries or plots of results (that wont be published) will not need to have a record of your system info, version numbers etc. They are not worth the time investment. 
+
+There is a lot of formal custom analysis that falls between these two poles.
+
+---
+# Where to start?
+
+There are many good guides. This training will be focussing on the practical elements of this. For more of the theory I like this [paper](https://academic.oup.com/bib/article/24/6/bbad375/7326135) which discusses an idea called the 5 pillars of reproducibility. We will quickly highlight some key aspects and how they relate to the practical elements we will cover. 
+
+
+![pillars](imgs/pillars.jpeg)
+
+
+---
+# End-to-End Automation
+
+.pull-left[
+All steps should be recorded. Ideally, when it comes to making final figures everything should be formalized in code.
+
+Interactive tools and web interfaces are great and good for exploratory anlysis i.e. IGV, MEME, DAVID, Loupe Browser, GSEA etc.
+
+These tools are incredibly hard to reproduce: no version numbers, hard to know reference data, tools will dissapear if unsupported, easier to make a mistake etc.
+
+Hand in hand with this is the use of *Open Source Software*. 
+  ]
+  
+.pull-right[
+
+![meme](imgs/meme.png)
+
+  ]
+  
+---
+## Literate programming
+
+.pull-left[
+To take this up a level, every figure you produce should be tied to code and a contextual explanation. This is where reproducible reports become really important like Jupyter or Rmarkdown/Quarto. 
+
+This direct link means you ensure provenance: you do not suffer from issues of copy and paste errors, or orphan png graphs that you don't entirely know how were made.  
+
+Reports are also a great way to share analysis in progress as you can add descriptions just like a lab notebook.
+
+  ]
+  
+.pull-right[
+
+![meme](imgs/report.png)
+  ]
+  
+---
+## Compute Environment Control
+
+.pull-left[
+Software management occurs at many levels. Variation in results can arise simply from what computer OS you are using, let alone versions of packages and software. Keeping a record of this information is the minimum.
+
+There are systems to help you maintain multiple versions of R, Python and other software and along with multiple version of packages. We will introduce you to Renv, conda and Docker. These systems use environments to enable shareable software ecosytems, making it much easier for others (or yourself) to keep a record of your system and rerun analyses. 
+  ]
+  
+.pull-right[
+
+
+![envs](imgs/envs.png)
++-----------------------------------------------------+
+| Conda Environments                                  |
+|-----------------------------------------------------|
+|  env1 (scRNAseq)                                    |
+|  - Python 3.9                                       |
+|  - NumPy, Pandas, scanPy                            |
+|  - Isolated from system Python                      |
+|-----------------------------------------------------|
+|  env2 (ATACseq)                                     |
+|  - Python 3.8                                       |
+|  - MACS3, samtools, picard                          |
+|  - Own dependencies, independent of env1            |
+|-----------------------------------------------------|
+|  env3 (Legacy-Env)                                  |
+|  - Python 2.7                                       |
+|  - Old NumPy, SciPy versions                        |
+|  - Peaksplitter                                     |
++-----------------------------------------------------+
+
+  ]
+  
+---
+# Code version control and persistent sharing
+
+As analysis develops over time it becomes more and more important to have a way to control which versions of scripts are being used. Especially in a collaborative project. This is where systems like Git and GitHub come in. 
+
+They allow you to keep record of changes you make while also allowing for sharing of the code. This can be public or private (and switched between the two). Environment configs can also be saved here to help ensure everyone is working in same way. 
+
+Once you are ready to publish your project can be made publicly accessible, and a snapshotted instance can be generated (with a DOI) using tools like Zenodo. The code can then persists as a public resource tied to the publication. 
+
+--- 
+# Data
+
+We will not go into much detail about data, beyond this. Here are some key points:
+
+* Keep data from a project organized from the start. 
+
+* When you publish you will need to deposit raw files and some processed data (i.e. counts, peaks etc.) onto a public database like GEO/SRA.
+
+* It is important to try and ensure that what you upload is machine readable and open source i.e. csv or txt files. We don't want weird or proprietary formats.
+
+**ALWAYS MAKE SURE YOU HAVE RAW FILES BACKED UP!**
+
+---
+## Documentation
+
+Writing methods can be a headache. But If you have followed the above steps than it will be a lot more straightforward. 
+With the code well documented and with versions maintained and recorded you will have everything you need. The code can also be linked to the publication. 
+
+One often overlooked part are the arguments. It is common to see:
+
+*Reads were mapped with bowtie*, when actually it should read: *Reads were mapped with bowtie allowing for 2 mismatches (-n 2)*. It should also be noted that argument default can change so listing all arguments in your code is best practice.  
+
+
+
+
+
+---
+# Summary
+
+![pillars](imgs/pillars.jpeg)
+
+
+
+---
+# Resources
+
+* [5 pillars of reproducibility](https://academic.oup.com/bib/article/24/6/bbad375/7326135)
+* [What is reproducibility?](https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.2020.0210)
+
+
+
+
