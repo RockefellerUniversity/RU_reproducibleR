@@ -451,6 +451,7 @@ The port 8787 is exposed and the 'init' script that is included with the base RS
 *Code (terminal):*
 
 ``` sh
+cd ~/Downloads/RU_reproducibleR-master/r_course
 docker build -t rocker/rstudio:4.4.0_v2 ./data
 ```
 
@@ -596,19 +597,33 @@ If we then want to share our images with someone else, or simply store them else
 
 Make sure you have an account on [Docker Hub](https://hub.docker.com/).
 
+Then create a repository with the same name as the image we want to push, in this case it would be 'rstudio_4.4.0_samtools'. A repository must exist on Docker Hub before pushing to it. 
+
+
+&lt;img src="imgs/dockerhub_create_repo.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Pushing images to Docker Hub
+
+Once the repository is created on Docker Hub, we do the following steps to push the image:
+
+  * login to docker with your credentials
+  * tag the image you want to push with the version
+  * push to dockerhub 
+  
 *Code (terminal):*
 
 ``` sh
 # log in and provide credentials used to sign into Docker Hub
-# this will prompt you to enter username and password
-docker login
+# include the username you used for dockerhub and this will prompt you to enter the password
+docker login -u (enter your username) 
 
 # tag the image you want to push with your Docker Hub username and a tag name after the colon
 # the ID is from the 'docker images' command
-docker tag 292c85d1812f dougbarrows/rstudio_4.4.0_samtools:topush
+docker tag 292c85d1812f rubrc/rstudio_4.4.0_samtools:topush
 
 # push to Docker Hub
-docker push brc/rstudio_4.4.0_samtools:topush
+docker push rubrc/rstudio_4.4.0_samtools:topush
 ```
 
 ---
@@ -638,7 +653,7 @@ renv and Docker can be used in tandem to easily recreate and R environment.
 *Code (R on local computer):*
 
 ``` r
-setwd("/Users/douglasbarrows/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
+setwd("~/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
 
 # load in packages to recreate environment we used previously
 library(renv)
