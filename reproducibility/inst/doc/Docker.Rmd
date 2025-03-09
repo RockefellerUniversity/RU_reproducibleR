@@ -69,7 +69,7 @@ system("salmon quant -i docker_exercise/transcripts_index -l A -1 docker_exercis
 
 4. Read in the quant.sf result file into R and plot a bar graph showing the number of reads for each of the genes in the fasta file. 
 
-```{r, eval=F,echo=toMessage}
+```{r, eval=toMessage,echo=toMessage}
 library(ggplot2)
 counts <- read.table("docker_exercise/sample_counts/quant.sf", header = T)
 ggplot(counts, aes(x = Name, y = NumReads)) + 
