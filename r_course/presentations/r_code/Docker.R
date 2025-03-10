@@ -211,6 +211,10 @@ knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
 
 
 ## ----echo=FALSE, out.width="85%", fig.align='left'----------------------------
+knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
+
+
+## ----echo=FALSE, out.width="85%", fig.align='left'----------------------------
 knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 
 
@@ -218,6 +222,7 @@ knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 knitr::include_graphics("imgs/dockerfile1_EXPOSE_CMD.png")
 
 
+## cd ~/Downloads/RU_reproducibleR-master/r_course
 ## docker build -t rocker/rstudio:4.4.0_v2 ./data
 
 ## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
@@ -313,16 +318,99 @@ cat("\n")
 knitr::include_graphics("imgs/docker_desktop_samtools_running.png")
 
 
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Run docker containers interactively in the terminal
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Run docker containers interactively in the terminal
+
+---
+"    
+  )
+  
+}
+
+
+
+## ----echo=FALSE, out.width="70%", fig.align='left'----------------------------
+cat("\n")
+knitr::include_graphics("imgs/dockerfile_R.png")
+
+
+## docker build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
+## 
+## cd ~/Downloads/RU_reproducibleR-master/r_course
+## docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
+
+## cd ~/Downloads/RU_reproducibleR-master/r_course
+## docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
+
+## ----echo=FALSE, out.width="80%", fig.align='left'----------------------------
+cat("\n")
+knitr::include_graphics("imgs/onlyR_docker_Routput.png")
+
+
+## ----echo=FALSE, out.width="30%", fig.align='left'----------------------------
+cat("\n")
+knitr::include_graphics("imgs/dockerfile_scanpy.png")
+
+
+## docker build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
+## 
+## cd ~/Downloads/RU_reproducibleR-master/r_course
+## docker run -it -v ./data:/data  python_scanpy
+## 
+
+## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
+cat("\n")
+knitr::include_graphics("imgs/python_console.png")
+
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Share images with Docker Hub
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Share images with Docker Hub
+
+---
+"    
+  )
+  
+}
+
+
+
+## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
+cat("\n")
+knitr::include_graphics("imgs/dockerhub_create_repo.png")
+
+
 ## # log in and provide credentials used to sign into Docker Hub
-## # this will prompt you to enter username and password
-## docker login
+## # include the username you used for dockerhub and this will prompt you to enter the password
+## docker login -u (enter your username)
 ## 
 ## # tag the image you want to push with your Docker Hub username and a tag name after the colon
 ## # the ID is from the 'docker images' command
-## docker tag 292c85d1812f dougbarrows/rstudio_4.4.0_samtools:topush
+## docker tag 292c85d1812f rubrc/rstudio_4.4.0_samtools:topush
 ## 
 ## # push to Docker Hub
-## docker push brc/rstudio_4.4.0_samtools:topush
+## docker push rubrc/rstudio_4.4.0_samtools:topush
 
 ## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/dockerhub_after_push.png")
@@ -351,7 +439,7 @@ if(params$isSlides == "yes"){
 
 
 ## ----eval=F-------------------------------------------------------------------
-# setwd("/Users/douglasbarrows/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
+# setwd("~/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
 # 
 # # load in packages to recreate environment we used previously
 # library(renv)

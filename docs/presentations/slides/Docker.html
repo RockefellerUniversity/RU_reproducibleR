@@ -219,9 +219,15 @@ docker images
 
 &lt;img src="imgs/docker_images.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
-&lt;hr&gt;
+---
 
-Confirm in Docker desktop:
+## Viewing local Docker images
+
+After pulling, the image is now available on our system to run.
+
+Images have names, tags, and image IDs as shown in the output. The ID is a hash of the metadata and filesystem of the Docker image. 
+
+We can also view the image in Docker desktop:
 &lt;img src="imgs/docker_desktop_images.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
@@ -413,8 +419,18 @@ Here we start with the same RStudio base image we used previously, and then add 
 
 ## Dockerfile components
 
-The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. Adding more R packages could result in missing dependencies, which you can pick up in the log for the build command. Dependencies for CRAN packages can also be found [here](https://packagemanager.posit.co/client/#/repos/2/packages). 
+The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. 
 
+
+&lt;img src="imgs/dockerfile1_sys_deps.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Dockerfile components
+
+This is a list of libraries is not comprehensive and adding more R packages could result in missing dependencies. 
+
+These can be identified in the log for the build command and manually added to the *apt-get* command, or alternatively, dependencies for a specific R or Python package can be found using the [Posit package manager](https://packagemanager.posit.co). This resource can also be used to install only those libraries that are necessary, which can help to limit the size of the image.  
 
 &lt;img src="imgs/dockerfile1_sys_deps.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
 
@@ -433,7 +449,7 @@ Note: The 'options(warn=2)' at the beginning of the R command will stop the inst
 
 ## Dockerfile components
 
-The port 8787 is exposed and the 'init' script that is included with the base RStudio image  
+The port 8787 is exposed and the 'init' script that is included with the base RStudio image. These commands are specific to this image and will vary depending on what the Docker image is meant to do when launching a container.
 
 
 &lt;img src="imgs/dockerfile1_EXPOSE_CMD.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
@@ -451,6 +467,7 @@ The port 8787 is exposed and the 'init' script that is included with the base RS
 *Code (terminal):*
 
 ``` sh
+cd ~/Downloads/RU_reproducibleR-master/r_course
 docker build -t rocker/rstudio:4.4.0_v2 ./data
 ```
 
@@ -573,7 +590,7 @@ system("samtools --help")
 &lt;img src="imgs/docker_image_samtools_interface.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
-## Docker Desktop
+## Run container from Docker Desktop
 
 We can also run containers from Docker Desktop
 
@@ -582,7 +599,7 @@ We can also run containers from Docker Desktop
 
 
 ---
-## Docker Desktop
+## Run container from Docker Desktop
 
 We can also run containers from Docker Desktop
 
@@ -590,25 +607,144 @@ We can also run containers from Docker Desktop
 &lt;img src="imgs/docker_desktop_samtools_running.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
+
+class: inverse, center, middle
+
+# Run docker containers interactively in the terminal
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+
+## Run R interactively in container
+
+Oftentimes Docker is used to run a specific set of software interactively within the terminal. This allows for running custom scripts contained within the Docker container as well. 
+
+So far we have only been using the R Studio Docker image which provides it's own user interface. Here we will use Docker to run a specific version or R and R packages in the terminal interactively. The Rocker suite has images that just contain R, without R studio. 
+
+---
+
+## Run R interactively in container
+
+All we have to do is change the base Docker image that we pull, and change the command at the end of the Dockerfile to 'R' so it will run R once we launch a container. 
+
+
+&lt;img src="imgs/dockerfile_R.png" width="70%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Run R interactively in container
+ 
+ After building this image as we have done previously, it should be run with the '-it' flag, which will run this container within an interactive terminal. Using these flags, when the 'R' command at the end of the Dockerfile is run upon launch, it will open the version of R in the image.
+ 
+First we build this image from the Dockerfile like we've done before. 
+
+*Code (terminal):*
+
+``` sh
+docker build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
+
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
+```
+
+---
+
+## Run R interactively in container
+
+Then we run a container with the *data* directory mounted. 
+
+*Code (terminal):*
+
+``` sh
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
+```
+
+*output on next slide
+
+---
+
+## Run R interactively in container
+
+Then we run a container with the *data* directory mounted.
+
+*Output (terminal):*
+
+&lt;img src="imgs/onlyR_docker_Routput.png" width="80%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Run Python interactively in container
+
+Python also has images available on Docker Hub and we can make a Dockerfile that has a specific version of python and any other packages we want available in that environment
+
+Here we pull the python image, use pip to install a python package (scanpy), then end with the 'python' command to open a python session in the terminal.
+
+Dockerfile:
+
+&lt;img src="imgs/dockerfile_scanpy.png" width="30%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Run Python interactively in container
+
+*Code (terminal):*
+
+``` sh
+docker build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
+
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  python_scanpy
+
+```
+
+
+&lt;img src="imgs/python_console.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+---
+
+class: inverse, center, middle
+
+# Share images with Docker Hub
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
 ## Pushing images to Docker Hub
 
 If we then want to share our images with someone else, or simply store them elsewhere for future use, we can push to Docker Hub.
 
 Make sure you have an account on [Docker Hub](https://hub.docker.com/).
 
+Then create a repository with the same name as the image we want to push. Let's share the R Studio image with samtools, so it would be 'rstudio_4.4.0_samtools'. A repository must exist on Docker Hub before pushing to it. 
+
+
+&lt;img src="imgs/dockerhub_create_repo.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+## Pushing images to Docker Hub
+
+Once the repository is created on Docker Hub, we do the following steps to push the image:
+
+  * login to docker with your credentials
+  * tag the image you want to push with the version
+  * push to dockerhub 
+  
 *Code (terminal):*
 
 ``` sh
 # log in and provide credentials used to sign into Docker Hub
-# this will prompt you to enter username and password
-docker login
+# include the username you used for dockerhub and this will prompt you to enter the password
+docker login -u (enter your username) 
 
 # tag the image you want to push with your Docker Hub username and a tag name after the colon
 # the ID is from the 'docker images' command
-docker tag 292c85d1812f dougbarrows/rstudio_4.4.0_samtools:topush
+docker tag 292c85d1812f rubrc/rstudio_4.4.0_samtools:topush
 
 # push to Docker Hub
-docker push brc/rstudio_4.4.0_samtools:topush
+docker push rubrc/rstudio_4.4.0_samtools:topush
 ```
 
 ---
@@ -638,7 +774,7 @@ renv and Docker can be used in tandem to easily recreate and R environment.
 *Code (R on local computer):*
 
 ``` r
-setwd("/Users/douglasbarrows/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
+setwd("~/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
 
 # load in packages to recreate environment we used previously
 library(renv)
@@ -693,10 +829,6 @@ docker run --rm \
            -e PASSWORD=password123 \
            rocker/rstudio:4.3.1_renv
 ```
-
-
----
-## Further Resources
 
 
  

@@ -340,54 +340,50 @@ Center</h4>
 <p>These exercises follow the material in the Docker section of <a href="https://rockefelleruniversity.github.io/RU_reproducibleR//">Reproducible
 R</a>.</p>
 <ol style="list-style-type: decimal">
-<li>Run R using a Docker container from Docker Hub</li>
+<li>Build a Docker image using a Dockerfile with the following
+components:</li>
 </ol>
 <ul>
-<li>Pull the Rocker R image for version 4.2.3 from Docker Hub</li>
-<li>Confirm that this image is available on your computer</li>
-<li>Launch a container from this image
-<ul>
-<li>HINT: is the -i and -t flags in the docker run command to run R
-interactively in container</li>
-</ul></li>
-<li>execute R code from within the container</li>
+<li><p>RStudio with R4.4</p></li>
+<li><p>The following packages from CRAN: ggplot2 and
+BiocManager</p></li>
+<li><p>The following packages from Bioconductor: Herper</p></li>
+<li><p>the pseudo aligner ‘salmon’ from conda</p></li>
+<li><p>Confirm that this image is available on your computer</p></li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
-<li>Customize the Rocker R Docker image</li>
+<li>Launch a container from this image and mount the ‘data’ folder
+within the course folder structure onto the docker image. Launch RStudio
+from your browser</li>
 </ol>
 <ul>
-<li><p>Make a Dockerfile that contains R version 4.2.3, the CRAN
-packages dplyr and ggplot2, the Bioconductor packages DESeq2 and
-rtracklayer, and the conda package samtools.</p>
+<li>make sure that the files in the ‘data’ folder are visible within the
+RStudio session within the docker image</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Activate the conda environment that contains salmon and confirm
+the version that you have installed</p></li>
+<li><p>Use salmon to get counts for the fastq files present in the
+‘data/docker_exercise’ folder within the course files.</p></li>
+</ol>
 <ul>
-<li>HINT: Make sure you install BiocManager from CRAN so that you can
-install Bioconductor packages and also install Herper so that you can
-install samtools</li>
-</ul></li>
-<li><p>Build an image using this Dockerfile</p></li>
-<li><p>Launch a container with this image with a volume from your local
-computer mounted</p></li>
-<li><p>Confirm that the container is running</p></li>
-<li><p>Confirm that you can see the files in the mounted folder</p>
+<li>code for indexing salmon: salmon index -t /path/to/fasta_file.fa -i
+/path/to/index_destination</li>
+<li>code for pseudo-alignment: salmon quant -i
+/path/to/index_destination -l A -1 path/to/reads_1.fastq -2
+path/to/reads_2.fastq –output path/to/output_dir</li>
+<li>learn more with the <a href="https://salmon.readthedocs.io/en/latest/salmon.html#">salmon
+manual</a></li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Read in the quant.sf result file into R and plot a bar graph
+showing the number of reads for each of the genes in the fasta
+file.</p></li>
+<li><p>Push this image to Docker Hub</p></li>
+</ol>
 <ul>
-<li>HINT: The R Rocker image does not set the working directory. You
-need to mount the local directory somewhere within the docker image and
-then navigate to that location from R to see those files. I recommend
-mounting your local directory to ‘/home/local_data’ within that
-container’s file system (this folder will automatically be made in
-container)</li>
-<li>HINT #2: you can also use the ‘docker exec’ command from a separate
-terminal tab to run a command within a container. You can type ‘docker
-exec IMAGEID ls’ to list the file system.</li>
-</ul></li>
-<li><p>make a plot from the ‘mtcars’ data set shows the relationship
-between weight (wt) and miles per gallon (mpg) that comes with R and
-save to your computer</p>
-<ul>
-<li>HINT: this table is available as a variable called ‘mtcars’</li>
-</ul></li>
-<li><p>confirm that samtools is installed</p></li>
-<li><p>push this image to Docker Hub</p></li>
+<li>HINT: Make sure you create a repository on Docker Hub before
+pushing.</li>
 </ul>
 
 

@@ -18,7 +18,7 @@ RUN apt-get update && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN Rscript -e "options(warn=2); install.packages(c('dplyr', 'renv', 'BiocManager'));"
+RUN Rscript -e "options(warn=2); install.packages(c('dplyr', 'renv', 'BiocManager'))"
 RUN Rscript -e "options(warn=2); BiocManager::install(version = '3.20')"
 RUN Rscript -e "options(warn=2); BiocManager::install(c('Herper'))"
 

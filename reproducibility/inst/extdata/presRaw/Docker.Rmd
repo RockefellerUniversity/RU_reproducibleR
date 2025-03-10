@@ -268,9 +268,15 @@ cat("\n")
 knitr::include_graphics("imgs/docker_images.png")
 ```
 
-<hr>
+---
 
-Confirm in Docker desktop:
+## Viewing local Docker images
+
+After pulling, the image is now available on our system to run.
+
+Images have names, tags, and image IDs as shown in the output. The ID is a hash of the metadata and filesystem of the Docker image. 
+
+We can also view the image in Docker desktop:
 ```{r, echo=FALSE, out.width="80%", fig.align='center'}
 knitr::include_graphics("imgs/docker_desktop_images.png")
 ```
@@ -488,8 +494,20 @@ knitr::include_graphics("imgs/dockerfile1_FROM.png")
 
 ## Dockerfile components
 
-The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. Adding more R packages could result in missing dependencies, which you can pick up in the log for the build command. Dependencies for CRAN packages can also be found [here](https://packagemanager.posit.co/client/#/repos/2/packages). 
+The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. 
 
+
+```{r, echo=FALSE, out.width="85%", fig.align='left'}
+knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
+```
+
+---
+
+## Dockerfile components
+
+This is a list of libraries is not comprehensive and adding more R packages could result in missing dependencies. 
+
+These can be identified in the log for the build command and manually added to the *apt-get* command, or alternatively, dependencies for a specific R or Python package can be found using the [Posit package manager](https://packagemanager.posit.co). This resource can also be used to install only those libraries that are necessary, which can help to limit the size of the image.  
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
 knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
@@ -512,7 +530,7 @@ knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 
 ## Dockerfile components
 
-The port 8787 is exposed and the 'init' script that is included with the base RStudio image  
+The port 8787 is exposed and the 'init' script that is included with the base RStudio image. These commands are specific to this image and will vary depending on what the Docker image is meant to do when launching a container.
 
 
 ```{r, echo=FALSE, out.width="85%", fig.align='left'}
@@ -677,7 +695,7 @@ knitr::include_graphics("imgs/docker_image_samtools_interface.png")
 ```
 
 ---
-## Docker Desktop
+## Run container from Docker Desktop
 
 We can also run containers from Docker Desktop
 
@@ -688,7 +706,7 @@ knitr::include_graphics("imgs/docker_desktop_samtools.png")
 
 
 ---
-## Docker Desktop
+## Run container from Docker Desktop
 
 We can also run containers from Docker Desktop
 
@@ -698,13 +716,151 @@ knitr::include_graphics("imgs/docker_desktop_samtools_running.png")
 ```
 
 ---
+
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Run docker containers interactively in the terminal
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Run docker containers interactively in the terminal
+
+---
+"    
+  )
+  
+}
+
+```
+
+
+## Run R interactively in container
+
+Oftentimes Docker is used to run a specific set of software interactively within the terminal. This allows for running custom scripts contained within the Docker container as well. 
+
+So far we have only been using the R Studio Docker image which provides it's own user interface. Here we will use Docker to run a specific version or R and R packages in the terminal interactively. The Rocker suite has images that just contain R, without R studio. 
+
+---
+
+## Run R interactively in container
+
+All we have to do is change the base Docker image that we pull, and change the command at the end of the Dockerfile to 'R' so it will run R once we launch a container. 
+
+```{r, echo=FALSE, out.width="70%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/dockerfile_R.png")
+```
+
+---
+
+## Run R interactively in container
+ 
+ After building this image as we have done previously, it should be run with the '-it' flag, which will run this container within an interactive terminal. Using these flags, when the 'R' command at the end of the Dockerfile is run upon launch, it will open the version of R in the image.
+ 
+First we build this image from the Dockerfile like we've done before. 
+
+*Code (terminal):*
+```{sh, eval=F}
+docker build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
+
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
+```
+
+---
+
+## Run R interactively in container
+
+Then we run a container with the *data* directory mounted. 
+
+*Code (terminal):*
+```{sh, eval=F}
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
+```
+
+*output on next slide
+
+---
+
+## Run R interactively in container
+
+Then we run a container with the *data* directory mounted.
+
+*Output (terminal):*
+```{r, echo=FALSE, out.width="80%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/onlyR_docker_Routput.png")
+```
+
+---
+
+## Run Python interactively in container
+
+Python also has images available on Docker Hub and we can make a Dockerfile that has a specific version of python and any other packages we want available in that environment
+
+Here we pull the python image, use pip to install a python package (scanpy), then end with the 'python' command to open a python session in the terminal.
+
+Dockerfile:
+```{r, echo=FALSE, out.width="30%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/dockerfile_scanpy.png")
+```
+
+---
+
+## Run Python interactively in container
+
+*Code (terminal):*
+```{sh, eval=F}
+docker build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
+
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  python_scanpy
+
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align='left'}
+cat("\n")
+knitr::include_graphics("imgs/python_console.png")
+```
+---
+
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Share images with Docker Hub
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Share images with Docker Hub
+
+---
+"    
+  )
+  
+}
+
+```
+
 ## Pushing images to Docker Hub
 
 If we then want to share our images with someone else, or simply store them elsewhere for future use, we can push to Docker Hub.
 
 Make sure you have an account on [Docker Hub](https://hub.docker.com/).
 
-Then create a repository with the same name as the image we want to push, in this case it would be 'rstudio_4.4.0_samtools'. A repository must exist on Docker Hub before pushing to it. 
+Then create a repository with the same name as the image we want to push. Let's share the R Studio image with samtools, so it would be 'rstudio_4.4.0_samtools'. A repository must exist on Docker Hub before pushing to it. 
 
 ```{r, echo=FALSE, out.width="100%", fig.align='left'}
 cat("\n")
@@ -837,10 +993,6 @@ docker run --rm \
            -e PASSWORD=password123 \
            rocker/rstudio:4.3.1_renv
 ```
-
-
----
-## Further Resources
 
 
  
