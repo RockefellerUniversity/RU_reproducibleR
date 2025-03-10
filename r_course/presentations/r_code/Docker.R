@@ -60,7 +60,7 @@ knitr::include_graphics("imgs/docker_schema_addBuild.png")
 knitr::include_graphics("imgs/docker_schema_addRun.png")
 
 
-## ----echo=FALSE, out.width="70%", fig.align='center'--------------------------
+## ----echo=FALSE, out.width="75%", fig.align='center'--------------------------
 knitr::include_graphics("imgs/docker_schema_all.png")
 
 
@@ -97,14 +97,8 @@ if(params$isSlides == "yes"){
 
 
 
-## docker pull rocker/rstudio:4.4.0
-
-## docker images
-
-## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
-cat("\n")
-knitr::include_graphics("imgs/docker_images.png")
-
+## docker image pull rocker/rstudio:4.4.0
+## # alias of 'docker pull' from older Docker versions
 
 ## docker images
 
@@ -117,24 +111,26 @@ knitr::include_graphics("imgs/docker_images.png")
 knitr::include_graphics("imgs/docker_desktop_images.png")
 
 
-## docker run --rm \
-##           -p 8787:8787 \
-##            -e PASSWORD=password123 \
-##            rocker/rstudio:4.4.0
+## docker container run --rm \
+##                -p 8787:8787 \
+##                -e PASSWORD=password123 \
+##                rocker/rstudio:4.4.0
+## # alias of 'docker run' from older Docker versions
 
 ## ----echo=FALSE, out.width="100%", fig.align='center'-------------------------
 knitr::include_graphics("imgs/rstudio_interface.png")
 
 
-## docker ps
+## docker container ls
+## # alias of 'docker ps' from older Docker versions
 
 ## ----echo=FALSE, out.width="100%", fig.align='center'-------------------------
 cat("\n")
 knitr::include_graphics("imgs/docker_ps.png")
 
 
-## docker stop 08ac0df5a76b # this is the ID from 'docker ps'
-## docker ps
+## docker container stop 8b1619f9189d # this is the ID from 'docker container ls'
+## docker container ls
 
 ## ----echo=FALSE, out.width="100%", fig.align='center'-------------------------
 cat("\n")
@@ -145,7 +141,7 @@ knitr::include_graphics("imgs/docker_stop.png")
 ##  cd ~/Downloads/RU_reproducibleR-master/r_course
 ## 
 ##  # launch docker container
-##  docker run --rm \
+##  docker container run --rm \
 ##           -v ./data:/home/rstudio \
 ##           -p 8787:8787 \
 ##            -e PASSWORD=password123 \
@@ -155,16 +151,16 @@ knitr::include_graphics("imgs/docker_stop.png")
 knitr::include_graphics("imgs/rstudio_interface_volume.png")
 
 
-## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
-knitr::include_graphics("imgs/rstudio_interface_volume_write.png")
-
-
 ## ----eval=F-------------------------------------------------------------------
 # dataIn <- read.csv("readThisTable.csv")
 # head(dataIn, 2)
 # # add gene IDs and write to new file on local computer
 # dataIn$Gene_ID <- seq(nrow(dataIn))
 # write.csv(dataIn, "rnaseq_table_withIDs.csv")
+
+
+## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
+knitr::include_graphics("imgs/rstudio_interface_volume_write.png")
 
 
 ## # For windows use: dir /a
@@ -223,7 +219,7 @@ knitr::include_graphics("imgs/dockerfile1_EXPOSE_CMD.png")
 
 
 ## cd ~/Downloads/RU_reproducibleR-master/r_course
-## docker build -t rocker/rstudio:4.4.0_v2 ./data
+## docker image build -t rocker/rstudio:4.4.0_v2 ./data
 
 ## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
 cat("\n")
@@ -237,7 +233,7 @@ cat("\n")
 knitr::include_graphics("imgs/docker_images_v1.png")
 
 
-## docker run --rm \
+## docker container run --rm \
 ##           -v ./data:/home/rstudio \
 ##           -p 8787:8787 \
 ##            -e PASSWORD=password123 \
@@ -275,7 +271,7 @@ if(params$isSlides == "yes"){
 knitr::include_graphics("imgs/dockerfile_samtools_all.png")
 
 
-## docker build -t rocker/rstudio:4.4.0_samtools -f ./data/Dockerfile_samtools ./data/
+## docker image build -t rocker/rstudio:4.4.0_samtools -f ./data/Dockerfile_samtools ./data/
 
 ## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
 cat("\n")
@@ -289,7 +285,7 @@ cat("\n")
 knitr::include_graphics("imgs/docker_images_samtools.png")
 
 
-## docker run --rm \
+## docker container run --rm \
 ##           -v ./data:/home/rstudio \
 ##           -p 8787:8787 \
 ##            -e PASSWORD=password123 \
@@ -300,12 +296,34 @@ knitr::include_graphics("imgs/docker_images_samtools.png")
 # # the environment name and miniconda path set in the Dockerfile
 # Herper::local_CondaEnv(new = "pipe_env",
 #                        pathToMiniConda = "/home/miniconda")
-# # test out salmon
+# # test out samtools
 # system("samtools --help")
 
 
 ## ----echo=FALSE, out.width="75%", fig.align='left'----------------------------
 knitr::include_graphics("imgs/docker_image_samtools_interface.png")
+
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Run container from Docker Desktop
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Run container from Docker Desktop
+
+---
+"    
+  )
+  
+}
+
 
 
 ## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
@@ -345,13 +363,10 @@ cat("\n")
 knitr::include_graphics("imgs/dockerfile_R.png")
 
 
-## docker build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
-## 
-## cd ~/Downloads/RU_reproducibleR-master/r_course
-## docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
+## docker image build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
 
 ## cd ~/Downloads/RU_reproducibleR-master/r_course
-## docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
+## docker container run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
 
 ## ----echo=FALSE, out.width="80%", fig.align='left'----------------------------
 cat("\n")
@@ -363,10 +378,10 @@ cat("\n")
 knitr::include_graphics("imgs/dockerfile_scanpy.png")
 
 
-## docker build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
+## docker image build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
 ## 
 ## cd ~/Downloads/RU_reproducibleR-master/r_course
-## docker run -it -v ./data:/data  python_scanpy
+## docker container run -it -v ./data:/data  python_scanpy
 ## 
 
 ## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
@@ -407,10 +422,10 @@ knitr::include_graphics("imgs/dockerhub_create_repo.png")
 ## 
 ## # tag the image you want to push with your Docker Hub username and a tag name after the colon
 ## # the ID is from the 'docker images' command
-## docker tag 292c85d1812f rubrc/rstudio_4.4.0_samtools:topush
+## docker image tag 292c85d1812f rubrc/rstudio_4.4.0_samtools:topush
 ## 
 ## # push to Docker Hub
-## docker push rubrc/rstudio_4.4.0_samtools:topush
+## docker image push rubrc/rstudio_4.4.0_samtools:topush
 
 ## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
 knitr::include_graphics("imgs/dockerhub_after_push.png")
@@ -438,20 +453,16 @@ if(params$isSlides == "yes"){
 
 
 
+## ----echo=FALSE, out.width="80%", fig.align='left'----------------------------
+knitr::include_graphics("imgs/test_renv_script.png")
+
+
 ## ----eval=F-------------------------------------------------------------------
-# setwd("~/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
-# 
-# # load in packages to recreate environment we used previously
-# library(renv)
-# library(BiocManager)
-# library(Herper)
-# 
 # # initialize renv
 # renv::init()
-# 
 
 
-## ----echo=FALSE, out.width="60%", fig.align='left'----------------------------
+## ----echo=FALSE, out.width="70%", fig.align='left'----------------------------
 knitr::include_graphics("imgs/lock_file_docker.png")
 
 
@@ -465,10 +476,10 @@ knitr::include_graphics("imgs/dockerfile_renv_restore.png")
 
 ## 
 ## # build the image
-## docker build -t rocker/rstudio:4.3.1_renv ./data/renv_docker
+## docker image build -t rocker/rstudio:4.3.1_renv ./data/renv_docker
 ## 
 ## # launch a container
-## docker run --rm \
+## docker container run --rm \
 ##           -v ./data:/home/rstudio \
 ##           -p 8787:8787 \
 ##            -e PASSWORD=password123 \

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Containers    </title>
+    <title>Using containers with Docker    </title>
     <meta charset="utf-8" />
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
     <script src="Docker_files/header-attrs-2.29/header-attrs.js"></script>
@@ -14,7 +14,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Containers<br />
+# Using containers with Docker<br />
 <html><br />
 <br />
 <hr color='#EB811B' size=1px width=796px><br />
@@ -37,11 +37,11 @@ class: center, middle, inverse, title-slide
 
 All prerequisites, links to material and slides for this course can be found on github.
 
-* [Reproducible_R](https://rockefelleruniversity.github.io/Reproducible_R/)
+* [Reproducible_R](https://rockefelleruniversity.github.io/RU_reproducibleR/)
 
 Or can be downloaded as a zip archive from here.
 
-* [Download zip](https://github.com/rockefelleruniversity/Reproducible_R/zipball/master)
+* [Download zip](https://github.com/RockefellerUniversity/RU_reproducibleR/archive/master.zip)
 
 ---
 ## Course materials
@@ -94,10 +94,9 @@ Docker allows for the creation of an isolated environment that can be shipped ac
 
 ## Docker client and host
 
-The Docker client communicates with the Docker daemon based on [user commands.](https://docs.docker.com/engine/reference/commandline/cli/)
+Once installed on your computer, Docker runs a process called the Docker daemon. A daemon is a program that runs as a background process and is not under direct control of the computer user, and the Docker daemon is the engine that manages Docker services and objects by communicating with the client. 
 
-A daemon is a program that runs as a background process and is not under direct control of the computer user, and the Docker daemon is the engine that manages Docker services and objects. 
-
+The Docker client, typically the command line interface, communicates with the Docker daemon based on [user commands.](https://docs.docker.com/engine/reference/commandline/cli/)
 
 &lt;img src="imgs/docker_schema_empty.png" width="85%" style="display: block; margin: auto;" /&gt;
 
@@ -105,7 +104,7 @@ A daemon is a program that runs as a background process and is not under direct 
 
 ## Creating Docker images
 
-The 'docker build' command uses a Dockerfile to create an image.
+The 'docker image build' command uses a Dockerfile to create an image.
 
 A Docker image is a read-only, isolated file system that contains all software, dependencies, scripts, and metadata required to run a container.
 
@@ -127,7 +126,7 @@ Once an image is built, an instance of this image can be launched as a stand-alo
 
 There are public repositories of Docker images (e.g. [Docker Hub](https://hub.docker.com/)), and typically you start with an existing image and build on top of this.
 
-&lt;img src="imgs/docker_schema_all.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="imgs/docker_schema_all.png" width="75%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -177,7 +176,8 @@ class: inverse, center, middle
 *Code (terminal):*
 
 ``` sh
-docker pull rocker/rstudio:4.4.0
+docker image pull rocker/rstudio:4.4.0
+# alias of 'docker pull' from older Docker versions
 ```
 
 ---
@@ -202,24 +202,6 @@ docker images
 
 ---
 
-## Viewing local Docker images
-
-After pulling, the image is now available on our system to run.
-
-Images have names, tags, and image IDs as shown in the output. The ID is a hash of the metadata and filesystem of the Docker image. 
-
-
-*Code (terminal):*
-
-``` sh
-docker images
-```
-
-*Output:*
-
-&lt;img src="imgs/docker_images.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
-
----
 
 ## Viewing local Docker images
 
@@ -235,7 +217,7 @@ We can also view the image in Docker desktop:
 
 ## Running docker containers
 
-Once the image is on our system, we can launch a container with the ['docker run' command](https://docs.docker.com/engine/reference/commandline/run/).
+Once the image is on our system, we can launch a container with the ['docker container run' command](https://docs.docker.com/engine/reference/commandline/run/).
 
 Components of the run command:
 *  --rm: this will automatically remove a container when you exit, otherwise can take up room on computer with old, unused containers
@@ -246,17 +228,18 @@ Components of the run command:
 *Code (terminal):*
 
 ``` sh
-docker run --rm \
-          -p 8787:8787 \
-           -e PASSWORD=password123 \
-           rocker/rstudio:4.4.0
+docker container run --rm \
+               -p 8787:8787 \
+               -e PASSWORD=password123 \
+               rocker/rstudio:4.4.0
+# alias of 'docker run' from older Docker versions
 ```
 
 ---
 
 ## Running docker containers
 
-While the container is running, we can go to 'http://localhost:8787' in a browser and log in with the the user 'rstudio' and the password from 'docker run'.
+While the container is running, we can go to 'http://localhost:8787' in a browser and log in with the the user 'rstudio' and the password from 'docker container run'.
 
 &lt;img src="imgs/rstudio_interface.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -264,12 +247,13 @@ While the container is running, we can go to 'http://localhost:8787' in a browse
 
 ## Listing active docker containers
 
-To see all containers running in the local environment, use the 'docker ps' command
+To see all containers running in the local environment, use the 'docker container ls' command
 
 *Code (terminal):*
 
 ``` sh
-docker ps
+docker container ls
+# alias of 'docker ps' from older Docker versions
 ```
 
 *Output:*
@@ -282,14 +266,14 @@ docker ps
 
 To stop the container currently running, if you are in the terminal tab where it was launched press Ctrl+C.
 
-Or open up another tab and the 'docker stop' command can be used with the ID listed from 'docker ps'
+Or open up another tab and the 'docker stop' command can be used with the ID listed from 'docker container ls'
 
 
 *Code (terminal):*
 
 ``` sh
-docker stop 08ac0df5a76b # this is the ID from 'docker ps'
-docker ps
+docker container stop 8b1619f9189d # this is the ID from 'docker container ls'
+docker container ls
 ```
 
 *Output:*
@@ -300,10 +284,10 @@ docker ps
 
 ## Adding volumes to containers
 
-The docker container has it's own file system, and we can mount a local directory onto that file system with the '-v' flag for the 'docker run' command.
+The docker container has it's own file system, and we can mount a local directory onto that file system with the '-v' flag for the 'docker container run' command.
 
 * Navigate to the 'r_course' directory within the downloaded course using the 'cd' command in the terminal
-* Use the 'docker run' command with the '-v' flag
+* Use the 'docker container run' command with the '-v' flag
   + the left side of the colon is the path on your computer to mount
   + the right side is the location within the docker container file system where that data will be accessible 
   + '/home/rstudio' is set by the container to be the working directory of Rstudio 
@@ -315,7 +299,7 @@ The docker container has it's own file system, and we can mount a local director
  cd ~/Downloads/RU_reproducibleR-master/r_course
  
  # launch docker container
- docker run --rm \
+ docker container run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
            -e PASSWORD=password123 \
@@ -329,17 +313,6 @@ The docker container has it's own file system, and we can mount a local director
 The RStudio interface now shows the files in the 'data' directory
 
 &lt;img src="imgs/rstudio_interface_volume.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-
----
-
-## Adding volumes to containers
-
-These files can be read into R, and also files can be written to the local environment
-
-*Output:*
-&lt;img src="imgs/rstudio_interface_volume_write.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -356,6 +329,16 @@ head(dataIn, 2)
 dataIn$Gene_ID &lt;- seq(nrow(dataIn))
 write.csv(dataIn, "rnaseq_table_withIDs.csv")
 ```
+
+---
+
+## Adding volumes to containers
+
+These files can be read into R, and also files can be written to the local environment
+
+*Output:*
+&lt;img src="imgs/rstudio_interface_volume_write.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+
 
 ---
 
@@ -449,7 +432,7 @@ Note: The 'options(warn=2)' at the beginning of the R command will stop the inst
 
 ## Dockerfile components
 
-The port 8787 is exposed and the 'init' script that is included with the base RStudio image. These commands are specific to this image and will vary depending on what the Docker image is meant to do when launching a container.
+The port 8787 is exposed and the 'init' script that is included with the base RStudio image. These commands are specific to this image and will vary depending on what the Docker container is meant to do when launched.
 
 
 &lt;img src="imgs/dockerfile1_EXPOSE_CMD.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
@@ -468,7 +451,7 @@ The port 8787 is exposed and the 'init' script that is included with the base RS
 
 ``` sh
 cd ~/Downloads/RU_reproducibleR-master/r_course
-docker build -t rocker/rstudio:4.4.0_v2 ./data
+docker image build -t rocker/rstudio:4.4.0_v2 ./data
 ```
 
 *Output:*
@@ -479,7 +462,7 @@ docker build -t rocker/rstudio:4.4.0_v2 ./data
 
 ## Building an image with a Dockerfile
 
-Use the docker 'images' command to see image
+Use the *docker images* command to see image
 
 *Code (terminal):*
 
@@ -495,12 +478,12 @@ docker images
 
 ## Running the custom container
 
-As done previously, use the 'docker run' command to launch a container with our customized RStudio session
+As done previously, use the *docker container run* command to launch a container with our customized RStudio session
 
 *Code (terminal):*
 
 ``` sh
-docker run --rm \
+docker container run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
            -e PASSWORD=password123 \
@@ -511,7 +494,7 @@ docker run --rm \
 
 ## Running the custom container
 
-As done previously, use the 'docker run' command to launch a container with our customized RStudio session
+As done previously, use the *docker container run* command to launch a container with our customized RStudio session
 
 *Output:*
 
@@ -542,7 +525,7 @@ This Dockerfile is not named 'Dockerfile', so we specify the exact path with '-f
 *Code (terminal):*
 
 ``` sh
-docker build -t rocker/rstudio:4.4.0_samtools -f ./data/Dockerfile_samtools ./data/
+docker image build -t rocker/rstudio:4.4.0_samtools -f ./data/Dockerfile_samtools ./data/
 ```
 
 *Output:*
@@ -565,7 +548,7 @@ docker images
 *Code (terminal):*
 
 ``` sh
-docker run --rm \
+docker container run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
            -e PASSWORD=password123 \
@@ -582,7 +565,7 @@ library(Herper)
 # the environment name and miniconda path set in the Dockerfile
 Herper::local_CondaEnv(new = "pipe_env", 
                        pathToMiniConda = "/home/miniconda")
-# test out salmon
+# test out samtools
 system("samtools --help")
 ```
 
@@ -590,6 +573,15 @@ system("samtools --help")
 &lt;img src="imgs/docker_image_samtools_interface.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
+
+class: inverse, center, middle
+
+# Run container from Docker Desktop
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
 ## Run container from Docker Desktop
 
 We can also run containers from Docker Desktop
@@ -621,7 +613,7 @@ class: inverse, center, middle
 
 Oftentimes Docker is used to run a specific set of software interactively within the terminal. This allows for running custom scripts contained within the Docker container as well. 
 
-So far we have only been using the R Studio Docker image which provides it's own user interface. Here we will use Docker to run a specific version or R and R packages in the terminal interactively. The Rocker suite has images that just contain R, without R studio. 
+So far we have only been using the R Studio Docker image which provides it's own user interface. Here we will use Docker to run a specific version of R and R packages in the terminal interactively. The Rocker suite has images that just contain R, without R studio. 
 
 ---
 
@@ -643,23 +635,16 @@ First we build this image from the Dockerfile like we've done before.
 *Code (terminal):*
 
 ``` sh
-docker build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
-
-cd ~/Downloads/RU_reproducibleR-master/r_course
-docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
+docker image build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
 ```
 
----
-
-## Run R interactively in container
-
-Then we run a container with the *data* directory mounted. 
+Then we run a container with the *data* directory mounted and the '-it' flag. 
 
 *Code (terminal):*
 
 ``` sh
 cd ~/Downloads/RU_reproducibleR-master/r_course
-docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
+docker container run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
 ```
 
 *output on next slide
@@ -668,7 +653,6 @@ docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
 
 ## Run R interactively in container
 
-Then we run a container with the *data* directory mounted.
 
 *Output (terminal):*
 
@@ -678,9 +662,9 @@ Then we run a container with the *data* directory mounted.
 
 ## Run Python interactively in container
 
-Python also has images available on Docker Hub and we can make a Dockerfile that has a specific version of python and any other packages we want available in that environment
+Python also has [images available](https://hub.docker.com/_/python) on Docker Hub and we can make a Dockerfile that has a specific version of Python and any other packages we want available in that environment.
 
-Here we pull the python image, use pip to install a python package (scanpy), then end with the 'python' command to open a python session in the terminal.
+Here we pull the python image, use pip to install a Python package (scanpy), then end with the 'python' command to open a Python session in the terminal.
 
 Dockerfile:
 
@@ -693,10 +677,10 @@ Dockerfile:
 *Code (terminal):*
 
 ``` sh
-docker build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
+docker image build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
 
 cd ~/Downloads/RU_reproducibleR-master/r_course
-docker run -it -v ./data:/data  python_scanpy
+docker container run -it -v ./data:/data  python_scanpy
 
 ```
 
@@ -741,10 +725,10 @@ docker login -u (enter your username)
 
 # tag the image you want to push with your Docker Hub username and a tag name after the colon
 # the ID is from the 'docker images' command
-docker tag 292c85d1812f rubrc/rstudio_4.4.0_samtools:topush
+docker image tag 292c85d1812f rubrc/rstudio_4.4.0_samtools:topush
 
 # push to Docker Hub
-docker push rubrc/rstudio_4.4.0_samtools:topush
+docker image push rubrc/rstudio_4.4.0_samtools:topush
 ```
 
 ---
@@ -771,16 +755,13 @@ class: inverse, center, middle
 
 renv and Docker can be used in tandem to easily recreate and R environment.
 
-*Code (R on local computer):*
+Open a new R project and then open the 'test_renv.R' script in the 'r_course/data/renv_docker' folder within the course materials. 
+
+&lt;img src="imgs/test_renv_script.png" width="80%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+After loading these libraries from the script in the same folder as the project, initialize the renv.
 
 ``` r
-setwd("~/Downloads/RU_reproducibleR-master/r_course/data/renv_docker")
-
-# load in packages to recreate environment we used previously
-library(renv)
-library(BiocManager)
-library(Herper)
-
 # initialize renv
 renv::init()
 ```
@@ -790,9 +771,7 @@ renv::init()
 
 The lock file generated by renv shows the versions of R and the loaded packages on my local computer. 
 
-At the time, I was using older versions of R and Bioconductor, and specific versions of each package. With Docker, we can easily use this lock file to recreate that exact same R environment. 
-
-&lt;img src="imgs/lock_file_docker.png" width="60%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="imgs/lock_file_docker.png" width="70%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 
 ---
@@ -820,10 +799,10 @@ Build the image with the build context (last argument) set to the directory cont
 ``` sh
 
 # build the image 
-docker build -t rocker/rstudio:4.3.1_renv ./data/renv_docker
+docker image build -t rocker/rstudio:4.3.1_renv ./data/renv_docker
 
 # launch a container
-docker run --rm \
+docker container run --rm \
           -v ./data:/home/rstudio \
           -p 8787:8787 \
            -e PASSWORD=password123 \

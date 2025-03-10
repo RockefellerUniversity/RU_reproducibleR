@@ -40,6 +40,7 @@ Widely agreed that reproducibility is a cornerstone of good science.
 
 If a result cannot be validated are they reliable or even worthwhile?
 
+
 ---
 # What does Reproducibility mean?
 
@@ -54,11 +55,20 @@ There is a confluence and mixture of the terms reproducibility, replicability an
 
 [(Gundersen, et al, 2020)](https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.2020.0210)
 
+---
+# What does Reproducibility mean?
+
+
+![repro.vs.replication](imgs/reproducible-definition-grid.png)
+
+[The Turing Way](https://book.the-turing-way.org/reproducible-research/overview/overview-definitions)
+
+
  
 ---
 # Reproducibility and bioinformatics
 
-For bioinforatics we typically focus on ensure integrity of findings by ensuring the results can be refound by repeating the analysis. Specifically in the field of bioinformatics there are many levels of focus for reproducibilty.
+For bioinformatics we typically focus on ensure integrity of findings by ensuring the results can be re-found by repeating the analysis with the same data. Specifically in the field of bioinformatics there are many levels of focus for reproducibility.
 
 .pull-left[
 What:
@@ -81,7 +91,7 @@ Who:
 
 This is a complex issue and enough care has not been taken to ensure results are reproducible. 
 
-![repro cancer biology](imgs/repro_issues.jpg)
+![repro cancer biology](imgs/repro_issues.jpg){width=80%}
 https://iiif.elifesciences.org/lax:67995%2Felife-67995-fig1-v2.tif/full/,1500/0/default.jpg
 
 [(Errington, et al, 2021)](https://elifesciences.org/articles/67995)
@@ -90,10 +100,19 @@ https://iiif.elifesciences.org/lax:67995%2Felife-67995-fig1-v2.tif/full/,1500/0/
 ---
 # A common example
 
+.pull-left[
+
+![umap1](imgs/umap1.png)
 
 
+  ]
+  
+.pull-right[
 
-https://www.reddit.com/r/bioinformatics/comments/194ee1v/same_seurat_code_on_same_dataset_on_two_different/
+![umap2](imgs/umap2.png)
+
+[Link](https://www.reddit.com/r/bioinformatics/comments/194ee1v/same_seurat_code_on_same_dataset_on_two_different/)
+  ]
 
 
 ---    
@@ -126,7 +145,7 @@ There is a lot of formal custom analysis that falls between these two poles.
 There are many good guides. This training will be focussing on the practical elements of this. For more of the theory I like this [paper](https://academic.oup.com/bib/article/24/6/bbad375/7326135) which discusses an idea called the 5 pillars of reproducibility. We will quickly highlight some key aspects and how they relate to the practical elements we will cover. 
 
 
-![pillars](imgs/pillars.jpeg)
+![pillars](imgs/pillars.jpeg){width=80%}
 
 
 ---
@@ -137,7 +156,7 @@ All steps should be recorded. Ideally, when it comes to making final figures eve
 
 Interactive tools and web interfaces are great and good for exploratory anlysis i.e. IGV, MEME, DAVID, Loupe Browser, GSEA etc.
 
-These tools are incredibly hard to reproduce: no version numbers, hard to know reference data, tools will dissapear if unsupported, easier to make a mistake etc.
+These tools are incredibly hard to reproduce: no version numbers, hard to know reference data, tools will disappear if unsupported, easier to make a mistake etc.
 
 Hand in hand with this is the use of *Open Source Software*. 
   ]
@@ -178,38 +197,21 @@ There are systems to help you maintain multiple versions of R, Python and other 
 
 
 ![envs](imgs/envs.png)
-+-----------------------------------------------------+
-| Conda Environments                                  |
-|-----------------------------------------------------|
-|  env1 (scRNAseq)                                    |
-|  - Python 3.9                                       |
-|  - NumPy, Pandas, scanPy                            |
-|  - Isolated from system Python                      |
-|-----------------------------------------------------|
-|  env2 (ATACseq)                                     |
-|  - Python 3.8                                       |
-|  - MACS3, samtools, picard                          |
-|  - Own dependencies, independent of env1            |
-|-----------------------------------------------------|
-|  env3 (Legacy-Env)                                  |
-|  - Python 2.7                                       |
-|  - Old NumPy, SciPy versions                        |
-|  - Peaksplitter                                     |
-+-----------------------------------------------------+
 
   ]
-  
+
+
 ---
-# Code version control and persistent sharing
+## Code version control
 
 As analysis develops over time it becomes more and more important to have a way to control which versions of scripts are being used. Especially in a collaborative project. This is where systems like Git and GitHub come in. 
 
 They allow you to keep record of changes you make while also allowing for sharing of the code. This can be public or private (and switched between the two). Environment configs can also be saved here to help ensure everyone is working in same way. 
 
-Once you are ready to publish your project can be made publicly accessible, and a snapshotted instance can be generated (with a DOI) using tools like Zenodo. The code can then persists as a public resource tied to the publication. 
+Once you are ready to publish your project can be made publicly [accessible](https://github.com/RockefellerUniversity/SchneebergerPane_2024).
 
 --- 
-# Data
+## Data
 
 We will not go into much detail about data, beyond this. Here are some key points:
 
@@ -231,15 +233,10 @@ One often overlooked part are the arguments. It is common to see:
 
 *Reads were mapped with bowtie*, when actually it should read: *Reads were mapped with bowtie allowing for 2 mismatches (-n 2)*. It should also be noted that argument default can change so listing all arguments in your code is best practice.  
 
-
-
-
-
 ---
 # Summary
 
 ![pillars](imgs/pillars.jpeg)
-
 
 
 ---
@@ -247,6 +244,7 @@ One often overlooked part are the arguments. It is common to see:
 
 * [5 pillars of reproducibility](https://academic.oup.com/bib/article/24/6/bbad375/7326135)
 * [What is reproducibility?](https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.2020.0210)
+* [The Turing Way Book](https://book.the-turing-way.org/)
 
 
 
