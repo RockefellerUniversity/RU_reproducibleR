@@ -52,14 +52,14 @@ docker run --rm \
 # go to browser and go to http://localhost:8787/
 ```
 
-2. Activate the conda environment that contains salmon and confirm the version that you have installed
+3. Activate the conda environment that contains salmon and confirm the version that you have installed
 
 ```{r, eval=F,echo=toMessage}
 Herper::local_CondaEnv("pipe_env", "/home/miniconda")
 system("salmon --version")
 ```
 
-3. Use salmon to get counts for the fastq files present in the 'data/docker_exercise' folder within the course files. 
+4. Use salmon to get counts for the fastq files present in the 'data/docker_exercise' folder within the course files. 
   - code for indexing salmon: salmon index -t /path/to/fasta_file.fa -i /path/to/index_destination
   - code for pseudo-alignment: salmon quant -i /path/to/index_destination -l A -1 path/to/reads_1.fastq -2 path/to/reads_2.fastq --output path/to/output_dir
   - learn more with the [salmon manual](https://salmon.readthedocs.io/en/latest/salmon.html#)
@@ -69,7 +69,7 @@ system("salmon index -t docker_exercise/transcripts.fasta -i docker_exercise/tra
 system("salmon quant -i docker_exercise/transcripts_index -l A -1 docker_exercise/reads_1.fastq -2 docker_exercise/reads_2.fastq --output docker_exercise/sample_counts")
 ```
 
-4. Read in the quant.sf result file into R and plot a bar graph showing the number of reads for each of the genes in the fasta file. 
+5. Read in the quant.sf result file into R and plot a bar graph showing the number of reads for each of the genes in the fasta file. 
 
 ```{r, eval=F,echo=toMessage}
 library(ggplot2)
@@ -85,7 +85,7 @@ knitr::include_graphics("imgs/docker_exercise_ggplot.png")
 cat("\n")
 ```
 
-5. Push this image to Docker Hub
+6. Push this image to Docker Hub
 
  - HINT: Make sure you create a repository on Docker Hub before pushing. 
  
