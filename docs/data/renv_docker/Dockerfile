@@ -1,5 +1,5 @@
 
-FROM rocker/rstudio:4.3.1
+FROM rocker/rstudio:4.4.0
 
 RUN apt-get clean all && \
     apt-get update && \
@@ -20,14 +20,12 @@ RUN apt-get clean all && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV RENV_VERSION 0.17.3
-RUN R -e "options(warn=2); install.packages('remotes')"
-RUN R -e "options(warn=2); remotes::install_github('rstudio/renv@${RENV_VERSION}')"
+RUN Rscript -e "options(warn=2); install.packages('renv')"
 
 WORKDIR /project
 COPY renv.lock renv.lock
 
-RUN R -e "renv::restore()"
+RUN Rscript -e "renv::restore()"
 
 RUN mkdir /home/miniconda
 RUN Rscript -e "Herper::install_CondaTools(tools = 'samtools', env = 'pipe_env', pathToMiniConda = '/home/miniconda')"
