@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE, tidy = T)
 
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides != "yes"){
-  cat("# Reproducible Research
+  cat("# Reproducible Reports
 
 ---
 "    
@@ -263,3 +263,105 @@ kable(dfExample)
 ## Here is some freeform _markdown_ and the first result
 ## from an rnorm call is 'r rnorm(3)[1]', followed by some
 ## more free form text.
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Interactivity
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Interactivity
+
+---
+"    
+  )
+  
+}
+
+
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Quarto
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Quarto
+
+---
+"    
+  )
+  
+}
+
+
+
+## 
+## ```{r}
+## #| warning=F
+## #| message=F
+## library(ggplot2)
+## ```
+## 
+
+## 
+## ```{r,warning=F,message=F}
+## library(ggplot2)
+## ```
+## 
+
+## ---
+## format:
+##   html:
+##     fig-width: 7
+##     fig-height: 6
+## ---
+
+## ---
+## output:
+##   html_document:
+##     fig_width: 7
+##     fig_height: 6
+## ---
+
+## ---
+## format:
+##   html:
+##     embed-resources: true
+##     fig-width: 7
+##     fig-height: 6
+## ---
+
+## ---
+## title: "My_Project_Name"
+## author:
+##   - "Matt Paul"
+##   - "Bioinformatics Resource Center"
+##   - "Rockefeller University"
+## date: "`r format(Sys.Date(), '%m/%d/%Y')`"
+## format:
+##   html:
+##     embed-resources: true
+##     code_folding: hide
+##     number_sections: true
+##     theme: yeti
+##     highlight: tango
+##     toc: true
+##     toc_float: true
+## ---
+
+## 
+## quarto render notebook.ipynb --execute
+## 
