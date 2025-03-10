@@ -521,7 +521,6 @@ if(params$isSlides == "yes"){
 
 ```
 
----
 ## Inserting tables
 
 The results of printing data frames or matrices in the console aren't neat.
@@ -753,7 +752,6 @@ library(ggplot2)
 
 **Rmarkdown**
 
-This will be accepted by Quarto regardless. There is backwards compatability. 
 
 ````{verbatim}
 
@@ -762,6 +760,10 @@ library(ggplot2)
 ```
 
 ````
+
+This will be accepted by Quarto regardless. There is backwards compatability. 
+
+
   ]
 
 
@@ -790,7 +792,7 @@ format:
 
 **Rmarkdown**
 
-This will be accepted by Quarto regardless. There is some backwards compatability. 
+
 
 ````{verbatim}
 ---
@@ -800,6 +802,9 @@ output:
     fig_height: 6
 ---
 ````
+
+This will be accepted by Quarto regardless. There is some backwards compatability. 
+
   ]
 
 ---
@@ -849,7 +854,10 @@ As mentioned many people who already are making reports, use Jupyter. These are 
 
 Quarto can be used to render these files directly. To do this you just need to add a new cell at the top containing our YAML. Code arguments can also be added.  
 
-![alt text](imgs/jupyter.png)
+
+<div align="center">
+<img src="imgs/jupyter.png" alt="jupyter" height="300" width="500">
+</div>
 
 ---
 # Quarto and Jupyter
