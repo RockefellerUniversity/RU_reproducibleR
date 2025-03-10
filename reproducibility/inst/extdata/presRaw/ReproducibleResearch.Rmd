@@ -63,7 +63,10 @@ There is a confluence and mixture of the terms reproducibility, replicability an
 # What does Reproducibility mean?
 
 
-![repro.vs.replication](imgs/reproducible-definition-grid.png)
+
+<div align="center">
+<img src="imgs/reproducible-definition-grid.png" alt="repro" height="300" width="500">
+</div>
 
 [The Turing Way](https://book.the-turing-way.org/reproducible-research/overview/overview-definitions)
 
@@ -95,14 +98,17 @@ Who:
 
 This is a complex issue and enough care has not been taken to ensure results are reproducible. 
 
-![repro cancer biology](imgs/repro_issues.jpg){width=80%}
-https://iiif.elifesciences.org/lax:67995%2Felife-67995-fig1-v2.tif/full/,1500/0/default.jpg
+<div align="center">
+<img src="imgs/repro_issues.jpg" alt="repro cancer biology" height="300" width="500">
+</div>
 
 [(Errington, et al, 2021)](https://elifesciences.org/articles/67995)
 
 
 ---
-# A common example
+## A common example
+
+This is an example from a bioinformatics forum. They have reran some code and they are getting different results. 
 
 .pull-left[
 
@@ -119,12 +125,12 @@ https://iiif.elifesciences.org/lax:67995%2Felife-67995-fig1-v2.tif/full/,1500/0/
   ]
 
 
----    
-# When to be reproducible?
+---
+## When to be reproducible?
 
-In the world of 'publish or perish' there is an emphasis on expediency to wrap up and move on to the next project. Any friction to the process will hamper your progress. 
+In the world of 'publish or perish' there is an emphasis on expediency to wrap up and move on to the next project. Any friction to the process can seem like it is hampering your progress. 
 
-As a result, neing fully reproducible can seem like an obstacle. Especially as most people do not think about it until the they are submitting a paper. But it is much easier if you start early. 
+As a result, being fully reproducible can seem like an obstacle rather than necessary and beneficial. Especially as most people do not think about it until the they are submitting a paper. But it is much easier if you start early. 
 
 As with phrase goes:
 
@@ -133,7 +139,7 @@ As with phrase goes:
 ---
 # Current challenge
 
-Even if you have the good intentions and start early it can be tough as there is no consistent SOP for reproduciblity (though several attempts ahve been [made](https://link.springer.com/article/10.1186/1471-2164-11-S4-S27)). Sometimes it seems like the wild west. But it can be inherently challenging to tackle when and how to be reproducible.
+Even if you have the good intentions and start early it can be tough as there is no consistent SOP for reproducibility (though several attempts have been [made](https://link.springer.com/article/10.1186/1471-2164-11-S4-S27)). Sometimes it seems like the wild west. But it can be inherently challenging to tackle when and how to be reproducible.
 
 It is clear:
 
@@ -146,10 +152,13 @@ There is a lot of formal custom analysis that falls between these two poles.
 ---
 # Where to start?
 
-There are many good guides. This training will be focussing on the practical elements of this. For more of the theory I like this [paper](https://academic.oup.com/bib/article/24/6/bbad375/7326135) which discusses an idea called the 5 pillars of reproducibility. We will quickly highlight some key aspects and how they relate to the practical elements we will cover. 
+There are many good guides. This training will be focusing on the practical elements of this. For more of the theory I like this [paper](https://academic.oup.com/bib/article/24/6/bbad375/7326135) which discusses an idea called the 5 pillars of reproducibility. We will quickly highlight some key aspects and how they relate to the practical elements we will cover. 
 
 
-![pillars](imgs/pillars.jpeg){width=80%}
+<div align="center">
+<img src="imgs/pillars.jpeg" alt="pillars" height="300" width="500">
+</div>
+
 
 
 ---
@@ -214,7 +223,8 @@ They allow you to keep record of changes you make while also allowing for sharin
 
 Once you are ready to publish your project can be made publicly [accessible](https://github.com/RockefellerUniversity/SchneebergerPane_2024).
 
---- 
+
+---
 ## Data
 
 We will not go into much detail about data, beyond this. Here are some key points:
@@ -225,22 +235,37 @@ We will not go into much detail about data, beyond this. Here are some key point
 
 * It is important to try and ensure that what you upload is machine readable and open source i.e. csv or txt files. We don't want weird or proprietary formats.
 
+* Use FAIR data principles (Findable, Accessible, Interoperable, Reusable).
+
 **ALWAYS MAKE SURE YOU HAVE RAW FILES BACKED UP!**
 
 ---
 ## Documentation
 
+.pull-left[
 Writing methods can be a headache. But If you have followed the above steps than it will be a lot more straightforward. 
 With the code well documented and with versions maintained and recorded you will have everything you need. The code can also be linked to the publication. 
 
 One often overlooked part are the arguments. It is common to see:
 
 *Reads were mapped with bowtie*, when actually it should read: *Reads were mapped with bowtie allowing for 2 mismatches (-n 2)*. It should also be noted that argument default can change so listing all arguments in your code is best practice.  
+  ]
+  
+.pull-right[
+Trimming Methods - 1000 Papers
+
+![envs](imgs/trim.png)
+
+[Simoneau et al, 2019](https://academic.oup.com/bib/article/22/1/140/5669860)
+
+  ]
+  
 
 ---
 # Summary
 
 ![pillars](imgs/pillars.jpeg)
+
 
 
 ---
@@ -249,7 +274,7 @@ One often overlooked part are the arguments. It is common to see:
 * [5 pillars of reproducibility](https://academic.oup.com/bib/article/24/6/bbad375/7326135)
 * [What is reproducibility?](https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.2020.0210)
 * [The Turing Way Book](https://book.the-turing-way.org/)
-
+* [RNAseq methods reporting is bad](https://academic.oup.com/bib/article/22/1/140/5669860)
 
 
 
