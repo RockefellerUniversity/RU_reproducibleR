@@ -211,6 +211,10 @@ knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
 
 
 ## ----echo=FALSE, out.width="85%", fig.align='left'----------------------------
+knitr::include_graphics("imgs/dockerfile1_sys_deps.png")
+
+
+## ----echo=FALSE, out.width="85%", fig.align='left'----------------------------
 knitr::include_graphics("imgs/dockerfile1_Rpackages.png")
 
 
@@ -314,6 +318,28 @@ cat("\n")
 knitr::include_graphics("imgs/docker_desktop_samtools_running.png")
 
 
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Run docker containers interactively in the terminal
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Run docker containers interactively in the terminal
+
+---
+"    
+  )
+  
+}
+
+
+
 ## ----echo=FALSE, out.width="70%", fig.align='left'----------------------------
 cat("\n")
 knitr::include_graphics("imgs/dockerfile_R.png")
@@ -321,6 +347,9 @@ knitr::include_graphics("imgs/dockerfile_R.png")
 
 ## docker build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
 ## 
+## cd ~/Downloads/RU_reproducibleR-master/r_course
+## docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
+
 ## cd ~/Downloads/RU_reproducibleR-master/r_course
 ## docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
 

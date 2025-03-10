@@ -219,9 +219,15 @@ docker images
 
 &lt;img src="imgs/docker_images.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
-&lt;hr&gt;
+---
 
-Confirm in Docker desktop:
+## Viewing local Docker images
+
+After pulling, the image is now available on our system to run.
+
+Images have names, tags, and image IDs as shown in the output. The ID is a hash of the metadata and filesystem of the Docker image. 
+
+We can also view the image in Docker desktop:
 &lt;img src="imgs/docker_desktop_images.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
@@ -413,8 +419,18 @@ Here we start with the same RStudio base image we used previously, and then add 
 
 ## Dockerfile components
 
-The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. Adding more R packages could result in missing dependencies, which you can pick up in the log for the build command. Dependencies for CRAN packages can also be found [here](https://packagemanager.posit.co/client/#/repos/2/packages). 
+The first RUN command installs system dependencies that are common to R packages. This command looks for updates, installs, and cleans up unnecessary files. 
 
+
+&lt;img src="imgs/dockerfile1_sys_deps.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Dockerfile components
+
+This is a list of libraries is not comprehensive and adding more R packages could result in missing dependencies. 
+
+These can be identified in the log for the build command and manually added to the *apt-get* command, or alternatively, dependencies for a specific R or Python package can be found using the [Posit package manager](https://packagemanager.posit.co). This resource can also be used to install only those libraries that are necessary, which can help to limit the size of the image.  
 
 &lt;img src="imgs/dockerfile1_sys_deps.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
 
@@ -433,7 +449,7 @@ Note: The 'options(warn=2)' at the beginning of the R command will stop the inst
 
 ## Dockerfile components
 
-The port 8787 is exposed and the 'init' script that is included with the base RStudio image  
+The port 8787 is exposed and the 'init' script that is included with the base RStudio image. These commands are specific to this image and will vary depending on what the Docker image is meant to do when launching a container.
 
 
 &lt;img src="imgs/dockerfile1_EXPOSE_CMD.png" width="85%" style="display: block; margin: auto auto auto 0;" /&gt;
@@ -592,9 +608,20 @@ We can also run containers from Docker Desktop
 
 ---
 
+class: inverse, center, middle
+
+# Run docker containers interactively in the terminal
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
+
 ## Run R interactively in container
 
-So far we have only been using the R Studio Docker image, but we can also use Docker to run a specific version or R and R packages in the terminal interactively. The Rocker suite has images that just contain R, without R studio. 
+Oftentimes Docker is used to run a specific set of software interactively within the terminal. This allows for running custom scripts contained within the Docker container as well. 
+
+So far we have only been using the R Studio Docker image which provides it's own user interface. Here we will use Docker to run a specific version or R and R packages in the terminal interactively. The Rocker suite has images that just contain R, without R studio. 
 
 ---
 
@@ -611,6 +638,8 @@ All we have to do is change the base Docker image that we pull, and change the c
  
  After building this image as we have done previously, it should be run with the '-it' flag, which will run this container within an interactive terminal. Using these flags, when the 'R' command at the end of the Dockerfile is run upon launch, it will open the version of R in the image.
  
+First we build this image from the Dockerfile like we've done before. 
+
 *Code (terminal):*
 
 ``` sh
@@ -623,6 +652,23 @@ docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
 ---
 
 ## Run R interactively in container
+
+Then we run a container with the *data* directory mounted. 
+
+*Code (terminal):*
+
+``` sh
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
+```
+
+*output on next slide
+
+---
+
+## Run R interactively in container
+
+Then we run a container with the *data* directory mounted.
 
 *Output (terminal):*
 
