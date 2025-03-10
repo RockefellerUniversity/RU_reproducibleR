@@ -574,11 +574,93 @@ if(params$isSlides == "yes"){
 
 ```
 
----
+
 ## Interactivity
 
+As we are summarizing data in a dynamic document, we can make data exporation easier by creating interactive versions of plots and tables. 
 
+```{r, echo=F}
+library(plotly)
+library(ggplot2)
 
+load("data/pcPlot.RData")
+
+ggplotly(pcPlot)
+
+```
+
+---
+## Plotly
+
+To do this we use the *plotly* package. Lets load in the package and the plot we want to make interactive. We have an R object that contains a ggplot2 object in our *data* directory.
+
+```{r}
+library(plotly)
+load("data/pcPlot.RData")
+pcPlot
+```
+
+---
+## Plotly labels
+
+The *ggplotly* function will wrap our ggplot object and add interactivity so we can hover over the points. 
+
+```{r}
+ggplotly(pcPlot)
+```
+
+---
+## Plotly labels
+
+The information assocaited with the plot are naturally inherited as labels. If we want to add custom labels we can specify it in our plot.
+
+```{r}
+ggplotly(pcPlot + geom_point(aes(label = Sample)))
+```
+
+---
+## Plotly labels
+
+If we want full control over the labeling we can instead use the ggplotly function to take care of this for us by specifying when/what/where labels are shown.
+
+```{R}
+ggplotly(pcPlot + geom_point(aes(text = Sample)), source = "select", tooltip = c("Sample"))
+```
+
+---
+Tables - DT
+
+Simlar to plots we can create interactive tables that are both searchable and sortable. We do this with the DT package. Lets make some quick demo data. 
+
+```{R}
+label <- c("Gene1", "Gene2", "Gene3")
+temp <- rnorm(3)
+temp2 <- rnorm(3)
+dfExample <- data.frame(label,temp,temp2)
+dfExample
+```
+
+---
+DT
+
+We can simply use the datatable function to then create our interactive table. 
+
+```{R}
+library(DT)
+datatable(dfExample)
+
+```
+
+---
+DT
+
+There are many ways to [customize](https://rstudio.github.io/DT/options.html) our table i.e. removing rownames, adding titles, default sorting etc
+
+```{R}
+
+datatable(dfExample, rownames = FALSE,caption = "My Table")
+
+```
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -632,7 +714,7 @@ There is a lot of active development to add new features not found in Rmds:
 
 * Quarto is not dependent on R or RStudio 
 * More [Output Formats](https://quarto.org/docs/output-formats/all-formats.html) - Native Reveal.js or powerpoint slides
-* Enhanced [interacivity](https://quarto.org/docs/dashboards/interactivity/) - Can be hooked into servers to run dashboards through Shiny 
+* Enhanced [interacivity] - Can be done locally with [Observable JavScript](https://quarto.org/docs/computations/ojs.html) or hooked into servers to run dashboards through [Shiny](https://quarto.org/docs/dashboards/interactivity/) 
 * Better [template](https://quarto.org/docs/extensions/starter-templates.html) creation
 * Built-in [citation management](https://quarto.org/docs/authoring/citations.html) & bibliography formatting
 * Broadly increased [customization](https://quarto.org/docs/output-formats/page-layout.html)
@@ -781,6 +863,11 @@ quarto render notebook.ipynb --execute
 ```
 
 ![alt text](imgs/jupyter2.png)
+
+---
+# Quarto and VS Code
+
+We have mostly been showing you how to use Quarto with RStudio. But if you are a VS Code user you can just install the Quarto extension there and use it within VS Code. 
 
 
 ---
