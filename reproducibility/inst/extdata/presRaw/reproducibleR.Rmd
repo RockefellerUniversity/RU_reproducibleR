@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE, tidy = T)
 
 ```{r, results='asis',include=TRUE,echo=FALSE}
 if(params$isSlides != "yes"){
-  cat("# Reproducible Research
+  cat("# Reproducible Reports
 
 ---
 "    
@@ -193,7 +193,7 @@ if(params$isSlides == "yes"){
 
 ## The Gold Standard
 
-When we do some analysis the ideal situation is ALL aspects of the analysis in a single document. 
+When we do some analysis the ideal situation is the preservation od ALL aspects of the analysis in a single document. 
 
 Rmarkdown can help with this.
 
@@ -211,7 +211,7 @@ Github and Sourceforge make use of Markdown syntax in their Readme files and ren
 
 https://github.com/github/markup/blob/master/README.md
 
-
+---
 ## Markdown syntax
 
 Markdown uses simple syntax to control text output.
@@ -536,7 +536,6 @@ kable(dfExample)
 ```
 
 ---
-
 ## Evaluating code in the body
 
 Most of your code will be in code chunks. But it may be useful to report the results of R within the block of Markdown. This can be done adding the code to evalulate within **'r  '**
@@ -550,17 +549,262 @@ more free form text.
 Here is some freeform _markdown_ and the first result
 from an rnorm call is `r rnorm(3)[1]`, followed by some more free form text.
 
+
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Interactivity
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Interactivity
+
+---
+"    
+  )
+  
+}
+
+```
+
+---
+## Interactivity
+
+
+
+
+---
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Quarto
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Quarto
+
+---
+"    
+  )
+  
+}
+
+```
+
+# Quarto
+
+Rmarkdown has been an incredibly useful tool for building reports for a long time, but it is predominately focused on R (though it can be used indirectly for python). 
+
+We have also mentioned [Jupyter Notebook](https://jupyter.org/). It is a similar notebook system. It was built for Python (though it can be used indirectly for R).
+
+[Quarto](https://quarto.org/) is a new form of report built on Rmds that can handle python and other languages in a more native way. 
+
+---
+# Rmarkdown and Quarto
+
+Quarto is supported by Posit, the people behind RStudio (who also developed Rmarkdown). Right now if you work in R, Rmarkdown will suffice, but the use of Quarto is growing and ultimately it will be the succesor. 
+
+Luckily everything you have just learnt about Rmd formatting will work for Quarto Markdowns (qmds) too. 
+
+---
+# Why Quarto?
+
+It will natively allow you to run code for: R, Python, Julia, JavaScript.
+
+Bioinformatics has a rich history with R, while Python has a wealth of machine learning packages. With the more recent developments in Deep leanring and AI more folks are dabbling with specific Python tools for parts of their analysis. As a result bioinformatics is becoming increasingly multi-language.
+
+---
+# Why Quarto?
+
+There is a lot of active development to add new features not found in Rmds:
+
+* Quarto is not dependent on R or RStudio 
+* More [Output Formats](https://quarto.org/docs/output-formats/all-formats.html) - Native Reveal.js or powerpoint slides
+* Enhanced [interacivity](https://quarto.org/docs/dashboards/interactivity/) - Can be hooked into servers to run dashboards through Shiny 
+* Better [template](https://quarto.org/docs/extensions/starter-templates.html) creation
+* Built-in [citation management](https://quarto.org/docs/authoring/citations.html) & bibliography formatting
+* Broadly increased [customization](https://quarto.org/docs/output-formats/page-layout.html)
+
+---
+# How to make a Qmd?
+
+In Rstudio it is the same as making a Rmd. Just pick a different option:
+
+New > Quarto Document
+
+
+This should largely look the same. 
+
+---
+# Quarto Code Chunks
+
+
+.pull-left[
+
+**Quarto**
+
+````{verbatim}
+
+```{r}
+#| warning=F
+#| message=F
+library(ggplot2)
+```
+
+````
+
+  ]
+
+.pull-right[
+
+**Rmarkdown**
+
+This will be accepted by Quarto regardless. There is backwards compatability. 
+
+````{verbatim}
+
+```{r,warning=F,message=F} 
+library(ggplot2)
+```
+
+````
+  ]
+
+
+
+---
+# Quarto YAML
+
+Most of the YAML will work in the same way, though there are slight differenes in the preferred names. 
+
+.pull-left[
+
+**Quarto**
+
+````{verbatim}
+---
+format: 
+  html:
+    fig-width: 7
+    fig-height: 6
+---
+````
+
+  ]
+
+.pull-right[
+
+**Rmarkdown**
+
+This will be accepted by Quarto regardless. There is some backwards compatability. 
+
+````{verbatim}
+---
+output: 
+  html_document:
+    fig_width: 7
+    fig_height: 6
+---
+````
+  ]
+
+---
+# A key difference
+
+Resource like images are not embedded by default into your report when you are using Quarto. This means if you move your report to share it, unless you also move the files associated with the rendered html i.e. MyReport.html and MyReport_files. 
+
+To ensure everything you need is embedded into the final document you just need to add *embed-resources: true* to the YAML. 
+
+````{verbatim}
+---
+format: 
+  html:
+    embed-resources: true
+    fig-width: 7
+    fig-height: 6
+---
+````
+
+---
+# An example YAML
+
+````{verbatim}
+---
+title: "My_Project_Name"
+author: 
+  - "Matt Paul"
+  - "Bioinformatics Resource Center"
+  - "Rockefeller University"
+date: "`r format(Sys.Date(), '%m/%d/%Y')`"
+format:
+  html:
+    embed-resources: true
+    code_folding: hide
+    number_sections: true
+    theme: yeti
+    highlight: tango
+    toc: true
+    toc_float: true
+---
+````
+
+---
+# Quarto and Jupyter
+
+As mentioned many people who already are making reports, use Jupyter. These are typically *.ipynb* files. 
+
+Quarto can be used to render these files directly. To do this you just need to add a new cell at the top containing our YAML. Code arguments can also be added.  
+
+![alt text](imgs/jupyter.png)
+
+---
+# Quarto and Jupyter
+
+You just need to run Quarto directly to render the Jupyter notebook. You will run this opn the command line.  
+
+```{sh, eval=F}
+
+quarto render notebook.ipynb --execute
+
+```
+
+![alt text](imgs/jupyter2.png)
+
+
+---
+# Quarto and the future
+
+Rmarkdown and Jupyter are great and widely supported. They will likely be superseded by Quarto over time.
+
+To summarize:
+* Rmarkdown and Jupyter will largely work with Quarto already
+* New features and increased customization option
+* You will probably want to use *embed-resources*
+
 ---
 ## Resources
 
 * [Rmarkdown website](http://rmarkdown.rstudio.com/)  
 * [Rmarkdown Book](https://bookdown.org/yihui/rmarkdown/)
 * [Rmarkdown Cheatsheet Download](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
+* [Quarto](https://quarto.org/)
 
 ---
 ## Exercises
 
-Exercise on Reproducibility in R can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
+Exercise on Reproducibility Reports can be found [here](../../exercises/exercises/ReproducibleR_exercise.html)
 
 
 ---
