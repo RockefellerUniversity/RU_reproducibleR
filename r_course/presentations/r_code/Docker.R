@@ -476,11 +476,11 @@ knitr::include_graphics("imgs/dockerfile_renv_restore.png")
 
 ## 
 ## # build the image
-## docker image build -t rocker/rstudio:4.3.1_renv ./data/renv_docker
+## docker image build -t rocker/rstudio:4.4.0_renv ./data/renv_docker
 ## 
 ## # launch a container
 ## docker container run --rm \
 ##           -v ./data:/home/rstudio \
 ##           -p 8787:8787 \
 ##            -e PASSWORD=password123 \
-##            rocker/rstudio:4.3.1_renv
+##            rocker/rstudio:4.4.0_renv

@@ -2145,14 +2145,14 @@ directory containing the Dockerfile and the lock file, then launch a
 container.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a></span>
 <span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co"># build the image </span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="ex">docker</span> image build <span class="at">-t</span> rocker/rstudio:4.3.1_renv ./data/renv_docker</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="ex">docker</span> image build <span class="at">-t</span> rocker/rstudio:4.4.0_renv ./data/renv_docker</span>
 <span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a></span>
 <span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co"># launch a container</span></span>
 <span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="ex">docker</span> container run <span class="at">--rm</span> <span class="dt">\</span></span>
 <span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>          <span class="at">-v</span> ./data:/home/rstudio <span class="dt">\</span></span>
 <span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>          <span class="at">-p</span> 8787:8787 <span class="dt">\</span></span>
 <span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>           <span class="at">-e</span> PASSWORD=password123 <span class="dt">\</span></span>
-<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>           rocker/rstudio:4.3.1_renv</span></code></pre></div>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>           rocker/rstudio:4.4.0_renv</span></code></pre></div>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
