@@ -44,6 +44,7 @@ Widely agreed that reproducibility is a cornerstone of good science.
 
 If a result cannot be validated are they reliable or even worthwhile?
 
+
 ---
 # What does Reproducibility mean?
 
@@ -62,7 +63,7 @@ There is a confluence and mixture of the terms reproducibility, replicability an
 ---
 # Reproducibility and bioinformatics
 
-For bioinforatics we typically focus on ensure integrity of findings by ensuring the results can be refound by repeating the analysis. Specifically in the field of bioinformatics there are many levels of focus for reproducibilty.
+For bioinformatics we typically focus on ensure integrity of findings by ensuring the results can be re-found by repeating the analysis with the same data. Specifically in the field of bioinformatics there are many levels of focus for reproducibility.
 
 .pull-left[
 What:
@@ -94,10 +95,19 @@ https://iiif.elifesciences.org/lax:67995%2Felife-67995-fig1-v2.tif/full/,1500/0/
 ---
 # A common example
 
+.pull-left[
+
+![umap1](imgs/umap1.png)
 
 
+  ]
+  
+.pull-right[
 
-https://www.reddit.com/r/bioinformatics/comments/194ee1v/same_seurat_code_on_same_dataset_on_two_different/
+![umap2](imgs/umap2.png)
+
+[Link](https://www.reddit.com/r/bioinformatics/comments/194ee1v/same_seurat_code_on_same_dataset_on_two_different/)
+  ]
 
 
 ---    
@@ -141,7 +151,7 @@ All steps should be recorded. Ideally, when it comes to making final figures eve
 
 Interactive tools and web interfaces are great and good for exploratory anlysis i.e. IGV, MEME, DAVID, Loupe Browser, GSEA etc.
 
-These tools are incredibly hard to reproduce: no version numbers, hard to know reference data, tools will dissapear if unsupported, easier to make a mistake etc.
+These tools are incredibly hard to reproduce: no version numbers, hard to know reference data, tools will disappear if unsupported, easier to make a mistake etc.
 
 Hand in hand with this is the use of *Open Source Software*. 
   ]
@@ -182,29 +192,12 @@ There are systems to help you maintain multiple versions of R, Python and other 
 
 
 ![envs](imgs/envs.png)
-+-----------------------------------------------------+
-| Conda Environments                                  |
-|-----------------------------------------------------|
-|  env1 (scRNAseq)                                    |
-|  - Python 3.9                                       |
-|  - NumPy, Pandas, scanPy                            |
-|  - Isolated from system Python                      |
-|-----------------------------------------------------|
-|  env2 (ATACseq)                                     |
-|  - Python 3.8                                       |
-|  - MACS3, samtools, picard                          |
-|  - Own dependencies, independent of env1            |
-|-----------------------------------------------------|
-|  env3 (Legacy-Env)                                  |
-|  - Python 2.7                                       |
-|  - Old NumPy, SciPy versions                        |
-|  - Peaksplitter                                     |
-+-----------------------------------------------------+
 
   ]
-  
+
+
 ---
-# Code version control and persistent sharing
+## Code version control and persistent sharing
 
 As analysis develops over time it becomes more and more important to have a way to control which versions of scripts are being used. Especially in a collaborative project. This is where systems like Git and GitHub come in. 
 
@@ -212,8 +205,9 @@ They allow you to keep record of changes you make while also allowing for sharin
 
 Once you are ready to publish your project can be made publicly accessible, and a snapshotted instance can be generated (with a DOI) using tools like Zenodo. The code can then persists as a public resource tied to the publication. 
 
+
 --- 
-# Data
+## Data
 
 We will not go into much detail about data, beyond this. Here are some key points:
 
