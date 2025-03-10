@@ -574,7 +574,7 @@ system("samtools --help")
 &lt;img src="imgs/docker_image_samtools_interface.png" width="75%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
-## Docker Desktop
+## Run container from Docker Desktop
 
 We can also run containers from Docker Desktop
 
@@ -583,7 +583,7 @@ We can also run containers from Docker Desktop
 
 
 ---
-## Docker Desktop
+## Run container from Docker Desktop
 
 We can also run containers from Docker Desktop
 
@@ -591,13 +591,88 @@ We can also run containers from Docker Desktop
 &lt;img src="imgs/docker_desktop_samtools_running.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
+
+## Run R interactively in container
+
+So far we have only been using the R Studio Docker image, but we can also use Docker to run a specific version or R and R packages in the terminal interactively. The Rocker suite has images that just contain R, without R studio. 
+
+---
+
+## Run R interactively in container
+
+All we have to do is change the base Docker image that we pull, and change the command at the end of the Dockerfile to 'R' so it will run R once we launch a container. 
+
+
+&lt;img src="imgs/dockerfile_R.png" width="70%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Run R interactively in container
+ 
+ After building this image as we have done previously, it should be run with the '-it' flag, which will run this container within an interactive terminal. Using these flags, when the 'R' command at the end of the Dockerfile is run upon launch, it will open the version of R in the image.
+ 
+*Code (terminal):*
+
+``` sh
+docker build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
+
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust 
+```
+
+---
+
+## Run R interactively in container
+
+*Output (terminal):*
+
+&lt;img src="imgs/onlyR_docker_Routput.png" width="80%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Run Python interactively in container
+
+Python also has images available on Docker Hub and we can make a Dockerfile that has a specific version of python and any other packages we want available in that environment
+
+Here we pull the python image, use pip to install a python package (scanpy), then end with the 'python' command to open a python session in the terminal.
+
+Dockerfile:
+
+&lt;img src="imgs/dockerfile_scanpy.png" width="30%" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+
+## Run Python interactively in container
+
+*Code (terminal):*
+
+``` sh
+docker build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
+
+cd ~/Downloads/RU_reproducibleR-master/r_course
+docker run -it -v ./data:/data  python_scanpy
+
+```
+
+
+&lt;img src="imgs/python_console.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
+---
+
+class: inverse, center, middle
+
+# Share images with Docker Hub
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=720px&gt;&lt;/html&gt; 
+
+---
+
 ## Pushing images to Docker Hub
 
 If we then want to share our images with someone else, or simply store them elsewhere for future use, we can push to Docker Hub.
 
 Make sure you have an account on [Docker Hub](https://hub.docker.com/).
 
-Then create a repository with the same name as the image we want to push, in this case it would be 'rstudio_4.4.0_samtools'. A repository must exist on Docker Hub before pushing to it. 
+Then create a repository with the same name as the image we want to push. Let's share the R Studio image with samtools, so it would be 'rstudio_4.4.0_samtools'. A repository must exist on Docker Hub before pushing to it. 
 
 
 &lt;img src="imgs/dockerhub_create_repo.png" width="100%" style="display: block; margin: auto auto auto 0;" /&gt;
@@ -708,10 +783,6 @@ docker run --rm \
            -e PASSWORD=password123 \
            rocker/rstudio:4.3.1_renv
 ```
-
-
----
-## Further Resources
 
 
  

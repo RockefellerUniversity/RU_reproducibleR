@@ -314,6 +314,59 @@ cat("\n")
 knitr::include_graphics("imgs/docker_desktop_samtools_running.png")
 
 
+## ----echo=FALSE, out.width="70%", fig.align='left'----------------------------
+cat("\n")
+knitr::include_graphics("imgs/dockerfile_R.png")
+
+
+## docker build -t rocker/r-ver:4.4.0_cust -f ./data/Dockerfile_R ./data/
+## 
+## cd ~/Downloads/RU_reproducibleR-master/r_course
+## docker run -it -v ./data:/data  rocker/r-ver:4.4.0_cust
+
+## ----echo=FALSE, out.width="80%", fig.align='left'----------------------------
+cat("\n")
+knitr::include_graphics("imgs/onlyR_docker_Routput.png")
+
+
+## ----echo=FALSE, out.width="30%", fig.align='left'----------------------------
+cat("\n")
+knitr::include_graphics("imgs/dockerfile_scanpy.png")
+
+
+## docker build -t python_scanpy -f ./data/Dockerfile_scanpy ./data/
+## 
+## cd ~/Downloads/RU_reproducibleR-master/r_course
+## docker run -it -v ./data:/data  python_scanpy
+## 
+
+## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
+cat("\n")
+knitr::include_graphics("imgs/python_console.png")
+
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Share images with Docker Hub
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Share images with Docker Hub
+
+---
+"    
+  )
+  
+}
+
+
+
 ## ----echo=FALSE, out.width="100%", fig.align='left'---------------------------
 cat("\n")
 knitr::include_graphics("imgs/dockerhub_create_repo.png")
