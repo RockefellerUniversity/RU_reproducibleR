@@ -6,6 +6,20 @@
     <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+    <script src="libs/typedarray-0.1/typedarray.min.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.33/datatables.js"></script>
+    <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
     <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
   </head>
@@ -457,9 +471,9 @@ kable(dfExample)
 
 |       temp|      temp2|
 |----------:|----------:|
-| -0.2196872| -0.4135806|
-|  0.2414832|  0.8471666|
-| -0.8622288| -0.3404989|
+| -0.8223313| -0.0805336|
+| -0.5501416|  0.8443160|
+| -0.0420902| -0.0715441|
 
 ---
 ## Evaluating code in the body
@@ -474,7 +488,7 @@ more free form text.
 ```
 
 Here is some freeform _markdown_ and the first result
-from an rnorm call is -0.2867892, followed by some more free form text.
+from an rnorm call is -2.7126117, followed by some more free form text.
 
 
 
@@ -487,11 +501,162 @@ class: inverse, center, middle
 
 ---
 
----
+
 ## Interactivity
 
+As we are summarizing data in a dynamic document, we can make data exporation easier by creating interactive versions of plots and tables. 
 
 
+```
+## Loading required package: ggplot2
+```
+
+```
+## 
+## Attaching package: 'plotly'
+```
+
+```
+## The following object is masked from 'package:ggplot2':
+## 
+##     last_plot
+```
+
+```
+## The following object is masked from 'package:IRanges':
+## 
+##     slice
+```
+
+```
+## The following object is masked from 'package:S4Vectors':
+## 
+##     rename
+```
+
+```
+## The following object is masked from 'package:stats':
+## 
+##     filter
+```
+
+```
+## The following object is masked from 'package:graphics':
+## 
+##     layout
+```
+
+<div class="plotly html-widget html-fill-item" id="htmlwidget-73443a314c2807485afa" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-73443a314c2807485afa">{"x":{"data":[{"x":[0.63672798475643777],"y":[0.61639057522774621],"text":"PC1: 0.6367280<br />PC2: 0.6163906<br />Time: 0hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,1)","legendgroup":"(0hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.60906629999999995],"y":[0.53843799999999997],"text":"PC1: 0.6090663<br />PC2: 0.5384380<br />Time: 0hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,2)","legendgroup":"(0hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.4596307],"y":[0.54244119999999996],"text":"PC1: 0.4596307<br />PC2: 0.5424412<br />Time: 2hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,1)","legendgroup":"(2hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.41904629999999998],"y":[0.48124299999999998],"text":"PC1: 0.4190463<br />PC2: 0.4812430<br />Time: 2hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,2)","legendgroup":"(2hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.32207960000000002],"y":[0.54347190000000001],"text":"PC1: 0.3220796<br />PC2: 0.5434719<br />Time: 12hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,1)","legendgroup":"(12hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.31305909999999998],"y":[0.44264419999999999],"text":"PC1: 0.3130591<br />PC2: 0.4426442<br />Time: 12hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,2)","legendgroup":"(12hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":48.949771689497723},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.29687565576217811,0.65291142899425969],"tickmode":"array","ticktext":["0.3","0.4","0.5","0.6"],"tickvals":[0.30000000000000004,0.40000000000000002,0.5,0.60000000000000009],"categoryorder":"array","categoryarray":["0.3","0.4","0.5","0.6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"PC1","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4339568812386127,0.62507789398913349],"tickmode":"array","ticktext":["0.45","0.50","0.55","0.60"],"tickvals":[0.45000000000000001,0.5,0.55000000000000004,0.60000000000000009],"categoryorder":"array","categoryarray":["0.45","0.50","0.55","0.60"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"PC2","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Time<br />Rep","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"16e65f153420":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"16e65f153420","visdat":{"16e65f153420":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+## Plotly
+
+To do this we use the *plotly* package. Lets load in the package and the plot we want to make interactive. We have an R object that contains a ggplot2 object in our *data* directory.
+
+
+``` r
+library(plotly)
+load("data/pcPlot.RData")
+pcPlot
+```
+
+![](reproducibleR_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+
+---
+## Plotly labels
+
+The *ggplotly* function will wrap our ggplot object and add interactivity so we can hover over the points. 
+
+
+``` r
+ggplotly(pcPlot)
+```
+
+<div class="plotly html-widget html-fill-item" id="htmlwidget-ef58a06f6ffb0057ef82" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-ef58a06f6ffb0057ef82">{"x":{"data":[{"x":[0.63672798475643777],"y":[0.61639057522774621],"text":"PC1: 0.6367280<br />PC2: 0.6163906<br />Time: 0hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,1)","legendgroup":"(0hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.60906629999999995],"y":[0.53843799999999997],"text":"PC1: 0.6090663<br />PC2: 0.5384380<br />Time: 0hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,2)","legendgroup":"(0hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.4596307],"y":[0.54244119999999996],"text":"PC1: 0.4596307<br />PC2: 0.5424412<br />Time: 2hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,1)","legendgroup":"(2hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.41904629999999998],"y":[0.48124299999999998],"text":"PC1: 0.4190463<br />PC2: 0.4812430<br />Time: 2hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,2)","legendgroup":"(2hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.32207960000000002],"y":[0.54347190000000001],"text":"PC1: 0.3220796<br />PC2: 0.5434719<br />Time: 12hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,1)","legendgroup":"(12hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.31305909999999998],"y":[0.44264419999999999],"text":"PC1: 0.3130591<br />PC2: 0.4426442<br />Time: 12hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,2)","legendgroup":"(12hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":48.949771689497723},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.29687565576217811,0.65291142899425969],"tickmode":"array","ticktext":["0.3","0.4","0.5","0.6"],"tickvals":[0.30000000000000004,0.40000000000000002,0.5,0.60000000000000009],"categoryorder":"array","categoryarray":["0.3","0.4","0.5","0.6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"PC1","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4339568812386127,0.62507789398913349],"tickmode":"array","ticktext":["0.45","0.50","0.55","0.60"],"tickvals":[0.45000000000000001,0.5,0.55000000000000004,0.60000000000000009],"categoryorder":"array","categoryarray":["0.45","0.50","0.55","0.60"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"PC2","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Time<br />Rep","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"16e63461b941":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"}},"cur_data":"16e63461b941","visdat":{"16e63461b941":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+## Plotly labels
+
+The information assocaited with the plot are naturally inherited as labels. If we want to add custom labels we can specify it in our plot.
+
+
+``` r
+ggplotly(pcPlot + geom_point(aes(label = Sample)))
+```
+
+```
+## Warning in geom_point(aes(label = Sample)): Ignoring unknown aesthetics: label
+```
+
+<div class="plotly html-widget html-fill-item" id="htmlwidget-a417f2d1d679902dba9a" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-a417f2d1d679902dba9a">{"x":{"data":[{"x":[0.63672798475643777],"y":[0.61639057522774621],"text":"PC1: 0.6367280<br />PC2: 0.6163906<br />Time: 0hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,1)","legendgroup":"(0hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.60906629999999995],"y":[0.53843799999999997],"text":"PC1: 0.6090663<br />PC2: 0.5384380<br />Time: 0hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,2)","legendgroup":"(0hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.4596307],"y":[0.54244119999999996],"text":"PC1: 0.4596307<br />PC2: 0.5424412<br />Time: 2hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,1)","legendgroup":"(2hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.41904629999999998],"y":[0.48124299999999998],"text":"PC1: 0.4190463<br />PC2: 0.4812430<br />Time: 2hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,2)","legendgroup":"(2hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.32207960000000002],"y":[0.54347190000000001],"text":"PC1: 0.3220796<br />PC2: 0.5434719<br />Time: 12hr<br />Rep: 1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,1)","legendgroup":"(12hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.31305909999999998],"y":[0.44264419999999999],"text":"PC1: 0.3130591<br />PC2: 0.4426442<br />Time: 12hr<br />Rep: 2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,2)","legendgroup":"(12hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.63672798475643777],"y":[0.61639057522774621],"text":"PC1: 0.6367280<br />PC2: 0.6163906<br />Time: 0hr<br />Rep: 1<br />Sample: A_1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,1)","legendgroup":"(0hr,1)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.60906629999999995],"y":[0.53843799999999997],"text":"PC1: 0.6090663<br />PC2: 0.5384380<br />Time: 0hr<br />Rep: 2<br />Sample: A_2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,2)","legendgroup":"(0hr,2)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.4596307],"y":[0.54244119999999996],"text":"PC1: 0.4596307<br />PC2: 0.5424412<br />Time: 2hr<br />Rep: 1<br />Sample: B_1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,1)","legendgroup":"(2hr,1)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.41904629999999998],"y":[0.48124299999999998],"text":"PC1: 0.4190463<br />PC2: 0.4812430<br />Time: 2hr<br />Rep: 2<br />Sample: B_2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,2)","legendgroup":"(2hr,2)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.32207960000000002],"y":[0.54347190000000001],"text":"PC1: 0.3220796<br />PC2: 0.5434719<br />Time: 12hr<br />Rep: 1<br />Sample: C_1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,1)","legendgroup":"(12hr,1)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.31305909999999998],"y":[0.44264419999999999],"text":"PC1: 0.3130591<br />PC2: 0.4426442<br />Time: 12hr<br />Rep: 2<br />Sample: C_2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,2)","legendgroup":"(12hr,2)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":48.949771689497723},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.29687565576217811,0.65291142899425969],"tickmode":"array","ticktext":["0.3","0.4","0.5","0.6"],"tickvals":[0.30000000000000004,0.40000000000000002,0.5,0.60000000000000009],"categoryorder":"array","categoryarray":["0.3","0.4","0.5","0.6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"PC1","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4339568812386127,0.62507789398913349],"tickmode":"array","ticktext":["0.45","0.50","0.55","0.60"],"tickvals":[0.45000000000000001,0.5,0.55000000000000004,0.60000000000000009],"categoryorder":"array","categoryarray":["0.45","0.50","0.55","0.60"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"PC2","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Time<br />Rep","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"16e63bfb6613":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"},"16e6274ad564":{"x":{},"y":{},"colour":{},"shape":{},"label":{}}},"cur_data":"16e63bfb6613","visdat":{"16e63bfb6613":["function (y) ","x"],"16e6274ad564":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+## Plotly labels
+
+If we want full control over the labeling we can instead use the ggplotly function to take care of this for us by specifying when/what/where labels are shown.
+
+
+``` r
+ggplotly(pcPlot + geom_point(aes(text = Sample)), source = "select", tooltip = c("Sample"))
+```
+
+```
+## Warning in geom_point(aes(text = Sample)): Ignoring unknown aesthetics: text
+```
+
+<div class="plotly html-widget html-fill-item" id="htmlwidget-f1393b3d15d0e3a91352" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-f1393b3d15d0e3a91352">{"x":{"data":[{"x":[0.63672798475643777],"y":[0.61639057522774621],"text":"","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,1)","legendgroup":"(0hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.60906629999999995],"y":[0.53843799999999997],"text":"","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,2)","legendgroup":"(0hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.4596307],"y":[0.54244119999999996],"text":"","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,1)","legendgroup":"(2hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.41904629999999998],"y":[0.48124299999999998],"text":"","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,2)","legendgroup":"(2hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.32207960000000002],"y":[0.54347190000000001],"text":"","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,1)","legendgroup":"(12hr,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.31305909999999998],"y":[0.44264419999999999],"text":"","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,2)","legendgroup":"(12hr,2)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.63672798475643777],"y":[0.61639057522774621],"text":"A_1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,1)","legendgroup":"(0hr,1)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.60906629999999995],"y":[0.53843799999999997],"text":"A_2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"(0hr,2)","legendgroup":"(0hr,2)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.4596307],"y":[0.54244119999999996],"text":"B_1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,1)","legendgroup":"(2hr,1)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.41904629999999998],"y":[0.48124299999999998],"text":"B_2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"(2hr,2)","legendgroup":"(2hr,2)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.32207960000000002],"y":[0.54347190000000001],"text":"C_1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,1)","legendgroup":"(12hr,1)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.31305909999999998],"y":[0.44264419999999999],"text":"C_2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"(12hr,2)","legendgroup":"(12hr,2)","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":48.949771689497723},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.29687565576217811,0.65291142899425969],"tickmode":"array","ticktext":["0.3","0.4","0.5","0.6"],"tickvals":[0.30000000000000004,0.40000000000000002,0.5,0.60000000000000009],"categoryorder":"array","categoryarray":["0.3","0.4","0.5","0.6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"PC1","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4339568812386127,0.62507789398913349],"tickmode":"array","ticktext":["0.45","0.50","0.55","0.60"],"tickvals":[0.45000000000000001,0.5,0.55000000000000004,0.60000000000000009],"categoryorder":"array","categoryarray":["0.45","0.50","0.55","0.60"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"PC2","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Time<br />Rep","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"select","attrs":{"16e645a47170":{"x":{},"y":{},"colour":{},"shape":{},"type":"scatter"},"16e676bfdb1f":{"x":{},"y":{},"colour":{},"shape":{},"text":{}}},"cur_data":"16e645a47170","visdat":{"16e645a47170":["function (y) ","x"],"16e676bfdb1f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+Tables - DT
+
+Simlar to plots we can create interactive tables that are both searchable and sortable. We do this with the DT package. Lets make some quick demo data. 
+
+
+``` r
+label &lt;- c("Gene1", "Gene2", "Gene3")
+temp &lt;- rnorm(3)
+temp2 &lt;- rnorm(3)
+dfExample &lt;- data.frame(label, temp, temp2)
+dfExample
+```
+
+```
+##   label       temp        temp2
+## 1 Gene1 -1.6982419 -0.686489999
+## 2 Gene2 -0.5084381 -0.006317112
+## 3 Gene3 -0.4965122  1.673448138
+```
+
+---
+DT
+
+We can simply use the datatable function to then create our interactive table. 
+
+
+``` r
+library(DT)
+datatable(dfExample)
+```
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ae37e385d8fe58af318c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ae37e385d8fe58af318c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["Gene1","Gene2","Gene3"],[-1.69824188058572,-0.508438149486121,-0.4965122323264497],[-0.6864899993580796,-0.006317111804430679,1.673448138023432]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>label<\/th>\n      <th>temp<\/th>\n      <th>temp2<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"label","targets":1},{"name":"temp","targets":2},{"name":"temp2","targets":3}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+
+---
+DT
+
+There are many ways to [customize](https://rstudio.github.io/DT/options.html) our table i.e. removing rownames, adding titles, default sorting etc
+
+
+``` r
+datatable(dfExample, rownames = FALSE, caption = "My Table")
+```
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-7ebb6317c31a3f5dac3a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7ebb6317c31a3f5dac3a">{"x":{"filter":"none","vertical":false,"caption":"<caption>My Table<\/caption>","data":[["Gene1","Gene2","Gene3"],[-1.69824188058572,-0.508438149486121,-0.4965122323264497],[-0.6864899993580796,-0.006317111804430679,1.673448138023432]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>label<\/th>\n      <th>temp<\/th>\n      <th>temp2<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2]},{"name":"label","targets":0},{"name":"temp","targets":1},{"name":"temp2","targets":2}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 
 ---
 class: inverse, center, middle
@@ -531,7 +696,7 @@ There is a lot of active development to add new features not found in Rmds:
 
 * Quarto is not dependent on R or RStudio 
 * More [Output Formats](https://quarto.org/docs/output-formats/all-formats.html) - Native Reveal.js or powerpoint slides
-* Enhanced [interacivity](https://quarto.org/docs/dashboards/interactivity/) - Can be hooked into servers to run dashboards through Shiny 
+* Enhanced [interacivity] - Can be done locally with [Observable JavScript](https://quarto.org/docs/computations/ojs.html) or hooked into servers to run dashboards through [Shiny](https://quarto.org/docs/dashboards/interactivity/) 
 * Better [template](https://quarto.org/docs/extensions/starter-templates.html) creation
 * Built-in [citation management](https://quarto.org/docs/authoring/citations.html) &amp; bibliography formatting
 * Broadly increased [customization](https://quarto.org/docs/output-formats/page-layout.html)
@@ -687,6 +852,11 @@ quarto render notebook.ipynb --execute
 ```
 
 ![alt text](imgs/jupyter2.png)
+
+---
+# Quarto and VS Code
+
+We have mostly been showing you how to use Quarto with RStudio. But if you are a VS Code user you can just install the Quarto extension there and use it within VS Code. 
 
 
 ---

@@ -286,6 +286,54 @@ if(params$isSlides == "yes"){
 
 
 
+## ----echo=F-------------------------------------------------------------------
+library(plotly)
+library(ggplot2)
+
+load("data/pcPlot.RData")
+
+ggplotly(pcPlot)
+
+
+
+## -----------------------------------------------------------------------------
+library(plotly)
+load("data/pcPlot.RData")
+pcPlot
+
+
+## -----------------------------------------------------------------------------
+ggplotly(pcPlot)
+
+
+## -----------------------------------------------------------------------------
+ggplotly(pcPlot + geom_point(aes(label = Sample)))
+
+
+## -----------------------------------------------------------------------------
+ggplotly(pcPlot + geom_point(aes(text = Sample)), source = "select", tooltip = c("Sample"))
+
+
+## -----------------------------------------------------------------------------
+label <- c("Gene1", "Gene2", "Gene3")
+temp <- rnorm(3)
+temp2 <- rnorm(3)
+dfExample <- data.frame(label,temp,temp2)
+dfExample
+
+
+## -----------------------------------------------------------------------------
+library(DT)
+datatable(dfExample)
+
+
+
+## -----------------------------------------------------------------------------
+
+datatable(dfExample, rownames = FALSE,caption = "My Table")
+
+
+
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
