@@ -340,7 +340,7 @@ knitr::include_graphics("imgs/docker_desktop_samtools_running.png")
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Run docker containers interactively in the terminal
+# Run Docker containers interactively in the terminal
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -348,7 +348,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Run docker containers interactively in the terminal
+  cat("# Run Docker containers interactively in the terminal
 
 ---
 "    
