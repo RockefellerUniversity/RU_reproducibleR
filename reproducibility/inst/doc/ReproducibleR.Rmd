@@ -19,20 +19,38 @@ message(toMessage)
 <p>&nbsp;</p>
 These exercises follow the material in [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
 
+**Exercise 1** - **Rmarkdown basics**
 
-- Open up markdownExampleDefaultStyles.Rmd and markdownExample.Rmd in the scripts directory. Have a look at the rMarkdown examples here and the resulting output html files.
+- Open up markdownExampleDefaultStyles.Rmd and compare each section to the rendered output: [Example HTML Default style.](../../scripts/markdownExampleDefaultStyles.html). Review how each piece of markdown controls the final rendered document. There are several examples we have not covered in the slides. 
 
-[Example HTML Default style.](../../scripts/markdownExampleDefaultStyles.html)  
-[Example HTML with extra style.](../../scripts/markdownExample.html)
+- Open up markdownExample.Rmd in the scripts directory and compare to the rendered output: [Example HTML with extra style.](../../scripts/markdownExample.html). What has changed?
+```{r, eval=FALSE,echo=toMessage}
+# Different Styles in YAML
+# Updated table of contents in YAML
+# Set Up chunk - we can use this to control defaults for code chunk arguments. In this case we have turned echo off for every chunk. 
+```
+
+**Exercise 2** - **Convert a Rmarkdown**
 
 - Open scriptToConvertToRMarkdown.r in scripts directory and save as new name.
-
 - Convert this script to an Rmarkdown document inside RStudio.
-
-- Add appropriate annotation and session information
-
+- Update YAML to reflect author, date, title etc.
+- Break the code down into chunks. Add some code chunk arguments to control figure sizes and/or echo of code.
+- Add appropriate annotation and session information.
+- Try making both interactive and non-interactive versions of the tables and plots.
 - Render the document.
 
+**Exercise 3** - **Make a Rmarkdown**
+- Make your own Rmarkdown document from scratch
+- Include YAML parameters like date
+- Read in file "readThisTable.csv"
+- Run some summary stats and plots
+- Use chunk arguments: fig.height/fig.width/fig.path/dev to save plots in pdf and png format
 
+**Exercise 4** - **Quarto**
+- Convert your Rmd from exercise 2 into a Quarto document
+- Keep the parameters the same. Render and review the result. Compare it to the Rmd output. 
+- Try and update all code arguments
 
-
+**Additional Exercise**
+- Take some of your own scripts. They can either be python or R. Try and convert them into an Rmarkdown/Quarto format so you can create a nice report summary of that piece of work.

@@ -63,9 +63,8 @@ There is a confluence and mixture of the terms reproducibility, replicability an
 # What does Reproducibility mean?
 
 
-
 <div align="center">
-<img src="imgs/reproducible-definition-grid.png" alt="repro" height="300" width="500">
+<img src="imgs/reproducible-definition-grid.png" alt="repro" height="400" width="600">
 </div>
 
 [The Turing Way](https://book.the-turing-way.org/reproducible-research/overview/overview-definitions)
@@ -99,7 +98,7 @@ Who:
 This is a complex issue and enough care has not been taken to ensure results are reproducible. 
 
 <div align="center">
-<img src="imgs/repro_issues.jpg" alt="repro cancer biology" height="300" width="500">
+<img src="imgs/repro_issues.jpg" alt="repro cancer biology" height="400" width="600">
 </div>
 
 [(Errington, et al, 2021)](https://elifesciences.org/articles/67995)

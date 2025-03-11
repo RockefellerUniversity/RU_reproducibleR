@@ -207,7 +207,7 @@ Versioning of software allows developers to make updates to their software while
 
 This also allows users to track the exact version of software they use to maintain essential reproducibility within their own work.
 
-The current version of the R software is **4.3.1**
+The current version of the R software is **4.4.3**
 
 ---
 ## Versioning in R packages
@@ -216,7 +216,7 @@ R package versions follow the convention of 3 numbers representing the major, mi
 
 **PackageName** **major**_._**minor**_._**patch**
 
-e.g. ggplot2 current version is **ggplot2** - **3**_._**4**_._**2**
+e.g. ggplot2 current version is **ggplot2** - **3**_._**5**_._**1**
 
 
 * Major - A major version update usually involves changes that affect backwards capability with previous versions and substantial changes to an API
@@ -763,8 +763,7 @@ restore()
 ## Further Resources
 
 * The Renv [guide](https://rstudio.github.io/renv/articles/renv.html)
-* [RSwitch](https://rud.is/rswitch/)
-
+* [RSwitch](https://rud.is/rswitch/) - This utility is specific to Macs, but it allows quick and easy switching between R versions (along with other R management options). For users on other OS they can change global options in RStudio. 
 
 
 ---

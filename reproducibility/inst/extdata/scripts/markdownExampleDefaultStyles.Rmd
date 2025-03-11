@@ -25,13 +25,21 @@ Italics = _Italics_ or *Italics*
 Bold  =  __Bold__ or **Bold**
 
 
-![alt text](../imgs/baseR.png)
+![myplot_local](../imgs/baseR.png)
 
-![alt text](https://github.com/RockefellerUniversity/RU_reproducibleR/tree/master/r_course/presentations/slides/imgs/baseR.png)
+![myplot_web](https://github.com/RockefellerUniversity/RU_reproducibleR/blob/master/r_course/presentations/slides/imgs/baseR.png?raw=true)
 
 # Top level section
+
+This is my top level section
+
 ## Middle level section
+
+This is my 2nd level section
+
 ### Bottom level section
+
+This is my 3rd level section
 
 * First item
 * Second item
@@ -49,51 +57,44 @@ Bold  =  __Bold__ or **Bold**
 hist(rnorm(100))
 ```
 
-
-
 https://rockefelleruniversity.github.io/Intro_To_R_1Day/
 [Github site](https://rockefelleruniversity.github.io/Intro_To_R_1Day/)
 
-
-Before the first page break
-***
-Before the second page break
-
 # R code chunks examples
 
-##rMarkdown
+## Rmarkdown
 
 
 ```{r} 
 hist(rnorm(1000))
 ```
 
-##rMarkdown. Controlling R code output - eval
+## Rmarkdown. Controlling R code output - eval
 
 
 ```{r,eval=F} 
 hist(rnorm(1000))
 ```
 
-##rMarkdown. Controlling R code output - Displaying code.
+## Rmarkdown. Controlling R code output - Displaying code.
 
 ```{r,echo=F} 
 hist(rnorm(1000))
 ```
 
-##rMarkdown. Controlling R code output - message and warnings
+## Rmarkdown. Controlling R code output - message and warnings
 
 ```{r,warning=F,message=F} 
 library(ggplot2)
 ```
 
-##rMarkdown. Controlling figure output.
+## Rmarkdown. Controlling figure output.
 
 ```{r,fig.width=5,fig.height=5} 
 hist(rnorm(100))
 ```
 
-##rMarkdown. Automatically tidying code.
+## Rmarkdown. Automatically tidying code.
 
 ```{r,tidy=T} 
         hist( 
@@ -101,14 +102,14 @@ rnorm(100  )
       )
 ```
 
-##rMarkdown. Placing code and output together
+## Rmarkdown. Placing code and output together
 
 ```{r,collapse=T} 
 temp <- rnorm(10)
 temp
 ```
 
-##rMarkdown. Inserting tables.
+## Rmarkdown. Inserting tables.
 
 ```{r,results='asis'} 
 library(knitr)
@@ -118,11 +119,11 @@ dfExample <- cbind(temp,temp2)
 kable(dfExample)
 ```
 
-##rMarkdown. Evaluating code within markdown text.
+## Rmarkdown. Evaluating code within markdown text.
 
 Here is some freeform _markdown_ and the first result from an rnorm call is `r rnorm(3)[1]`, followed by some more free form text.
 
-##rMarkdown: cache
+## Rmarkdown: cache
 
 ```{r,cache=TRUE} 
 x <- sample(1000,10^4,replace=T)
