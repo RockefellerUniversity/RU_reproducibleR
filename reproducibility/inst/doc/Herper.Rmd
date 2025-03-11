@@ -57,5 +57,5 @@ export_CondaEnv("rnaseq", "~/Desktop/my_yeast_salmon_conda_envrionment.yml")
 
 **Exercise 2** - **Conda**
 
-- Retry exercise 1, but use regular conda. 
+- Retry exercise 1, but use regular conda. Set up the environment from the exported yml.
   
