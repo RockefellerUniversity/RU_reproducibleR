@@ -19,13 +19,16 @@ message(toMessage)
 <p>&nbsp;</p>
 These exercises follow the material in the GitHub section of [Reproducible R](https://rockefelleruniversity.github.io/RU_reproducibleR//). 
 
+**Exercise 1** - **Herper**
+
 1. Lets setup an environment to do some basic counting for RNAseq. We will follow the example in the salmon [guide](https://combine-lab.github.io/salmon/getting_started/), but we will modify it for S. cerevisiae to make it quicker as the genomes smaller. 
   - Install Salmon with Herper
   - Download reference data from Ensembl ("http://ftp.ensemblgenomes.org/pub/fungi/release-56/fasta/saccharomyces_cerevisiae/cdna/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa.gz")
   - Use *with_CondaEnv()* to build the salmon index
   - Next lets download a yeast dataset. Here's a link to a meiotic yeast RNAseq fastq file: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/065/SRR18072865/SRR18072865_1.fastq.gz
   - Use *with_CondaEnv()* to quantify the yeast counts
-  - Save your conda environment with 
+  - Save your conda environment to yml
+  - Rebuild the yml in a new environment
   
   
 ```{r, eval=F}
@@ -51,6 +54,8 @@ with_CondaEnv(new = "rnaseq", code = system2("salmon", c("quant",
 export_CondaEnv("rnaseq", "~/Desktop/my_yeast_salmon_conda_envrionment.yml")
                                                          
 ```
+
+**Exercise 2** - **Conda**
+
+- Retry exercise 1, but use regular conda. 
   
-  
-- 
