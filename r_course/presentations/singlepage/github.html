@@ -1855,7 +1855,7 @@ Your future self will thank you.</p>
 not add a message, you will get prompted.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span><span class="st">&#39;Made a README&#39;</span></span>
 <span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">git</span> status .</span></code></pre></div>
-<pre><code>## [master (root-commit) e74b080] Made a README
+<pre><code>## [master (root-commit) 4574da9] Made a README
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ##  create mode 100644 README.md
 ## On branch master
@@ -1940,7 +1940,7 @@ commit.</p>
 ## +++ b/README.md
 ## @@ -0,0 +1 @@
 ## +Hello Friends
-## [master 4c7571f] Added welcome message
+## [master 5f9f360] Added welcome message
 ##  1 file changed, 1 insertion(+)</code></pre>
 </div>
 <div id="whatve-we-done---git-log-pt1" class="section level2">
@@ -1952,15 +1952,15 @@ commit.</p>
 </ul>
 <div class="sourceCode" id="cb34"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a></span>
 <span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="fu">git</span> log</span></code></pre></div>
-<pre><code>## commit 4c7571ff1d465cb01d985b0e719a330157cca34e
+<pre><code>## commit 5f9f36011fa041c989a84f5ebc1131965eb2f5a7
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Tue Mar 11 01:44:27 2025 +0000
+## Date:   Tue Mar 11 02:37:41 2025 +0000
 ## 
 ##     Added welcome message
 ## 
-## commit e74b080ac6b6d9d53aab16da49682cfa130376a5
+## commit 4574da9ce58b7f30cc51221db461f5c57f932371
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Tue Mar 11 01:44:27 2025 +0000
+## Date:   Tue Mar 11 02:37:41 2025 +0000
 ## 
 ##     Made a README</code></pre>
 </div>
@@ -1974,13 +1974,13 @@ This is important if you want to comb through 100s of commits.</p>
 <li>–patch = What content changes</li>
 </ul>
 <div class="sourceCode" id="cb36"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div>
-<pre><code>## 4c7571f Added welcome message
-## e74b080 Made a README</code></pre>
+<pre><code>## 5f9f360 Added welcome message
+## 4574da9 Made a README</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--stat</span></span></code></pre></div>
-<pre><code>## 4c7571f Added welcome message
+<pre><code>## 5f9f360 Added welcome message
 ##  README.md | 1 +
 ##  1 file changed, 1 insertion(+)
-## e74b080 Made a README
+## 4574da9 Made a README
 ##  README.md | 0
 ##  1 file changed, 0 insertions(+), 0 deletions(-)</code></pre>
 </div>
