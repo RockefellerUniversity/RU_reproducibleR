@@ -439,6 +439,7 @@ Center</h4>
 </p>
 <p>These exercises follow the material in the GitHub section of <a href="https://rockefelleruniversity.github.io/RU_reproducibleR//">Reproducible
 R</a>.</p>
+<p><strong>Exercise 1</strong> - <strong>Herper</strong></p>
 <ol style="list-style-type: decimal">
 <li>Lets setup an environment to do some basic counting for RNAseq. We
 will follow the example in the salmon <a href="https://combine-lab.github.io/salmon/getting_started/">guide</a>,
@@ -452,7 +453,8 @@ genomes smaller.</li>
 <li>Next lets download a yeast dataset. Here’s a link to a meiotic yeast
 RNAseq fastq file: <a href="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/065/SRR18072865/SRR18072865_1.fastq.gz" class="uri">ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/065/SRR18072865/SRR18072865_1.fastq.gz</a></li>
 <li>Use <em>with_CondaEnv()</em> to quantify the yeast counts</li>
-<li>Save your conda environment with</li>
+<li>Save your conda environment to yml</li>
+<li>Rebuild the yml in a new environment</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(Herper)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">install_CondaTools</span>(<span class="at">tools =</span> <span class="st">&quot;salmon&quot;</span>, <span class="at">env =</span> <span class="st">&quot;rnaseq&quot;</span>)</span>
@@ -474,8 +476,9 @@ RNAseq fastq file: <a href="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/065/SRR180
 <span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>                                                         <span class="st">&quot;-o&quot;</span>, <span class="st">&quot;~/Desktop/yeast_quant&quot;</span>)))</span>
 <span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="fu">export_CondaEnv</span>(<span class="st">&quot;rnaseq&quot;</span>, <span class="st">&quot;~/Desktop/my_yeast_salmon_conda_envrionment.yml&quot;</span>)</span></code></pre></div>
+<p><strong>Exercise 2</strong> - <strong>Conda</strong></p>
 <ul>
-<li></li>
+<li>Retry exercise 1, but use regular conda.</li>
 </ul>
 
 

@@ -38,7 +38,7 @@ class: center, middle, inverse, title-slide
 
 [Conda](https://conda.org/) is an open-source and cross-platform package and environment management system. 
 
-It was originally developed to help manage packages for Python, but that has expanded beyond python and is very popular with R users as well. 
+It was originally developed to help manage packages for Python (similar to Renv), but that has expanded beyond python and is very popular with R users as well. 
 
 ---
 ## How does Conda work?
@@ -68,11 +68,171 @@ Mamba - A reimplementation of Conda built in C++ [FASTER]
 
 Minimamba - A minimal install of Mamba
 
+
+---
+## Conda vs miniconda vs ...
+
+![nest](imgs/conda_nest.png)
+
+[Python Envs Guide](https://www.whiteboxml.com/blog/the-definitive-guide-to-python-virtual-environments-with-conda)
+  ]
+
+
+---
+## Conda vs miniconda vs ...
+
+We recommend specifically miniconda. You often do not need all the software that Anaconda provides. We can instead purposefully install software as and when we need it. 
+
+Anaconda is also a private company. Though conda itself is free and open source, Anaconda was developed by a this private entity and has recently been pushing for [license fees](https://www.datacamp.com/blog/navigating-anaconda-licensing). It is a little unclear how this will transpire within academia as opposed to business.  
+
+---
+## Installation
+
+Conda (and specifically miniconda) can be installed with from conda forge. This is an open source community that archives the many of the recipes for the packages you may want to use. 
+
+https://conda-forge.org/download/
+
+
+---
+
+
+## Environments
+
+The first step when using conda is to create an environment. We want to software used for different pieces of analysis to be siloed off from one another i.e. one environment for scRNAseq, ATACseq etc. We may even need to create an environment for a single piece of software if it has very specific dependencies. 
+
+This is on the command line. 
+
+
+``` sh
+conda create -n demo
+```
+
+---
+## Environments
+
+If you are unsure what environments you have you can use *conda info* to find more information about all your environments. 
+
+
+``` sh
+conda info --envs
+```
+
+---
+## Activation
+
+Before you can really do anything with your software you must first activate your environment. Even if you create a new environment, it will not be used until activated. 
+
+
+``` sh
+conda activate demo
+```
+
+---
+## Install
+
+We can simply install our software using *conda install*. Here lets try installing *seaborn* a python package for plotting in python. There are many packages available. You can check on the [Anaconda search repository](https://anaconda.org/anaconda/repo).
+
+
+``` sh
+conda install seaborn
+```
+
+---
+## Channels
+
+The conda system has several channels. These are repositories of packages that are managed by different communities. One of these is bioconda. This is a great place to get bioinformatic specific packages. 
+
+If we try to install samtools from the deafult channels it cannot be found.
+
+
+``` sh
+conda install samtools
+```
+
+By specifying the channel we can now get samtools. 
+
+``` sh
+conda install bioconda::samtools
+```
+
+---
+## Using Software
+
+If the environment is activated all the installed software in the environment is available to be run. 
+
+
+``` sh
+samtools help
+```
+
+---
+## Maintenance of environments
+
+As you collate and build environments you will want to make sure they are preserved and shareable. First we can check on our environment with conda list. This tells us what software we have installed and the versions.
+
+
+``` sh
+conda list
+```
+
+---
+## Maintenance of environments
+
+Listing software versions is useful, but we want a more systematic way to preserve and detail our environments. For this we can use *conda env export*. This saves a YAML file.
+
+
+``` sh
+conda env export &gt; environment.yml
+```
+
+
+---
+## YAML
+
+```
+name: demo
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - bzip2=1.0.8=h99b78c6_7
+  - c-ares=1.34.4=h5505292_0
+  - ca-certificates=2025.1.31=hf0a4a13_0
+  - htslib=1.21=hfcd771d_1
+  - krb5=1.21.3=h237132a_0
+  - libcurl=8.12.1=h73640d1_0
+  - libcxx=19.1.7=ha82da77_0
+  - libdeflate=1.22=hd74edd7_0
+  - libedit=3.1.20250104=pl5321hafb1f1b_0
+  - libev=4.33=h93a5062_2
+  - liblzma=5.6.4=h39f12f2_0
+  - libnghttp2=1.64.0=h6d7220d_0
+  - libssh2=1.11.1=h9cc3647_0
+  - libzlib=1.3.1=h8359307_2
+  - ncurses=6.5=h5e97a16_3
+  - openssl=3.4.1=h81ee809_0
+  - samtools=1.21=h267f7b9_1
+  - zstd=1.5.7=h6491c7d_1
+prefix: /Users/mattpaul/Documents/RU/Software/mini/envs/demo
+```
+
+---
+## Maintenance of environments
+
+The YAML file can be viewed directly. But we can also import it using *conda env create*. Using this approach we can share the our conda envs. This *yml* file is a key way we can ensure reproducibility.  
+
+
+``` sh
+conda env create -f environment.yml
+```
+
+
 ---
 ## A few tips
 
-* Work with miniconda or even better use Herper
+* Work with miniconda or even better use Herper (we will introduce this soon)
 * Always install software into new environments (never the base)
+
 
 ---
 
