@@ -1,6 +1,6 @@
 Package: reproducibility
 Type: Package
-Title: Reporoducibility in R
+Title: Reproducibility in R
 Version: 0.1.0
 Author: Matt Paul and Thomas Carroll.
 Maintainer: Thomas Carroll <tc.infomatics@gmail>
