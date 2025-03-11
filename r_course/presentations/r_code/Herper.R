@@ -22,6 +22,48 @@ if(params$isSlides != "yes"){
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
+# Using Conda
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Using Conda
+
+---
+"    
+  )
+  
+}
+
+
+
+## conda create -n demo
+
+## conda info --envs
+
+## conda activate demo
+
+## conda install seaborn
+
+## conda install samtools
+
+## conda install bioconda::samtools
+
+## samtools help
+
+## conda list
+
+## conda env export > environment.yml
+
+## conda env create -f environment.yml
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
 # Herper
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
