@@ -1,6 +1,6 @@
 output_dir: '.'
 navbar:
-  title: Reporoducibility in R
+  title: Reproducibility in R
   left:
   - text: Home
     href: index.html
