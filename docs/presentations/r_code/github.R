@@ -307,11 +307,15 @@ branch code i.e. \n
 y=2  \n")
 
 
+## git mv FilePath NewFilePath
+
+## git add -A .
+
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Other useful Git and GitHub commands and utilities
+# Zenodo
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -319,7 +323,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Other useful Git and GitHub commands and utilities
+  cat("# Zenodo
 
 ---
 "    
@@ -328,10 +332,6 @@ if(params$isSlides == "yes"){
 }
 
 
-
-## git mv FilePath NewFilePath
-
-## git add -A .
 
 ## ----echo=F, message=F, warning=F, include=F, eval=F--------------------------
 # 

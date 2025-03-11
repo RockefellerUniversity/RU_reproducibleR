@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Reproducible Research Overview    </title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Rockefeller University, Bioinformatics Resource Centre" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="metropolisCustom.css" type="text/css" />
+    <link rel="stylesheet" href="metropolis-fontsCustom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Reproducible Research Overview<br />
+<html><br />
+<br />
+<hr color='#EB811B' size=1px width=796px><br />
+</html>
+]
+.author[
+### Rockefeller University, Bioinformatics Resource Centre
+]
+.date[
+### <a href="https://rockefelleruniversity.github.io/RU_reproducibleR/" class="uri">https://rockefelleruniversity.github.io/RU_reproducibleR/</a>
+]
+
+---
+
+
+
+
+
+
+
+# Reproducible Research Overview
+
+We have covered many of the practical aspects achieving reproducibility. 
+
+
+![pillars](imgs/pillars.jpeg)
+
+---
+# Reproducible Research Overview
+
+We have covered many of the practical aspects achieving reproducibility. 
+
+![pillars](imgs/pillars_annotated.jpeg)
+
+---
+## Best Practise
+
+In order of importance. 
+
+1) Code should be in Quarto/Rmarkdown. This should encode everything from start to finish. 
+2=) R and R packages should be maintained with Renv (and archived)
+2=) Python and Command Line Tools should be maintained with Conda (and archived)
+4) Git and GitHub will be used to track and share **everything**.
+5) Docker can be used to containerize system setups between users
+6) Final analyses should be uploaded to Zenodo or something similar
+
+---
+# Towards a standard operating procedure
+
+Though the best practices are exactly that the context matters.
+
+It is okay if you do not hit every mark perfectly for every plot. As we discussed in the [introduction](https://rockefelleruniversity.github.io/RU_reproducibleR/presentations/slides/ReproducibleResearch.html#9) the context matters.
+
+We will run through some examples. 
+
+---
+## Case Studies
+
+**I am starting my PhD project which I will work on with several other lab members.**
+
+* Check genome versions used by your lab. If there's a fasta/gtf, do you have a record of how they were generated?
+* Does your lab use any pipelines/workflows? Find out versions of tools used in these workflows.
+* Start a new Renv and conda for the project. This way you have the newest version of tools. If possible match versions from workflows. 
+* Create a GitHub. Share yml/lock files so everyone can be in same place
+* Optionally: Create a docker with everything included in one place.
+
+---
+## Case Studies
+
+**I am starting my PhD project which I will work on by myself.**
+
+The same as working collaboratively. You will want a record of your packages and version control through GitHub for publication regardless (and for your own sanity). 
+
+Plus you may gain collaborators as you go and having this set up will make that process easier. 
+
+---
+## Case Studies
+
+**I am submitting a paper.**
+
+Did you keep a good record of your work? If yes, than this is easy. If no:
+
+* Double check you can actually regenerate your figures using your code. 
+* Keep track of package versions etc while you reprocess. 
+* Compile finalized code into GitHub then create a release on Zenodo.
+
+---
+## Case Studies
+
+**I have built a ATACseq pipeline for the whole lab to use**
+
+* Create a docker with your code, packages and everything included in one place. 
+* Share the recipe with others in the lab so they match the pipeline versions of tools for downstream analysis 
+* When ready, create a Zenodo so anyone who uses the pipeline for publication will have a DOI to include for the methods. 
+
+---
+## Our Example
+
+*"Quick one-line queries or plots of results (that wont be published) will not need to have a record of your system info, version numbers etc. They are not worth the time investment."*
+
+If you already have Rmarkdown, Renv and Conda setup the inertia for reproducibility is minimal. So a quick plot will never be completely orphaned and unusable. 
+
+
+---
+## Challenges remain
+
+* Reproducibility skills are not prioritized
+* Fixation on novel research direction in funding
+* Journals have no incentive to make sure any code provided actually good
+
+Reproducibility is undervalued. This means it is up to the research community to hold ourselves accountable.
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1855,7 +1855,7 @@ Your future self will thank you.</p>
 not add a message, you will get prompted.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span><span class="st">&#39;Made a README&#39;</span></span>
 <span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">git</span> status .</span></code></pre></div>
-<pre><code>## [master (root-commit) b5485f0] Made a README
+<pre><code>## [master (root-commit) 27658e3] Made a README
 ##  1 file changed, 0 insertions(+), 0 deletions(-)
 ##  create mode 100644 README.md
 ## On branch master
@@ -1940,7 +1940,7 @@ commit.</p>
 ## +++ b/README.md
 ## @@ -0,0 +1 @@
 ## +Hello Friends
-## [master 6f8a03c] Added welcome message
+## [master 521cdb6] Added welcome message
 ##  1 file changed, 1 insertion(+)</code></pre>
 </div>
 <div id="whatve-we-done---git-log-pt1" class="section level2">
@@ -1952,15 +1952,15 @@ commit.</p>
 </ul>
 <div class="sourceCode" id="cb34"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a></span>
 <span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="fu">git</span> log</span></code></pre></div>
-<pre><code>## commit 6f8a03c17c4f5f4fea5edea705fbcff80ebeafb7
+<pre><code>## commit 521cdb677c3ea7fd194a21fdc4c02e423cd0f18f
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Tue Mar 11 16:24:19 2025 +0000
+## Date:   Tue Mar 11 18:54:11 2025 +0000
 ## 
 ##     Added welcome message
 ## 
-## commit b5485f0a33aeb0ec5e7e31c76e5b522f1cf1a4c9
+## commit 27658e398d47d2cdde4f31183c82614940366a27
 ## Author: BRC-RU &lt;brc@rockefeller.edu&gt;
-## Date:   Tue Mar 11 16:24:19 2025 +0000
+## Date:   Tue Mar 11 18:54:11 2025 +0000
 ## 
 ##     Made a README</code></pre>
 </div>
@@ -1974,13 +1974,13 @@ This is important if you want to comb through 100s of commits.</p>
 <li>–patch = What content changes</li>
 </ul>
 <div class="sourceCode" id="cb36"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div>
-<pre><code>## 6f8a03c Added welcome message
-## b5485f0 Made a README</code></pre>
+<pre><code>## 521cdb6 Added welcome message
+## 27658e3 Made a README</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--stat</span></span></code></pre></div>
-<pre><code>## 6f8a03c Added welcome message
+<pre><code>## 521cdb6 Added welcome message
 ##  README.md | 1 +
 ##  1 file changed, 1 insertion(+)
-## b5485f0 Made a README
+## 27658e3 Made a README
 ##  README.md | 0
 ##  1 file changed, 0 insertions(+), 0 deletions(-)</code></pre>
 </div>
@@ -2322,11 +2322,8 @@ you will find the structure somewhere:</p>
 anything superfluous including the “&lt;, = and &gt;”.</p>
 <p>If the conflict is found on GitHub, it will walk you through
 this.</p>
+<p>v</p>
 </div>
-</div>
-<div id="other-useful-git-and-github-commands-and-utilities" class="section level1">
-<h1>Other useful Git and GitHub commands and utilities</h1>
-<hr />
 <div id="forking" class="section level2">
 <h2>Forking</h2>
 <p>How do I work on a project that belongs to someone else on
@@ -2400,6 +2397,54 @@ history or roll back unstaged changes to a specific file.</p></li>
 <p>Follow up with the <a href="https://git-scm.com/book/en/v2">Git
 book</a> for more detail on implementing these commands.</p>
 </div>
+</div>
+<div id="zenodo" class="section level1">
+<h1>Zenodo</h1>
+<hr />
+</div>
+<div id="zenodo-1" class="section level1">
+<h1>Zenodo</h1>
+<p>GitHub is a great resource, but there are risks with storing all your
+resources in a private enterprise.</p>
+<p>Zenodo was developed and funded by the European Commission (a key
+driver of the EU agenda), for the purpose of promoting and maintaining
+open science.</p>
+</div>
+<div id="github-to-zenodo" class="section level1">
+<h1>GitHub to Zenodo</h1>
+<p>As most folks are using GitHub for collating code, Zenodo and GitHub
+have worked together to make adding a persistent identifier to you
+repository very easy.</p>
+<p>Let’s have a <a href>look</a></p>
+</div>
+<div id="github-to-zenodo-1" class="section level1">
+<h1>GitHub to Zenodo</h1>
+<p>Simple series of <a href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content">steps</a>:</p>
+<ol style="list-style-type: decimal">
+<li>Log into Zenodo using a GitHub login</li>
+<li>Authorize Zenodo to access GitHub.</li>
+<li>Go to GitHub section of your <a href="https://zenodo.org/account/settings/github/">Zenodo
+settings</a>.</li>
+<li>To the right of the name of the repository you want to archive,
+toggle the button to On.</li>
+<li>Create a Release for the GitHub repository</li>
+</ol>
+</div>
+<div id="github-to-zenodo-2" class="section level1">
+<h1>GitHub to Zenodo</h1>
+<p>After you have created a new release Zenodo will automatically then
+create a DOI. It also gives you a nice little badge, which you can add
+to your GitHub repository README.</p>
+<p>When this is done Zenodo will have stored a static version of the
+repository based on the release you created. This will be stored for the
+foreseeable future.</p>
+</div>
+<div id="figshare" class="section level1">
+<h1>Figshare</h1>
+<p>Figshare is similar to Zenodo. It is a private enterprise, but is
+free to individual scientists.</p>
+<p>There is a similar workflow to add a <a href="https://help.figshare.com/article/how-to-connect-figshare-with-your-github-account">figshare
+DOI</a>.</p>
 <div id="further-resouces" class="section level2">
 <h2>Further Resouces</h2>
 <ul>
@@ -2422,7 +2467,7 @@ Jokes</a>.</p></li>
 <h2>Git/Github and R</h2>
 <p>In most of our training we talk about how great R is to do
 bioinformatics. With Git and GitHub this is no exception. I have shown
-you RStudios user-friendly interface for Git. There are also R pacakges
+you RStudio’s user-friendly interface for Git. There are also R pacakges
 that allow you to do much of what we have talked about trhough R itself
 in a programmatic way:</p>
 <ul>
