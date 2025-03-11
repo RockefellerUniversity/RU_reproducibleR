@@ -1,0 +1,135 @@
+---
+title: "Reproducible Research Overview <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+author: "Rockefeller University, Bioinformatics Resource Centre"
+date: "https://rockefelleruniversity.github.io/RU_reproducibleR/"
+output: 
+  xaringan::moon_reader:
+    css: ["default", "metropolisCustom.css", "metropolis-fontsCustom.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+  html_document:
+    toc: true # table of content true
+    toc_float: yes
+    depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: false  ## if you want number sections at each table header
+    theme: united  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
+params:
+  isSlides: "no"
+---
+
+```{r setup, include=FALSE}
+suppressPackageStartupMessages(require(knitr))
+knitr::opts_chunk$set(echo = TRUE, tidy = T)
+```
+
+```{r, results='asis',include=TRUE,echo=FALSE}
+if(params$isSlides != "yes"){
+  cat("# Reproducible Research Overview
+
+---
+"    
+  )
+  
+}
+
+```
+
+
+# Reproducible Research Overview
+
+We have covered many of the practical aspects achieving reproducibility. 
+
+
+![pillars](imgs/pillars.jpeg)
+
+---
+# Reproducible Research Overview
+
+We have covered many of the practical aspects achieving reproducibility. 
+
+![pillars](imgs/pillars_annotated.jpeg)
+
+---
+## Best Practise
+
+In order of importance. 
+
+1) Code should be in Quarto/Rmarkdown. This should encode everything from start to finish. 
+2=) R and R packages should be maintained with Renv (and archived)
+2=) Python and Command Line Tools should be maintained with Conda (and archived)
+4) Git and GitHub will be used to track and share **everything**.
+5) Docker can be used to containerize system setups between users
+6) Final analyses should be uploaded to Zenodo or something similar
+
+---
+# Towards a standard operating procedure
+
+Though the best practices are exactly that the context matters.
+
+It is okay if you do not hit every mark perfectly for every plot. As we discussed in the [introduction](https://rockefelleruniversity.github.io/RU_reproducibleR/presentations/slides/ReproducibleResearch.html#9) the context matters.
+
+We will run through some examples. 
+
+---
+## Case Studies
+
+**I am starting my PhD project which I will work on with several other lab members.**
+
+* Check genome versions used by your lab. If there's a fasta/gtf, do you have a record of how they were generated?
+* Does your lab use any pipelines/workflows? Find out versions of tools used in these workflows.
+* Start a new Renv and conda for the project. This way you have the newest version of tools. If possible match versions from workflows. 
+* Create a GitHub. Share yml/lock files so everyone can be in same place
+* Optionally: Create a docker with everything included in one place.
+
+---
+## Case Studies
+
+**I am starting my PhD project which I will work on by myself.**
+
+The same as working collaboratively. You will want a record of your packages and version control through GitHub for publication regardless (and for your own sanity). 
+
+Plus you may gain collaborators as you go and having this set up will make that process easier. 
+
+---
+## Case Studies
+
+**I am submitting a paper.**
+
+Did you keep a good record of your work? If yes, than this is easy. If no:
+
+* Double check you can actually regenerate your figures using your code. 
+* Keep track of package versions etc while you reprocess. 
+* Compile finalized code into GitHub then create a release on Zenodo.
+
+---
+## Case Studies
+
+**I have built a ATACseq pipeline for the whole lab to use**
+
+* Create a docker with your code, packages and everything included in one place. 
+* Share the recipe with others in the lab so they match the pipeline versions of tools for downstream analysis 
+* When ready, create a Zenodo so anyone who uses the pipeline for publication will have a DOI to include for the methods. 
+
+---
+## Our Example
+
+*"Quick one-line queries or plots of results (that wont be published) will not need to have a record of your system info, version numbers etc. They are not worth the time investment."*
+
+If you already have Rmarkdown, Renv and Conda setup the inertia for reproducibility is minimal. So a quick plot will never be completely orphaned and unusable. 
+
+
+---
+## Challenges remain
+
+* Reproducibility skills are not prioritized
+* Fixation on novel research direction in funding
+* Journals have no incentive to make sure any code provided actually good
+
+Reproducibility is undervalued. This means it is up to the research community to hold ourselves accountable.
+
+
+
