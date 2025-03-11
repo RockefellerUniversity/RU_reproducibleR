@@ -484,3 +484,10 @@ knitr::include_graphics("imgs/dockerfile_renv_restore.png")
 ##           -p 8787:8787 \
 ##            -e PASSWORD=password123 \
 ##            rocker/rstudio:4.4.0_renv
+
+## # login to your lab node
+## # pull image from Docker Hub
+## apptainer pull docker://rocker/r-ver:4.4.0
+## 
+## # open an R console using the resulting Apptainer image
+## apptainer exec r-ver_4.4.0.sif R

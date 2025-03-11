@@ -2079,9 +2079,9 @@ pushing to it.</p>
 <p>Once the repository is created on Docker Hub, we do the following
 steps to push the image:</p>
 <ul>
-<li>login to docker with your credentials</li>
+<li>login to Docker with your credentials</li>
 <li>tag the image you want to push with the version</li>
-<li>push to dockerhub</li>
+<li>push to Docker Hub</li>
 </ul>
 <p><em>Code (terminal):</em></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># log in and provide credentials used to sign into Docker Hub</span></span>
@@ -2153,6 +2153,24 @@ container.</p>
 <span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>          <span class="at">-p</span> 8787:8787 <span class="dt">\</span></span>
 <span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>           <span class="at">-e</span> PASSWORD=password123 <span class="dt">\</span></span>
 <span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>           rocker/rstudio:4.4.0_renv</span></code></pre></div>
+</div>
+<div id="using-docker-on-hpc" class="section level2">
+<h2>Using Docker on HPC</h2>
+<p>Docker is generally not allowed on the HPC due to the need to have
+root access. You can use Docker images by using another containerization
+software called Apptainer.</p>
+<p>Apptainer was designed to play nice with Docker and the <a href="https://apptainer.org/docs/user/main/docker_and_oci.html">Apptainer
+manual</a> goes into detail about how to use Apptainer with Docker
+images.</p>
+<p>Apptainer is not installed on the head nodes, so you can run
+interactively if your lab has it’s own node, or you can submit jobs to
+the HPC scheduler.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># login to your lab node</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="co"># pull image from Docker Hub</span></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="ex">apptainer</span> pull docker://rocker/r-ver:4.4.0</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co"># open an R console using the resulting Apptainer image</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="ex">apptainer</span> exec r-ver_4.4.0.sif R</span></code></pre></div>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>

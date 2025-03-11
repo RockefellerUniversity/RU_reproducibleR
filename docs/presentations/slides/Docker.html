@@ -712,9 +712,9 @@ Then create a repository with the same name as the image we want to push. Let's 
 
 Once the repository is created on Docker Hub, we do the following steps to push the image:
 
-  * login to docker with your credentials
+  * login to Docker with your credentials
   * tag the image you want to push with the version
-  * push to dockerhub 
+  * push to Docker Hub 
   
 *Code (terminal):*
 
@@ -808,6 +808,25 @@ docker container run --rm \
            -e PASSWORD=password123 \
            rocker/rstudio:4.4.0_renv
 ```
+
+---
+## Using Docker on HPC
+
+Docker is generally not allowed on the HPC due to the need to have root access. You can use Docker images by using another containerization software called Apptainer. 
+
+Apptainer was designed to play nice with Docker and the [Apptainer manual](https://apptainer.org/docs/user/main/docker_and_oci.html) goes into detail about how to use Apptainer with Docker images. 
+
+Apptainer is not installed on the head nodes, so you can run interactively if your lab has it's own node, or you can submit jobs to the HPC scheduler. 
+
+``` sh
+# login to your lab node
+# pull image from Docker Hub
+apptainer pull docker://rocker/r-ver:4.4.0
+
+# open an R console using the resulting Apptainer image
+apptainer exec r-ver_4.4.0.sif R
+```
+
 
 
  

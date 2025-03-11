@@ -388,6 +388,50 @@ the README.md. An example line is here: &lt;img src=“<a href="https://my_gif_u
 <li><p>Create a pull request to merge your fork back into the main
 repository.</p></li>
 </ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Build a Docker image from Github</li>
+</ol>
+<ul>
+<li><p>Take a fork of this repository: <a href="https://github.com/RockefellerUniversity/reproducibility_exercise" class="uri">https://github.com/RockefellerUniversity/reproducibility_exercise</a></p></li>
+<li><p>Create a local copy by cloning the repository</p></li>
+<li><p>You’ll notice there is a Dockerfile in the directory that you
+have created. Currently, this Dockerfile only installs the
+pseudo-aligner software Salmon.</p></li>
+<li><p>Make the same plot that we made in the Docker exercises using the
+Docker image from Docker Hub.</p>
+<ul>
+<li>This Dockerfile does not have ggplot2, add a line of code to make
+sure ggplot2 will be installed in an image built form this
+Dockerfile.</li>
+<li>Build an image from this revised Dockerfile</li>
+<li>Run a container from this image and open an RStudio session in your
+browser. HINT: make sure you mount the directory of the cloned
+repository (on your computer) onto the Docker container.</li>
+<li>Activate the conda environment that contains salmon and confirm the
+version that you have installed</li>
+<li>Use salmon to get counts for the fastq files present in the folder
+from the cloned repository.
+<ul>
+<li>code for indexing salmon: salmon index -t /path/to/fasta_file.fa -i
+/path/to/index_destination</li>
+<li>code for pseudo-alignment: salmon quant -i
+/path/to/index_destination -l A -1 path/to/reads_1.fastq -2
+path/to/reads_2.fastq –output path/to/output_dir</li>
+<li>learn more with the <a href="https://salmon.readthedocs.io/en/latest/salmon.html#">salmon
+manual</a></li>
+</ul></li>
+<li>Read in the quant.sf result file into your RStudio session and make
+a bar graph showing the number of reads for each of the genes in the
+fasta file.
+<ul>
+<li>save a png or pdf of the plot in the cloned repository
+directory</li>
+</ul></li>
+<li>Add the revised Dockerfile and the plot to the git repositoy on your
+computer</li>
+<li>Push these changes to your forked repository on Github.</li>
+</ul></li>
+</ul>
 
 
 
