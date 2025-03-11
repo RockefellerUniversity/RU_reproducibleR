@@ -1,3 +1,7 @@
+library(tidyr)
+library(ggplot2)
+
+
 filesToRead <- dir("data/ExpressionResults/",pattern = "*\\.txt",full.names=T)
 fileRead <- vector("list",length=length(filesToRead))
 for(i in 1:length(filesToRead)){
@@ -25,8 +29,11 @@ table(Annotation$Pathway)
 summary(Annotation$Pathway)
 correlation <- cor(annotatedExpression[,grep("ExpressionResults",colnames(annotatedExpression))])
 
-boxplot(annotatedExpression[,grep("ExpressionResults",colnames(annotatedExpression))],
-        horizontal=T,las=2,names=gsub("ExpressionResults|\\.txt","",colnames(annotatedExpression[,grep("ExpressionResults",colnames(annotatedExpression))])))
+
+
+annotatedExpression[,grep("ExpressionResults",colnames(annotatedExpression))] %>% 
+  pivot_longer(everything(), names_to = "sample", values_to = "expression") %>% 
+  ggplot(aes(x=sample, y=expression)) +geom_boxplot()
 
 indexGroupOne <- grep("[1-5].txt",colnames(annotatedExpression))
 indexGroupTwo <- grep("[6-9,0].txt",colnames(annotatedExpression))
@@ -43,3 +50,4 @@ colnames(testResult) <- c("logFC","tStatistic","pValue")
 annotatedResult <- cbind(annotatedExpression[,1:3],testResult)
 annotatedResult <- annotatedResult[order(annotatedResult$tStatistic),]
 annotatedResult[1:2,]
+

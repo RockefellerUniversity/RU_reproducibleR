@@ -226,6 +226,106 @@ ul.task-list{list-style: none;}
 
 
 
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } 
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } 
+code span.at { color: #204a87; } 
+code span.bn { color: #0000cf; } 
+code span.cf { color: #204a87; font-weight: bold; } 
+code span.ch { color: #4e9a06; } 
+code span.cn { color: #8f5902; } 
+code span.co { color: #8f5902; font-style: italic; } 
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } 
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } 
+code span.dt { color: #204a87; } 
+code span.dv { color: #0000cf; } 
+code span.er { color: #a40000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #0000cf; } 
+code span.fu { color: #204a87; font-weight: bold; } 
+code span.im { } 
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } 
+code span.kw { color: #204a87; font-weight: bold; } 
+code span.op { color: #ce5c00; font-weight: bold; } 
+code span.ot { color: #8f5902; } 
+code span.pp { color: #8f5902; font-style: italic; } 
+code span.sc { color: #ce5c00; font-weight: bold; } 
+code span.ss { color: #4e9a06; } 
+code span.st { color: #4e9a06; } 
+code span.va { color: #000000; } 
+code span.vs { color: #4e9a06; } 
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -339,23 +439,47 @@ Center</h4>
 </p>
 <p>These exercises follow the material in <a href="https://rockefelleruniversity.github.io/RU_reproducibleR//">Reproducible
 R</a>.</p>
+<p><strong>Exercise 1</strong> - <strong>Rmarkdown basics</strong></p>
 <ul>
-<li>Open up markdownExampleDefaultStyles.Rmd and markdownExample.Rmd in
-the scripts directory. Have a look at the rMarkdown examples here and
-the resulting output html files.</li>
+<li><p>Open up markdownExampleDefaultStyles.Rmd and compare each section
+to the rendered output: <a href="../../scripts/markdownExampleDefaultStyles.html">Example HTML
+Default style.</a>. Review how each piece of markdown controls the final
+rendered document. There are several examples we have not covered in the
+slides.</p></li>
+<li><p>Open up markdownExample.Rmd in the scripts directory and compare
+to the rendered output: <a href="../../scripts/markdownExample.html">Example HTML with extra
+style.</a>. What has changed?</p></li>
 </ul>
-<p><a href="../../scripts/markdownExampleDefaultStyles.html">Example
-HTML Default style.</a><br />
-<a href="../../scripts/markdownExample.html">Example HTML with extra
-style.</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Different Styles in YAML</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># Updated table of contents in YAML</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Set Up chunk - we can use this to control defaults for code chunk arguments. In this case we have turned echo off for every chunk. </span></span></code></pre></div>
+<p><strong>Exercise 2</strong> - <strong>Convert a
+Rmarkdown</strong></p>
 <ul>
-<li><p>Open scriptToConvertToRMarkdown.r in scripts directory and save
-as new name.</p></li>
-<li><p>Convert this script to an Rmarkdown document inside
-RStudio.</p></li>
-<li><p>Add appropriate annotation and session information</p></li>
-<li><p>Render the document.</p></li>
+<li>Open scriptToConvertToRMarkdown.r in scripts directory and save as
+new name.</li>
+<li>Convert this script to an Rmarkdown document inside RStudio.</li>
+<li>Update YAML to reflect author, date, title etc.</li>
+<li>Break the code down into chunks. Add some code chunk arguments to
+control figure sizes and/or echo of code.</li>
+<li>Add appropriate annotation and session information.</li>
+<li>Try making both interactive and non-interactive versions of the
+tables and plots.</li>
+<li>Render the document.</li>
 </ul>
+<p><strong>Exercise 3</strong> - <strong>Make a Rmarkdown</strong> -
+Make your own Rmarkdown document from scratch - Include YAML parameters
+like date - Read in file “readThisTable.csv” - Run some summary stats
+and plots - Use chunk arguments: fig.height/fig.width/fig.path/dev to
+save plots in pdf and png format</p>
+<p><strong>Exercise 4</strong> - <strong>Quarto</strong> - Convert your
+Rmd from exercise 2 into a Quarto document - Keep the parameters the
+same. Render and review the result. Compare it to the Rmd output. - Try
+and update all code arguments</p>
+<p><strong>Additional Exercise</strong> - Take some of your own scripts.
+They can either be python or R. Try and convert them into an
+Rmarkdown/Quarto format so you can create a nice report summary of that
+piece of work.</p>
 
 
 
