@@ -265,7 +265,7 @@ knitr::include_graphics("imgs/docker_desktop_images.png")
 
 ---
 
-## Running docker containers
+## Running Docker containers
 
 Once the image is on our system, we can launch a container with the ['docker container run' command](https://docs.docker.com/engine/reference/commandline/run/).
 
@@ -286,7 +286,7 @@ docker container run --rm \
 
 ---
 
-## Running docker containers
+## Running Docker containers
 
 While the container is running, we can go to 'http://localhost:8787' in a browser and log in with the the user 'rstudio' and the password from 'docker container run'.
 
@@ -296,7 +296,7 @@ knitr::include_graphics("imgs/rstudio_interface.png")
 
 ---
 
-## Listing active docker containers
+## Listing active Docker containers
 
 To see all containers running in the local environment, use the 'docker container ls' command
 
@@ -314,7 +314,7 @@ knitr::include_graphics("imgs/docker_ps.png")
 
 ---
 
-## Stopping docker containers
+## Stopping Docker containers
 
 To stop the container currently running, if you are in the terminal tab where it was launched press Ctrl+C.
 
@@ -726,7 +726,7 @@ knitr::include_graphics("imgs/docker_desktop_samtools_running.png")
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Run docker containers interactively in the terminal
+# Run Docker containers interactively in the terminal
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -734,7 +734,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Run docker containers interactively in the terminal
+  cat("# Run Docker containers interactively in the terminal
 
 ---
 "    
