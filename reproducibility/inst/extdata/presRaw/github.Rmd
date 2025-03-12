@@ -963,7 +963,7 @@ Zenodo was developed and funded by the European Commission (a key driver of the 
 
 As most folks are using GitHub for collating code, Zenodo and GitHub have worked together to make adding a persistent identifier to you repository very easy. 
 
-Let's have a [look]()
+Let's have a [look](https://zenodo.org/records/10668666)
 
 ---
 # GitHub to Zenodo
@@ -989,8 +989,6 @@ When this is done Zenodo will have stored a static version of the repository bas
 Figshare is similar to Zenodo. It is a private enterprise, but is free to individual scientists. 
 
 There is a similar workflow to add a [figshare DOI](https://help.figshare.com/article/how-to-connect-figshare-with-your-github-account).
-
-
 
 ---
 ## Further Resouces
